@@ -10,10 +10,10 @@ a:hover{ color:Red; text-decoration:underline;}
 
 .head a{color:White;text-decoration:underline;}
 
-.navlist{list-style-type:none;margin:0px; padding:10px;}
+.navlist{list-style-type:none;margin:0px; padding:0px;}
 .navlist li{ padding:0px;}
 .navlist li a{line-height:24px;}
-.navlist li div{margin:2px 0px;padding-left:10px;padding-top:2px; border:1px dashed #ffffff;}
+.navlist li div{margin:2px 0px;padding-left:10px;padding-top:2px;height: 26px; border:1px dashed #ffffff;}
 .navlist li div.hover{border:1px dashed #99BBE8; background:#E0ECFF;cursor:pointer;}
 .navlist li div.hover a{color:#416AA3;}
 .navlist li div.selected{border:1px solid #99BBE8; background:#E0ECFF;cursor:default;}
