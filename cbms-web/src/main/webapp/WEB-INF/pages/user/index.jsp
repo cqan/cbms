@@ -10,41 +10,63 @@
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
   </head>
-  	<body class="easyui-layout" style="overflow-y: hidden"  fit="true"   scroll="no">
-    <table class="easyui-datagrid" title="用户管理" style="width:700px;height:250px"
-           data-options="rownumbers:true,singleSelect:true,url:'datagrid_data1.json',method:'get',toolbar:'#tb'">
+  	<body>
+    <table id="tt" class="easyui-datagrid" style="width:400px;height:auto;">
         <thead>
         <tr>
-            <th data-options="field:'itemid',width:80">Item ID</th>
-            <th data-options="field:'productid',width:100">Product</th>
-            <th data-options="field:'listprice',width:80,align:'right'">List Price</th>
-            <th data-options="field:'unitcost',width:80,align:'right'">Unit Cost</th>
-            <th data-options="field:'attr1',width:240">Attribute</th>
-            <th data-options="field:'status',width:60,align:'center'">Status</th>
+            <th field="name1" width="50">Col 1</th>
+            <th field="name2" width="50">Col 2</th>
+            <th field="name3" width="50">Col 3</th>
+            <th field="name4" width="50">Col 4</th>
+            <th field="name5" width="50">Col 5</th>
+            <th field="name6" width="50">Col 6</th>
         </tr>
         </thead>
+        <tbody>
+        <tr>
+            <td>Data 1</td>
+            <td>Data 2</td>
+            <td>Data 3</td>
+            <td>Data 4</td>
+            <td>Data 5</td>
+            <td>Data 6</td>
+        </tr>
+        <tr>
+            <td>Data 1</td>
+            <td>Data 2</td>
+            <td>Data 3</td>
+            <td>Data 4</td>
+            <td>Data 5</td>
+            <td>Data 6</td>
+        </tr>
+        <tr>
+            <td>Data 1</td>
+            <td>Data 2</td>
+            <td>Data 3</td>
+            <td>Data 4</td>
+            <td>Data 5</td>
+            <td>Data 6</td>
+        </tr>
+        <tr>
+            <td>Data 1</td>
+            <td>Data 2</td>
+            <td>Data 3</td>
+            <td>Data 4</td>
+            <td>Data 5</td>
+            <td>Data 6</td>
+        </tr>
+        <tr>
+        </tr>
+        </tbody>
     </table>
-    <div id="tb" style="padding:5px;height:auto">
-        <div style="margin-bottom:5px">
-            <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true"></a>
-            <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true"></a>
-            <a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true"></a>
-            <a href="#" class="easyui-linkbutton" iconCls="icon-cut" plain="true"></a>
-            <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true"></a>
-        </div>
-        <div>
-            Date From: <input class="easyui-datebox" style="width:80px">
-            To: <input class="easyui-datebox" style="width:80px">
-            Language:
-            <select class="easyui-combobox" panelHeight="auto" style="width:100px">
-                <option value="java">Java</option>
-                <option value="c">C</option>
-                <option value="basic">Basic</option>
-                <option value="perl">Perl</option>
-                <option value="python">Python</option>
-            </select>
-            <a href="#" class="easyui-linkbutton" iconCls="icon-search">Search</a>
-        </div>
+    <div style="margin:20px 0;"></div>
+    <div class="easyui-panel">
+        <div class="easyui-pagination" data-options="
+					total: 114,
+					showPageList: false,
+					showRefresh: false,
+					displayMsg: ''
+				"></div>
     </div>
   </body>
 </html>
