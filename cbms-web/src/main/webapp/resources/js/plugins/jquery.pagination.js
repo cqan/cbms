@@ -171,6 +171,6 @@ $.fn.pagination.defaults={total:1,pageSize:10,pageNumber:1,pageList:[10,20,30,50
 },onBeforeRefresh:function(_20,_21){
 },onRefresh:function(_22,_23){
 },onChangePageSize:function(_24){
-},beforePageText:"Page",afterPageText:"of {pages}",displayMsg:"Displaying {from} to {to} of {total} items"};
+},beforePageText:"第",afterPageText:"页，共 {pages}页",displayMsg:"当前显示从第{from}条到{to}条 共{total}条记录"};
 })(jQuery);
 
