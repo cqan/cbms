@@ -11,62 +11,37 @@
 	<meta http-equiv="description" content="This is my page">
   </head>
   	<body>
-    <table id="tt" class="easyui-datagrid" style="width:400px;height:auto;">
+    <table id="tt" class="easyui-datagrid" style="width:100%;height:auto;">
         <thead>
         <tr>
-            <th field="name1" width="50">Col 1</th>
-            <th field="name2" width="50">Col 2</th>
-            <th field="name3" width="50">Col 3</th>
-            <th field="name4" width="50">Col 4</th>
-            <th field="name5" width="50">Col 5</th>
-            <th field="name6" width="50">Col 6</th>
+            <th field="name1" width="15%">用户名</th>
+            <th field="name2" width="15%">姓名</th>
+            <th field="name3" width="20%">email</th>
+            <th field="name4" width="20%">创建时间</th>
+            <th field="name5" width="10%">状态</th>
+            <th field="name6" width="20%">操作</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>Data 1</td>
-            <td>Data 2</td>
-            <td>Data 3</td>
-            <td>Data 4</td>
-            <td>Data 5</td>
-            <td>Data 6</td>
-        </tr>
-        <tr>
-            <td>Data 1</td>
-            <td>Data 2</td>
-            <td>Data 3</td>
-            <td>Data 4</td>
-            <td>Data 5</td>
-            <td>Data 6</td>
-        </tr>
-        <tr>
-            <td>Data 1</td>
-            <td>Data 2</td>
-            <td>Data 3</td>
-            <td>Data 4</td>
-            <td>Data 5</td>
-            <td>Data 6</td>
-        </tr>
-        <tr>
-            <td>Data 1</td>
-            <td>Data 2</td>
-            <td>Data 3</td>
-            <td>Data 4</td>
-            <td>Data 5</td>
-            <td>Data 6</td>
-        </tr>
-        <tr>
-        </tr>
+        <c:forEach items="${page.content}" var="entity">
+            <tr>
+                <td>${entity.userName}</td>
+                <td>${entity.realName}</td>
+                <td>${entity.email}</td>
+                <td>${entity.createTime}</td>
+                <td>${entity.status}</td>
+                <td>授权</td>
+            </tr>
+        </c:forEach>
         </tbody>
     </table>
     <div style="margin:20px 0;"></div>
-    <div class="easyui-panel">
+    <div class="easyui-panel" style="width:100%">
         <div class="easyui-pagination" data-options="
 					total: 114,
 					showPageList: false,
 					showRefresh: false,
-					displayMsg: ''
-				"></div>
+					displayMsg: ''"></div>
     </div>
   </body>
 </html>
