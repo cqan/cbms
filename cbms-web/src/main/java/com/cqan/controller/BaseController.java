@@ -1,7 +1,6 @@
 package com.cqan.controller;
 
 import com.cqan.service.BaseService;
-import com.cqan.system.User;
 import com.cqan.util.ReflectionUtils;
 import com.cqan.util.Servlets;
 import com.google.common.collect.Maps;
@@ -31,7 +30,7 @@ public abstract class BaseController<Entity,PK extends Serializable,EntityServic
         this.entityClass = ReflectionUtils.getSuperClassGenricType(getClass());
     }
 
-    @RequestMapping("/index.html")    
+    @RequestMapping("/index.html")
     public String page(@RequestParam(value = "sortType", defaultValue = "auto") String sortType,String sortField,
                        @RequestParam(value = "page", defaultValue = "1") int pageNumber,@RequestParam
             (value = "pageSize", defaultValue = PAGESIZE) int pageSize, Model model,HttpServletRequest request){
