@@ -1,15 +1,23 @@
 window.onload = function(){
 	$('#loading-mask').fadeOut();
 }
-
 var onlyOpenTitle="首页";
-
 $(function(){
 	openPwd();
 	init();
 	tabClose();
 	tabCloseEven();
 })
+
+function selectPage(pageNumber, pageSize){
+    $("#page").val(pageNumber);
+    $("#pageSize").val(pageSize);
+    submitForm();
+}
+
+function submitForm(){
+    $("#inputForm").submit();
+}
 
 //初始化左侧
 function init() {

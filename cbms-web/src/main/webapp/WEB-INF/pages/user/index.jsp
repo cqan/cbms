@@ -11,6 +11,20 @@
 	<meta http-equiv="description" content="This is my page">
   </head>
   	<body>
+    <form id="inputForm" action="${ctx}user/index.html" method="post">
+        <input type="hidden" name="page" id="page" value="${param['page']}">
+        <input type="hidden" name="pageSize" id="pageSize" value="${param['pageSize']}">
+        用户名:<input name="search_LIKES_userName" style="width: 100px;" class="easyui-textbox" value="${param['search_LIKES_userName']}">
+        姓名:<input name="search_LIKES_realName" style="width: 100px;" class="easyui-textbox" value="${param['search_LIKES_realName']}">
+        email:<input name="search_LIKES_email" style="width: 100px;" class="easyui-textbox" value="${param['search_LIKES_email']}">
+        状态： <select class="easyui-combobox" style="width: 100px;" data-options="panelHeight:'auto'" name="search_EQI_status">
+                    <option value="">全部</option>
+                    <option value="1" ${param['search_EQI_status'] eq 1?"selected":""}>正常</option>
+                    <option value="2" ${param['search_EQI_status'] eq 2?"selected":""}>禁用</option>
+             </select>
+        创建时间:<input class="easyui-datetimebox" style="width:155px">至<input class="easyui-datetimebox" style="width:155px">
+        <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="submitForm()" style="width:80px">Search</a>
+    </form>
     <table id="tt" class="easyui-datagrid" style="width:100%;height:auto;">
         <thead>
         <tr>
@@ -29,7 +43,7 @@
                 <td>${entity.realName}</td>
                 <td>${entity.email}</td>
                 <td>${entity.createTime}</td>
-                <td>${entity.status}</td>
+                <td>${entity.status eq 1?"正常":"禁用"}</td>
                 <td>授权</td>
             </tr>
         </c:forEach>
@@ -37,11 +51,17 @@
     </table>
     <div style="margin:20px 0;"></div>
     <div class="easyui-panel" style="width:100%">
-        <div class="easyui-pagination" data-options="
-					total: 114,
-					showPageList: false,
+        <div id="pagination" class="easyui-pagination" data-options="
+					total: ${page.totalElements},
+					pageSize:${page.size},
+					pageNumber:${page.number+1},
+					showPageList: true,
+					pageList:[10,20,30],
 					showRefresh: false,
-					displayMsg: ''"></div>
+					onSelectPage:selectPage,
+					beforePageText:'第',
+					afterPageText:'页，共{pages}页',
+					displayMsg: '显示{from} - {to} 条数据，共{total}条'"></div>
     </div>
   </body>
 </html>
