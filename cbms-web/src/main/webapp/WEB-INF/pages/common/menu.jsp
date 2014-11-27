@@ -21,7 +21,7 @@
                             <span><a link="${ctx}role/index.html">角色管理</a></span>
                         </li>
                     </shiro:hasPermission>
-                    <shiro:hasPermission name="system.permision">
+                    <shiro:hasPermission name="system.permission">
                         <li>
                             <span><a link="${ctx}permission/index.html">权限管理</a></span>
                         </li>

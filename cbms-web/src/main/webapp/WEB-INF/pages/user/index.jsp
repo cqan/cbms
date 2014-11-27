@@ -22,7 +22,8 @@
                     <option value="1" ${param['search_EQI_status'] eq 1?"selected":""}>正常</option>
                     <option value="2" ${param['search_EQI_status'] eq 2?"selected":""}>禁用</option>
              </select>
-        创建时间:<input class="easyui-datetimebox" style="width:155px">至<input class="easyui-datetimebox" style="width:155px">
+        创建时间:<input name="search_GTED_createTime" class="easyui-datetimebox" value="${param['search_GTED_createTime']}" style="width:155px">
+        至<input name="search_LTD_createTime" class="easyui-datetimebox" value="${param[search_LTD_createTime]}" style="width:155px">
         <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="submitForm()" style="width:80px">Search</a>
     </form>
     <table id="tt" class="easyui-datagrid" style="width:100%;height:auto;">
