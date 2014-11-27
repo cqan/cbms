@@ -20,7 +20,7 @@ public abstract class BaseController<Entity,PK extends Serializable,EntityServic
 
     private Class<Entity> entityClass;
 
-    protected static final String PAGESIZE = "20";
+    protected static final String PAGESIZE = "10";
 
     protected Map<String, String> sortFields = Maps.newLinkedHashMap();
 
