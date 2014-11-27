@@ -11,7 +11,7 @@ import javax.persistence.MappedSuperclass;
  * Created by huiwu on 2014/9/20.
  */
 @MappedSuperclass  
-public class IdLongEntity implements Serializable {
+public class IdLongEntity {
 
 	private static final long serialVersionUID = 179568864824699617L;
 	private Long id;
