@@ -20,7 +20,6 @@ import com.google.common.collect.Lists;
 
 @Entity
 @Table(name="role")
-@SuppressWarnings("serial")
 //默认的缓存策略.
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Role extends IdLongEntity{

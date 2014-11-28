@@ -26,10 +26,6 @@ import com.google.common.collect.Lists;
 @Table(name = "user")
 public class User extends IdLongEntity {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -8443825440716633016L;
 
 	@JSONField(name = "user_name")
     private String userName;

@@ -18,7 +18,6 @@ import com.cqan.IdLongEntity;
 
 @Entity
 @Table(name="permission")
-@SuppressWarnings("serial")
 //默认的缓存策略.
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Permission extends IdLongEntity{

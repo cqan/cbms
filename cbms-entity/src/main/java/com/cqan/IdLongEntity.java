@@ -1,6 +1,5 @@
 package com.cqan;
 
-import java.io.Serializable;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,7 +12,6 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass  
 public class IdLongEntity {
 
-	private static final long serialVersionUID = 179568864824699617L;
 	private Long id;
 
 	@Id
