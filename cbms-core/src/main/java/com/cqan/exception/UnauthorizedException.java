@@ -11,7 +11,11 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 public class UnauthorizedException extends RuntimeException{
 
-    private InfoCode infoCode;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7285450318547800963L;
+	private InfoCode infoCode;
 
     public UnauthorizedException(){
         this.infoCode = InfoCode.UNAUTHORIZED;

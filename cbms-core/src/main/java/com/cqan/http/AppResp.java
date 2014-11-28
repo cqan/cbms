@@ -12,7 +12,12 @@ import java.io.Serializable;
 @JSONType(orders = { "status", "msg", "data" })
 public class AppResp implements Serializable {
 
-    private int status;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3942357976595852781L;
+
+	private int status;
 
     private String msg;
 

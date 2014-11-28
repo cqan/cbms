@@ -10,7 +10,11 @@ import java.io.Serializable;
  */
 public class InfoCode implements Serializable {
 
-    private int code;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4181865758935309876L;
+	private int code;
     private String msg;
 
     private InfoCode(int code, String msg) {

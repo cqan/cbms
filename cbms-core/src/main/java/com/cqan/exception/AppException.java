@@ -10,7 +10,11 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 public class AppException extends RuntimeException {
 
-    private InfoCode infoCode;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1322392158514616169L;
+	private InfoCode infoCode;
 
     public AppException(){
         this.infoCode = InfoCode.SERVICE_UNAVAILABLE;
