@@ -11,6 +11,7 @@
 	<meta http-equiv="description" content="This is my page">
   </head>
   	<body>
+    <div>
     <form id="inputForm" action="${ctx}user/index.html" method="post">
         <input type="hidden" name="page" id="page" value="${param['page']}">
         <input type="hidden" name="pageSize" id="pageSize" value="${param['pageSize']}">
@@ -26,6 +27,8 @@
         至<input name="search_LTD_createTime" class="easyui-datetimebox" value="${param[search_LTD_createTime]}" style="width:155px">
         <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="submitForm()" style="width:80px">Search</a>
     </form>
+        <a href="${ctx}user/edit.html" class="easyui-linkbutton" data-options="iconCls:'icon-add'" style="width:80px">添加</a>
+    </div>
     <table id="tt" class="easyui-datagrid" style="width:100%;height:auto;">
         <thead>
         <tr>
