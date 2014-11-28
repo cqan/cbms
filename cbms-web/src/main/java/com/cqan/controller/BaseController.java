@@ -44,7 +44,7 @@ public abstract class BaseController<Entity,PK extends Serializable,EntityServic
     }
 
     @RequestMapping("/edit.html")
-     public String edit(@RequestParam("id")Long id,Model model){
+     public String edit(Long id,Model model){
         if (id!=null&&id!=0){
             Object entity  = entityService.get(id);
             model.addAttribute("entity",entity);
