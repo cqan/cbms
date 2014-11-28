@@ -16,7 +16,7 @@ import java.util.Map;
 /**
  * Created by huiwu on 2014/10/19.
  */
-public abstract class BaseController<Entity,PK extends Serializable,EntityService extends BaseService> {
+public abstract class BaseController<Entity,PK extends Serializable,EntityService extends BaseService<Entity, PK>> {
 
     private Class<Entity> entityClass;
 
@@ -44,8 +44,8 @@ public abstract class BaseController<Entity,PK extends Serializable,EntityServic
     }
 
     @RequestMapping("/edit.html")
-     public String edit(Long id,Model model){
-        if (id!=null&&id!=0){
+     public String edit(PK id,Model model){
+        if (id!=null){
             Object entity  = entityService.get(id);
             model.addAttribute("entity",entity);
         }

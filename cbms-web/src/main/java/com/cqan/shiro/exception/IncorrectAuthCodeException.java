@@ -3,11 +3,16 @@ package com.cqan.shiro.exception;
 import org.apache.shiro.authc.AuthenticationException;
 
 /**
- * Created by Administrator on 2014/10/19.
+ * Created by wuhui on 2014/10/19.
  */
 public class IncorrectAuthCodeException extends AuthenticationException {
 
-    public IncorrectAuthCodeException(String msg){
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4048984203811080556L;
+
+	public IncorrectAuthCodeException(String msg){
         super(msg);
     }
 }

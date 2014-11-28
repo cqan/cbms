@@ -15,7 +15,7 @@
         <form id="ff" method="post">
             <table cellpadding="5" align="center">
                 <tr>
-                    <td>Name:</td>
+                    <td>用户名:</td>
                     <td><input class="easyui-textbox" type="text" name="name" data-options="required:true"></input></td>
                 </tr>
                 <tr>

@@ -3,11 +3,15 @@ package com.cqan.shiro.realm;
 import org.apache.shiro.authc.UsernamePasswordToken;
 
 /**
- * Created by Administrator on 2014/10/19.
+ * Created by wuhui on 2014/10/19.
  */
 public class AuthCodeUsernamePasswordToken extends UsernamePasswordToken {
 
-    private String authCode;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3033139739154383753L;
+	private String authCode;
 
     public AuthCodeUsernamePasswordToken(String username, char[] password,
                                          boolean rememberMe, String host,String authCode) {
