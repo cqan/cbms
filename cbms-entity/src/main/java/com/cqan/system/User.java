@@ -3,7 +3,6 @@ package com.cqan.system;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -172,7 +171,7 @@ public class User extends IdLongEntity {
         this.email = email;
     }
     
-	@ManyToOne(cascade = {CascadeType.ALL},targetEntity=School.class,fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="school_id")
 	public School getSchool() {
 		return school;

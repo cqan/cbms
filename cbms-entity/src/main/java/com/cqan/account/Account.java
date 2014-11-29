@@ -1,8 +1,6 @@
 package com.cqan.account;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -26,7 +24,7 @@ public class Account extends IdLongEntity {
 		this.active = active;
 	}
 
-	@ManyToOne(cascade = {CascadeType.ALL},targetEntity=Group.class,fetch = FetchType.EAGER)
+	@ManyToOne
     @JoinColumn(name="group_id")
 	public Group getGroup() {
 		return group;

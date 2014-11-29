@@ -3,9 +3,7 @@ package com.cqan.school;
 
 import com.cqan.IdLongEntity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -37,7 +35,7 @@ public class Fee extends IdLongEntity {
 		this.feeType = feeType;
 	}
 
-	@ManyToOne(cascade = {CascadeType.ALL},targetEntity=School.class,fetch = FetchType.LAZY)
+	@ManyToOne
     @JoinColumn(name="school_id")
 	public School getSchool() {
 		return school;
