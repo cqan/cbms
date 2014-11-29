@@ -4,7 +4,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <title>后台管理系统</title>
+    <title>北京联通校园网运营后台管理系统</title>
   	<%@include file="/WEB-INF/pages/common/taglib.jsp"%>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -27,7 +27,7 @@
      </script>
   <body>
     <div style="margin:0 auto;width:800px;">
-            <div id="win" class="easyui-window" minimizable="false" closable="false" maximizable="false"  collapsible="false"  title="Login" style="width:300px;height:250px;">
+            <div id="win" class="easyui-window" minimizable="false" closable="false" maximizable="false"  collapsible="false"  title="北京联通校园网运营管理平台" style="width:300px;height:250px;">
                 <form action="${ctx}login.html" method="post" style="padding:10px 20px 10px 40px;" name="login_f">
                     <p>${error}</p>
                     <p>用户名: <input class="easyui-validatebox" type="text" id="username" name="username" required="true"/></p>

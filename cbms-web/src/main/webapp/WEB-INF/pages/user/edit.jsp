@@ -10,47 +10,82 @@
 </head>
 <body>
 <div style="margin:5px 0;"></div>
+系统管理--><a href="${ctx}user/index.html">用户管理</a>-->${empty entity?"添加":"修改"}用户信息
 <div class="easyui-panel" title="${empty entity?"添加":"修改"}用户信息" style="width:100%">
     <div style="text-align: center;">
-        <form id="ff" method="post">
+        <form id="inputForm" action="${ctx}user/save.html" method="post">
+        <input name="id" type="hidden" value="${entity.id}">
             <table cellpadding="5" align="center">
                 <tr>
                     <td>用户名:</td>
-                    <td><input class="easyui-textbox" type="text" name="name" data-options="required:true"></input></td>
+                    <td><input class="easyui-textbox" type="text" name="userName" value="${entity.userName}"></input></td>
+                </tr>
+                <tr>
+                    <td>姓名:</td>
+                    <td><input class="easyui-textbox" type="text" name="realName"  value="${entity.realName}"></input></td>
                 </tr>
                 <tr>
                     <td>Email:</td>
-                    <td><input class="easyui-textbox" type="text" name="email" data-options="required:true,validType:'email'"></input></td>
+                    <td><input class="easyui-textbox" type="text" name="email" value="${entity.email}"></input></td>
                 </tr>
                 <tr>
-                    <td>Subject:</td>
-                    <td><input class="easyui-textbox" type="text" name="subject" data-options="required:true"></input></td>
-                </tr>
-                <tr>
-                    <td>Message:</td>
-                    <td><input class="easyui-textbox" name="message" data-options="multiline:true" style="height:60px"></input></td>
-                </tr>
-                <tr>
-                    <td>Language:</td>
+                    <td>状态:</td>
                     <td>
-                        <select class="easyui-combobox" name="language"><option value="ar">Arabic</option><option value="bg">Bulgarian</option><option value="ca">Catalan</option><option value="zh-cht">Chinese Traditional</option><option value="cs">Czech</option><option value="da">Danish</option><option value="nl">Dutch</option><option value="en" selected="selected">English</option><option value="et">Estonian</option><option value="fi">Finnish</option><option value="fr">French</option><option value="de">German</option><option value="el">Greek</option><option value="ht">Haitian Creole</option><option value="he">Hebrew</option><option value="hi">Hindi</option><option value="mww">Hmong Daw</option><option value="hu">Hungarian</option><option value="id">Indonesian</option><option value="it">Italian</option><option value="ja">Japanese</option><option value="ko">Korean</option><option value="lv">Latvian</option><option value="lt">Lithuanian</option><option value="no">Norwegian</option><option value="fa">Persian</option><option value="pl">Polish</option><option value="pt">Portuguese</option><option value="ro">Romanian</option><option value="ru">Russian</option><option value="sk">Slovak</option><option value="sl">Slovenian</option><option value="es">Spanish</option><option value="sv">Swedish</option><option value="th">Thai</option><option value="tr">Turkish</option><option value="uk">Ukrainian</option><option value="vi">Vietnamese</option></select>
+                        <select class="easyui-combobox" data-options="panelHeight:'auto'" name="status">
+                        <option value="1" ${entity.status eq 1?"selected":""}>正常</option>
+                        <option value="2"  ${entity.status eq 2?"selected":""}>禁用</option>
+                       </select>
                     </td>
                 </tr>
             </table>
         </form>
         <div style="text-align:center;padding:5px">
-            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">保存</a>
+            <input type="submit" value="保存">
             <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">重置</a>
         </div>
     </div>
 </div>
 </body>
-<script>
-    function submitForm(){
-        $('#ff').form('submit');
-    }
+<script>   
+
+
     function clearForm(){
-        $('#ff').form('clear');
+        $('#inputForm').form('clear');
     }
+    
+    $(function(){
+    	var msg = "${msg}";
+    	if(msg!=''){
+    		show("",msg);
+    	}
+    	
+    	$("#inputForm").validate({
+	        rules: {
+	        	   userName: {
+	        		   required: true
+	        	   },
+	        	   realName: {
+	        	    required: true,
+	        	    minlength: 2
+	        	   },
+	        	   email: {
+	        	    required: true,
+	        	    email: true
+	        	   }
+	        	  },
+	        messages: {
+	        	userName: "请输入用户名",
+	        	email: {
+	        	    required: "请输入Email地址",
+	        	    email: "请输入正确的email地址"
+	        	 },
+	        	 realName: {
+	        	    required: "请输入姓名",
+	        	    minlength:"姓名长度不能少于2个字符"
+	        	 }
+	        }
+	   });
+    });
+	
 </script>
 </html>

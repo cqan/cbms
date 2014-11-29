@@ -17,6 +17,7 @@ String path = request.getContextPath();
 <link rel="stylesheet" type="text/css" href="${ctx}resources/js/themes/icon.css" />
 <script type="text/javascript" src="${ctx}resources/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="${ctx}resources/js/system.js"></script>
+<script type="text/javascript" src="${ctx}resources/js/jquery.validate.min.js"></script>
 <script type="text/javascript" src="${ctx}resources/js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="${ctx}resources/js/locale/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="${ctx}resources/js/plugins/jquery.pagination.js"></script>

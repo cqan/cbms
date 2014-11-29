@@ -10,6 +10,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
@@ -54,7 +56,7 @@ public class User extends IdLongEntity {
     @JSONField(name = "last_login_ip")
     private String lastLoginIp;
 
-    //1：g正常，2：禁用
+    //1：正常，2：禁用
     private int status;
     
     private List<Role> roles = Lists.newArrayList(); // 有序的关联对象集合	
@@ -163,4 +165,18 @@ public class User extends IdLongEntity {
     public void setEmail(String email) {
         this.email = email;
     }
+    
+    
+
+	@Override
+	public void setId(Long id) {
+		super.setId(id);
+	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this,ToStringStyle.SHORT_PREFIX_STYLE);
+	}
+    
+    
 }
