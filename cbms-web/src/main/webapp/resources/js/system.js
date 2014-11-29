@@ -15,6 +15,21 @@ function selectPage(pageNumber, pageSize){
     submitForm();
 }
 
+function show(title,msg){
+	if(title==''){
+		title = "系统提示";
+	}
+	if(msg==''){
+		msg = "系统错误，请稍候再试！";
+	}
+	 $.messager.show({
+		 title:title,
+		 msg:msg,
+		timeout:3000,
+		showType:'slide'
+		 });
+}
+
 function submitForm(){
     $("#inputForm").submit();
 }

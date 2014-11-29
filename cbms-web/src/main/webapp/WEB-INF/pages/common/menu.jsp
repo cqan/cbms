@@ -30,12 +30,10 @@
             </div>
     </shiro:hasPermission>
     <shiro:hasPermission name="system">
-        <div title="文件管理" iconCls="icon-folder" style="padding:10px;">
+          <div title="学校管理" iconCls="icon-folder" style="padding:10px;">
             <ul class="easyui-tree">
-                <li><span><a link="http://www.google.com.hk">上传图片</a></span></li>
-                <li><span><a link="http://www.baidu.com">上传附件</a></span></li>
-                <li><span><a link="http://www.google.com.hk">管理上传文件(utf8)</a></span></li>
-                <li><span><a link="http://www.baidu.com">管理上传文件(zh_cn)</a></span></li>
+                <li><span><a link="${ctx}school/index.html">学校注册</a></span></li>
+                <li><span><a link="${ctx}group/index.html">学校客户组管理</a></span></li>
             </ul>
         </div>
     </shiro:hasPermission>

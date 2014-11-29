@@ -48,7 +48,7 @@
                 <td>${entity.email}</td>
                 <td>${entity.createTime}</td>
                 <td>${entity.status eq 1?"正常":"禁用"}</td>
-                <td>授权</td>
+                <td>授权,<a href="${ctx}user/edit.html?id=${entity.id}">修改</a></td>
             </tr>
         </c:forEach>
         </tbody>
