@@ -17,6 +17,11 @@ public class RoleServiceImpl extends
 		this.repository = repository;
 	}
 
+	@Override
+	public Role findByRoleCode(String roleCode) {
+		return repository.findByRoleCode(roleCode);
+	}
+
 	
 
 }

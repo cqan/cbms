@@ -3,7 +3,7 @@ package com.cqan.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import com.cqan.school.Group;
+import com.cqan.school.AccountGroup;
 import com.cqan.service.GroupService;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping("/group")
-public class GrouplController extends BaseController<Group,Long,GroupService>{
+public class GrouplController extends BaseController<AccountGroup,Long,GroupService>{
 
     @Override
     @Autowired

@@ -1,23 +1,50 @@
 package com.cqan.school;
 
 
-import com.cqan.IdLongEntity;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.cqan.IdLongEntity;
+
+/**
+ * 计费管理
+ * @author wuhui
+ *
+ */
 @Entity
 @Table(name = "fee")
 public class Fee extends IdLongEntity {
 
 	private String name;
 	
-	private short feeType;//计费类型（1，计时。2，按月）
+	//计费政策类型
+	private short strategyType;
 
 	private School school;
 	
+	private float price;
+	
+	private int time;
+	
+	private int downControl;
+	
+	private int upControl;
+	
+	private String area;
+	
+	private Date startTime;
+	
+	private Date endTime;
+	
+	private int stuVisible;
+	
+	private String description;
+	
+
 
 	public String getName() {
 		return name;
@@ -27,12 +54,84 @@ public class Fee extends IdLongEntity {
 		this.name = name;
 	}
 
-	public short getFeeType() {
-		return feeType;
+	public short getStrategyType() {
+		return strategyType;
 	}
 
-	public void setFeeType(short feeType) {
-		this.feeType = feeType;
+	public void setStrategyType(short strategyType) {
+		this.strategyType = strategyType;
+	}
+
+	public float getPrice() {
+		return price;
+	}
+
+	public void setPrice(float price) {
+		this.price = price;
+	}
+
+	public int getTime() {
+		return time;
+	}
+
+	public void setTime(int time) {
+		this.time = time;
+	}
+
+	public int getDownControl() {
+		return downControl;
+	}
+
+	public void setDownControl(int downControl) {
+		this.downControl = downControl;
+	}
+
+	public int getUpControl() {
+		return upControl;
+	}
+
+	public void setUpControl(int upControl) {
+		this.upControl = upControl;
+	}
+
+	public String getArea() {
+		return area;
+	}
+
+	public void setArea(String area) {
+		this.area = area;
+	}
+
+	public Date getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
+
+	public Date getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
+	}
+
+	public int getStuVisible() {
+		return stuVisible;
+	}
+
+	public void setStuVisible(int stuVisible) {
+		this.stuVisible = stuVisible;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	@ManyToOne

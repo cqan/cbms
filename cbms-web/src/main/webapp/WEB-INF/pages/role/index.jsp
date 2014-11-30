@@ -25,8 +25,8 @@
     <table id="tt" class="easyui-datagrid" style="width:100%;height:auto;">
         <thead>
         <tr>
-            <th field="name1" width="15%">用户名</th>
-            <th field="name2" width="15%">姓名</th>
+            <th field="name1" width="15%">角色名称</th>
+            <th field="name2" width="15%">角色代码</th>
             <th field="name4" width="20%">创建时间</th>
             <th field="name6" width="20%">操作</th>
         </tr>
@@ -37,7 +37,7 @@
                 <td>${entity.name}</td>
                 <td>${entity.roleCode}</td>
                 <td>${entity.createTime}</td>
-                <td>授权</td>
+                <td><a href="${ctx}role/auth.html?id=${entity.id}">授权</a>&nbsp;<a href="${ctx}role/edit.html?id=${entity.id}">修改</a></td>
             </tr>
         </c:forEach>
         </tbody>

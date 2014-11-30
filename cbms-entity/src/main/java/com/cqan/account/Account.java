@@ -6,7 +6,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.cqan.IdLongEntity;
-import com.cqan.school.Group;
+import com.cqan.school.AccountGroup;
 
 @Entity
 @Table(name = "account")
@@ -14,7 +14,7 @@ public class Account extends IdLongEntity {
 	
 	private boolean active;
 	
-	private Group group;
+	private AccountGroup group;
 
 	public boolean isActive() {
 		return active;
@@ -26,11 +26,11 @@ public class Account extends IdLongEntity {
 
 	@ManyToOne
     @JoinColumn(name="group_id")
-	public Group getGroup() {
+	public AccountGroup getGroup() {
 		return group;
 	}
 
-	public void setGroup(Group group) {
+	public void setGroup(AccountGroup group) {
 		this.group = group;
 	}
 

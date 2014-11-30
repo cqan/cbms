@@ -4,4 +4,6 @@ import com.cqan.system.Role;
 
 public interface RoleService extends BaseService<Role, Long> {
 
+	Role findByRoleCode(String roleCode);
+
 }

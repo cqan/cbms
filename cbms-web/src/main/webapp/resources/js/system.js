@@ -30,6 +30,10 @@ function show(title,msg){
 		 });
 }
 
+function alertMsg(msg,type){
+		 $.messager.alert('系统提示',msg,type);
+}
+
 function submitForm(){
     $("#inputForm").submit();
 }

@@ -48,7 +48,11 @@
                 <td>${entity.email}</td>
                 <td>${entity.createTime}</td>
                 <td>${entity.status eq 1?"正常":"禁用"}</td>
-                <td>授权,<a href="${ctx}user/edit.html?id=${entity.id}">修改</a></td>
+                <td>
+                	<a href="${ctx}user/auth.html?id=${entity.id}">授权</a>&nbsp;
+                	<a href="${ctx}user/edit.html?id=${entity.id}">修改</a>&nbsp;
+                	<a href="#" onclick="disable('${entity.id}')">${entity.status eq 1?"禁用":"启用"}</a>&nbsp;
+                </td>
             </tr>
         </c:forEach>
         </tbody>
@@ -68,4 +72,25 @@
 					displayMsg: '显示{from} - {to} 条数据，共{total}条'"></div>
     </div>
   </body>
+  
+  <script type="text/javascript">
+  	function disable(id){
+  		if( $.messager.confirm('系统提示', '确实要执行此操作吗?', function(r){
+  			if (r){
+  				$.ajax({
+  		  			url:"${ctx}user/disable.html",
+  		  			data:{id:id},
+  		  			type:'POST',
+  		  			success:function(data){
+  		  				alert(data);
+  		  				window.location.reload(true);
+  		  			},
+  		  			error:function(data){
+  		  				alert(data);
+  		  			}
+  		  			});
+  				}}));
+  		
+  	}
+  </script>
 </html>

@@ -19,7 +19,6 @@
         权限代码:<input name="search_LIKES_permissionCode" style="width: 100px;" class="easyui-textbox" value="${param['search_LIKES_permissionCode']}">
         <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="submitForm()" style="width:80px">Search</a>
     </form>
-        <a href="${ctx}user/edit.html" class="easyui-linkbutton" data-options="iconCls:'icon-add'" style="width:80px">添加</a>
     </div>
     <table id="tt" class="easyui-datagrid" style="width:100%;height:auto;">
         <thead>

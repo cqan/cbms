@@ -14,77 +14,84 @@
 <div class="easyui-panel" title="${empty entity?"添加":"修改"}用户信息" style="width:100%">
     <div style="text-align: center;">
         <form id="inputForm" action="${ctx}user/save.html" method="post">
-        <input name="id" type="hidden" value="${entity.id}">
-            <table cellpadding="5" align="center">
+        <input name="id" id="uid" type="hidden" value="${entity.id}">
+            <table cellpadding="5" align="center" style="width: 100%">
                 <tr>
-                    <td>用户名:</td>
-                    <td><input class="easyui-textbox" type="text" name="userName" value="${entity.userName}"></input></td>
+                    <td style="width:47%;text-align: right;padding-right: 10px;">用户名:</td>
+                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="userName"  name="userName" value="${entity.userName}" /></td>
                 </tr>
                 <tr>
-                    <td>姓名:</td>
-                    <td><input class="easyui-textbox" type="text" name="realName"  value="${entity.realName}"></input></td>
+                    <td  style="width:47%;text-align: right;padding-right: 10px;">姓名:</td>
+                    <td style="text-align: left;padding-left: 10px;"><input type="text" name="realName"  value="${entity.realName}"/></td>
                 </tr>
                 <tr>
-                    <td>Email:</td>
-                    <td><input class="easyui-textbox" type="text" name="email" value="${entity.email}"></input></td>
+                    <td  style="width:47%;text-align: right;padding-right: 10px;">Email:</td>
+                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="email" name="email" value="${entity.email}"/></td>
                 </tr>
                 <tr>
-                    <td>状态:</td>
-                    <td>
+                    <td  style="width:47%;text-align: right;padding-right: 10px;">状态:</td>
+                    <td style="text-align: left;padding-left: 10px;">
                         <select class="easyui-combobox" data-options="panelHeight:'auto'" name="status">
                         <option value="1" ${entity.status eq 1?"selected":""}>正常</option>
                         <option value="2"  ${entity.status eq 2?"selected":""}>禁用</option>
                        </select>
                     </td>
                 </tr>
+                <tr>
+                    <td colspan="2">
+                      <div style="text-align:center;padding:5px">
+				            <input type="submit" class="button" value="保存">&nbsp;&nbsp;&nbsp;
+				            <input type="reset" class="button" value="取消">
+				        </div>
+                    </td>
+                </tr>
             </table>
         </form>
-        <div style="text-align:center;padding:5px">
-            <input type="submit" value="保存">
-            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">重置</a>
-        </div>
+        
     </div>
 </div>
 </body>
-<script>   
-
-
-    function clearForm(){
-        $('#inputForm').form('clear');
-    }
-    
+<script lang="text/javascript">   
     $(function(){
     	var msg = "${msg}";
     	if(msg!=''){
     		show("",msg);
-    	}
+    }
     	
     	$("#inputForm").validate({
-	        rules: {
-	        	   userName: {
-	        		   required: true
-	        	   },
-	        	   realName: {
-	        	    required: true,
-	        	    minlength: 2
-	        	   },
-	        	   email: {
-	        	    required: true,
-	        	    email: true
-	        	   }
-	        	  },
-	        messages: {
-	        	userName: "请输入用户名",
-	        	email: {
-	        	    required: "请输入Email地址",
-	        	    email: "请输入正确的email地址"
-	        	 },
-	        	 realName: {
-	        	    required: "请输入姓名",
-	        	    minlength:"姓名长度不能少于2个字符"
-	        	 }
-	        }
-	   });
+			rules: {
+				userName: {
+					required: true,
+					 remote:{
+						 url:'${ctx}user/checkUserName.html',
+						 type:"post",
+						 dataType:"json", 
+						 data: {                    
+							 userName: function(){return $("#userName").val()},
+							 id:$("#uid").val()}
+					 }
+				},
+				realName: {
+					required: true
+				},
+				email:{
+					required:true
+				}
+			},
+			messages:{
+				userName: {
+					required:"*请输入用户名！",
+					remote:"*用户名已存在！"
+				},
+				realName: {
+					required:"*请输入姓名！"
+				},
+				email:{
+					required:"*请输入email！"
+				}
+			}
+		});
+    	
     });
 	
 </script>

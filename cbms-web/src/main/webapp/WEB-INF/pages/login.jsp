@@ -21,25 +21,59 @@
               var name=document.login_f.username.value;
               var pwd=document.login_f.password.value;
               var code=document.login_f.authcode.value;
-              if(!name||!pwd||!code){alert('请如入完整信息！');return false;}
+              if(!name||!pwd||!code||code.length!=4){alertMsg('请如入完整信息！',"info");return false;}
                  document.login_f.submit();
           }
+          
+          function reflashAuthCode(){
+        	  var verify=document.getElementById('safecode');
+        	    verify.setAttribute('src',url+'admin/code.htm?'+Math.random());
+          }
+          
+          $(function(){
+              $('input').bind('keypress',function(event){
+                  if(event.keyCode == "13")    
+                  {
+                	  check_f();
+                  }
+              });
+          });
      </script>
   <body>
-    <div style="margin:0 auto;width:800px;">
-            <div id="win" class="easyui-window" minimizable="false" closable="false" maximizable="false"  collapsible="false"  title="北京联通校园网运营管理平台" style="width:300px;height:250px;">
-                <form action="${ctx}login.html" method="post" style="padding:10px 20px 10px 40px;" name="login_f">
-                    <p>${error}</p>
-                    <p>用户名: <input class="easyui-validatebox" type="text" id="username" name="username" required="true"/></p>
-                    <p>密&nbsp;&nbsp;码: <input class="easyui-validatebox"  id="pwd" type="password" name="password" required="true"></p>
-                    <p>验证码: <input class="easyui-validatebox" type="text" id="authcode" name="authCode" required="true" style="width:80px;"/><img src="${ctx}authcode.html" style="top:5px;position:relative;" width="70" height="20"/></p>
-                    <div style="padding:5px;text-align:center;">
-                        <a href="#" class="easyui-linkbutton" icon="icon-ok" onclick="check_f()">登录</a>
-                        <a href="#" class="easyui-linkbutton" icon="icon-cancel" onclick="document.login_f.reset()">重置</a>
-                    </div>
+    <div style="margin:0 auto;width:900px;">
+            <div id="win" class="easyui-window" minimizable="false" closable="false" maximizable="false"  collapsible="false"  title="北京联通校园网运营管理平台" style="width:380px;height:250px;">
+                <form action="${ctx}login.html" method="post" style="padding:10px 20px 10px 40px;" id="loginForm" name="login_f">
+                    <table width="100%">
+                    <tr><td style="text-align: right; width: 25%"></td>
+                    	<td style="color: red;"><c:if test="${empty error}"><div style="margin:10px 0;"></div></c:if>
+                    	<c:if test="${!empty error}">${error}</c:if></td>
+                    <tr height="35px;">
+                    	<td style="text-align: right; width: 25%">用户名: </td>
+                    	<td><input class="easyui-textbox" type="text" id="username" name="username" style="width:155px"/></td>
+                    </tr>
+                    <tr height="35px;">
+                    	<td style="text-align: right; width: 25%">密&nbsp;&nbsp;码: </td>
+                    	<td><input class="easyui-textbox"  id="pwd" type="password" name="password" style="width:155px"></td>
+                    </tr>
+                    <tr height="35px;">
+                    	<td style="text-align: right; width: 25%">验证码:</td>
+                    	<td>
+                    		<input class="easyui-textbox" type="text" id="authcode" name="authCode" style="width:80px;"/>
+                    		<img src="${ctx}authcode.html" id="safecode" onclick="reflashAuthCode()" style="top:7px;position:relative;" width="70" height="20"/>
+                    	</td>
+                    </tr>
+                    <tr height="50px;">
+                    	<td colspan="2">
+                    		<div style="padding:5px;text-align:center;">
+		                        <a href="#" class="easyui-linkbutton" style="margin-right: 25px;" icon="icon-ok" onclick="check_f()">登录</a>
+		                        <a href="#" class="easyui-linkbutton" icon="icon-cancel" onclick="document.login_f.reset()">重置</a>
+	                    	</div>
+                    	</td>
+                    </tr>
+                   
+                    </table>
                 </form>
             </div>
         </div>
     </body>
-  </body>
 </html>
