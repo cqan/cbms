@@ -2,9 +2,14 @@ package com.cqan.system;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import com.cqan.IdLongEntity;
 
-public class CardStrategy extends IdLongEntity {
+@Entity
+@Table(name="card_strategy")
+public class CardBatch extends IdLongEntity {
 
 	
 	private String name;

@@ -16,8 +16,8 @@ import com.cqan.IdLongEntity;
  *
  */
 @Entity
-@Table(name = "fee")
-public class Fee extends IdLongEntity {
+@Table(name = "fee_policy")
+public class FeePolicy extends IdLongEntity {
 
 	private String name;
 	
