@@ -45,12 +45,6 @@ public class User extends IdLongEntity {
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date birthday;
 
-    @JSONField(name = "create_time",format = "yyyy-MM-dd HH:mm:ss")
-    private Date createTime;
-
-    @JSONField(name = "update_time",format = "yyyy-MM-dd HH:mm:ss")
-    private Date updateTime;
-
     @JSONField(name = "nick_name")
     private String nickName;
 
@@ -113,22 +107,6 @@ public class User extends IdLongEntity {
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
     }
 
     public String getNickName() {

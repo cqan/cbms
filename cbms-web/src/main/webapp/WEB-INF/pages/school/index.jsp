@@ -17,45 +17,42 @@
             <td width="15%" align="right">
        		<input type="hidden" name="page" id="page" value="${param['page']}">
         	<input type="hidden" name="pageSize" id="pageSize" value="${param['pageSize']}">
-      		  学校名：<input name="search_LIKES_userName" style="width: 100px;" class="easyui-textbox" value="${param['search_LIKES_userName']}">
+      		  学校名：<input name="search_LIKES_name" style="width: 100px;" class="easyui-textbox" value="${param['search_LIKES_name']}">
       		</td><td width="20%" align="right">
-        	地区：<select class="easyui-combobox" style="width: 100px;" data-options="panelHeight:'auto'" name="search_EQI_status">
-                    <option value="">全部</option>
-                    <option value="1" ${param['search_EQI_status'] eq 1?"selected":""}>正常</option>
-                    <option value="2" ${param['search_EQI_status'] eq 2?"selected":""}>禁用</option>
+        	地区：<select class="easyui-combobox" style="width: 100px;" data-options="panelHeight:'auto'" name="search_EQS_city">
+        	        <option value="">全部</option>
+                    <option value="1" ${param['search_EQS_city'] eq '北京'?"selected":""}>北京</option>
              </select>  
              </td><td width="20%" align="right">      
-         	 区局：       <select class="easyui-combobox" style="width: 100px;" data-options="panelHeight:'auto'" name="search_EQI_status">
-                    <option value="">全部</option>
-                    <option value="1" ${param['search_EQI_status'] eq 1?"selected":""}>正常</option>
-                    <option value="2" ${param['search_EQI_status'] eq 2?"selected":""}>禁用</option>
+         	 区局：       <select class="easyui-combobox" style="width: 100px;" data-options="panelHeight:'auto'" name="search_EQS_district">
+         	        <option value="">全部</option>
+                    <option value="1" ${param['search_EQS_district'] eq '昌平'?"selected":""}>昌平</option>
              </select>
              </td><td width="20%" align="right">
-           	 调拨区局：       <select class="easyui-combobox" style="width: 100px;" data-options="panelHeight:'auto'" name="search_EQI_status">
-                    <option value="">全部</option>
-                    <option value="1" ${param['search_EQI_status'] eq 1?"selected":""}>正常</option>
-                    <option value="2" ${param['search_EQI_status'] eq 2?"selected":""}>禁用</option>
+           	 调拨区局：       <select class="easyui-combobox" style="width: 100px;" data-options="panelHeight:'auto'" name="search_EQS_subDistrict">
+           	        <option value="">全部</option>
+                    <option value="1" ${param['search_EQS_subDistrict'] eq '昌平'?"selected":""}>昌平</option>
              </select>
              </td><td width="20%" align="right">
-                                           分成类型：       <select class="easyui-combobox" style="width: 100px;" data-options="panelHeight:'auto'" name="search_EQI_status">
+                                           分成类型：       <select class="easyui-combobox" style="width: 100px;" data-options="panelHeight:'auto'" name="search_EQI_rateType">
                     <option value="">全部</option>
-                    <option value="1" ${param['search_EQI_status'] eq 1?"selected":""}>正常</option>
-                    <option value="2" ${param['search_EQI_status'] eq 2?"selected":""}>禁用</option>
+                    <option value="1" ${param['search_EQI_rateType'] eq 1?"selected":""}>计时</option>
+                    <option value="2" ${param['search_EQI_rateType'] eq 2?"selected":""}>包月</option>
              </select>
              </td>
              </tr>
              <tr >
                 <td align="right">
-                                           可信标志：<select class="easyui-combobox" style="width: 100px;" data-options="panelHeight:'auto'" name="search_EQI_status">
+                                           可信标志：<select class="easyui-combobox" style="width: 100px;" data-options="panelHeight:'auto'" name="search_EQI_trusted">
                     <option value="">全部</option>
-                    <option value="1" ${param['search_EQI_status'] eq 1?"selected":""}>正常</option>
-                    <option value="2" ${param['search_EQI_status'] eq 2?"selected":""}>禁用</option>
+                    <option value="1" ${param['search_EQI_trusted'] eq 1?"selected":""}>可信</option>
+                    <option value="2" ${param['search_EQI_trusted'] eq 2?"selected":""}>不可信</option>
              </select>
              </td><td align="right">
-                                             上网方式：<select class="easyui-combobox" style="width: 100px;" data-options="panelHeight:'auto'" name="search_EQI_status">
+                                             上网方式：<select class="easyui-combobox" style="width: 100px;" data-options="panelHeight:'auto'" name="search_EQI_netType">
                     <option value="">全部</option>
-                    <option value="1" ${param['search_EQI_status'] eq 1?"selected":""}>正常</option>
-                    <option value="2" ${param['search_EQI_status'] eq 2?"selected":""}>禁用</option>
+                    <option value="1" ${param['search_EQI_netType'] eq 1?"selected":""}>虚拟ADSL</option>
+                    <option value="2" ${param['search_EQI_netType'] eq 2?"selected":""}>PPPOE</option>
                     </td>
              </select>
                 </td>
@@ -66,40 +63,43 @@
              </tr>
          </table>
     </form>
-    <table id="tt" class="easyui-datagrid" style="width:100%;height:auto;">
-        <thead>
-        <tr>
-            <th field="name1" width="9%">名称</th>
-            <th field="name2" width="9%">编码</th>
-            <th field="name3" width="9%">上网方式</th>
-            <th field="name4" width="9%">分成类型</th>
-            <th field="name5" width="9%">学校分成比例</th>
-            <th field="name6" width="9%">所在地区</th>
-            <th field="name6" width="9%">区局</th>
-            <th field="name6" width="9%">调拨区局</th>
-            <th field="name6" width="9%">可信标志</th>
-            <th field="name6" width="9%">虚拟学校标志</th>
-            <th field="name6" width="9%">激活帐号数</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${page.content}" var="entity">
-            <tr>
-                <td>${entity.name}</td>
-                <td>${entity.code}</td>
-                <td>${entity.netType}</td>
-                <td>${entity.userName}</td>
-                <td>${entity.userName}</td>
-                <td>${entity.userName}</td>
-                <td>${entity.realName}</td>
-                <td>${entity.email}</td>
-                <td>${entity.createTime}</td>
-                <td>${entity.status eq 1?"正常":"禁用"}</td>
-                <td>授权</td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
+    	<table id="tt" class="easyui-datagrid" style="width:100%;height:auto;">
+    	    <a href="${ctx}school/edit.html" class="easyui-linkbutton" data-options="iconCls:'icon-add'" style="width:80px;margin-bottom:5px;">添加</a>
+	        <thead>
+	        <tr>
+	            <th field="name1" width="8%">名称</th>
+	            <th field="name2" width="8%">编码</th>
+	            <th field="name3" width="8%">上网方式</th>
+	            <th field="name4" width="8%">分成类型</th>
+	            <th field="name5" width="8%">学校分成比例</th>
+	            <th field="name6" width="8%">所在地区</th>
+	            <th field="name7" width="8%">区局</th>
+	            <th field="name8" width="8%">调拨区局</th>
+	            <th field="name9" width="8%">可信标志</th>
+	            <th field="name10" width="8%">虚拟学校标志</th>
+	            <th field="name11" width="8%">激活帐号数</th>
+	            <th field="name12" width="12%">操作</th>
+	        </tr>
+	        </thead>
+	        <tbody>
+	        <c:forEach items="${page.content}" var="entity">
+	            <tr>
+	                <td>${entity.name}</td>
+	                <td>${entity.code}</td>
+	                <td>${entity.netType eq 1?"虚拟ADSL":"PPPOE"}</td>
+	                <td>${entity.rateType eq 1?"计时":"包月"}</td>
+	                <td>${entity.rate}</td>
+	                <td>${entity.city}</td>
+	                <td>${entity.district}</td>
+	                <td>${entity.subDistrict}</td>
+	                <td>${entity.trusted eq 1?"可信":"不可信"}</td>
+	                <td>${entity.virtualFlag eq '1'?"否":"是"}</td>
+	                <td>${entity.activeNum}</td>
+	                <td><a href="${ctx}school/edit.html?id=${entity.id}">修改</a>&nbsp;</td>
+	            </tr>
+	        </c:forEach>
+	        </tbody>
+    	</table>
     <div style="margin:20px 0;"></div>
     <div class="easyui-panel" style="width:100%">
         <div id="pagination" class="easyui-pagination" data-options="

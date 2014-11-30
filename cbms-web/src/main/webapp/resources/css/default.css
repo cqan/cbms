@@ -46,3 +46,9 @@ label.error, label.error {
 
 
 .icon-arrow{ background:url('../images/arrow.gif') no-repeat right;}
+
+
+
+select {
+   width:141px;
+}

@@ -28,8 +28,6 @@ public class Role extends IdLongEntity{
 	
 	private String roleCode;
 	
-	private Date createTime;
-	
 	private List<Permission> permissions = Lists.newArrayList();
 	
 	public String getName() {
@@ -46,14 +44,6 @@ public class Role extends IdLongEntity{
 
 	public void setRoleCode(String roleCode) {
 		this.roleCode = roleCode;
-	}
-
-	public Date getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
 	}
 
 	// 多对多定义

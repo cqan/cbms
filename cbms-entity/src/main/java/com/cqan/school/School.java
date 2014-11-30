@@ -13,7 +13,7 @@ public class School extends IdLongEntity {
 
 	private String code;// 学校编码
 
-	//1:计时，2：包月
+	//1:计时，2：包月  分层类型
 	private int rateType;// 网络
 
 	//分成比率
@@ -26,7 +26,7 @@ public class School extends IdLongEntity {
 	//1:可信；2:不可信
 	private  int trusted;
 	
-	//学校虚拟标识
+	//学校虚拟标识   1：否 2：是
 	private String virtualFlag;
 	
 	private int activeNum;
