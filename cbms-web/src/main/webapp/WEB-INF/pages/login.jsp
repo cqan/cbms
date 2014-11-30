@@ -21,13 +21,13 @@
               var name=document.login_f.username.value;
               var pwd=document.login_f.password.value;
               var code=document.login_f.authcode.value;
-              if(!name||!pwd||!code||code.length!=4){alertMsg('请如入完整信息！',"info");return false;}
+              if(!name||!pwd||!code){alertMsg('请如入完整信息！',"info");return false;}
                  document.login_f.submit();
           }
           
           function reflashAuthCode(){
         	  var verify=document.getElementById('safecode');
-        	    verify.setAttribute('src',url+'admin/code.htm?'+Math.random());
+        	    verify.setAttribute('src','${ctx}authcode.html?'+Math.random());
           }
           
           $(function(){
@@ -59,7 +59,7 @@
                     	<td style="text-align: right; width: 25%">验证码:</td>
                     	<td>
                     		<input class="easyui-textbox" type="text" id="authcode" name="authCode" style="width:80px;"/>
-                    		<img src="${ctx}authcode.html" id="safecode" onclick="reflashAuthCode()" style="top:7px;position:relative;" width="70" height="20"/>
+                    		<img src="${ctx}authcode.html" id="safecode" onclick="reflashAuthCode()" style="top:7px;position:relative; cursor: pointer;" title="看不清点击换一张！" width="70" height="20"/>
                     	</td>
                     </tr>
                     <tr height="50px;">
