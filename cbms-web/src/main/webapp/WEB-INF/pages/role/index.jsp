@@ -36,7 +36,7 @@
             <tr>
                 <td>${entity.name}</td>
                 <td>${entity.roleCode}</td>
-                <td>${entity.createTime}</td>
+                <td><fmt:formatDate value="${entity.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                 <td><a href="${ctx}role/auth.html?id=${entity.id}">授权</a>&nbsp;<a href="${ctx}role/edit.html?id=${entity.id}">修改</a></td>
             </tr>
         </c:forEach>

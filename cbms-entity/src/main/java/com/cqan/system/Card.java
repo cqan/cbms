@@ -39,11 +39,13 @@ public class Card extends IdLongEntity{
 	
 	private Date startTime;
 	
+	//1:未使用；2：已使用；3：过期；4：冻结
 	private int status;
 	
 	private String transferArea;
 	
 	private String transferName;
+	
 
 	@ManyToOne
     @JoinColumn(name="account_group_id")

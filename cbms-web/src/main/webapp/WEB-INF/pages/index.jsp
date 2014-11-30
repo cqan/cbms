@@ -52,22 +52,24 @@
 	    <!--修改密码窗口-->
 	    <div id="w" class="easyui-window" title="修改密码" collapsible="false" minimizable="false" maximizable="false" icon="icon-save"  style="width: 300px; height: 150px; padding: 5px;background: #fafafa;">
 	        <div class="easyui-layout" fit="true">
-	            <div region="center" border="false" style="padding: 10px; background: #fff; border: 1px solid #ccc;">
+	           <form id="inputForm" action="${ctx}user/resetpwd.html" method="post">
+	           		<div region="center" border="false" style="padding: 10px; background: #fff; border: 1px solid #ccc;">
 	                <table cellpadding=3>
 	                    <tr>
-	                        <td>新密码：</td>
-	                        <td><input id="txtNewPass" type="Password" class="txt01" /></td>
+	                        <td>新&nbsp;密&nbsp;码：</td>
+	                        <td><input id="newpwd" type="Password" name="newpwd" class="easyui-textbox easyui-validatebox" style="width:150px;" data-options="validType:'length[6,16]'" invalidMessage="请输入6至16位的新密码！"/></td>
 	                    </tr>
 	                    <tr>
 	                        <td>确认密码：</td>
-	                        <td><input id="txtRePass" type="Password" class="txt01" /></td>
+	                        <td><input id="renewpwd" type="Password" name="renewpwd" class="easyui-textbox easyui-validatebox" style="width:150px;" data-options="validType:'equalTo[#newpwd]'"  invalidMessage="两次输入密码不匹配！"/></td>
 	                    </tr>
 	                </table>
-	            </div>
-	            <div region="south" border="false" style="text-align: right; height: 30px; line-height: 30px;">
-	                <a id="btnEp" class="easyui-linkbutton" icon="icon-ok" href="javascript:void(0)" >确定</a>
-	                 <a id="btnCancel" class="easyui-linkbutton" icon="icon-cancel" href="javascript:void(0)">取消</a>
-	            </div>
+		            </div>
+		            <div region="south" border="false" style="text-align: right; height: 30px; line-height: 30px;">
+		                <a id="btnEp" class="easyui-linkbutton" onclick="resetPwd()" icon="icon-ok" href="javascript:void(0)" >确定</a>
+		                 <a id="btnCancel" class="easyui-linkbutton" icon="icon-cancel" href="javascript:void(0)">取消</a>
+		            </div>
+	           </form>
 	        </div>
 	    </div>
 
@@ -84,4 +86,16 @@
 			<div id="exit">退出</div>-->
 		</div>
   </body>
+  
+  <script type="text/javascript">
+  		function resetPwd(){
+  			$('#inputForm').submit();
+  		}
+	    $(function(){
+	    	var msg = "${msg}";
+	    	if(msg!=''){
+	    		show("",msg);
+	    	}
+	   });
+  </script>
 </html>

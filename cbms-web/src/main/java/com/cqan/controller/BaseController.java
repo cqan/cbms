@@ -4,12 +4,15 @@ import com.cqan.service.BaseService;
 import com.cqan.util.ReflectionUtils;
 import com.cqan.util.Servlets;
 import com.google.common.collect.Maps;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+
 import java.io.Serializable;
 import java.util.Map;
 
@@ -40,6 +43,10 @@ public abstract class BaseController<Entity,PK extends Serializable,EntityServic
         model.addAttribute("sortType", sortType);
         model.addAttribute("sortField", sortField);
         model.addAttribute("sortFields", sortFields);
+        String msg = (String) request.getAttribute("msg");
+        if (StringUtils.isNotBlank(msg)) {
+        	model.addAttribute("msg", msg);
+		}
         return getView()+"/index";
     }
 

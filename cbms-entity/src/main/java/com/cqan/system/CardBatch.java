@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.cqan.IdLongEntity;
 
@@ -20,9 +21,32 @@ public class CardBatch extends IdLongEntity {
 	
 	private int cardNum;
 	
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date endTime;
 	
+	private Date createTime;
+	
 	private String decription;
+	
+	//1:正在制卡；2:制卡完成
+	private int status;
+	
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 
 	public String getName() {
 		return name;

@@ -92,33 +92,7 @@ function closePwd() {
     $('#w').window('close');
 }
 
-//修改密码
-function serverLogin() {
-    var $newpass = $('#txtNewPass');
-    var $rePass = $('#txtRePass');
 
-    if ($newpass.val() == '') {
-        msgShow('系统提示', '请输入密码！', 'warning');
-        return false;
-    }
-    if ($rePass.val() == '') {
-        msgShow('系统提示', '请在一次输入密码！', 'warning');
-        return false;
-    }
-
-    if ($newpass.val() != $rePass.val()) {
-        msgShow('系统提示', '两次密码不一至！请重新输入', 'warning');
-        return false;
-    }
-
-    $.post('/ajax/editpassword.ashx?newpass=' + $newpass.val(), function(msg) {
-        msgShow('系统提示', '恭喜，密码修改成功！<br>您的新密码为：' + msg, 'info');
-        $newpass.val('');
-        $rePass.val('');
-        close();
-    })
-    
-}
 
 function createFrame(url){
 	var s = '<iframe scrolling="auto" frameborder="0"  src="'+url+'" style="width:100%;height:100%;"></iframe>';

@@ -46,7 +46,7 @@
                 <td>${entity.userName}</td>
                 <td>${entity.realName}</td>
                 <td>${entity.email}</td>
-                <td>${entity.createTime}</td>
+                <td><fmt:formatDate value="${entity.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                 <td>${entity.status eq 1?"正常":"禁用"}</td>
                 <td>
                 	<a href="${ctx}user/auth.html?id=${entity.id}">授权</a>&nbsp;

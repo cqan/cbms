@@ -15,7 +15,7 @@ public class SearchFilter {
 
 	/** 属性数据类型. */
 	public enum PropertyType {
-		S(String.class), I(Integer.class), L(Long.class), N(Double.class), D(Date.class), B(Boolean.class);
+		S(String.class), I(Integer.class), L(Long.class),F(Float.class), N(Double.class), D(Date.class), B(Boolean.class);
 
 		private Class<?> clazz;
 

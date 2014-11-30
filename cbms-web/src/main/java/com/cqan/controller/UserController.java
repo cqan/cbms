@@ -7,6 +7,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cqan.service.RoleService;
 import com.cqan.service.UserService;
+import com.cqan.shiro.credentials.PasswordHelper;
 import com.cqan.system.Role;
 import com.cqan.system.User;
 import com.google.common.collect.Lists;
@@ -92,7 +95,20 @@ public class UserController extends BaseController<User,Long,UserService>{
     	return "redirect:/user/auth.html?id="+id;
     }
     
-    
+    @RequestMapping(value="/resetpwd.html")
+    public String resetpwd(String newpwd,Model model){
+    	Subject subject = SecurityUtils.getSubject();
+    	String userName = (String) subject.getPrincipal();
+    	if (StringUtils.isNoneBlank(userName)) {
+			User user = entityService.findByUserName(userName);
+			if (user!=null&&user.getStatus()==1) {
+				user.setPassword(PasswordHelper.encryptPassword(userName, newpwd));
+				entityService.save(user);
+				model.addAttribute("msg", "修改密码成功！");
+			}
+		}
+    	return "/index";
+    }
     
     
     @ResponseBody
@@ -112,6 +128,9 @@ public class UserController extends BaseController<User,Long,UserService>{
 		}
     	return "false";
     }
+    
+    
+    
     @ResponseBody
     @RequestMapping(value="/disable.html",method=RequestMethod.POST)
     public String disable(Long id){

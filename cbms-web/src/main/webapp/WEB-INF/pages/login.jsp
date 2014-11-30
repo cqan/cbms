@@ -16,7 +16,8 @@
       	a{text-decoration:none;color:black;}
       	body{background-color:#DDD;}
   	 </style>
-     <script>
+  	 <script type="text/javascript">if (top.location != self.location) {top.location = self.location;}</script>
+     <script type="text/javascript">
           function check_f(){
               var name=document.login_f.username.value;
               var pwd=document.login_f.password.value;
@@ -62,7 +63,7 @@
                     		<img src="${ctx}authcode.html" id="safecode" onclick="reflashAuthCode()" style="top:7px;position:relative; cursor: pointer;" title="看不清点击换一张！" width="70" height="20"/>
                     	</td>
                     </tr>
-                    <tr height="50px;">
+                    <tr height="45px;">
                     	<td colspan="2">
                     		<div style="padding:5px;text-align:center;">
 		                        <a href="#" class="easyui-linkbutton" style="margin-right: 25px;" icon="icon-ok" onclick="check_f()">登录</a>

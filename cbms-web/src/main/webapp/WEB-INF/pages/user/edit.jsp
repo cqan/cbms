@@ -51,14 +51,14 @@
     </div>
 </div>
 </body>
-<script lang="text/javascript">   
-    $(function(){
-    	var msg = "${msg}";
-    	if(msg!=''){
-    		show("",msg);
-    }
-    	
-    	$("#inputForm").validate({
+	<script lang="text/javascript">   
+	    $(function(){
+	    	var msg = "${msg}";
+	    	if(msg!=''){
+	    		show("",msg);
+	    }
+	    	
+	   	$("#inputForm").validate({
 			rules: {
 				userName: {
 					required: true,
@@ -91,8 +91,7 @@
 				}
 			}
 		});
-    	
-    });
-	
-</script>
+	   	
+	   });
+	</script>
 </html>
