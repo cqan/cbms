@@ -24,8 +24,4 @@ public class PasswordHelper {
                  hashIterations).toHex();
     }
 
-    public static void main(String[] args) {
-        System.out.println(encryptPassword("admin","admin"));
-    }
-    
 }
