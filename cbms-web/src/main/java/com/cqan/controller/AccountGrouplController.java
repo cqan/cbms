@@ -1,6 +1,7 @@
 package com.cqan.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -54,4 +55,14 @@ public class AccountGrouplController extends BaseController<AccountGroup,Long,Ac
     	entityService.save(ag);
     	return "accountGroup/edit";
     }
+
+	@Override
+	@RequestMapping("/edit.html")
+	public String edit(Long id, Model model) {
+		List<School> schools = schoolService.listAll();
+        model.addAttribute("schools",schools);
+        return super.edit(id, model);
+	}
+    
+    
 }

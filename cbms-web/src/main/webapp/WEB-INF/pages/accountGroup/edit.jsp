@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
     <%@include file="/WEB-INF/pages/common/taglib.jsp"%>
@@ -39,8 +40,9 @@
                     <td  style="width:47%;text-align: right;padding-right: 10px;">学校:</td>
                     <td style="text-align: left;padding-left: 10px;">
                         <select class="easyui-combobox" data-options="panelHeight:'auto'" name="school.id">
-                        <option value="1" ${entity.school.id eq 1?"selected":""}>学校一</option>
-                        <option value="2"  ${entity.school.id eq 2?"selected":""}>学校二</option>
+                            <c:forEach items="${schools}" var="school">
+                                <option value="${school.id}" ${entity.school.id eq school.id?"selected":""}>${school.name}</option>
+                            </c:forEach>
                        </select>
                     </td>
                 </tr>
@@ -50,7 +52,10 @@
                 </tr>
                 <tr>
                     <td style="width:47%;text-align: right;padding-right: 10px;">备注:</td>
-                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="description"  name="description" value="${entity.description}" /></td>
+                    <td style="text-align: left;padding-left: 10px;">
+	                    <textarea rows="3" cols="17" style="resize: none" id="description" name="description" value="${entity.description}" >
+	                    </textarea>
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="2">

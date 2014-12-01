@@ -1,6 +1,7 @@
 package com.cqan.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -61,5 +62,12 @@ public class SchoolController extends BaseController<School,Long,SchoolService>{
     	model.addAttribute("entity", s);
     	entityService.save(s);
     	return "school/edit";
+    }
+    
+    @RequestMapping(value="/listAll.html",method=RequestMethod.POST)
+    public String listAll(Model model){
+    	List<School> schools = entityService.listAll();
+    	model.addAttribute("entity",schools);
+    	return null;
     }
 }
