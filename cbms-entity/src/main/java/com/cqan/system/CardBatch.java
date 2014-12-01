@@ -24,8 +24,6 @@ public class CardBatch extends IdLongEntity {
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date endTime;
 	
-	private Date createTime;
-	
 	private String decription;
 	
 	//1:正在制卡；2:制卡完成
@@ -38,14 +36,6 @@ public class CardBatch extends IdLongEntity {
 
 	public void setStatus(int status) {
 		this.status = status;
-	}
-
-	public Date getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
 	}
 
 	public String getName() {

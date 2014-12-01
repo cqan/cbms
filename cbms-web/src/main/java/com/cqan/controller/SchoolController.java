@@ -27,11 +27,13 @@ public class SchoolController extends BaseController<School,Long,SchoolService>{
 
     @RequestMapping(value="/save.html",method=RequestMethod.POST)
     public String save(School school,Model model){
+    	School s;
     	if (school.getId()==null||school.getId()==0) {
     		school.setCreateTime(new Date());
+    		s = school;
 			model.addAttribute("msg","添加成功！");
 		}else{
-			School s = entityService.get(school.getId());
+		    s = entityService.get(school.getId());
 			s.setActiveNum(school.getActiveNum());
 			s.setAddr(school.getAddr());
 			s.setCity(school.getCity());
@@ -56,8 +58,8 @@ public class SchoolController extends BaseController<School,Long,SchoolService>{
 			model.addAttribute("msg","修改成功！");
 		}
     	school.setUpdateTime(new Date());
-    	model.addAttribute("entity", school);
-    	entityService.save(school);
+    	model.addAttribute("entity", s);
+    	entityService.save(s);
     	return "school/edit";
     }
 }

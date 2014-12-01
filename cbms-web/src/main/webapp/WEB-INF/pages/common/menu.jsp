@@ -33,7 +33,7 @@
           <div title="学校管理" iconCls="icon-folder" style="overflow:auto;padding:6px;">
             <ul class="easyui-tree navlist">
                <shiro:hasPermission name="school.reg"><li><span><a link="${ctx}school/index.html">学校注册</a></span></li></shiro:hasPermission>
-               <shiro:hasPermission name="school.accountGroup"><li><span><a link="${ctx}group/index.html">学校客户组管理</a></span></li></shiro:hasPermission>
+               <shiro:hasPermission name="school.accountGroup"><li><span><a link="${ctx}accountGroup/index.html">学校客户组管理</a></span></li></shiro:hasPermission>
             </ul>
         </div>
     </shiro:hasPermission>

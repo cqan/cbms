@@ -2,7 +2,7 @@ package com.cqan.repository;
 
 import com.cqan.school.AccountGroup;
 
-public interface GroupRepository extends BaseRepository<AccountGroup, Long>{
+public interface AccountGroupRepository extends BaseRepository<AccountGroup, Long>{
 
 
 }

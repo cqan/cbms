@@ -86,6 +86,12 @@
                        </select>
                     </td>
                 </tr>
+               <tr>
+                    <td  style="width:47%;text-align: right;padding-right: 10px;">可信标示:</td>
+                    <td style="text-align: left;padding-left: 10px;">
+                    	<input type="checkbox" id="trusted"  name="trusted"  ${entity.trusted eq 1?"checked":""} value="${entity.trusted eq null?2:entity.trusted}" /></td>
+                    </td>
+                </tr>
                 <tr>
                     <td style="width:47%;text-align: right;padding-right: 10px;">网络负责人:</td>
                     <td style="text-align: left;padding-left: 10px;"><input type="text" id="netLeader"  name="netLeader" value="${entity.netLeader}" /></td>
@@ -143,9 +149,17 @@
 <script lang="text/javascript">   
     $(function(){
     	var msg = "${msg}";
+    	var $trusted = $("#trusted");
+    	$trusted.click(function(){
+	    	if($(this).attr("checked")=="checked"){
+	    	   $(this).val(1);
+	    	}else{
+	    	   $(this).val(2);
+	    	}
+    	});
     	if(msg!=''){
     		show("",msg);
-    }
+    	}
     	
     });
 	
