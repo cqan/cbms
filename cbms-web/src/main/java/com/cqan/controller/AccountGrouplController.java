@@ -3,6 +3,8 @@ package com.cqan.controller;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,7 @@ import com.cqan.service.SchoolService;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Created by Administrator on 2014/10/19.
@@ -55,6 +58,18 @@ public class AccountGrouplController extends BaseController<AccountGroup,Long,Ac
     	entityService.save(ag);
     	return "accountGroup/edit";
     }
+
+    
+    
+	@Override
+	@RequestMapping("/index.html")
+	 public String page(@RequestParam(value = "sortType", defaultValue = "auto") String sortType,String sortField,
+             @RequestParam(value = "page", defaultValue = "1") int pageNumber,@RequestParam
+             (value = "pageSize", defaultValue = PAGESIZE) int pageSize, Model model,HttpServletRequest request) {
+		List<School> schools = schoolService.listAll();
+        model.addAttribute("schools",schools);
+		return super.page(sortType, sortField, pageNumber, pageSize, model, request);
+	}
 
 	@Override
 	@RequestMapping("/edit.html")

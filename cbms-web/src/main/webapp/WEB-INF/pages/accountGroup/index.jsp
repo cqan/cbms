@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -29,10 +30,11 @@
                     <option value="4" ${param['search_EQI_type'] eq 4?"selected":""}>其它</option>
              </select>
              </td><td width="20%" align="right">
-           	 所在学校：<select class="easyui-combobox" style="width: 100px;" data-options="panelHeight:'auto'" name="search_EQI_status">
+           	 所在学校：<select class="easyui-combobox" style="width: 100px;" data-options="panelHeight:'auto'" name="search_EQI_school.id">
                     <option value="">全部</option>
-                    <option value="1" ${param['search_EQI_status'] eq 1?"selected":""}>学校1</option>
-                    <option value="2" ${param['search_EQI_status'] eq 2?"selected":""}>学校2</option>
+                    <c:forEach items="${schools}" var="school">
+                        <option value="${school.id}" ${param['search_EQI_school.id'] eq school.id?"selected":""}>${school.name}</option>
+                    </c:forEach>
              </select>
              </td><td width="20%" align="right">
              <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="submitForm()" style="width:80px">Search</a>
