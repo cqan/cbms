@@ -31,6 +31,8 @@ import com.google.common.collect.Lists;
 @RequestMapping("/user")
 public class UserController extends BaseController<User,Long,UserService>{
 
+	private static final String DEFAULT_PASSPORT = "123456";
+	
 	@Autowired
 	private RoleService roleService;
 	
@@ -45,6 +47,7 @@ public class UserController extends BaseController<User,Long,UserService>{
     	if (user.getId()==null||user.getId()==0) {
 			user.setBirthday(new Date());
 			user.setCreateTime(new Date());
+			user.setPassword(PasswordHelper.encryptPassword(user.getUserName(), DEFAULT_PASSPORT));
 			model.addAttribute("msg","添加成功！");
 		}else{
 			User u = entityService.get(user.getId());

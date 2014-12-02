@@ -47,7 +47,7 @@
                 <td><fmt:formatDate value="${entity.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                 <td>${entity.status eq 1?"正常":entity.status eq 2?"已使用":entity.status eq 3?"过期":"冻结"}</td>
                 <td>
-                	<a href="${ctx}user/auth.html?id=${entity.id}">冻结</a>&nbsp;
+                	<a href="${ctx}card/op.html?id=${entity.id}">冻结</a>&nbsp;
                 </td>
             </tr>
         </c:forEach>
