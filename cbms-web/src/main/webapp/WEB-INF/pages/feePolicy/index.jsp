@@ -54,36 +54,38 @@
 	                    <option value="2">否</option>
 	             </select>
              </tr>
-             <tr>
+             <tr align=right>
                  <td>
+                                                                 开始日期：<input name="search_GTED_startTime" class="easyui-datetimebox" value="${param['search_GTED_startTime']}" style="width:100px;">
                  </td>
                  <td>
+                                                                 结束日期：<input name="search_LTD_endTime" class="easyui-datetimebox" value="${param[search_LTD_endTime]}" style="width:100px;">
                  </td>
-	             </td><td width="20%" align="right">
+	             </td><td width="20%" align="right" colspan=3>
 	            		 <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="submitForm()" style="width:80px">Search</a>
 	             </td>
              </tr>
          </table>
     </form>
     <table id="tt" class="easyui-datagrid" style="width:100%;height:auto;">
-        <a href="${ctx}accountGroup/edit.html" class="easyui-linkbutton" data-options="iconCls:'icon-add'" style="width:80px;margin-bottom:5px;">添加</a>
+        <a href="${ctx}feePolicy/edit.html" class="easyui-linkbutton" data-options="iconCls:'icon-add'" style="width:80px;margin-bottom:5px;">添加</a>
         <thead>
         <tr>
             <th field="name1" width="6%">计费策略名</th>
             <th field="name2" width="6%">地区</th>
             <th field="name3" width="6%">适用学校</th>
-            <th field="name4" width="6%">计费政策类型</th>
+            <th field="name4" width="8%">计费政策类型</th>
             <th field="name5" width="6%">费率（元）</th>
-            <th field="name6" width="6%">周期（分钟/天/月）</th>
-            <th field="name7" width="6%">上限类型（N：无S：时间 L：流量）</th>
+            <th field="name6" width="8%">周期（分钟/天/月）</th>
+            <th field="name7" width="8%">上限类型（N：无S：时间 L：流量）</th>
             <th field="name8" width="6%">超限费率</th>
             <th field="name9" width="6%">上限数值</th>
             <th field="name10" width="6%">客户组类型</th>
             <th field="name11" width="6%">创建人</th>
-            <th field="name12" width="6%">学生是否可见（Y：是 N：否）</th>
-            <th field="name13" width="6%">启动标志（Y：是  N：否）</th>
-            <th field="name14" width="6%">套餐解释</th>
-            <th field="name15" width="6%">操作</th>
+            <th field="name12" width="8%">学生是否可见（Y：是 N：否）</th>
+            <th field="name13" width="8%">启动标志（Y：是  N：否）</th>
+            <th field="name14" width="10%">套餐解释</th>
+            <th field="name15" width="4%">操作</th>
         </tr>
         </thead>
         <tbody>
