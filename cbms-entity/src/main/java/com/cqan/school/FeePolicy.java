@@ -8,6 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.cqan.IdLongEntity;
 
 /**
@@ -36,8 +38,10 @@ public class FeePolicy extends IdLongEntity {
 	
 	private String area;
 	
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date startTime;
 	
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date endTime;
 	//学生是否可见 1：是；2：否
 	private int stuVisible;
