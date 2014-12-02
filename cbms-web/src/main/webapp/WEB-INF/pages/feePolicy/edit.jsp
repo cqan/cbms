@@ -11,10 +11,10 @@
 </head>
 <body>
 <div style="margin:5px 0;"></div>
-学校客户组管理--><a href="${ctx}accountGroup/index.html">学校客户组管理</a>-->${empty entity?"添加":"修改"}学校客户组信息
+计费策略管理--><a href="${ctx}feePolicy/index.html">学校客户组管理</a>-->${empty entity?"添加":"修改"}学校客户组信息
 <div class="easyui-panel" title="${empty entity?"添加":"修改"}学校客户组信息" style="width:100%">
     <div style="text-align: center;">
-        <form id="inputForm" action="${ctx}accountGroup/save.html" method="post">
+        <form id="inputForm" action="${ctx}feePolicy/save.html" method="post">
     		<input name="id" id="id" type="hidden" value="${entity.id}">
             <table cellpadding="5" align="center" style="width: 100%">
                 <tr>

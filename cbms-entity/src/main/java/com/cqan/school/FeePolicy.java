@@ -39,7 +39,7 @@ public class FeePolicy extends IdLongEntity {
 	private Date startTime;
 	
 	private Date endTime;
-	
+	//学生是否可见 1：是；2：否
 	private int stuVisible;
 	
 	private String description;

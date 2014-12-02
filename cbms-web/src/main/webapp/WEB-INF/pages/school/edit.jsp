@@ -130,7 +130,9 @@
                 </tr>
                 <tr>
                     <td style="width:47%;text-align: right;padding-right: 10px;">描述:</td>
-                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="description"  name="description" value="${entity.description}" /></td>
+                    <td style="text-align: left;padding-left: 10px;">
+                    	<textarea rows="3" cols="17" style="resize: none" id="description" name="description" >${entity.description}</textarea>
+	                </td>
                 </tr>
                 <tr>
                     <td colspan="2">
