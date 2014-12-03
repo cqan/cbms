@@ -36,7 +36,7 @@
                 <tr>
                     <td  style="width:47%;text-align: right;padding-right: 10px;">分层类型:</td>
                     <td style="text-align: left;padding-left: 10px;">
-                        <select class="easyui-combobox" data-options="panelHeight:'auto'" name="rateType">
+                        <select class="easyui-combobox" data-options="panelHeight:'auto'" id="rateType" name="rateType">
                         <option value="1" ${entity.rateType eq 1?"selected":""}>计时</option>
                         <option value="2"  ${entity.rateType eq 2?"selected":""}>包月</option>
                        </select>
@@ -44,7 +44,7 @@
                 </tr>
                 <tr>
                     <td  style="width:47%;text-align: right;padding-right: 10px;">学校分层比例:</td>
-                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="rate"  name="rate" value="${entity.rate}" /></td>
+                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="rate"  name="rate" value="${entity.rate}" /><span id="rate_msg"></span></td>
                 </tr>
                 <tr>
                     <td  style="width:47%;text-align: right;padding-right: 10px;">所属地区:</td>
@@ -118,11 +118,11 @@
                 </tr>
                 <tr>
                     <td style="width:47%;text-align: right;padding-right: 10px;">服务器IP:</td>
-                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="serverIp"  name="serverIp" value="${entity.serverIp}" /></td>
+                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="serverIp"  name="serverIp" value="${entity.serverIp}" /><span id="serverIp_msg"></span></td>
                 </tr>
                 <tr>
                     <td style="width:47%;text-align: right;padding-right: 10px;">服务器端口:</td>
-                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="serverPort"  name="serverPort" value="${entity.serverPort}" /></td>
+                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="serverPort"  name="serverPort" value="${entity.serverPort}" /><span id="serverPort_msg"></span></td>
                 </tr>
                 <tr>
                     <td style="width:47%;text-align: right;padding-right: 10px;">地址:</td>
@@ -159,6 +159,33 @@
 	    	   $(this).val(2);
 	    	}
     	});
+    	
+    	$("#rate").blur(function(){
+    	   if(/^0\.\d*[0-9]$/.test($(this).val())){
+    	      $("#rate_msg").removeAttr("color").html("");
+    	   }else{
+    	      $("#rate_msg").css("color","red").html(" * 必须为数值且小于1。");
+    	   }
+    	});
+    	
+    	$("#serverPort").blur(function(){
+    	   if(/^\d+$/.test($(this).val())){
+    	      $("#serverPort_msg").removeAttr("color").html("");
+    	   }else{
+    	      $("#serverPort_msg").css("color","red").html(" * 必须为数值。");
+    	   }
+    	});
+    	
+    	$("#serverIp").blur(function(){
+    	   if(/((?:(?:25[0-5]|2[0-4]\d|((1\d{2})|([1-9]?\d)))\.){3}(?:25[0-5]|2[0-4]\d|((1\d{2})|([1-9]?\d))))/.test($(this).val())){
+    	      $("#serverIp_msg").removeAttr("color").html("");
+    	   }else{
+    	      $("#serverIp_msg").css("color","red").html(" * IP格式错误。");
+    	   }
+    	});
+    	
+    	
+    	
     	if(msg!=''){
     		show("",msg);
     	}

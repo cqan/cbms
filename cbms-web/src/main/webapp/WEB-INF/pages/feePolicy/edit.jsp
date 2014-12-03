@@ -29,14 +29,14 @@
                     <td style="width:47%;text-align: right;padding-right: 10px;"></td>
                     <td style="text-align: left;padding-left: 10px;">
                        <input type="text" id="price"  name="price" value="${entity.price}" style="width:53px;"/>&nbsp;元&nbsp;
-                       <input type="text" id="time"  name="time" value="${entity.time}" style="width:53px;"/>月&nbsp;
+                       <input type="text" id="time"  name="time" value="${entity.time}" style="width:53px;"/>月&nbsp;<span id="price_time_msg"></span>
                     </td>
                 </tr>
                 <tr>
                     <td style="width:47%;text-align: right;padding-right: 10px;">上行带宽控制:</td>
                     <td style="text-align: left;padding-left: 10px;">
                        <select class="easyui-combobox" data-options="panelHeight:'auto'" name="upControl">
-                            <option value="0" ${entity.upControl eq 1?"selected":"0"}>无限制</option>
+                            <option value="" ${entity.upControl eq null?"selected":""}>无限制</option>
 		                    <option value="1" ${entity.upControl eq 1?"selected":""}>512K</option>
 		                    <option value="2" ${entity.upControl eq 2?"selected":""}>1M</option>
 		                    <option value="3" ${entity.upControl eq 3?"selected":""}>2M</option>
@@ -53,7 +53,7 @@
                     <td style="width:47%;text-align: right;padding-right: 10px;">下行带宽控制:</td>
                     <td style="text-align: left;padding-left: 10px;">
                       <select class="easyui-combobox" data-options="panelHeight:'auto'" name="downControl">
-                            <option value="0"  ${entity.downControl eq 1?"selected":"0"}>无限制</option>
+                            <option value=""  ${entity.downControl eq null?"selected":""}>无限制</option>
 		                    <option value="1" ${entity.downControl eq 1?"selected":""}>512K</option>
 		                    <option value="2" ${entity.downControl eq 2?"selected":""}>1M</option>
 		                    <option value="3" ${entity.downControl eq 3?"selected":""}>2M</option>
@@ -79,7 +79,7 @@
                     <td style="width:47%;text-align: right;padding-right: 10px;">适用学校:</td>
                     <td style="text-align: left;padding-left: 10px;">
                         <select class="easyui-combobox" data-options="panelHeight:'auto'" name="school.id">
-		                    <option value="0" ${entity.school.id eq school.id?"selected":""}>全部</option>
+		                    <option value="" ${entity.school.id eq null?"selected":""}>全部</option>
 		                    <c:forEach items="${schools}" var="school">
 		                        <option value="${school.id}" ${entity.school.id eq school.id?"selected":""}>${school.name}</option>
 		                    </c:forEach>
@@ -106,7 +106,7 @@
                     </td>
                     <td style="text-align: left;padding-left: 10px;">
 	                    <select class="easyui-combobox" data-options="panelHeight:'auto'" name="stuVisible">
-		                    <option value="0" ${entity.stuVisible eq 0?"selected":""}>全部</option>
+		                    <option value="" ${entity.stuVisible eq null?"selected":""}>全部</option>
 		                    <option value="1" ${entity.stuVisible eq 1?"selected":""}>是</option>
 		                    <option value="2" ${entity.stuVisible eq 2?"selected":""}>否</option>
 		                </select>
@@ -136,6 +136,22 @@
     $(function(){
     	var msg = "${msg}";
     	var $independentGroup = $("#independentGroup");
+    	$("#price").blur(function(){
+    	    if(/^\d+(\.\d+)?$/.test($(this).val())){
+    	       $("#price_time_msg").removeAttr("color").html("");
+    	    }else{
+    	       $("#price_time_msg").css("color","red").html(" * 价格格式错误，请输入数值");
+    	    }
+    	});
+    	
+    	$("#time").blur(function(){
+    	    if(/^\d+(\.\d+)?$/.test($(this).val())){
+    	       $("#price_time_msg").removeAttr("color").html("");
+    	    }else{
+    	       $("#price_time_msg").css("color","red").html(" * 日期格式错误，请输入数值");
+    	    }
+    	});
+    	
     	$independentGroup.click(function(){
 	    	if($(this).attr("checked")=="checked"){
 	    	   $(this).val(1);
@@ -143,6 +159,8 @@
 	    	   $(this).val(2);
 	    	}
     	});
+    	
+    	
     	if(msg!=''){
     		show("",msg);
 	    }

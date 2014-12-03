@@ -93,7 +93,7 @@
             <tr>
                 <td>${entity.name}</td>
                 <td>${entity.area}</td>
-                <td>${entity.school.name}</td>
+                <td>${entity.school.id eq null?"全部学校":entity.school.name}</td>
                 <td>${entity.strategyType}</td>
                 <td>${entity.price}</td>
                 <td>${entity.time}</td>
@@ -102,7 +102,7 @@
                 <td>${entity.time}</td>
                 <td>${entity.time}</td>
                 <td>${entity.time}</td>
-                <td>${entity.stuVisible}</td>
+                <td>${entity.stuVisible eq ""?"全部":(entity.stuVisible eq 1?"是":"否")}</td>
                 <td>${entity.time}</td>
                 <td>${entity.description}</td>
                 <td><a href="${ctx}feePolicy/edit.html?id=${entity.id}">修改</a>&nbsp;</td>

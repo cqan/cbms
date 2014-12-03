@@ -32,9 +32,9 @@ public class FeePolicy extends IdLongEntity {
 	
 	private int time;
 	
-	private int downControl;
+	private Integer downControl;
 	
-	private int upControl;
+	private Integer upControl;
 	
 	private String area;
 	
@@ -44,7 +44,7 @@ public class FeePolicy extends IdLongEntity {
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date endTime;
 	//学生是否可见 1：是；2：否
-	private int stuVisible;
+	private Integer stuVisible;
 	
 	private String description;
 	
@@ -82,21 +82,6 @@ public class FeePolicy extends IdLongEntity {
 		this.time = time;
 	}
 
-	public int getDownControl() {
-		return downControl;
-	}
-
-	public void setDownControl(int downControl) {
-		this.downControl = downControl;
-	}
-
-	public int getUpControl() {
-		return upControl;
-	}
-
-	public void setUpControl(int upControl) {
-		this.upControl = upControl;
-	}
 
 	public String getArea() {
 		return area;
@@ -122,20 +107,36 @@ public class FeePolicy extends IdLongEntity {
 		this.endTime = endTime;
 	}
 
-	public int getStuVisible() {
-		return stuVisible;
-	}
-
-	public void setStuVisible(int stuVisible) {
-		this.stuVisible = stuVisible;
-	}
-
 	public String getDescription() {
 		return description;
 	}
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Integer getDownControl() {
+		return downControl;
+	}
+
+	public void setDownControl(Integer downControl) {
+		this.downControl = downControl;
+	}
+
+	public Integer getUpControl() {
+		return upControl;
+	}
+
+	public void setUpControl(Integer upControl) {
+		this.upControl = upControl;
+	}
+
+	public Integer getStuVisible() {
+		return stuVisible;
+	}
+
+	public void setStuVisible(Integer stuVisible) {
+		this.stuVisible = stuVisible;
 	}
 
 	@ManyToOne

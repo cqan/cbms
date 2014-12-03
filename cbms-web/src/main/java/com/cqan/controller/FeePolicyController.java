@@ -44,7 +44,10 @@ public class FeePolicyController extends BaseController<FeePolicy,Long,FeePolicy
     @RequestMapping(value="/save.html",method=RequestMethod.POST)
     public String save(FeePolicy feePolicy,Model model){
     	FeePolicy fp;
-    	School school = schoolService.get(feePolicy.getSchool().getId());
+    	School school =null;
+    	if(null != feePolicy.getSchool() && null !=feePolicy.getSchool().getId()){
+    		school = schoolService.get(feePolicy.getSchool().getId());
+    	}
     	if (feePolicy.getId()==null||feePolicy.getId()==0) {
     		feePolicy.setCreateTime(new Date());
     		feePolicy.setSchool(school);
