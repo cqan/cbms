@@ -48,7 +48,7 @@
     <shiro:hasPermission name="card">
           <div title="营业管理" iconCls="icon-folder" style="overflow:auto;padding:6px;">
             <ul class="easyui-tree navlist">
-                 <shiro:hasPermission name="card.create"><li><span><a link="${ctx}card/batch/index.html">开户受理</a></span></li></shiro:hasPermission>
+                 <shiro:hasPermission name="card.create"><li><span><a link="${ctx}account/edit.html">开户受理</a></span></li></shiro:hasPermission>
                 <shiro:hasPermission name="card.manager"><li><span><a link="${ctx}card/index.html">受理激活</a></span></li></shiro:hasPermission>
                 <shiro:hasPermission name="card.manager"><li><span><a link="${ctx}card/index.html">重置密码</a></span></li></shiro:hasPermission>
                 <shiro:hasPermission name="card.manager"><li><span><a link="${ctx}card/index.html">客户资料变更</a></span></li></shiro:hasPermission>
@@ -60,6 +60,13 @@
           <div title="计费管理" iconCls="icon-folder" style="overflow:auto;padding:6px;">
             <ul class="easyui-tree navlist">
                 <shiro:hasPermission name="card.create"><li><span><a link="${ctx}feePolicy/index.html">计费套餐策略</a></span></li></shiro:hasPermission>
+            </ul>
+        </div>
+    </shiro:hasPermission>
+    <shiro:hasPermission name="card">
+          <div title="系统管理" iconCls="icon-folder" style="overflow:auto;padding:6px;">
+            <ul class="easyui-tree navlist">
+                <shiro:hasPermission name="card.create"><li><span><a link="${ctx}feePolicy/index.html">管理员及学校查询</a></span></li></shiro:hasPermission>
             </ul>
         </div>
     </shiro:hasPermission>

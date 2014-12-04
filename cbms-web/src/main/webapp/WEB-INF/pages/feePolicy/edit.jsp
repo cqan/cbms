@@ -18,10 +18,6 @@
     		<input name="id" id="id" type="hidden" value="${entity.id}">
             <table cellpadding="5" align="center" style="width: 100%">
                 <tr>
-                    <td style="width:47%;text-align: right;padding-right: 10px;">计费政策类型:</td>
-                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="strategyType"  name="strategyType" value="${entity.strategyType}" /></td>
-                </tr>
-                <tr>
                     <td  style="width:47%;text-align: right;padding-right: 10px;">计费策略名:</td>
                     <td style="text-align: left;padding-left: 10px;"><input type="text" id="name" name="name"  value="${entity.name}"/></td>
                 </tr>
@@ -30,6 +26,14 @@
                     <td style="text-align: left;padding-left: 10px;">
                        <input type="text" id="price"  name="price" value="${entity.price}" style="width:53px;"/>&nbsp;元&nbsp;
                        <input type="text" id="time"  name="time" value="${entity.time}" style="width:53px;"/>月&nbsp;<span id="price_time_msg"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:47%;text-align: right;padding-right: 10px;">计费政策类型:</td>
+                    <td style="text-align: left;padding-left: 10px;">
+	                    <select class="easyui-combobox" data-options="panelHeight:'auto'" name="strategyType">
+	                          <option value="1" ${entity.strategyType eq 1?"selected":""}>包月无上限</option>
+	                     </select>
                     </td>
                 </tr>
                 <tr>

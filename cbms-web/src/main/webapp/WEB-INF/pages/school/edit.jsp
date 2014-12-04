@@ -55,6 +55,7 @@
                        </select>
                     </td>
                 </tr>
+                <!--
                 <tr>
                     <td  style="width:47%;text-align: right;padding-right: 10px;">区局:</td>
                     <td style="text-align: left;padding-left: 10px;">
@@ -73,9 +74,10 @@
                        </select>
                     </td>
                 </tr>
+                -->
                 <tr>
                     <td style="width:47%;text-align: right;padding-right: 10px;">激活账号数:</td>
-                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="activeNum"  name="activeNum" value="${entity.activeNum}" /></td>
+                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="activeNum"  name="activeNum" value="${entity.activeNum}" /><span id="activeNum_msg"></span></td>
                 </tr>
                 <tr>
                     <td  style="width:47%;text-align: right;padding-right: 10px;">虚拟学校标志:</td>
@@ -164,7 +166,7 @@
     	   if(/^0\.\d*[0-9]$/.test($(this).val())){
     	      $("#rate_msg").removeAttr("color").html("");
     	   }else{
-    	      $("#rate_msg").css("color","red").html(" * 必须为数值且小于1。");
+    	      $("#rate_msg").css("color","red").html(" * 必须为数值且大于0小于1。");
     	   }
     	});
     	
@@ -184,6 +186,14 @@
     	   }
     	});
     	
+    	$("#activeNum").blur(function(){
+    	   if(/^\d+$/.test($(this).val())){
+    	   	  $("#activeNum_msg").removeAttr("color").html("");
+    	   }else{
+    	      $("#activeNum_msg").css("color","red").html(" * 必须为数值。");
+    	   }
+    	
+    	});
     	
     	
     	if(msg!=''){

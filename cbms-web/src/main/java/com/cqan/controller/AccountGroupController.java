@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 @RequestMapping("/accountGroup")
-public class AccountGrouplController extends BaseController<AccountGroup,Long,AccountGroupService>{
+public class AccountGroupController extends BaseController<AccountGroup,Long,AccountGroupService>{
 
 	@Autowired
 	private SchoolService schoolService;
@@ -55,6 +55,8 @@ public class AccountGrouplController extends BaseController<AccountGroup,Long,Ac
 		}
     	accountGroup.setUpdateTime(new Date());
     	model.addAttribute("entity", ag);
+		List<School> schools = schoolService.listAll();
+        model.addAttribute("schools",schools);
     	entityService.save(ag);
     	return "accountGroup/edit";
     }
