@@ -63,4 +63,11 @@
             </ul>
         </div>
     </shiro:hasPermission>
+    <shiro:hasPermission name="internet.manager">
+          <div title="计费管理" iconCls="icon-folder" style="overflow:auto;padding:6px;">
+            <ul class="easyui-tree navlist">
+                <shiro:hasPermission name="internet.manager"><li><span><a link="${ctx}netConfig/index.html">上网管理</a></span></li></shiro:hasPermission>
+            </ul>
+        </div>
+    </shiro:hasPermission>
 </div>

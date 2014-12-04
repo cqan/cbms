@@ -6,6 +6,7 @@ import com.cqan.util.Servlets;
 import com.google.common.collect.Maps;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,10 +60,14 @@ public abstract class BaseController<Entity,PK extends Serializable,EntityServic
         return getView()+"/edit";
     }
 
-    private String getView(){
+    protected String getView(){
         return entityClass.getSimpleName().substring(0,1).toLowerCase()+entityClass.getSimpleName().substring(1);
     }
 
     public abstract void setEntityService(EntityService entityService);
+    
+    protected String getCurrentUser(){
+    	return (String) SecurityUtils.getSubject().getPrincipal();
+    }
 
 }
