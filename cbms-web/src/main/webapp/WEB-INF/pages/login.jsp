@@ -22,7 +22,7 @@
               var name=document.login_f.username.value;
               var pwd=document.login_f.password.value;
               var code=document.login_f.authcode.value;
-              if(!name||!pwd||!code){alertMsg('请如入完整信息！',"info");return false;}
+              if(name==""||pwd==""||code==""){alertMsg('请如入完整信息！',"info");return false;}
                  document.login_f.submit();
           }
           
