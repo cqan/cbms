@@ -10,24 +10,24 @@ import com.cqan.IdLongEntity;
 @Table(name="user_school")
 public class UserSchool extends IdLongEntity {
 
-	private int userId;
+	private Long userId;
 	
-	private int schoolId;
+	private Long schoolId;
 
 	
-	public int getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
-	public int getSchoolId() {
+	public Long getSchoolId() {
 		return schoolId;
 	}
 
-	public void setSchoolId(int schoolId) {
+	public void setSchoolId(Long schoolId) {
 		this.schoolId = schoolId;
 	}
 	

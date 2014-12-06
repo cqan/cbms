@@ -230,6 +230,22 @@ public class School extends IdLongEntity {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	@Override
+	public boolean equals(Object school) {
+		if(null == school){
+		  return false;	
+		}
+		if(school instanceof School){
+			if(this.getId() == ((School)school).getId()){
+				return true;
+			}else{
+				return false;
+			}
+		}else{
+			return false;
+		}
+	}
 	
 	
 	
