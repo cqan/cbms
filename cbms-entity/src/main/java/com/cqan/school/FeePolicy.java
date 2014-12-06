@@ -48,6 +48,10 @@ public class FeePolicy extends IdLongEntity {
 	
 	private String description;
 	
+	private int creatorId;
+	
+	private String creator;
+	
 
 
 	public String getName() {
@@ -137,6 +141,22 @@ public class FeePolicy extends IdLongEntity {
 
 	public void setStuVisible(Integer stuVisible) {
 		this.stuVisible = stuVisible;
+	}
+	
+	public int getCreatorId() {
+		return creatorId;
+	}
+
+	public void setCreatorId(int creatorId) {
+		this.creatorId = creatorId;
+	}
+
+	public String getCreator() {
+		return creator;
+	}
+
+	public void setCreator(String creator) {
+		this.creator = creator;
 	}
 
 	@ManyToOne

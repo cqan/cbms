@@ -1,5 +1,7 @@
 package com.cqan.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,12 @@ public class CardBatchServiceImpl extends
 	@Autowired
 	public void setEntityRepository(CardBatchRepository repository) {
 		this.repository = repository;
+	}
+
+	@Override
+	public List<CardBatch> findByStatus(int status) {
+		
+		return repository.findByStatus(status);
 	}
 
 	

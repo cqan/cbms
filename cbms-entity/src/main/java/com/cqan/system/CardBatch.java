@@ -4,6 +4,9 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.cqan.IdLongEntity;
@@ -26,7 +29,7 @@ public class CardBatch extends IdLongEntity {
 	
 	private String decription;
 	
-	//1:正在制卡；2:制卡完成
+	//0:未制卡；1:正在制卡；2:制卡完成
 	private int status;
 	
 
@@ -84,6 +87,11 @@ public class CardBatch extends IdLongEntity {
 
 	public void setDecription(String decription) {
 		this.decription = decription;
+	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this,ToStringStyle.SHORT_PREFIX_STYLE);
 	}
 	
 	

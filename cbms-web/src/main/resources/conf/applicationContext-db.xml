@@ -48,19 +48,10 @@
 		<property name="entityManagerFactory" ref="entityManagerFactory"/>
 	</bean>
 	
-	<tx:annotation-driven transaction-manager="jpaTransactionManager" />	
-	<tx:annotation-driven transaction-manager="jdbcTransactionManager" />	
+	<tx:annotation-driven transaction-manager="jpaTransactionManager" proxy-target-class="true"/>	
 	
+	<aop:aspectj-autoproxy/> 
 	
-	<bean id="jdbcTransactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-
-	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-
 	<!-- druide连接池 -->
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
 		init-method="init" destroy-method="close">

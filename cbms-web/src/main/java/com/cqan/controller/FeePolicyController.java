@@ -48,6 +48,8 @@ public class FeePolicyController extends BaseController<FeePolicy,Long,FeePolicy
     	if(null != feePolicy.getSchool() && null !=feePolicy.getSchool().getId()){
     		school = schoolService.get(feePolicy.getSchool().getId());
     	}
+    	feePolicy.setCreator("ddd");
+    	feePolicy.setCreatorId(1);
     	if (feePolicy.getId()==null||feePolicy.getId()==0) {
     		feePolicy.setCreateTime(new Date());
     		feePolicy.setSchool(school);
@@ -70,6 +72,8 @@ public class FeePolicyController extends BaseController<FeePolicy,Long,FeePolicy
 		}
     	feePolicy.setUpdateTime(new Date());
     	model.addAttribute("entity", feePolicy);
+		List<School> schools = schoolService.listAll();
+        model.addAttribute("schools",schools);
     	entityService.save(fp);
     	return "feePolicy/edit";
     }

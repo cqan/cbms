@@ -29,22 +29,26 @@
         <thead>
         <tr>
             <th field="name1" width="15%">名称</th>
-            <th field="name2" width="15%">区域</th>
+            <th field="name2" width="10%">区域</th>
             <th field="name3" width="10%">价格</th>
             <th field="name4" width="10%">数量</th>
-            <th field="name5" width="20%">失效时间</th>
-            <th field="name6" width="20%">创建时间</th>
+            <th field="name5" width="10%">状态</th>
+            <th field="name6" width="15%">失效时间</th>
+            <th field="name7" width="15%">创建时间</th>
+            <th field="name8" width="15%">操作</th>
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${page.content}" var="entity">
             <tr>
-                <td>${entity.name}</td>
+                <td><a href="${ctx}card/index.html?search_EQL_cardBatch.id=${entity.id}">${entity.name}</a></td>
                 <td>${entity.area}</td>
                 <td>${entity.price}</td>
                 <td>${entity.cardNum}</td>
+                <td>${entity.status eq 0?"未制卡":entity.status eq 1?"正在制卡":"制卡完成"}</td>
                 <td><fmt:formatDate value="${entity.endTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                 <td><fmt:formatDate value="${entity.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                <td><a href="#" onclick="resetCardBatch('${entity.id}')">重新生成卡</a></td>
             </tr>
         </c:forEach>
         </tbody>
@@ -72,5 +76,16 @@
   		show("",msg);
   	}
   });
+  
+  function resetCardBatch(id){
+	  jQuery.ajax({
+		  		url: "${ctx}card/batch/operate.html",
+		  		data:{id:id}, 
+		  		type:"POST",
+		  		success: function(data){
+			        alert(data);
+			        window.location.reload(true);
+			  }});
+  }
 </script>
 </html>

@@ -60,14 +60,15 @@ public abstract class BaseController<Entity,PK extends Serializable,EntityServic
         return getView()+"/edit";
     }
 
-    protected String getView(){
+    private String getView(){
         return entityClass.getSimpleName().substring(0,1).toLowerCase()+entityClass.getSimpleName().substring(1);
     }
+    
+    
+    protected String getCurrentUserName() {
+		return (String) SecurityUtils.getSubject().getPrincipal();
+	}
 
     public abstract void setEntityService(EntityService entityService);
-    
-    protected String getCurrentUser(){
-    	return (String) SecurityUtils.getSubject().getPrincipal();
-    }
 
 }

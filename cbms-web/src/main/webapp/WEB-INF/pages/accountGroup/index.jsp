@@ -60,7 +60,7 @@
             <tr>
                 <td>${entity.code}</td>
                 <td>${entity.name}</td>
-                <td>${entity.type}</td>
+                <td>${entity.type eq 1?"学生":(entity.type eq 2?"家属区":(entity.type eq 3?"办公区":"其它"))}</td>
                 <td>${entity.school.name}</td>
                 <td></td>
                 <td>${entity.description}</td>

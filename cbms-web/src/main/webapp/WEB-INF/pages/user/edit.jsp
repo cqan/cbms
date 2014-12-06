@@ -68,7 +68,8 @@
 						 dataType:"json", 
 						 data: {                    
 							 userName: function(){return $("#userName").val()},
-							 id:$("#uid").val()}
+							 id:$("#uid").val()
+						}
 					 }
 				},
 				realName: {

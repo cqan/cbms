@@ -2,14 +2,16 @@ package com.cqan.system;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import com.cqan.IdLongEntity;
-import com.cqan.school.AccountGroup;
-import com.cqan.school.FeePolicy;
 import com.cqan.school.School;
 
 
@@ -17,7 +19,7 @@ import com.cqan.school.School;
 @Table(name="card")
 public class Card extends IdLongEntity{
 	
-	private AccountGroup accountGroup;
+	//private AccountGroup accountGroup;
 	
 	private  String area;
 	
@@ -27,7 +29,7 @@ public class Card extends IdLongEntity{
 	
 	private Date endTime;
 	
-	private FeePolicy feePolicy;
+//	private FeePolicy feePolicy;
 	
 	private float price;
 	
@@ -47,17 +49,17 @@ public class Card extends IdLongEntity{
 	private String transferName;
 	
 
-	@ManyToOne
-    @JoinColumn(name="account_group_id")
-	public AccountGroup getAccountGroup() {
-		return accountGroup;
-	}
+//	@ManyToOne
+//    @JoinColumn(name="account_group_id")
+//	public AccountGroup getAccountGroup() {
+//		return accountGroup;
+//	}
 
 	public String getArea() {
 		return area;
 	}
 
-	@ManyToOne
+	@ManyToOne(cascade={CascadeType.REFRESH})
     @JoinColumn(name="card_batch_id")
 	public CardBatch getCardBatch() {
 		return cardBatch;
@@ -71,11 +73,11 @@ public class Card extends IdLongEntity{
 		return endTime;
 	}
 
-	@ManyToOne
-    @JoinColumn(name="fee_policy_id")
-	public FeePolicy getFeePolicy() {
-		return feePolicy;
-	}
+//	@ManyToOne
+//    @JoinColumn(name="fee_policy_id")
+//	public FeePolicy getFeePolicy() {
+//		return feePolicy;
+//	}
 
 	public float getPrice() {
 		return price;
@@ -111,9 +113,9 @@ public class Card extends IdLongEntity{
 		return transferName;
 	}
 
-	public void setAccountGroup(AccountGroup accountGroup) {
-		this.accountGroup = accountGroup;
-	}
+//	public void setAccountGroup(AccountGroup accountGroup) {
+//		this.accountGroup = accountGroup;
+//	}
 
 	public void setArea(String area) {
 		this.area = area;
@@ -131,9 +133,9 @@ public class Card extends IdLongEntity{
 		this.endTime = endTime;
 	}
 
-	public void setFeePolicy(FeePolicy feePolicy) {
-		this.feePolicy = feePolicy;
-	}
+//	public void setFeePolicy(FeePolicy feePolicy) {
+//		this.feePolicy = feePolicy;
+//	}
 
 	public void setPrice(float price) {
 		this.price = price;
@@ -165,6 +167,11 @@ public class Card extends IdLongEntity{
 
 	public void setTransferName(String transferName) {
 		this.transferName = transferName;
+	}
+	
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this,ToStringStyle.SHORT_PREFIX_STYLE);
 	}
 	
 

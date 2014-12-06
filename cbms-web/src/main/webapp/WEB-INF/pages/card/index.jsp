@@ -15,7 +15,8 @@
     <form id="inputForm" action="${ctx}card/index.html" method="post">
         <input type="hidden" name="page" id="page" value="${param['page']}">
         <input type="hidden" name="pageSize" id="pageSize" value="${param['pageSize']}">
-        卡号:<input name="search_LIKES_accountGroup.name" style="width: 100px;" class="easyui-textbox" value="${param['search_LIKES_accountGroup.name']}">
+        <input type="hidden" name=search_EQL_cardBatch.id id="pageSize" value="${param['search_EQL_cardBatch.id']}">
+        卡号:<input name="search_LIKES_cardNo" style="width: 100px;" class="easyui-textbox" value="${param['search_LIKES_cardNo']}">
         状态： <select class="easyui-combobox" style="width: 100px;" data-options="panelHeight:'auto'" name="search_EQI_status">
                     <option value="">全部</option>
                     <option value="1" ${param['search_EQI_status'] eq 1?"selected":""}>未使用</option>
@@ -23,12 +24,12 @@
                     <option value="2" ${param['search_EQI_status'] eq 3?"selected":""}>过期</option>
                     <option value="2" ${param['search_EQI_status'] eq 4?"selected":""}>冻结</option>
              </select>
+             <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="submitForm()" style="width:80px">Search</a>
         </form>
     </div>
     <table id="tt" class="easyui-datagrid" style="width:100%;height:auto;">
         <thead>
         <tr>
-            <th field="name1" width="15%">学校</th>
             <th field="name2" width="15%">卡号名</th>
             <th field="name3" width="10%">密码</th>
             <th field="name4" width="15%">制卡批次</th>
@@ -40,14 +41,13 @@
         <tbody>
         <c:forEach items="${page.content}" var="entity">
             <tr>
-                <td>${entity.school.name}</td>
                 <td>${entity.cardNo}</td>
                 <td>${entity.pwd}</td>
                 <td>${entity.cardBatch.name}</td>
                 <td><fmt:formatDate value="${entity.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                <td>${entity.status eq 1?"正常":entity.status eq 2?"已使用":entity.status eq 3?"过期":"冻结"}</td>
+                <td>${entity.status eq 1?"未使用":entity.status eq 2?"已使用":entity.status eq 3?"过期":"冻结"}</td>
                 <td>
-                	<a href="${ctx}card/op.html?id=${entity.id}">冻结</a>&nbsp;
+                	<c:if test="${entity.status eq 1}"><a href="${ctx}card/op.html?id=${entity.id}">冻结</a>&nbsp;</c:if>
                 </td>
             </tr>
         </c:forEach>
