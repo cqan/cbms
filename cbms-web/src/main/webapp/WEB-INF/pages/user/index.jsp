@@ -52,6 +52,7 @@
                 	<a href="${ctx}user/auth.html?id=${entity.id}">授权</a>&nbsp;
                 	<a href="${ctx}user/edit.html?id=${entity.id}">修改</a>&nbsp;
                 	<a href="#" onclick="disable('${entity.id}')">${entity.status eq 1?"禁用":"启用"}</a>&nbsp;
+                	<a href="${ctx}userSchool/edit.html?id=${entity.id}">关联地区</a>&nbsp;
                 </td>
             </tr>
         </c:forEach>
