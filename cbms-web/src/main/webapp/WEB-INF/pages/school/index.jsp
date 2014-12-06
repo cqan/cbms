@@ -19,9 +19,17 @@
         	<input type="hidden" name="pageSize" id="pageSize" value="${param['pageSize']}">
       		  学校名：<input name="search_LIKES_name" style="width: 100px;" class="easyui-textbox" value="${param['search_LIKES_name']}">
       		</td><td width="20%" align="right">
-        	地区：<select class="easyui-combobox" style="width: 100px;" data-options="panelHeight:'auto'" name="search_EQS_city">
+        	地区：<select class="easyui-combobox" style="width: 100px;" data-options="panelHeight:'auto'" name="search_EQI_city">
         	        <option value="">全部</option>
-                    <option value="1" ${param['search_EQS_city'] eq '北京'?"selected":""}>北京</option>
+        	        <option value="2"   ${param['search_EQI_city'] eq 2?"selected":""}>二区</option>
+                    <option value="3"   ${param['search_EQI_city'] eq 3?"selected":""}>三区</option>
+                    <option value="4"   ${param['search_EQI_city'] eq 4?"selected":""}>四区</option>
+                    <option value="5"   ${param['search_EQI_city'] eq 5?"selected":""}>五区</option>
+                    <option value="7"   ${param['search_EQI_city'] eq 7?"selected":""}>七区</option>
+                    <option value="8"   ${param['search_EQI_city'] eq 8?"selected":""}>八区</option>
+                    <option value="9"   ${param['search_EQI_city'] eq 9?"selected":""}>昌平</option>
+                    <option value="10"  ${param['search_EQI_city'] eq 10?"selected":""}>房山</option>
+                    <option value="11"  ${param['search_EQI_city'] eq 11?"selected":""}>密云</option>
              </select>  
              </td><td width="20%" align="right">      
          	 区局：       <select class="easyui-combobox" style="width: 100px;" data-options="panelHeight:'auto'" name="search_EQS_district">
@@ -89,7 +97,7 @@
 	                <td>${entity.netType eq 1?"虚拟ADSL":"PPPOE"}</td>
 	                <td>${entity.rateType eq 1?"计时":"包月"}</td>
 	                <td>${entity.rate}</td>
-	                <td>${entity.city}</td>
+	                <td>${entity.city eq 2 ?"二区":entity.city eq 3 ?"三区":entity.city eq 4 ?"四区":entity.city eq 5?"五区":entity.city eq 7?"七区":entity.city eq 8?"八区":entity.city eq 9?"昌平":entity.city eq 10?"房山":entity.city eq 11?"密云":""}</td>
 	                <td>${entity.district}</td>
 	                <td>${entity.subDistrict}</td>
 	                <td>${entity.trusted eq 1?"可信":"不可信"}</td>

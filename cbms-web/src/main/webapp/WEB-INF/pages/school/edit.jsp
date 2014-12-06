@@ -50,8 +50,15 @@
                     <td  style="width:47%;text-align: right;padding-right: 10px;">所属地区:</td>
                     <td style="text-align: left;padding-left: 10px;">
                         <select class="easyui-combobox" data-options="panelHeight:'auto'" name="city">
-                        <option value="1" ${entity.city eq 1?"selected":""}>北京</option>
-                        <option value="2"  ${entity.city eq 2?"selected":""}>北京</option>
+                        <option value="2"   ${entity.city eq 2?"selected":""}>二区</option>
+                        <option value="3"   ${entity.city eq 3?"selected":""}>三区</option>
+                        <option value="4"   ${entity.city eq 4?"selected":""}>四区</option>
+                        <option value="5"   ${entity.city eq 5?"selected":""}>五区</option>
+                        <option value="7"   ${entity.city eq 7?"selected":""}>七区</option>
+                        <option value="8"   ${entity.city eq 8?"selected":""}>八区</option>
+                        <option value="9"   ${entity.city eq 9?"selected":""}>昌平</option>
+                        <option value="10"  ${entity.city eq 10?"selected":""}>房山</option>
+                        <option value="11"   ${entity.city eq 11?"selected":""}>密云</option>
                        </select>
                     </td>
                 </tr>
