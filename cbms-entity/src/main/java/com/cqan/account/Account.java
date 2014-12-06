@@ -30,9 +30,9 @@ public class Account extends IdLongEntity {
 	
 	private String address;
 	
-	private int schoolId;
+	private Long schoolId;
 	
-	private int feePolicyId;
+	private Long feePolicyId;
 	
 	private AccountGroup group;
 
@@ -118,19 +118,19 @@ public class Account extends IdLongEntity {
 		this.address = address;
 	}
 
-	public int getSchoolId() {
+	public Long getSchoolId() {
 		return schoolId;
 	}
 
-	public void setSchoolId(int schoolId) {
+	public void setSchoolId(Long schoolId) {
 		this.schoolId = schoolId;
 	}
 
-	public int getFeePolicyId() {
+	public Long getFeePolicyId() {
 		return feePolicyId;
 	}
 
-	public void setFeePolicyId(int feePolicyId) {
+	public void setFeePolicyId(Long feePolicyId) {
 		this.feePolicyId = feePolicyId;
 	}
 	
