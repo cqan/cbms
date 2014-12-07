@@ -70,4 +70,11 @@
             </ul>
         </div>
     </shiro:hasPermission>
+        <shiro:hasPermission name="card">
+          <div title="上网控制" iconCls="icon-folder" style="overflow:auto;padding:6px;">
+            <ul class="easyui-tree navlist">
+                <shiro:hasPermission name="card.create"><li><span><a link="${ctx}netConfig/edit.html">上网时间段配置</a></span></li></shiro:hasPermission>
+            </ul>
+        </div>
+    </shiro:hasPermission>
 </div>
