@@ -2,8 +2,10 @@ package com.cqan.controller;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +26,11 @@ import com.cqan.service.AccountService;
 import com.cqan.service.AccountTaskService;
 import com.cqan.service.FeePolicyService;
 import com.cqan.service.SchoolService;
+import com.cqan.service.UserSchoolService;
+import com.cqan.system.UserSchool;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 
 /**
  * Created by Administrator on 2014/10/19.
@@ -36,6 +41,9 @@ public class AccountController extends BaseController<Account,Long,AccountServic
 
 	@Autowired
 	private SchoolService schoolService;
+	
+	@Autowired
+	private UserSchoolService userSchoolService;
 	
 	@Autowired
 	private AccountGroupService accountGroupService;
@@ -63,7 +71,13 @@ public class AccountController extends BaseController<Account,Long,AccountServic
     public String select(String name,String schoolId){
     	List<Map<String,Object>> data = Lists.newArrayList();
     	if (name.equals("school")) {
-    		List<School> schools = schoolService.listAll();
+    		Set<School> schools = Sets.newHashSet();
+    		List<UserSchool> userSchools = userSchoolService.findByUserId(getCurrentUser().getId());
+    		for (UserSchool us : userSchools) {
+				School school = schoolService.get(us.getSchoolId());
+				schools.add(school);
+			}
+    		System.out.println(schools);
     		for (School school : schools) {
     			Map<String,Object> map = Maps.newHashMap();
         		map.put("schoolId", school.getId());
@@ -95,6 +109,16 @@ public class AccountController extends BaseController<Account,Long,AccountServic
 	        			data.add(map);
 	        		}
     			}
+    			List<FeePolicy> fps = feePolicyService.findBySchoolIsNull();
+        		if (fps!=null) {
+        			for (FeePolicy ag : fps) {
+            			Map<String,Object> map = Maps.newHashMap();
+            			map.put("feePolicyId", ag.getId());
+            			map.put("feePolicyName", ag.getName());
+            			data.add(map);
+            		}
+				}
+    			
 			}
     	}
     	

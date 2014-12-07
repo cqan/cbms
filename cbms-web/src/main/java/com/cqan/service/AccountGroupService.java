@@ -8,5 +8,7 @@ import com.cqan.school.School;
 public interface AccountGroupService  extends BaseService<AccountGroup, Long>{
 
 	List<AccountGroup> findBySchool(School school);
+
+	List<AccountGroup> findBySchool();
 	
 }

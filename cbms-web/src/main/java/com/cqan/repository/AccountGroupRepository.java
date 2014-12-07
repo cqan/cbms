@@ -9,5 +9,7 @@ public interface AccountGroupRepository extends BaseRepository<AccountGroup, Lon
 
 	List<AccountGroup> findBySchool(School school);
 
+	List<AccountGroup> findBySchoolIsNull();
+
 
 }

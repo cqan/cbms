@@ -48,7 +48,7 @@ public class FeePolicyController extends BaseController<FeePolicy,Long,FeePolicy
     	if(null != feePolicy.getSchool() && null !=feePolicy.getSchool().getId()){
     		school = schoolService.get(feePolicy.getSchool().getId());
     	}
-    	feePolicy.setCreator("ddd");
+    	feePolicy.setCreator(getCurrentUserName());
     	feePolicy.setCreatorId(1);
     	if (feePolicy.getId()==null||feePolicy.getId()==0) {
     		feePolicy.setCreateTime(new Date());
