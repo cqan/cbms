@@ -8,5 +8,7 @@ import com.cqan.school.School;
 public interface FeePolicyRepository extends BaseRepository<FeePolicy, Long> {
 
 	List<FeePolicy> findBySchool(School school);
+	
+	List<FeePolicy> findBySchoolIsNull();
 
 }
