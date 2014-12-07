@@ -18,12 +18,12 @@ public class NetConfigServiceImpl extends
 	public void setEntityRepository(NetConfigRepository repository) {
 		this.repository = repository;
 	}
-
-	@Override
-	public List<NetConfig> findByAgid(Long groupId) {
-		return null;
-	}
 	
+	
+	@Override
+	public List<NetConfig> findByGroupId(Long gid) {
+		return repository.findByGroupId(gid);
+	}
 	
 	
 

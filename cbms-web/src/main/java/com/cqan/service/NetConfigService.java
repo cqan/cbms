@@ -6,6 +6,5 @@ import com.cqan.net.NetConfig;
 
 public interface NetConfigService extends BaseService<NetConfig, Long> {
 
-	List<NetConfig> findByAgid(Long groupId);
-
+	public List<NetConfig> findByGroupId(Long gid);
 }
