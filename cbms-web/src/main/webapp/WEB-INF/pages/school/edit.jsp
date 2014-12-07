@@ -18,11 +18,15 @@
             <table cellpadding="5" align="center" style="width: 100%">
                 <tr>
                     <td style="width:47%;text-align: right;padding-right: 10px;">名称:</td>
-                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="name"  name="name" value="${entity.name}" /></td>
+                    <td style="text-align: left;padding-left: 10px;">
+                    	<input type="text" id="name"  name="name" value="${entity.name}" />
+                    </td>
                 </tr>
                 <tr>
                     <td  style="width:47%;text-align: right;padding-right: 10px;">学校编码:</td>
-                    <td style="text-align: left;padding-left: 10px;"><input type="text" name="code"  value="${entity.code}"/></td>
+                    <td style="text-align: left;padding-left: 10px;">
+                    	<input type="text" name="schoolCode"  value="${entity.schoolCode}"/>
+                    </td>
                 </tr>
                 <tr>
                     <td  style="width:47%;text-align: right;padding-right: 10px;">上网方式:</td>
@@ -43,8 +47,10 @@
                     </td>
                 </tr>
                 <tr>
-                    <td  style="width:47%;text-align: right;padding-right: 10px;">学校分层比例:</td>
-                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="rate"  name="rate" value="${entity.rate}" /><span id="rate_msg"></span></td>
+                    <td  style="width:47%;text-align: right;padding-right: 10px;">学校分成比例:</td>
+                    <td style="text-align: left;padding-left: 10px;">
+                    <input type="text" id="rate"  name="rate" value="${entity.rate}"/>
+                    <span id="rate_msg"></span></td>
                 </tr>
                 <tr>
                     <td  style="width:47%;text-align: right;padding-right: 10px;">所属地区:</td>
@@ -61,30 +67,6 @@
                         <option value="11"   ${entity.city eq 11?"selected":""}>密云</option>
                        </select>
                     </td>
-                </tr>
-                <!--
-                <tr>
-                    <td  style="width:47%;text-align: right;padding-right: 10px;">区局:</td>
-                    <td style="text-align: left;padding-left: 10px;">
-                        <select class="easyui-combobox" data-options="panelHeight:'auto'" name="district">
-                        <option value="1" ${entity.district eq 1?"selected":""}>昌平</option>
-                        <option value="2"  ${entity.district eq 2?"selected":""}>昌平</option>
-                       </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td  style="width:47%;text-align: right;padding-right: 10px;">调拨分局:</td>
-                    <td style="text-align: left;padding-left: 10px;">
-                        <select class="easyui-combobox" data-options="panelHeight:'auto'" name="subDistrict">
-                        <option value="1" ${entity.subDistrict eq 1?"selected":""}>昌平</option>
-                        <option value="2"  ${entity.subDistrict eq 2?"selected":""}>昌平</option>
-                       </select>
-                    </td>
-                </tr>
-                -->
-                <tr>
-                    <td style="width:47%;text-align: right;padding-right: 10px;">激活账号数:</td>
-                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="activeNum"  name="activeNum" value="${entity.activeNum}" /><span id="activeNum_msg"></span></td>
                 </tr>
                 <tr>
                     <td  style="width:47%;text-align: right;padding-right: 10px;">虚拟学校标志:</td>
@@ -147,7 +129,7 @@
                     <td colspan="2">
                       <div style="text-align:center;padding:5px">
 				            <input type="submit" class="button" value="保存">&nbsp;&nbsp;&nbsp;
-				            <input type="reset" class="button" value="取消">
+				           <a href="${ctx}school/index.html" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:80px">返回</a>
 				        </div>
                     </td>
                 </tr>
@@ -160,53 +142,96 @@
 <script lang="text/javascript">   
     $(function(){
     	var msg = "${msg}";
-    	var $trusted = $("#trusted");
-    	$trusted.click(function(){
-	    	if($(this).attr("checked")=="checked"){
-	    	   $(this).val(1);
-	    	}else{
-	    	   $(this).val(2);
-	    	}
-    	});
-    	
-    	$("#rate").blur(function(){
-    	   if(/^0\.\d*[0-9]$/.test($(this).val())){
-    	      $("#rate_msg").removeAttr("color").html("");
-    	   }else{
-    	      $("#rate_msg").css("color","red").html(" * 必须为数值且大于0小于1。");
-    	   }
-    	});
-    	
-    	$("#serverPort").blur(function(){
-    	   if(/^\d+$/.test($(this).val())){
-    	      $("#serverPort_msg").removeAttr("color").html("");
-    	   }else{
-    	      $("#serverPort_msg").css("color","red").html(" * 必须为数值。");
-    	   }
-    	});
-    	
-    	$("#serverIp").blur(function(){
-    	   if(/((?:(?:25[0-5]|2[0-4]\d|((1\d{2})|([1-9]?\d)))\.){3}(?:25[0-5]|2[0-4]\d|((1\d{2})|([1-9]?\d))))/.test($(this).val())){
-    	      $("#serverIp_msg").removeAttr("color").html("");
-    	   }else{
-    	      $("#serverIp_msg").css("color","red").html(" * IP格式错误。");
-    	   }
-    	});
-    	
-    	$("#activeNum").blur(function(){
-    	   if(/^\d+$/.test($(this).val())){
-    	   	  $("#activeNum_msg").removeAttr("color").html("");
-    	   }else{
-    	      $("#activeNum_msg").css("color","red").html(" * 必须为数值。");
-    	   }
-    	
-    	});
-    	
-    	
     	if(msg!=''){
     		show("",msg);
     	}
     	
+    	jQuery.validator.addMethod("ip", function(value, element) {
+    	    return this.optional(element) || (/^(\d+)\.(\d+)\.(\d+)\.(\d+)$/.test(value) && (RegExp.$1 < 256 && RegExp.$2 < 256 && RegExp.$3 < 256 && RegExp.$4 < 256));
+    	  }, "*请填写正确的IP地址！");
+    	
+    	$("#inputForm").validate({
+			rules: {
+				name: {
+					required: true
+				},
+				schoolCode: {
+					required: true
+				},
+				rate:{
+					required:true,
+					digits:true
+				},
+				netLeader:{
+					required:true
+				},
+				netLeaderPhone:{
+					required:true
+				},
+				maintenance:{
+					required:true
+				},
+				customerManager:{
+					required:true
+				},
+				cmPhone:{
+					required:true
+				},
+				mPhone:{
+					required:true
+				},
+				serverIp:{
+					required:true,
+					ip:true
+				},
+				serverPort:{
+					required:true
+				},
+				addr:{
+					required:true
+				}
+			},
+			messages:{
+				name: {
+					required: "*请填写学校名称！"
+				},
+				schoolCode: {
+					required: "*请填写学校代码！"
+				},
+				rate:{
+					required:"*请填写学校分成比率！",
+					digits:"*分成比率必须是数字！"
+				},
+				netLeader:{
+					required:"*请填写网络负责人电话姓名！"
+				},
+				netLeaderPhone:{
+					required:"*请填写网络负责人电话！"
+				},
+				maintenance:{
+					required:"*请填写维护人员名称！"
+				},
+				customerManager:{
+					required:"*请填写客服经理名称！"
+				},
+				cmPhone:{
+					required:"*请填写客服经理电话！"
+				},
+				mPhone:{
+					required:"*请填写维护人员名称！"
+				},
+				serverIp:{
+					required:"*请填写服务IP！"
+				},
+				serverPort:{
+					required:"*请填写服务端口！",
+					digits:"*端口必须是数字！"
+				},
+				addr:{
+					required:"*请填写地址！"
+				}
+			}
+		});
     });
 	
 </script>
