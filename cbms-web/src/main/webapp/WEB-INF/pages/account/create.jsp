@@ -14,7 +14,7 @@
 学校客户组管理--><a href="${ctx}account/index.html">学校客户组管理</a>-->${empty entity?"添加":"修改"}学校客户组信息
 <div class="easyui-panel" title="${empty entity?"添加":"修改"}学校客户组信息" style="width:100%">
     <div style="text-align: center;">
-        <form id="inputForm" action="${ctx}account/save.html" method="post" onsubmit="return verifyForm();">
+        <form id="inputForm" action="${ctx}account/save.html" method="post">
     		<input name="id" id="id" type="hidden" value="${entity.id}">
             <table cellpadding="5" align="center" style="width: 100%">
                 <tr>
@@ -23,18 +23,14 @@
                 </tr>
                 <tr>
                     <td  style="width:47%;text-align: right;padding-right: 10px;">密码:</td>
-                    <td style="text-align: left;padding-left: 10px;"><input type="password" id="password" name="password"  value=""/></td>
-                </tr>
-                <tr>
-                    <td  style="width:47%;text-align: right;padding-right: 10px;">确认密码:</td>
-                    <td style="text-align: left;padding-left: 10px;"><input type="password" id="repassword" name="repassword"  value="${entity.password}"/></td>
+                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="password" name="password"  value=""/></td>
                 </tr>
                 <tr>
                     <td  style="width:47%;text-align: right;padding-right: 10px;">用户默认状态:</td>
                     <td style="text-align: left;padding-left: 10px;">
-                        <select class="easyui-combobox" data-options="panelHeight:'auto'" name="active">
-		                    <option value="0" ${entity.active?"selected":""}>欠费停机</option>
-		                    <option value="1" ${!entity.active?"selected":""}>正常</option>
+                        <select class="easyui-combobox" data-options="panelHeight:'auto'" name="status">
+		                    <option value="0" ${entity.status?"selected":""}>欠费停机</option>
+		                    <option value="1" ${!entity.status?"selected":""}>正常</option>
                        </select>
                     </td>
                 </tr>
@@ -92,8 +88,8 @@
                 <tr>
                     <td colspan="2">
                       <div style="text-align:center;padding:5px">
-				            <input type="submit" class="button" value="保存">&nbsp;&nbsp;&nbsp;
-				            <input type="reset" class="button" value="取消">
+				            <input type="button" class="button" value="保存" onclick="verifyForm()">&nbsp;&nbsp;&nbsp;
+				            <a href="${ctx}account/create.html" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:80px">返回</a>
 				        </div>
                     </td>
                 </tr>
@@ -135,9 +131,6 @@
 						required: true,
 						minlength:6
 					},
-					repassword:{
-						equalTo:"#password"
-					},
 					name:{
 						required:true
 					},
@@ -172,9 +165,6 @@
 						required:"*请输入密码！",
 						minlength:"*密码最小长度不应少于6个字符"
 						
-					},
-					repassword:{
-						equalTo:"*确认密码与密码不一致！"
 					},
 					name:{
 						required:"*请输入姓名"
@@ -233,7 +223,7 @@
 	    function verifyForm(){
 	    	var school = $('#school').combobox('getValue'); 
 	    	var group = $('#group').combobox('getValue'); 
-	    	var fee = $('#feePolicy').combobox('getValue'); 
+	    	var feePolicy = $('#feePolicy').combobox('getValue'); 
 	    	if(school==''){
 	    		msgShow("提示","请选择学校！","warning");
 	    		return false;
@@ -242,11 +232,11 @@
 	    		msgShow("提示","请选择用户组！","warning");
 	    		return false;
 	    	}
-	    	if(fee==''){
-	    		fee("提示","请选择套餐！","warning");
+	    	if(feePolicy==''){
+	    		msgShow("提示","请选择套餐！","warning");
 	    		return false;
 	    	}
-	    	return true;
+	    	$("#inputForm").submit();
 	    }
 	</script>
 </html>

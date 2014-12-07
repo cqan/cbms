@@ -126,8 +126,8 @@
                     <td colspan="2">
                       <div style="text-align:center;padding:5px">
 				            <input type="submit" class="button" value="保存">&nbsp;&nbsp;&nbsp;
-				            <input type="reset" class="button" value="取消">
-				        </div>
+				            <a href="${ctx}feePolicy/index.html" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:80px">返回</a>
+				       </div>
                     </td>
                 </tr>
             </table>
@@ -139,30 +139,36 @@
 <script lang="text/javascript">   
     $(function(){
     	var msg = "${msg}";
-    	var $independentGroup = $("#independentGroup");
-    	$("#price").blur(function(){
-    	    if(/^\d+(\.\d+)?$/.test($(this).val())){
-    	       $("#price_time_msg").removeAttr("color").html("");
-    	    }else{
-    	       $("#price_time_msg").css("color","red").html(" * 价格格式错误，请输入数值");
-    	    }
-    	});
-    	
-    	$("#time").blur(function(){
-    	    if(/^\d+(\.\d+)?$/.test($(this).val())){
-    	       $("#price_time_msg").removeAttr("color").html("");
-    	    }else{
-    	       $("#price_time_msg").css("color","red").html(" * 日期格式错误，请输入数值");
-    	    }
-    	});
-    	
-    	$independentGroup.click(function(){
-	    	if($(this).attr("checked")=="checked"){
-	    	   $(this).val(1);
-	    	}else{
-	    	   $(this).val(2);
-	    	}
-    	});
+	   	$("#inputForm").validate({
+			rules: {
+				price: {
+					required: true,
+					number:true,
+					min:0
+				},
+				name: {
+					required: true
+				},
+				time:{
+					required: true,
+					digits:true
+				}
+			},
+			messages:{
+				price: {
+					required:"*请输入价格！",
+					number:"*价钱只能是数字！",
+					min:"价钱必须大于0"
+				},
+				name: {
+					required:"*请输入名称！"
+				},
+				time:{
+					required:"*请填写时间！",
+					digits:"*时间只能是正整数！"
+				}
+			}
+		});
     	
     	
     	if(msg!=''){

@@ -27,7 +27,7 @@
                     <td colspan="2">
                       <div style="text-align:center;padding:5px">
 				            <input type="submit" class="button" value="下一步">&nbsp;&nbsp;&nbsp;
-				            <input type="reset" class="button" value="取消">
+				            <a href="${ctx}account/modify.html" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:80px">返回</a>
 				        </div>
                     </td>
                 </tr>

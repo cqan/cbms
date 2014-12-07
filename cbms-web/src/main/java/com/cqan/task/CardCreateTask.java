@@ -46,6 +46,7 @@ public class CardCreateTask implements Runnable{
 	
 	public CardCreateTask(){
 		if (!flag) {
+			logger.debug("制卡定时任务初始化...");
 			flag = true;
 			scheduled.scheduleAtFixedRate(this, INITIALDELAY, PERIOD, TimeUnit.SECONDS);
 		}

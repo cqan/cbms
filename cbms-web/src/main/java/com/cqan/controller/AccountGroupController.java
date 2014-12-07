@@ -45,7 +45,7 @@ public class AccountGroupController extends BaseController<AccountGroup,Long,Acc
 			model.addAttribute("msg","添加成功！");
 		}else{
 			ag = entityService.get(accountGroup.getId());
-			ag.setCode(accountGroup.getCode());
+			ag.setGroupCode(accountGroup.getGroupCode());
 			ag.setDescription(accountGroup.getDescription());
 			ag.setIndependentGroup(accountGroup.getIndependentGroup());
 			ag.setName(accountGroup.getName());
