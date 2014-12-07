@@ -78,7 +78,7 @@
 	                    	 _group.combobox('setValue','${account.group.id}');
 	    	             }
 	                 }).combobox('clear');
-	           	  _feePolicy.combobox({
+	           	  	_feePolicy.combobox({
 	                     disabled: false,
 	                     url: '${ctx}account/select.html?name=feePolicy&schoolId=${account.schoolId}',
 	                     valueField: 'feePolicyId',

@@ -41,15 +41,15 @@
                     <td style="text-align: left;padding-left: 10px;">
                        <select class="easyui-combobox" data-options="panelHeight:'auto'" name="upControl">
                             <option value="" ${entity.upControl eq null?"selected":""}>无限制</option>
-		                    <option value="1" ${entity.upControl eq 1?"selected":""}>512K</option>
-		                    <option value="2" ${entity.upControl eq 2?"selected":""}>1M</option>
-		                    <option value="3" ${entity.upControl eq 3?"selected":""}>2M</option>
-		                    <option value="4" ${entity.upControl eq 4?"selected":""}>3M</option>
-		                    <option value="5" ${entity.upControl eq 5?"selected":""}>4M</option>
-		                    <option value="6" ${entity.upControl eq 6?"selected":""}>8M</option>
-		                    <option value="7" ${entity.upControl eq 7?"selected":""}>10M</option>
-		                    <option value="8" ${entity.upControl eq 8?"selected":""}>12M</option>
-		                    <option value="9" ${entity.upControl eq 9?"selected":""}>20M</option>
+		                    <option value="512" ${entity.upControl eq 512?"selected":""}>512K</option>
+		                    <option value="1" ${entity.upControl eq 1?"selected":""}>1M</option>
+		                    <option value="2" ${entity.upControl eq 2?"selected":""}>2M</option>
+		                    <option value="3" ${entity.upControl eq 3?"selected":""}>3M</option>
+		                    <option value="4" ${entity.upControl eq 4?"selected":""}>4M</option>
+		                    <option value="8" ${entity.upControl eq 8?"selected":""}>8M</option>
+		                    <option value="10" ${entity.upControl eq 10?"selected":""}>10M</option>
+		                    <option value="12" ${entity.upControl eq 12?"selected":""}>12M</option>
+		                    <option value="20" ${entity.upControl eq 20?"selected":""}>20M</option>
                        </select>
                     </td>
                 </tr>
@@ -58,15 +58,15 @@
                     <td style="text-align: left;padding-left: 10px;">
                       <select class="easyui-combobox" data-options="panelHeight:'auto'" name="downControl">
                             <option value=""  ${entity.downControl eq null?"selected":""}>无限制</option>
-		                    <option value="1" ${entity.downControl eq 1?"selected":""}>512K</option>
-		                    <option value="2" ${entity.downControl eq 2?"selected":""}>1M</option>
-		                    <option value="3" ${entity.downControl eq 3?"selected":""}>2M</option>
-		                    <option value="4" ${entity.downControl eq 4?"selected":""}>3M</option>
-		                    <option value="5" ${entity.downControl eq 5?"selected":""}>4M</option>
-		                    <option value="6" ${entity.downControl eq 6?"selected":""}>8M</option>
-		                    <option value="7" ${entity.downControl eq 7?"selected":""}>10M</option>
-		                    <option value="8" ${entity.downControl eq 8?"selected":""}>12M</option>
-		                    <option value="9" ${entity.downControl eq 9?"selected":""}>20M</option>
+		                    <option value="512" ${entity.downControl eq 1?"selected":""}>512K</option>
+		                    <option value="1" ${entity.downControl eq 2?"selected":""}>1M</option>
+		                    <option value="2" ${entity.downControl eq 3?"selected":""}>2M</option>
+		                    <option value="3" ${entity.downControl eq 4?"selected":""}>3M</option>
+		                    <option value="4" ${entity.downControl eq 5?"selected":""}>4M</option>
+		                    <option value="8" ${entity.downControl eq 6?"selected":""}>8M</option>
+		                    <option value="10" ${entity.downControl eq 7?"selected":""}>10M</option>
+		                    <option value="12" ${entity.downControl eq 8?"selected":""}>12M</option>
+		                    <option value="20" ${entity.downControl eq 9?"selected":""}>20M</option>
                        </select>
                     </td>
                 </tr>
