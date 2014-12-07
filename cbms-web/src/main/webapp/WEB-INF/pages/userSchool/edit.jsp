@@ -145,7 +145,7 @@
 							               </div>
 							               <select multiple="multiple" id="inOption">
 							                   <c:forEach items="${schools}" var="school">
-						                             <option value="${school.id}"}>${school.name}</option>
+						                             <option value="${school.id}">${school.name}</option>
 						                       </c:forEach>
 							               </select>
 							           </div>
