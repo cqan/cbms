@@ -47,7 +47,8 @@
                 <td><fmt:formatDate value="${entity.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                 <td>${entity.status eq 1?"未使用":entity.status eq 2?"已使用":entity.status eq 3?"过期":"冻结"}</td>
                 <td>
-                	<c:if test="${entity.status eq 1}"><a href="${ctx}card/op.html?id=${entity.id}">冻结</a>&nbsp;</c:if>
+                	<c:if test="${entity.status eq 1}"><a href="#" onclick="disable('${entity.id}')">冻结</a>&nbsp;</c:if>
+                	<c:if test="${entity.status eq 4}"><a href="#" onclick="disable('${entity.id}')">解结</a>&nbsp;</c:if>
                 </td>
             </tr>
         </c:forEach>
@@ -74,15 +75,15 @@
   		if( $.messager.confirm('系统提示', '确实要执行此操作吗?', function(r){
   			if (r){
   				$.ajax({
-  		  			url:"${ctx}user/disable.html",
+  		  			url:"${ctx}card/disable.html",
   		  			data:{id:id},
   		  			type:'POST',
   		  			success:function(data){
-  		  				alert(data);
+  		  				alertMsg(data,'info');
   		  				window.location.reload(true);
   		  			},
   		  			error:function(data){
-  		  				alert(data);
+  		  			alertMsg(data,'error');
   		  			}
   		  			});
   				}}));

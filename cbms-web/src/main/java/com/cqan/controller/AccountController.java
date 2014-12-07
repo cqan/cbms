@@ -241,5 +241,39 @@ public class AccountController extends BaseController<Account,Long,AccountServic
     	return "account/resetpwd";
     }
     
+    @RequestMapping("/change.html")
+    public String change(String name,Model model){
+    	if (StringUtils.isBlank(name)) {
+    		return "account/change";
+    	}
+    	
+    	Account account = entityService.findByLicenseNoOrUserName(name);
+    	if (account==null) {
+    		model.addAttribute("msg", "*帐号不存在！");
+    	}else{
+    		model.addAttribute("account", account);
+    		return "account/changeFee";
+    	}
+    	return "account/change";
+    }
+    @RequestMapping(value="/changeFee.html",method=RequestMethod.POST)
+    public String changeFee(Long id,Long feePolicyId,Model model){
+    	if (id==null||id==0||feePolicyId==null||feePolicyId==0) {
+    		model.addAttribute("msg", "请求参数错误！");
+    		return "account/change";
+    	}
+    	Account a = entityService.get(id);
+    	FeePolicy feePolicy = feePolicyService.get(feePolicyId);
+    	if (a==null||feePolicy==null) {
+    		model.addAttribute("msg", "*帐号或套餐不存在！");
+    	}else{
+    		a.setFeePolicyId(feePolicyId);
+    		a.setUpdateTime(new Date());
+    		entityService.save(a);
+    		model.addAttribute("msg","变更个人信息成功！");
+    	}
+    	return "account/change";
+    }
+    
     
 }

@@ -1,12 +1,15 @@
 package com.cqan.controller;
 
 import com.cqan.service.BaseService;
+import com.cqan.service.UserService;
+import com.cqan.system.User;
 import com.cqan.util.ReflectionUtils;
 import com.cqan.util.Servlets;
 import com.google.common.collect.Maps;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +32,9 @@ public abstract class BaseController<Entity,PK extends Serializable,EntityServic
     protected Map<String, String> sortFields = Maps.newLinkedHashMap();
 
     protected EntityService entityService;
+    
+    @Autowired
+    private UserService userService;
 
     public BaseController(){
         this.entityClass = ReflectionUtils.getSuperClassGenricType(getClass());
@@ -68,6 +74,11 @@ public abstract class BaseController<Entity,PK extends Serializable,EntityServic
     protected String getCurrentUserName() {
 		return (String) SecurityUtils.getSubject().getPrincipal();
 	}
+    
+    protected User getCurrentUser(){
+    	
+    	return userService.findByUserName(getCurrentUserName());
+    }
 
     public abstract void setEntityService(EntityService entityService);
 

@@ -10,18 +10,16 @@
     <meta http-equiv="description" content="This is my page">
 </head>
 <body>
-<div style="margin:5px 0;"></div>
-系统-->营业管理-->客户资料变更
-<div class="easyui-panel" title="客户资料变更" style="width:100%">
+<div style="margin:5px 0;"></div>  
+系统-->营业管理-->变更套餐
+<div class="easyui-panel" title="变更套餐" style="width:100%">
     <div style="text-align: center;">
-        <form id="inputForm" action="${ctx}account/modify.html" method="post" onsubmit="return verifyForm();">
+        <form id="inputForm" action="${ctx}account/change.html" method="post" onsubmit="return verifyForm();">
     		<input name="id" id="id" type="hidden" value="${entity.id}">
             <table cellpadding="5" align="center" style="width: 100%">
                 <tr>
                     <td style="width:47%;text-align: right;padding-right: 10px;">账号或证件编号:</td>
-                    <td style="text-align: left;padding-left: 10px;">
-                    <input type="text" id="name" name="name"/>
-                    </td>
+                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="name" name="name"/></td>
                 </tr>
                 <tr>
                     <td colspan="2">
