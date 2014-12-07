@@ -18,7 +18,7 @@ import com.cqan.IdLongEntity;
 @Table(name="aaa_radius")
 public class AccountAuth extends IdLongEntity {
 
-	
+	//认证用户名类型，pppoe-pc， 手机：mobile 
 	private String authorType;
 	
 	private String framedIp;
@@ -41,13 +41,13 @@ public class AccountAuth extends IdLongEntity {
 	
 	private Long outputkg;
 	
-	private String passport;
+	private String password;
 	
 	private Integer pcCurSession;
 	
 	private Integer pcMaxSession;
 	
-	private Long timeStamp;
+	private Date timeStamp;
 	
 	private String userName;
 	
@@ -210,8 +210,8 @@ public class AccountAuth extends IdLongEntity {
 	 * @return
 	 */
 	@Column(name="user_password")
-	public String getPassport() {
-		return passport;
+	public String getPassword() {
+		return password;
 	}
 
 	/**
@@ -237,7 +237,7 @@ public class AccountAuth extends IdLongEntity {
 	 * @return
 	 */
 	@Column(name="time_stamp")
-	public Long getTimeStamp() {
+	public Date getTimeStamp() {
 		return timeStamp;
 	}
 
@@ -330,8 +330,8 @@ public class AccountAuth extends IdLongEntity {
 		this.outputkg = outputkg;
 	}
 
-	public void setPassport(String passport) {
-		this.passport = passport;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public void setPcCurSession(Integer pcCurSession) {
@@ -342,7 +342,7 @@ public class AccountAuth extends IdLongEntity {
 		this.pcMaxSession = pcMaxSession;
 	}
 
-	public void setTimeStamp(Long timeStamp) {
+	public void setTimeStamp(Date timeStamp) {
 		this.timeStamp = timeStamp;
 	}
 

@@ -12,7 +12,8 @@ import com.cqan.school.AccountGroup;
 @Table(name = "account")
 public class Account extends IdLongEntity {
 	
-	private boolean active;
+	//用户状态：0-正常，1：停机  （开户时默认状态为1）
+	private Integer status;
 	
 	private String name;
 	
@@ -35,13 +36,24 @@ public class Account extends IdLongEntity {
 	private Long feePolicyId;
 	
 	private AccountGroup group;
-
-	public boolean isActive() {
-		return active;
+	
+	private String creater;
+	
+	
+	public String getCreater() {
+		return creater;
 	}
 
-	public void setActive(boolean active) {
-		this.active = active;
+	public void setCreater(String creater) {
+		this.creater = creater;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 
 	@ManyToOne
