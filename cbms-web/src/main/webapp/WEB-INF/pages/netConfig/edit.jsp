@@ -14,9 +14,7 @@
 	     border:1px;
 	     solid #eee;
      }
-     #addConfig>tr>first-child{
-     
-     
+     .a{
      }
      </style>
 </head>
@@ -24,9 +22,10 @@
 <div style="margin:5px 0;"></div>
 计费管理--><a href="${ctx}feePolicy/index.html">计费套餐策略</a>-->${empty entity?"添加":"修改"}计费套餐策略信息
 <div class="easyui-panel" title="${empty entity?"添加":"修改"}请进行上网时间段配置" style="width:100%;height:100%;">
-    <div style="text-align: center;">
+    <div style="text-align: center;height:100%;">
         <form id="inputForm" action="${ctx}netConfig/save.html" method="post">
     		<input name="id" id="id" type="hidden" value="${entity.id}">
+    		<input name="groupId" type="hidden" value="1">
             <table id="addConfigTable" cellpadding="5" align=center>
                 <tr>
                     <td  style="text-align: center;padding-right: 10px;">序号</td>
@@ -38,14 +37,23 @@
                     </td>
                 </tr>
                <c:forEach items="${netConfigs}" var="netConfig" varStatus="status">
-	                <tr>
-	                    <td  style="text-align: center;padding-right: 10px;">
-	                        ${status}
-	                    </td>
+	                <tr class="a">
+	                    <td  style="text-align: center;padding-right: 10px;">${status.index+1}</td>
 	                    <td style="text-align: center;padding-left: 10px;">
-	                                                                                                        星期三
-	                           <input type="hidden" name="startWork" value="${netConfig.startWork}">
-	                           <input type="hidden" name="endWork" value="${netConfig.startWork}">                                                                
+	                            <c:choose>
+									<c:when test="${netConfig.startWork eq netConfig.endWork}">
+	                                     ${netConfig.startWork eq 1?"星期一":netConfig.startWork eq 2?"星期二":netConfig.startWork eq 3?"星期三":netConfig.startWork eq 4?"星期四":netConfig.startWork eq 5?"星期五":netConfig.startWork eq 6?"星期五":"星期日"}
+									</c:when>
+									<c:otherwise>
+	                                     ${netConfig.startWork eq 1?"星期一":netConfig.startWork eq 2?"星期二":netConfig.startWork eq 3 ?"星期三":netConfig.startWork eq 4 ?"星期四":netConfig.startWork eq 5?"星期五":netConfig.startWork eq 6?"星期六":"星期日"} 
+	                                     &nbsp;&nbsp;--&nbsp;&nbsp;
+	                                     ${netConfig.endWork eq 1?"星期一":netConfig.endWork eq 2?"星期二":netConfig.endWork eq 3 ?"星期三":netConfig.endWork eq 4 ?"星期四":netConfig.endWork eq 5?"星期五":netConfig.endWork eq 6?"星期六":"星期日"}
+									</c:otherwise>
+								</c:choose>
+	                           <input type="hidden" name="netConfigs[${status.index}].startWork" value="${netConfig.startWork}">
+	                           <input type="hidden" name="netConfigs[${status.index}].endWork" value="${netConfig.endWork}">  
+	                           <input type="hidden" name="netConfigs[${status.index}].startTime" value="${netConfig.startTime}">
+	                           <input type="hidden" name="netConfigs[${status.index}].endTime" value="${netConfig.endTime}"> 
 	                    </td>
 	                    <td style="text-align: center;padding-left: 10px;">
 	                          <a href="#" onclick="del(this);">删除</a>
@@ -90,27 +98,11 @@
 </body>
 <script lang="text/javascript">   
     $(function(){
-	    	 var _school = $('#school').combobox({
-	             url: '${ctx}account/select.html?name=school',
-	             editable: false,
-	             valueField: 'schoolId',
-	             textField: 'schoolName',
-	             onSelect: function (record) {
-	            	 _group.combobox({
-	                     disabled: false,
-	                     url: '${ctx}account/select.html?name=group&schoolId=' + record.schoolId,
-	                     valueField: 'groupId',
-	                     textField: 'groupName'
-	                 }).combobox('clear');
-	             }
-	         });
-	         
-	         var _group = $('#group').combobox({
-	             disabled: true,
-	             valueField: 'groupId',
-	             textField: 'groupName'
-	         });
-	         
+             
+             $("#startTime").blur(function(){
+                if($(this)){
+                }
+             });
 	         $addConfig = $("#addConfig").click(function(){
 	            var $startWeek = $("#startWeek");
 	            var $endWeek = $("#endWeek");
@@ -130,11 +122,14 @@
 	            }
 	            var st = $("#startTime").val();
 	            var et = $("#endTime").val();
+	            var $before = $(this).parent().parent("tr");
+	            var index = $("#addConfigTable").find("tr[class='a']").size();
+	            index = index + 1;
 	       	    $("#startTime").val("");
 	       	    $("#endTime").val("");
-	       	    var temp = "<tr><td style=\"text-align: center;padding-right: 10px;\">s</td><td style=\"text-align: center;padding-left: 10px;\">"+text+"<input name=\"startWork\" type=\"hidden\" value=\"+sval+\"><input name=\"endWork\" type=\"hidden\" value=\"+eval+\"><input name=\"startTime\" type=\"hidden\" value=\"+st+\"><input name=\"endTime\" type=\"hidden\" value=\"+et+\"></td><td style=\"text-align: center;padding-left: 10px;\"><a href=\"#\" onclick=\"del(this);\">删除</a></td></td></tr>";
+	       	    var temp = "<tr class=\"a\"><td style=\"text-align: center;padding-right: 10px;\">"+index+"</td><td style=\"text-align: center;padding-left: 10px;\">"+text+"<input name=\"netConfigs[0].startWork\" type=\"hidden\" value=\""+sval+"\"><input name=\"netConfigs[0].endWork\" type=\"hidden\" value=\""+eval+"\"><input name=\"netConfigs[0].startTime\" type=\"hidden\" value=\""+st+"\"><input name=\"netConfigs[0].endTime\" type=\"hidden\" value=\""+et+"\"></td><td style=\"text-align: center;padding-left: 10px;\"><a href=\"#\" onclick=\"del(this);\">删除</a></td></td></tr>";
 	            var $temp = $(temp);
-	            $(this).parent().parent("tr").before($temp);
+	            $before.before($temp);
 	         });
     });
     

@@ -1,7 +1,6 @@
 package com.cqan.controller;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,41 +39,35 @@ public class NetConfigController extends BaseController<NetConfig,Long,NetConfig
     	return "netConfig/step1";
     }
     
-    @RequestMapping(value="/edit.html",method=RequestMethod.GET)
-    public String edit(long groupId,Model model){
+    @Override
+    @RequestMapping(value="/edit.html")
+    public String edit(Long groupId,Model model){
     	AccountGroup ag  = accountGroupService.get(groupId);
     	List<NetConfig> netConfigs = new ArrayList<NetConfig>();
     	netConfigs = entityService.findByGroupId(groupId);
-    	NetConfig netConfig1 = new NetConfig();
-    	netConfig1.setAgid(6l);
-    	NetConfig netConfig2 = new NetConfig();
-    	netConfig2.setAgid(7l);
-    	NetConfig netConfig3 = new NetConfig();
-    	netConfig3.setAgid(8l);
-    	netConfigs.add(netConfig1);
-    	netConfigs.add(netConfig2);
-    	netConfigs.add(netConfig3);
-    	System.out.println("hhh"+netConfigs.size());
     	model.addAttribute("msg","修改成功！");
     	model.addAttribute("entity", model);
     	model.addAttribute("ag", ag);
+    	model.addAttribute("groupId", groupId);
     	model.addAttribute("netConfigs", netConfigs);
     	return "netConfig/edit";
     }
     
+    
     @RequestMapping(value="/save.html",method=RequestMethod.POST)
-    public String save(NetConfig netConfig,Model model){
+    public String save(NetConfig[] netConfigs,Model model){
     	NetConfig nc =null;
-    	if (netConfig.getId()==null||netConfig.getId()==0) {
-    		netConfig.setCreateTime(new Date());
-    		nc = netConfig;
-			model.addAttribute("msg","添加成功！");
-		}else{
-			nc = entityService.get(netConfig.getId());
-			
-			model.addAttribute("msg","修改成功！");
-		}
-    	netConfig.setUpdateTime(new Date());
+//    	if (netConfig.getId()==null||netConfig.getId()==0) {
+//    		netConfig.setCreateTime(new Date());
+//    		nc = netConfig;
+//			model.addAttribute("msg","添加成功！");
+//		}else{
+//			nc = entityService.get(netConfig.getId());
+//			
+//			model.addAttribute("msg","修改成功！");
+//		}
+//    	netConfig.setUpdateTime(new Date());
+    	System.out.println("hhh"+netConfigs.length);
     	model.addAttribute("entity", nc);
     	entityService.save(nc);
     	return "netConfig/edit";
