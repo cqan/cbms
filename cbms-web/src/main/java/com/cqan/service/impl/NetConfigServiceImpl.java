@@ -1,5 +1,7 @@
 package com.cqan.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,11 @@ public class NetConfigServiceImpl extends
 	@Autowired
 	public void setEntityRepository(NetConfigRepository repository) {
 		this.repository = repository;
+	}
+
+	@Override
+	public List<NetConfig> findByAgid(Long groupId) {
+		return null;
 	}
 	
 	
