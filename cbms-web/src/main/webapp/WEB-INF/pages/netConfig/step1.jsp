@@ -26,7 +26,7 @@
                 <tr>
                     <td  style="width:47%;text-align: right;padding-right: 10px;">客户组:</td>
                     <td style="text-align: left;padding-left: 10px;">
-                        <select class="easyui-combobox" data-options="valueField:'groupId', textField:'groupName',panelHeight:'auto',editable:false" name="groupId"> </select>
+                        <select class="easyui-combobox" id="group" data-options="valueField:'groupId', textField:'groupName',panelHeight:'auto',editable:false" name="groupId"> </select>
                     </td>
                 </tr>
                 <tr>
