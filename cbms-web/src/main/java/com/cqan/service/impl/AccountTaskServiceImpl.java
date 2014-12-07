@@ -8,8 +8,7 @@ import com.cqan.repository.AccountTaskRepository;
 import com.cqan.service.AccountTaskService;
 
 @Service("accountTaskService")
-public class AccountTaskServiceImpl extends
-		BaseServiceImpl<AccountTask, Long, AccountTaskRepository> implements AccountTaskService {
+public class AccountTaskServiceImpl extends BaseServiceImpl<AccountTask, Long, AccountTaskRepository> implements AccountTaskService{
 
 	@Override
 	@Autowired
