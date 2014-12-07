@@ -1,5 +1,6 @@
 package com.cqan.controller;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -14,11 +15,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.cqan.account.Account;
+import com.cqan.account.AccountTask;
+import com.cqan.account.FeePolicy;
 import com.cqan.school.AccountGroup;
-import com.cqan.school.FeePolicy;
 import com.cqan.school.School;
 import com.cqan.service.AccountGroupService;
 import com.cqan.service.AccountService;
+import com.cqan.service.AccountTaskService;
 import com.cqan.service.FeePolicyService;
 import com.cqan.service.SchoolService;
 import com.google.common.collect.Lists;
@@ -39,6 +42,9 @@ public class AccountController extends BaseController<Account,Long,AccountServic
 	
 	@Autowired
 	private FeePolicyService feePolicyService;
+	
+	@Autowired
+	private AccountTaskService accountTaskService;
 	
     @Override
     @Autowired
@@ -98,33 +104,38 @@ public class AccountController extends BaseController<Account,Long,AccountServic
     @RequestMapping(value="/save.html",method=RequestMethod.POST)
     public String save(Account account,Model model){
     	Account a =null;
-    	//School school = schoolService.get(account.getId());
     	if (account.getId()==null||account.getId()==0) {
-    		account.setCreateTime(new Date());
-    		//account.setSchool(school);
     		a = account;
-			model.addAttribute("msg","添加成功！");
-		}else{
-			a = entityService.get(account.getId());
-			a.setUserName(account.getUserName());
-			a.setActive(account.isActive());
+    		a.setCreateTime(new Date());
+    		a.setUserName(account.getUserName());
 			a.setAddress(account.getAddress());
 			a.setEmail(account.getEmail());
 			a.setFeePolicyId(account.getFeePolicyId());
-			a.setGroup(account.getGroup());
+			AccountGroup ag = accountGroupService.get(account.getGroup().getId());
+			a.setGroup(ag);
 			a.setLicenseNo(account.getLicenseNo());
 			a.setLicenseType(account.getLicenseType());
 			a.setName(account.getName());
 			a.setPassword(account.getPassword());
 			a.setPhoneNum(account.getPhoneNum());
 			a.setSchoolId(account.getSchoolId());
-			a.setFeePolicyId(account.getFeePolicyId());
-			model.addAttribute("msg","修改成功！");
+		}else{
+			a = entityService.get(account.getId());
 		}
+    	a.setUpdateTime(new Date());
+    	a.setStatus(0);
+    	School school = schoolService.get(account.getSchoolId());
+    	FeePolicy fp = feePolicyService.get(account.getFeePolicyId());
+    	a.setCreater(getCurrentUserName());
     	account.setUpdateTime(new Date());
     	model.addAttribute("entity", a);
+    	model.addAttribute("school",school);
+    	Calendar c = Calendar.getInstance();
+    	c.add(Calendar.MONTH, c.get(Calendar.MONTH)+fp.getTime());
+    	model.addAttribute("endTime",c.getTime());
+    	model.addAttribute("feePolicy",fp);
     	entityService.save(a);
-    	return "account/create";
+    	return "account/accountInfo";
     }
     
 
@@ -182,6 +193,27 @@ public class AccountController extends BaseController<Account,Long,AccountServic
 		}
     	return "account/resetpwd";
     }
+    
+    @RequestMapping(value="/active.html")
+    public String active(String name,Model model){
+    	
+    	if (StringUtils.isBlank(name)) {
+    		return "account/active";
+    	}
+    	
+    	Account account = entityService.findByLicenseNoOrUserName(name);
+    	if (account==null) {
+    		model.addAttribute("msg", "*帐号不存在！");
+    	}else{
+    		model.addAttribute("account", account);
+    		FeePolicy feePolicy = feePolicyService.get(account.getFeePolicyId());
+    		model.addAttribute("feePolicy", feePolicy);
+    		return "account/activeAccount";
+    	}
+    	return "account/active";
+    }
+    
+    
     @RequestMapping(value="/modify.html")
     public String modify(String name,Model model){
     	
@@ -217,6 +249,24 @@ public class AccountController extends BaseController<Account,Long,AccountServic
     	}
     	return "account/resetpwd";
     }
+    @RequestMapping(value="/activeAccount.html",method=RequestMethod.POST)
+    public String activeAccount(Long id,Model model){
+    	if (id==null||id==0) {
+    		model.addAttribute("msg","请求参数错误！");
+    		return "account/active";
+		}
+    	Account account = entityService.get(id);
+    	if (account==null) {
+    		model.addAttribute("msg","帐号不存在！");
+    		return "account/active";
+		}
+    	saveTask(account, account.getFeePolicyId());
+    	model.addAttribute("msg","激活成功！");
+    	return "account/resetpwd";
+    }
+    
+    
+    
     @RequestMapping(value="/modInfo.html",method=RequestMethod.POST)
     public String modpwd(Account account,Model model){
     	
@@ -267,12 +317,20 @@ public class AccountController extends BaseController<Account,Long,AccountServic
     	if (a==null||feePolicy==null) {
     		model.addAttribute("msg", "*帐号或套餐不存在！");
     	}else{
-    		a.setFeePolicyId(feePolicyId);
     		a.setUpdateTime(new Date());
     		entityService.save(a);
+    		saveTask(a, feePolicy.getId());
     		model.addAttribute("msg","变更个人信息成功！");
     	}
     	return "account/change";
+    }
+    
+    private void saveTask(Account account,Long feePolicyId){
+    	AccountTask at = new AccountTask();
+    	at.setAccountId(account.getId());
+    	at.setCreateTime(new Date());
+    	at.setFeePolicyId(account.getFeePolicyId());
+    	accountTaskService.save(at);
     }
     
     

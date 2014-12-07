@@ -14,11 +14,12 @@
     <form id="inputForm" action="${ctx}school/index.html" method="post">
          <table width="98%">
             <tr>
-            <td width="15%" align="right">
+            <td align="right">
        		<input type="hidden" name="page" id="page" value="${param['page']}">
         	<input type="hidden" name="pageSize" id="pageSize" value="${param['pageSize']}">
       		  学校名：<input name="search_LIKES_name" style="width: 100px;" class="easyui-textbox" value="${param['search_LIKES_name']}">
-      		</td><td width="20%" align="right">
+      		</td>
+      		<td align="right">
         	地区：<select class="easyui-combobox" style="width: 100px;" data-options="panelHeight:'auto'" name="search_EQI_city">
         	        <option value="">全部</option>
         	        <option value="2"   ${param['search_EQI_city'] eq 2?"selected":""}>二区</option>
@@ -31,38 +32,26 @@
                     <option value="10"  ${param['search_EQI_city'] eq 10?"selected":""}>房山</option>
                     <option value="11"  ${param['search_EQI_city'] eq 11?"selected":""}>密云</option>
              </select>  
-             </td><td width="20%" align="right">      
-         	 区局：       <select class="easyui-combobox" style="width: 100px;" data-options="panelHeight:'auto'" name="search_EQS_district">
-         	        <option value="">全部</option>
-                    <option value="1" ${param['search_EQS_district'] eq '昌平'?"selected":""}>昌平</option>
-             </select>
-             </td><td width="20%" align="right">
-           	 调拨区局：       <select class="easyui-combobox" style="width: 100px;" data-options="panelHeight:'auto'" name="search_EQS_subDistrict">
-           	        <option value="">全部</option>
-                    <option value="1" ${param['search_EQS_subDistrict'] eq '昌平'?"selected":""}>昌平</option>
-             </select>
-             </td><td width="20%" align="right">
-                                           分成类型：       <select class="easyui-combobox" style="width: 100px;" data-options="panelHeight:'auto'" name="search_EQI_rateType">
+             </td>
+            <td align="right">
+          分成类型： <select class="easyui-combobox" style="width: 100px;" data-options="panelHeight:'auto'" name="search_EQI_rateType">
                     <option value="">全部</option>
                     <option value="1" ${param['search_EQI_rateType'] eq 1?"selected":""}>计时</option>
                     <option value="2" ${param['search_EQI_rateType'] eq 2?"selected":""}>包月</option>
              </select>
              </td>
-             </tr>
-             <tr >
                 <td align="right">
-                                           可信标志：<select class="easyui-combobox" style="width: 100px;" data-options="panelHeight:'auto'" name="search_EQI_trusted">
+                可信标志：<select class="easyui-combobox" style="width: 100px;" data-options="panelHeight:'auto'" name="search_EQI_trusted">
                     <option value="">全部</option>
                     <option value="1" ${param['search_EQI_trusted'] eq 1?"selected":""}>可信</option>
                     <option value="2" ${param['search_EQI_trusted'] eq 2?"selected":""}>不可信</option>
              </select>
              </td><td align="right">
-                                             上网方式：<select class="easyui-combobox" style="width: 100px;" data-options="panelHeight:'auto'" name="search_EQI_netType">
-                    <option value="">全部</option>
-                    <option value="1" ${param['search_EQI_netType'] eq 1?"selected":""}>虚拟ADSL</option>
-                    <option value="2" ${param['search_EQI_netType'] eq 2?"selected":""}>PPPOE</option>
-                    </td>
-             </select>
+             上网方式：<select class="easyui-combobox" style="width: 100px;" data-options="panelHeight:'auto'" name="search_EQI_netType">
+	                    <option value="">全部</option>
+	                    <option value="1" ${param['search_EQI_netType'] eq 1?"selected":""}>虚拟ADSL</option>
+	                    <option value="2" ${param['search_EQI_netType'] eq 2?"selected":""}>PPPOE</option>
+             		</select>
                 </td>
                 <td colspan=2></td>
                 <td align="right">
@@ -81,8 +70,6 @@
 	            <th field="name4" width="8%">分成类型</th>
 	            <th field="name5" width="8%">学校分成比例</th>
 	            <th field="name6" width="8%">所在地区</th>
-	            <th field="name7" width="8%">区局</th>
-	            <th field="name8" width="8%">调拨区局</th>
 	            <th field="name9" width="8%">可信标志</th>
 	            <th field="name10" width="8%">虚拟学校标志</th>
 	            <th field="name11" width="8%">激活帐号数</th>
@@ -93,13 +80,11 @@
 	        <c:forEach items="${page.content}" var="entity">
 	            <tr>
 	                <td>${entity.name}</td>
-	                <td>${entity.code}</td>
+	                <td>${entity.schoolCode}</td>
 	                <td>${entity.netType eq 1?"虚拟ADSL":"PPPOE"}</td>
 	                <td>${entity.rateType eq 1?"计时":"包月"}</td>
 	                <td>${entity.rate}</td>
 	                <td>${entity.city eq 2 ?"二区":entity.city eq 3 ?"三区":entity.city eq 4 ?"四区":entity.city eq 5?"五区":entity.city eq 7?"七区":entity.city eq 8?"八区":entity.city eq 9?"昌平":entity.city eq 10?"房山":entity.city eq 11?"密云":""}</td>
-	                <td>${entity.district}</td>
-	                <td>${entity.subDistrict}</td>
 	                <td>${entity.trusted eq 1?"可信":"不可信"}</td>
 	                <td>${entity.virtualFlag eq '1'?"否":"是"}</td>
 	                <td>${entity.activeNum}</td>

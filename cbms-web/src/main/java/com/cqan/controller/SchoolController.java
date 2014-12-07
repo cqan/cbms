@@ -39,7 +39,7 @@ public class SchoolController extends BaseController<School,Long,SchoolService>{
 			s.setAddr(school.getAddr());
 			s.setCity(school.getCity());
 			s.setCmPhone(school.getCmPhone());
-			s.setCode(school.getCode());
+			s.setSchoolCode(school.getSchoolCode());
 			s.setCustomerManager(school.getCustomerManager());
 			s.setDescription(school.getDescription());
 			s.setDistrict(school.getDistrict());

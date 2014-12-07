@@ -11,7 +11,7 @@ public class School extends IdLongEntity {
 
 	private String name;// 名称
 
-	private String code;// 学校编码
+	private String schoolCode;// 学校编码
 
 	//1:计时，2：包月  分层类型
 	private int rateType;// 网络
@@ -71,12 +71,12 @@ public class School extends IdLongEntity {
 		this.name = name;
 	}
 
-	public String getCode() {
-		return code;
+	public String getSchoolCode() {
+		return schoolCode;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	public void setSchoolCode(String schoolCode) {
+		this.schoolCode = schoolCode;
 	}
 
 	public int getRateType() {

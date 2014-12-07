@@ -1,4 +1,4 @@
-package com.cqan.school;
+package com.cqan.account;
 
 
 import java.util.Date;
@@ -11,6 +11,7 @@ import javax.persistence.Table;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.cqan.IdLongEntity;
+import com.cqan.school.School;
 
 /**
  * 计费管理

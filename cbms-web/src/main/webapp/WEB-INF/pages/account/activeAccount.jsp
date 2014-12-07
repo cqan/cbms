@@ -10,22 +10,36 @@
     <meta http-equiv="description" content="This is my page">
 </head>
 <body>
-<div style="margin:5px 0;"></div>
-系统-->营业管理-->重置密码
-<div class="easyui-panel" title="重置密码" style="width:100%">
+<div style="margin:5px 0;"></div>  
+系统-->营业管理-->受理激活
+<div class="easyui-panel" title="受理激活" style="width:100%">
     <div style="text-align: center;">
-        <form id="inputForm" action="${ctx}account/setpwd.html" method="post" onsubmit="return verifyForm();">
+        <form id="inputForm" action="${ctx}account/activeAccount.html" method="post" onsubmit="return verifyForm();">
     		<input name="id" id="id" type="hidden" value="${entity.id}">
             <table cellpadding="5" align="center" style="width: 100%">
                 <tr>
-                    <td style="width:47%;text-align: right;padding-right: 10px;">账号或证件编号:</td>
-                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="name" name="name"/></td>
+                    <td style="width:47%;text-align: right;padding-right: 10px;">账号:</td>
+                    <td style="text-align: left;padding-left: 10px;">
+                    	${account.name}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:47%;text-align: right;padding-right: 10px;">证件号码:</td>
+                    <td style="text-align: left;padding-left: 10px;">
+                    	${account.licenseNo}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:47%;text-align: right;padding-right: 10px;">套餐:</td>
+                    <td style="text-align: left;padding-left: 10px;">
+                    	${feePolicy.name}
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="2">
                       <div style="text-align:center;padding:5px">
-				            <input type="submit" class="button" value="下一步">&nbsp;&nbsp;&nbsp;
-				            <a href="${ctx}account/modpwd.html" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:80px">返回</a>
+				            <input type="submit" class="button" value="激活">&nbsp;&nbsp;&nbsp;
+				            <input type="reset" class="button" value="取消">
 				        </div>
                     </td>
                 </tr>

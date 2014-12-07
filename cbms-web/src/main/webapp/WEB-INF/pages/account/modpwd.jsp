@@ -37,7 +37,7 @@
                     <td colspan="2">
                       <div style="text-align:center;padding:5px">
 				            <input type="button" class="button" value="重置" onclick="verifyForm()">&nbsp;&nbsp;&nbsp;
-				            <input type="reset" class="button" value="取消">
+				            <a href="${ctx}account/modpwd.html" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:80px">返回</a>
 				        </div>
                     </td>
                 </tr>

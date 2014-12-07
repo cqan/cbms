@@ -19,7 +19,7 @@
             <table cellpadding="5" align="center" style="width: 100%">
                 <tr>
                     <td style="width:47%;text-align: right;padding-right: 10px;">客户组编号:</td>
-                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="code"  name="code" value="${entity.code}" /></td>
+                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="groupCode"  name="groupCode" value="${entity.groupCode}" /></td>
                 </tr>
                 <tr>
                     <td  style="width:47%;text-align: right;padding-right: 10px;">客户组名称:</td>
@@ -60,7 +60,7 @@
                     <td colspan="2">
                       <div style="text-align:center;padding:5px">
 				            <input type="submit" class="button" value="保存">&nbsp;&nbsp;&nbsp;
-				            <input type="reset" class="button" value="取消">
+				            <a href="${ctx}accountGroup/index.html" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:80px">返回</a>
 				        </div>
                     </td>
                 </tr>
@@ -73,17 +73,28 @@
 <script lang="text/javascript">   
     $(function(){
     	var msg = "${msg}";
-    	var $independentGroup = $("#independentGroup");
-    	$independentGroup.click(function(){
-	    	if($(this).attr("checked")=="checked"){
-	    	   $(this).val(1);
-	    	}else{
-	    	   $(this).val(2);
-	    	}
-    	});
     	if(msg!=''){
     		show("",msg);
 	    }
+    	
+    	$("#inputForm").validate({
+			rules: {
+				groupCode: {
+					required: true
+				},
+				name: {
+					required: true
+				}
+			},
+			messages:{
+				groupCode: {
+					required: "*请填写服务组编码！"
+				},
+				name: {
+					required: "*请填写服务组名称！"
+				}
+			}
+		});
     	
     });
 	

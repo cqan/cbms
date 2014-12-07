@@ -11,7 +11,7 @@ import com.cqan.IdLongEntity;
 @Table(name = "account_group")
 public class AccountGroup extends IdLongEntity {
 	
-	private String code;
+	private String groupCode;
 	
 	private String name;
 	
@@ -37,12 +37,12 @@ public class AccountGroup extends IdLongEntity {
 		this.school = school;
 	}
 
-	public String getCode() {
-		return code;
+	public String getGroupCode() {
+		return groupCode;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	public void setGroupCode(String code) {
+		this.groupCode = code;
 	}
 
 	public String getName() {
