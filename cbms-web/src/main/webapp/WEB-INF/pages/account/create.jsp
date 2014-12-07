@@ -89,7 +89,6 @@
                         <select class="easyui-combobox" id="feePolicy" name="feePolicyId" data-options="valueField:'feePolicyId', textField:'feePolicyName',panelHeight:'auto',editable:false">
                        </select>
                     </td>
-                </tr>
                 <tr>
                     <td colspan="2">
                       <div style="text-align:center;padding:5px">

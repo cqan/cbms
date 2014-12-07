@@ -48,11 +48,11 @@
     <shiro:hasPermission name="card">
           <div title="营业管理" iconCls="icon-folder" style="overflow:auto;padding:6px;">
             <ul class="easyui-tree navlist">
-                 <shiro:hasPermission name="card.create"><li><span><a link="${ctx}account/create.html">开户受理</a></span></li></shiro:hasPermission>
-                <shiro:hasPermission name="card.manager"><li><span><a link="${ctx}card/index.html">受理激活</a></span></li></shiro:hasPermission>
+                <shiro:hasPermission name="card.create"><li><span><a link="${ctx}account/create.html">开户受理</a></span></li></shiro:hasPermission>
+                <!--<shiro:hasPermission name="card.manager"><li><span><a link="${ctx}card/index.html">受理激活</a></span></li></shiro:hasPermission>-->
                 <shiro:hasPermission name="card.manager"><li><span><a link="${ctx}account/setpwd.html">重置密码</a></span></li></shiro:hasPermission>
                 <shiro:hasPermission name="card.manager"><li><span><a link="${ctx}account/modify.html">客户资料变更</a></span></li></shiro:hasPermission>
-                <shiro:hasPermission name="card.manager"><li><span><a link="${ctx}card/index.html">套餐变更</a></span></li></shiro:hasPermission>
+                <shiro:hasPermission name="card.manager"><li><span><a link="${ctx}account/change.html">套餐变更</a></span></li></shiro:hasPermission>
             </ul>
         </div>
     </shiro:hasPermission>
