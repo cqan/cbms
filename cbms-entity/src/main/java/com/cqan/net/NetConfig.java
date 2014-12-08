@@ -20,6 +20,21 @@ public class NetConfig extends IdLongEntity {
 	
 	private String endTime;
 
+	
+	public NetConfig() {
+		super();
+	}
+
+	public NetConfig(Long agid, String startWork, String endWork,
+			String startTime, String endTime) {
+		super();
+		this.agid = agid;
+		this.startWork = startWork;
+		this.endWork = endWork;
+		this.startTime = startTime;
+		this.endTime = endTime;
+	}
+
 	public Long getAgid() {
 		return agid;
 	}

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
     <%@include file="/WEB-INF/pages/common/taglib.jsp"%>
@@ -20,12 +21,11 @@
 </head>
 <body>
 <div style="margin:5px 0;"></div>
-计费管理--><a href="${ctx}feePolicy/index.html">计费套餐策略</a>-->${empty entity?"添加":"修改"}计费套餐策略信息
-<div class="easyui-panel" title="${empty entity?"添加":"修改"}请进行上网时间段配置" style="width:100%;height:100%;">
+上网控制--><a href="${ctx}feePolicy/index.html">上网时间段配置</a>-->${fn:length(netConfigs)<=0?"添加":"修改"}
+<div class="easyui-panel" title="${fn:length(netConfigs)<=0?"添加":"修改"}上网时间段配置" style="width:100%;height:100%;">
     <div style="text-align: center;height:100%;">
         <form id="inputForm" action="${ctx}netConfig/save.html" method="post">
-    		<input name="id" id="id" type="hidden" value="${entity.id}">
-    		<input name="groupId" type="hidden" value="1">
+    		<input name="groupId" type="hidden" value="${ag.id}">
             <table id="addConfigTable" cellpadding="5" align=center>
                 <tr>
                     <td  style="text-align: center;padding-right: 10px;">序号</td>
@@ -50,10 +50,10 @@
 	                                     ${netConfig.endWork eq 1?"星期一":netConfig.endWork eq 2?"星期二":netConfig.endWork eq 3 ?"星期三":netConfig.endWork eq 4 ?"星期四":netConfig.endWork eq 5?"星期五":netConfig.endWork eq 6?"星期六":"星期日"}
 									</c:otherwise>
 								</c:choose>
-	                           <input type="hidden" name="netConfigs[${status.index}].startWork" value="${netConfig.startWork}">
-	                           <input type="hidden" name="netConfigs[${status.index}].endWork" value="${netConfig.endWork}">  
-	                           <input type="hidden" name="netConfigs[${status.index}].startTime" value="${netConfig.startTime}">
-	                           <input type="hidden" name="netConfigs[${status.index}].endTime" value="${netConfig.endTime}"> 
+	                           <input type="hidden" name="startWork" value="${netConfig.startWork}">
+	                           <input type="hidden" name="endWork" value="${netConfig.endWork}">  
+	                           <input type="hidden" name="startTime" value="${netConfig.startTime}">
+	                           <input type="hidden" name="endTime" value="${netConfig.endTime}"> 
 	                    </td>
 	                    <td style="text-align: center;padding-left: 10px;">
 	                          <a href="#" onclick="del(this);">删除</a>
@@ -63,7 +63,7 @@
                 <tr>
                     <td  style="text-align: center;padding-right: 10px;">日期段</td>
                     <td style="text-align: center;padding-left: 10px;">
-                       <select id="startWeek" class="easyui-combobox" data-options="panelHeight:'auto'" name="">
+                       <select id="startWeek" onchange="checkWeek();">
 		                    <option value="1">星期一</option>
 		                    <option value="2" >星期二</option>
 		                    <option value="3" >星期三</option>
@@ -73,7 +73,7 @@
 		                    <option value="7" >星期日</option>
                        </select>  
                        ----
-                      <select id="endWeek" class="easyui-combobox" data-options="panelHeight:'auto'" name="">
+                      <select id="endWeek" onchange="checkWeek();">
 		                    <option value="1">星期一</option>
 		                    <option value="2">星期二</option>
 		                    <option value="3">星期三</option>
@@ -84,7 +84,12 @@
                        </select>                                                                              
                     </td>
                     <td style="text-align: center;padding-left: 10px;">
-                                                                                                      时间段：<input type="text" name="" id="startTime">----<input type="text" name="" id="endTime"><input id="addConfig" type="button" class="button" value="增加">
+                                                                                                      时间段：<input type="text" id="startTime" onblur="checkTime();">----<input type="text" id="endTime" onblur="checkTime();"><input id="addConfig" type="button" class="button" value="增加">
+                    </td>
+                </tr>
+                <tr style="height:40px;">
+                    <td style="text-align: center;padding-left: 10px;" colspan="3">
+                            <span id="error" style="color:red;"></span>
                     </td>
                 </tr>
             </table>
@@ -104,21 +109,26 @@
                 }
              });
 	         $addConfig = $("#addConfig").click(function(){
+	            if(!checkWeek() || !checkTime()){
+	              return null;
+	            }
 	            var $startWeek = $("#startWeek");
 	            var $endWeek = $("#endWeek");
 	            var soption = $startWeek.find("option:selected");
-	            var eoption = $endWeek.find("option:selected");
+	            var eoption = $endWeek.find("option:selected");  
 	            var stext = soption.text();
 	            var sval = soption.val();
 	            var etext = eoption.text();
 	            var eval = eoption.val();
+	            
 	            var text = "";
 	            if(sval>eval){
-	              alert("");
+	              $("#error").html("* 日期段起始错误.");
+	              return null;
 	            }else if(sval==eval){
 	               text=stext;
 	            }else{
-	                text=stext+etext;
+	                text=stext+"&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;&nbsp;"+etext;
 	            }
 	            var st = $("#startTime").val();
 	            var et = $("#endTime").val();
@@ -127,7 +137,7 @@
 	            index = index + 1;
 	       	    $("#startTime").val("");
 	       	    $("#endTime").val("");
-	       	    var temp = "<tr class=\"a\"><td style=\"text-align: center;padding-right: 10px;\">"+index+"</td><td style=\"text-align: center;padding-left: 10px;\">"+text+"<input name=\"netConfigs[0].startWork\" type=\"hidden\" value=\""+sval+"\"><input name=\"netConfigs[0].endWork\" type=\"hidden\" value=\""+eval+"\"><input name=\"netConfigs[0].startTime\" type=\"hidden\" value=\""+st+"\"><input name=\"netConfigs[0].endTime\" type=\"hidden\" value=\""+et+"\"></td><td style=\"text-align: center;padding-left: 10px;\"><a href=\"#\" onclick=\"del(this);\">删除</a></td></td></tr>";
+	       	    var temp = "<tr class=\"a\"><td style=\"text-align: center;padding-right: 10px;\">"+index+"</td><td style=\"text-align: center;padding-left: 10px;\">"+text+"<input name=\"startWork\" type=\"hidden\" value=\""+sval+"\"><input name=\"endWork\" type=\"hidden\" value=\""+eval+"\"><input name=\"startTime\" type=\"hidden\" value=\""+st+"\"><input name=\"endTime\" type=\"hidden\" value=\""+et+"\"></td><td style=\"text-align: center;padding-left: 10px;\"><a href=\"#\" onclick=\"del(this);\">删除</a></td></td></tr>";
 	            var $temp = $(temp);
 	            $before.before($temp);
 	         });
@@ -135,6 +145,58 @@
     
     function del(myself){
        $(myself).parent().parent("tr").remove();
+    }
+    
+    function checkWeek(){
+        var $startWeek = $("#startWeek");
+        var $endWeek = $("#endWeek");
+        var soption = $startWeek.find("option:selected");
+        var eoption = $endWeek.find("option:selected");  
+        var sval = soption.val();
+        var eval = eoption.val();
+        if(sval>eval){
+            $("#error").html("* 日期段起始错误.");
+            return false;
+        }else{
+            $("#error").html("");
+            return true;
+        }
+    }
+    
+    function checkTime(){
+        var $startTime = $("#startTime");
+        var $endTime = $("#endTime");
+        var startVal  =  $startTime.val();
+        var endVal  =  $endTime.val();
+        if("" == startVal || "" == endVal){
+           $("#error").html("* 起始时间不能为空.");
+           return false;
+        }else{
+           $("#error").html("");
+        }
+        if(/^((1|0?)[0-9]|2[0-3])([0-5][0-9])$/.test(startVal)){
+           $("#error").html("");
+        }else{
+           $("#error").html("* 时间格式错误.");
+           return false;
+        }
+                if(/^((1|0?)[0-9]|2[0-3])([0-5][0-9])$/.test(endVal)){
+           $("#error").html("");
+        }else{
+           $("#error").html("* 时间格式错误.");
+           return false;
+        }
+        if(startVal>endVal){
+           $("#error").html("* 起始时间错误。");
+           return false;
+        }else{
+          $("#error").html("");
+          return true;
+        }
+    }
+    
+    function vl(){
+       return false;
     }
        
 </script>

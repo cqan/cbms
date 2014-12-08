@@ -11,8 +11,8 @@
 </head>
 <body>
 <div style="margin:5px 0;"></div>
-计费管理--><a href="${ctx}netConfig/index.html">计费套餐策略</a>-->${empty entity?"添加":"修改"}计费套餐策略信息
-<div class="easyui-panel" title="${empty entity?"添加":"修改"}学校客户组信息" style="width:100%">
+上网控制--><a href="${ctx}netConfig/index.html">上网时间段配置</a>
+<div class="easyui-panel" title="${empty entity?"添加":"修改"}上网时间段配置" style="width:100%">
     <div style="text-align: center;">
         <form id="inputForm" action="${ctx}netConfig/edit.html" method="post">
     		<input name="id" id="id" type="hidden" value="${entity.id}">
