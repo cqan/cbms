@@ -24,4 +24,9 @@ public class FeePolicyServiceImpl extends BaseServiceImpl<FeePolicy, Long, FeePo
 		return repository.findBySchool(school);
 	}
 
+	@Override
+	public List<FeePolicy> findBySchoolIsNull() {
+		return repository.findBySchoolIsNull();
+	}
+
 }

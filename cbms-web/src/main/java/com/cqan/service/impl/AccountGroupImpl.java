@@ -24,5 +24,10 @@ public class AccountGroupImpl extends BaseServiceImpl<AccountGroup, Long, Accoun
 		return repository.findBySchool(school);
 	}
 
+	@Override
+	public List<AccountGroup> findBySchool() {
+		return repository.findBySchoolIsNull();
+	}
+
 
 }
