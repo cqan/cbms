@@ -61,7 +61,9 @@
          </table>
     </form>
     	<table id="tt" class="easyui-datagrid" style="width:100%;height:auto;">
-    	    <a href="${ctx}school/edit.html" class="easyui-linkbutton" data-options="iconCls:'icon-add'" style="width:80px;margin-bottom:5px;">添加</a>
+    	    <shiro:hasPermission name="school.reg.add">
+    	    	<a href="${ctx}school/edit.html" class="easyui-linkbutton" data-options="iconCls:'icon-add'" style="width:80px;margin-bottom:5px;">添加</a>
+	        </shiro:hasPermission>
 	        <thead>
 	        <tr>
 	            <th field="name1" width="8%">名称</th>
@@ -88,7 +90,11 @@
 	                <td>${entity.trusted eq 1?"可信":"不可信"}</td>
 	                <td>${entity.virtualFlag eq '1'?"否":"是"}</td>
 	                <td>${entity.activeNum}</td>
-	                <td><a href="${ctx}school/edit.html?id=${entity.id}">修改</a>&nbsp;</td>
+	                <td>
+	                    <shiro:hasPermission name="school.reg.modify">
+	                    	<a href="${ctx}school/edit.html?id=${entity.id}">修改</a>&nbsp;
+	                    </shiro:hasPermission>
+	                </td>
 	            </tr>
 	        </c:forEach>
 	        </tbody>

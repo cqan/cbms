@@ -23,7 +23,9 @@
         至<input name="search_LTD_createTime" class="easyui-datetimebox" value="${param[search_LTD_createTime]}" style="width:155px">
         <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="submitForm()" style="width:80px">Search</a>
     </form>
-    <a href="${ctx}card/batch/edit.html" class="easyui-linkbutton" data-options="iconCls:'icon-add'" style="width:80px">添加</a>
+    <shiro:hasPermission name="card.create.add">
+    	<a href="${ctx}card/batch/edit.html" class="easyui-linkbutton" data-options="iconCls:'icon-add'" style="width:80px">添加</a>
+    </shiro:hasPermission>
     </div>
     <table id="tt" class="easyui-datagrid" style="width:100%;height:auto;">
         <thead>
@@ -48,7 +50,11 @@
                 <td>${entity.status eq 0?"未制卡":entity.status eq 1?"正在制卡":"制卡完成"}</td>
                 <td><fmt:formatDate value="${entity.endTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                 <td><fmt:formatDate value="${entity.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                <td><a href="#" onclick="resetCardBatch('${entity.id}')">重新生成卡</a></td>
+                <td>
+                    <shiro:hasPermission name="card.create.renew">
+                    	<a href="#" onclick="resetCardBatch('${entity.id}')">重新生成卡</a>
+                    </shiro:hasPermission>
+                </td>
             </tr>
         </c:forEach>
         </tbody>

@@ -27,7 +27,9 @@
         至<input name="search_LTD_createTime" class="easyui-datetimebox" value="${param[search_LTD_createTime]}" style="width:155px">
         <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="submitForm()" style="width:80px">Search</a>
     </form>
+    <shiro:hasPermission name="system.user.add">
         <a href="${ctx}user/edit.html" class="easyui-linkbutton" data-options="iconCls:'icon-add'" style="width:80px">添加</a>
+    </shiro:hasPermission>
     </div>
     <table id="tt" class="easyui-datagrid" style="width:100%;height:auto;">
         <thead>
@@ -49,10 +51,18 @@
                 <td><fmt:formatDate value="${entity.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                 <td>${entity.status eq 1?"正常":"禁用"}</td>
                 <td>
-                	<a href="${ctx}user/auth.html?id=${entity.id}">授权</a>&nbsp;
-                	<a href="${ctx}user/edit.html?id=${entity.id}">修改</a>&nbsp;
-                	<a href="#" onclick="disable('${entity.id}')">${entity.status eq 1?"禁用":"启用"}</a>&nbsp;
-                	<a href="${ctx}userSchool/edit.html?id=${entity.id}">关联地区</a>&nbsp;
+                    <shiro:hasPermission name="system.user.auth">
+                		<a href="${ctx}user/auth.html?id=${entity.id}">授权</a>&nbsp;
+                	</shiro:hasPermission>
+                	<shiro:hasPermission name="system.user.modify">
+                		<a href="${ctx}user/edit.html?id=${entity.id}">修改</a>&nbsp;
+                    </shiro:hasPermission>
+                	<shiro:hasPermission name="system.user.activeflag">
+                		<a href="#" onclick="disable('${entity.id}')">${entity.status eq 1?"禁用":"启用"}</a>&nbsp;
+                	</shiro:hasPermission>
+                	<shiro:hasPermission name="system.user.area">
+                		<a href="${ctx}userSchool/edit.html?id=${entity.id}">关联地区</a>&nbsp;
+                	</shiro:hasPermission>
                 </td>
             </tr>
         </c:forEach>
