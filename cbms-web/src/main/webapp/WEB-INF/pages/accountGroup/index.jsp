@@ -48,7 +48,9 @@
          </table>
     </form>
     <table id="tt" class="easyui-datagrid" style="width:100%;height:auto;">
-        <a href="${ctx}accountGroup/edit.html" class="easyui-linkbutton" data-options="iconCls:'icon-add'" style="width:80px;margin-bottom:5px;">添加</a>
+        <shiro:hasPermission name="school.accountGroup.add">
+        		<a href="${ctx}accountGroup/edit.html" class="easyui-linkbutton" data-options="iconCls:'icon-add'" style="width:80px;margin-bottom:5px;">添加</a>
+        </shiro:hasPermission>
         <thead>
         <tr>
             <th field="name1" width="15%">客户组编号</th>
@@ -69,7 +71,11 @@
                 <td>${entity.school.name}</td>
                 <td></td>
                 <td>${entity.description}</td>
-                <td><a href="${ctx}accountGroup/edit.html?id=${entity.id}">修改</a>&nbsp;</td>
+                <td>
+                    <shiro:hasPermission name="school.accountGroup.modify">
+                    	<a href="${ctx}accountGroup/edit.html?id=${entity.id}">修改</a>&nbsp;
+                    </shiro:hasPermission>
+                </td>
             </tr>
         </c:forEach>
         </tbody>

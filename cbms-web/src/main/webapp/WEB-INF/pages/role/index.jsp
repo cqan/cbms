@@ -20,7 +20,9 @@
         email:<input name="search_LIKES_email" style="width: 100px;" class="easyui-textbox" value="${param['search_LIKES_email']}">
         <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="submitForm()" style="width:80px">Search</a>
     </form>
+    <shiro:hasPermission name="system.role.add">
         <a href="${ctx}role/edit.html" class="easyui-linkbutton" data-options="iconCls:'icon-add'" style="width:80px">添加</a>
+    </shiro:hasPermission>
     </div>
     <table id="tt" class="easyui-datagrid" style="width:100%;height:auto;">
         <thead>
@@ -37,7 +39,14 @@
                 <td>${entity.name}</td>
                 <td>${entity.roleCode}</td>
                 <td><fmt:formatDate value="${entity.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                <td><a href="${ctx}role/auth.html?id=${entity.id}">授权</a>&nbsp;<a href="${ctx}role/edit.html?id=${entity.id}">修改</a></td>
+	            <td>
+	              <shiro:hasPermission name="system.role.auth">
+	              		<a href="${ctx}role/auth.html?id=${entity.id}">授权</a>&nbsp;
+	              </shiro:hasPermission>
+	              <shiro:hasPermission name="system.role.modify">
+	             		 <a href="${ctx}role/edit.html?id=${entity.id}">修改</a>
+	              </shiro:hasPermission>
+	            </td>
             </tr>
         </c:forEach>
         </tbody>

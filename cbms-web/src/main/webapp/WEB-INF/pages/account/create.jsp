@@ -88,7 +88,9 @@
                 <tr>
                     <td colspan="2">
                       <div style="text-align:center;padding:5px">
-				            <input type="button" class="button" value="保存" onclick="verifyForm()">&nbsp;&nbsp;&nbsp;
+                            <shiro:hasPermission name="business.account.add">
+				            	<input type="button" class="button" value="保存" onclick="verifyForm()">&nbsp;&nbsp;&nbsp;
+				            </shiro:hasPermission>
 				            <a href="${ctx}account/create.html" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:80px">返回</a>
 				        </div>
                     </td>
