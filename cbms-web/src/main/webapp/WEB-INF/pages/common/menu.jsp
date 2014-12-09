@@ -45,35 +45,28 @@
             </ul>
         </div>
     </shiro:hasPermission>
-    <shiro:hasPermission name="card">
+    <shiro:hasPermission name="business">
           <div title="营业管理" iconCls="icon-folder" style="overflow:auto;padding:6px;">
             <ul class="easyui-tree navlist">
-                <shiro:hasPermission name="card.create"><li><span><a link="${ctx}account/create.html">开户受理</a></span></li></shiro:hasPermission>
-                <shiro:hasPermission name="card.manager"><li><span><a link="${ctx}account/active.html">受理激活</a></span></li></shiro:hasPermission>
-                <shiro:hasPermission name="card.manager"><li><span><a link="${ctx}account/setpwd.html">重置密码</a></span></li></shiro:hasPermission>
-                <shiro:hasPermission name="card.manager"><li><span><a link="${ctx}account/modify.html">客户资料变更</a></span></li></shiro:hasPermission>
-                <shiro:hasPermission name="card.manager"><li><span><a link="${ctx}account/change.html">套餐变更</a></span></li></shiro:hasPermission>
+                <shiro:hasPermission name="business.account"><li><span><a link="${ctx}account/create.html">开户受理</a></span></li></shiro:hasPermission>
+                <shiro:hasPermission name="business.active"><li><span><a link="${ctx}account/active.html">受理激活</a></span></li></shiro:hasPermission>
+                <shiro:hasPermission name="business.reset"><li><span><a link="${ctx}account/setpwd.html">重置密码</a></span></li></shiro:hasPermission>
+                <shiro:hasPermission name="business.accountchange"><li><span><a link="${ctx}account/modify.html">客户资料变更</a></span></li></shiro:hasPermission>
+                <shiro:hasPermission name="business.policychange"><li><span><a link="${ctx}account/change.html">套餐变更</a></span></li></shiro:hasPermission>
             </ul>
         </div>
     </shiro:hasPermission>
-    <shiro:hasPermission name="card">
+    <shiro:hasPermission name="fee">
           <div title="计费管理" iconCls="icon-folder" style="overflow:auto;padding:6px;">
             <ul class="easyui-tree navlist">
-                <shiro:hasPermission name="card.create"><li><span><a link="${ctx}feePolicy/index.html">计费套餐策略</a></span></li></shiro:hasPermission>
+                <shiro:hasPermission name="fee.policy"><li><span><a link="${ctx}feePolicy/index.html">计费套餐策略</a></span></li></shiro:hasPermission>
             </ul>
         </div>
     </shiro:hasPermission>
-    <shiro:hasPermission name="card">
-          <div title="系统管理" iconCls="icon-folder" style="overflow:auto;padding:6px;">
-            <ul class="easyui-tree navlist">
-                <shiro:hasPermission name="card.create"><li><span><a link="${ctx}feePolicy/index.html">管理员及学校查询</a></span></li></shiro:hasPermission>
-            </ul>
-        </div>
-    </shiro:hasPermission>
-        <shiro:hasPermission name="card">
+    <shiro:hasPermission name="netConfig">
           <div title="上网控制" iconCls="icon-folder" style="overflow:auto;padding:6px;">
             <ul class="easyui-tree navlist">
-                <shiro:hasPermission name="card.create"><li><span><a link="${ctx}netConfig/step1.html">上网时间段配置</a></span></li></shiro:hasPermission>
+                <shiro:hasPermission name="netConfig.deploy"><li><span><a link="${ctx}netConfig/step1.html">上网时间段配置</a></span></li></shiro:hasPermission>
             </ul>
         </div>
     </shiro:hasPermission>
