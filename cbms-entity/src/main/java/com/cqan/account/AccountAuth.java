@@ -66,6 +66,7 @@ public class AccountAuth extends IdLongEntity {
 	
 	private Integer ipbindtag;
 	
+	
 	/**
 	 * 绑定标志：0-禁止绑定，1-需要绑定，2-已绑定vlan，用于绑定vlan。
 	 * @return
@@ -129,7 +130,7 @@ public class AccountAuth extends IdLongEntity {
 	 * @return
 	 */
 	@Column(name="inputpkg")
-	public long getInputkg() {
+	public Long getInputkg() {
 		return inputkg;
 	}
 
@@ -138,7 +139,7 @@ public class AccountAuth extends IdLongEntity {
 	 * @return
 	 */
 	@Column(name="kickofftag")
-	public int getKickofftag() {
+	public Integer getKickofftag() {
 		return kickofftag;
 	}
 
@@ -156,7 +157,7 @@ public class AccountAuth extends IdLongEntity {
 	 * @return
 	 */
 	@Column(name="mo_cur_session")
-	public int getMoCurSession() {
+	public Integer getMoCurSession() {
 		return moCurSession;
 	}
 
@@ -165,7 +166,7 @@ public class AccountAuth extends IdLongEntity {
 	 * @return
 	 */
 	@Column(name="mo_max_session")
-	public int getMoMaxSession() {
+	public Integer getMoMaxSession() {
 		return moMaxSession;
 	}
 
@@ -201,7 +202,7 @@ public class AccountAuth extends IdLongEntity {
 	 * @return
 	 */
 	@Column(name="outputpkg")
-	public long getOutputkg() {
+	public Long getOutputkg() {
 		return outputkg;
 	}
 

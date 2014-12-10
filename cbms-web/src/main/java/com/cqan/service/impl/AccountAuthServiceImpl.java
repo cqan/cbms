@@ -26,14 +26,14 @@ public class AccountAuthServiceImpl extends
 	private FeePolicyService feePolicyService;
 	
 	@Override
-	public void createAccount(Account account) {
+	public void updateAccount(Account account) {
 		AccountAuth aa = repository.findByUserName(account.getUserName());
 		if (aa==null) {
 			aa = new AccountAuth();
-			aa.setPassword(account.getPassword());
 			aa.setUserStatus(account.getStatus());
 			aa.setCreateTime(new Date());
 		}
+		aa.setPassword(account.getPassword());
 		aa.setUserStatusTime(new Date());
 		aa.setUpdateTime(new Date());
 		aa.setLoginpolicy(loginPolicy(account.getGroup().getId()));

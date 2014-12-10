@@ -5,5 +5,5 @@ import com.cqan.account.AccountAuth;
 
 public interface AccountAuthService extends BaseService<AccountAuth, Long> {
 
-	void createAccount(Account account);
+	void updateAccount(Account account);
 }

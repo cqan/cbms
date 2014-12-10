@@ -18,7 +18,7 @@ import com.cqan.IdLongEntity;
 import com.google.common.collect.Lists;
 
 @Entity
-@Table(name="role")
+@Table(name="tbl_role")
 //默认的缓存策略.
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Role extends IdLongEntity{
@@ -47,7 +47,7 @@ public class Role extends IdLongEntity{
 
 	// 多对多定义
 	@ManyToMany
-	@JoinTable(name = "role_permission", joinColumns = { @JoinColumn(name = "rid") }, inverseJoinColumns = { @JoinColumn(name = "pid") })
+	@JoinTable(name = "role_permission", joinColumns = { @JoinColumn(name = "role_id") }, inverseJoinColumns = { @JoinColumn(name = "permission_id") })
 	// Fecth策略定义
 	@Fetch(FetchMode.SUBSELECT)
 	// 集合按id排序

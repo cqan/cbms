@@ -1,9 +1,14 @@
 package com.cqan.account;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 import com.cqan.IdLongEntity;
 import com.cqan.school.AccountGroup;
@@ -39,7 +44,27 @@ public class Account extends IdLongEntity {
 	
 	private String creater;
 	
+	private Date expireTime;
 	
+	private Long syncTime;
+	
+	
+	public Long getSyncTime() {
+		return syncTime;
+	}
+
+	public void setSyncTime(Long syncTime) {
+		this.syncTime = syncTime;
+	}
+
+	public Date getExpireTime() {
+		return expireTime;
+	}
+
+	public void setExpireTime(Date expireTime) {
+		this.expireTime = expireTime;
+	}
+
 	public String getCreater() {
 		return creater;
 	}
@@ -144,6 +169,11 @@ public class Account extends IdLongEntity {
 
 	public void setFeePolicyId(Long feePolicyId) {
 		this.feePolicyId = feePolicyId;
+	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this,ToStringStyle.SHORT_PREFIX_STYLE);
 	}
 	
 	

@@ -28,7 +28,7 @@ import com.google.common.collect.Lists;
  * Created by huiwu on 2014/9/20.
  */
 @Entity
-@Table(name = "user")
+@Table(name = "tbl_user")
 public class User extends IdLongEntity {
 
 
@@ -62,7 +62,7 @@ public class User extends IdLongEntity {
 	
 	// 多对多定义
 	@ManyToMany
-	@JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "uid") }, inverseJoinColumns = { @JoinColumn(name = "rid") })
+	@JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "role_id") })
 	// Fecth策略定义
 	@Fetch(FetchMode.SUBSELECT)
 	// 集合按id排序
