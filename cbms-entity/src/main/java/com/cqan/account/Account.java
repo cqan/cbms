@@ -14,7 +14,7 @@ import com.cqan.IdLongEntity;
 import com.cqan.school.AccountGroup;
 
 @Entity
-@Table(name = "account")
+@Table(name = "tbl_account")
 public class Account extends IdLongEntity {
 	
 	//用户状态：0-正常，1：停机  （开户时默认状态为1）
