@@ -21,7 +21,7 @@
 </head>
 <body>
 <div style="margin:5px 0;"></div>
-上网控制--><a href="${ctx}feePolicy/index.html">上网时间段配置</a>-->${fn:length(netConfigs)<=0?"添加":"修改"}
+上网控制--><a href="${ctx}netConfig/step1.html">上网时间段配置</a>-->${fn:length(netConfigs)<=0?"添加":"修改"}
 <div class="easyui-panel" title="${fn:length(netConfigs)<=0?"添加":"修改"}上网时间段配置" style="width:100%;height:100%;">
     <div style="text-align: center;height:100%;">
         <form id="inputForm" action="${ctx}netConfig/save.html" method="post">
@@ -56,7 +56,8 @@
 	                           <input type="hidden" name="endTime" value="${netConfig.endTime}"> 
 	                    </td>
 	                    <td style="text-align: center;padding-left: 10px;">
-	                          <a href="#" onclick="del(this);">删除</a>
+	                              <span styel="width:40px;text-align: center;padding-left: 10px;">${netConfig.startTime}----${netConfig.endTime}</span>
+	                              <a href="#" style="padding-left: 50px;padding-right: 10px;" onclick="del(this);">删除</a>
 	                    </td>
 	                </tr>
 				</c:forEach>
@@ -95,7 +96,7 @@
             </table>
             <div style="text-align:center;padding:5px">
 				  <input type="submit" class="button" value="保存">&nbsp;&nbsp;&nbsp;
-	              <input type="reset" class="button" value="取消">
+	              <a href="${ctx}netConfig/step1.html" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:80px">返回</a>
 			</div>
         </form>
     </div>
@@ -137,7 +138,7 @@
 	            index = index + 1;
 	       	    $("#startTime").val("");
 	       	    $("#endTime").val("");
-	       	    var temp = "<tr class=\"a\"><td style=\"text-align: center;padding-right: 10px;\">"+index+"</td><td style=\"text-align: center;padding-left: 10px;\">"+text+"<input name=\"startWork\" type=\"hidden\" value=\""+sval+"\"><input name=\"endWork\" type=\"hidden\" value=\""+eval+"\"><input name=\"startTime\" type=\"hidden\" value=\""+st+"\"><input name=\"endTime\" type=\"hidden\" value=\""+et+"\"></td><td style=\"text-align: center;padding-left: 10px;\"><a href=\"#\" onclick=\"del(this);\">删除</a></td></td></tr>";
+	       	    var temp = "<tr class=\"a\"><td style=\"text-align: center;padding-right: 10px;\">"+index+"</td><td style=\"text-align: center;padding-left: 10px;\">"+text+"<input name=\"startWork\" type=\"hidden\" value=\""+sval+"\"><input name=\"endWork\" type=\"hidden\" value=\""+eval+"\"><input name=\"startTime\" type=\"hidden\" value=\""+st+"\"><input name=\"endTime\" type=\"hidden\" value=\""+et+"\"></td><td style=\"text-align: center;padding-left: 10px;\"><span styel=\"width:40px;text-align: center;padding-left: 10px;\">"+st+"----"+et+"</span><a style=\"padding-left: 50px;padding-right: 10px;\" href=\"#\" onclick=\"del(this);\">删除</a></td></td></tr>";
 	            var $temp = $(temp);
 	            $before.before($temp);
 	         });
@@ -169,7 +170,7 @@
         var startVal  =  $startTime.val();
         var endVal  =  $endTime.val();
         if("" == startVal || "" == endVal){
-           $("#error").html("* 起始时间不能为空.");
+           $("#error").html("* 起止时间不能为空.");
            return false;
         }else{
            $("#error").html("");
@@ -180,14 +181,14 @@
            $("#error").html("* 时间格式错误.");
            return false;
         }
-                if(/^((1|0?)[0-9]|2[0-3])([0-5][0-9])$/.test(endVal)){
+        if(/^((1|0?)[0-9]|2[0-3])([0-5][0-9])$/.test(endVal)){
            $("#error").html("");
         }else{
            $("#error").html("* 时间格式错误.");
            return false;
         }
         if(startVal>endVal){
-           $("#error").html("* 起始时间错误。");
+           $("#error").html("* 起止时间错误。");
            return false;
         }else{
           $("#error").html("");

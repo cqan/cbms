@@ -1,6 +1,10 @@
 package com.cqan.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.cqan.account.Account;
@@ -9,7 +13,7 @@ import com.cqan.service.AccountService;
 
 
 @Service("accountService")
-public class AccountImpl extends BaseServiceImpl<Account, Long, AccountRepository> implements AccountService {
+public class AccountServiceImpl extends BaseServiceImpl<Account, Long, AccountRepository> implements AccountService {
 
 	@Override
 	@Autowired
@@ -31,6 +35,11 @@ public class AccountImpl extends BaseServiceImpl<Account, Long, AccountRepositor
 	public Account findByLicenseNoOrUserName(String name) {
 		
 		return repository.findByUserNameOrLicenseNo(name);
+	}
+
+	@Override
+	public List<Account> findBySyncTime(int size) {
+		return repository.findAll(new PageRequest(0, size, new Sort(Sort.Direction.ASC,"syncTime"))).getContent();
 	}
 
 }
