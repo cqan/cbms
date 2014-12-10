@@ -19,11 +19,11 @@
   	 <script type="text/javascript">if (top.location != self.location) {top.location = self.location;}</script>
      <script type="text/javascript">
           function check_f(){
-              var name=document.login_f.username.value;
-              var pwd=document.login_f.password.value;
-              var code=document.login_f.authcode.value;
+              var name=$("#username").val();
+              var pwd=$("#pwd").val();
+              var code=$("#authcode").val();
               if(name==""||pwd==""||code==""){alertMsg('请如入完整信息！',"info");return false;}
-                 document.login_f.submit();
+                 $("#loginForm").submit();
           }
           
           function reflashAuthCode(){
