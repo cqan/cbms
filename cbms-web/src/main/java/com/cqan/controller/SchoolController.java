@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,7 +37,7 @@ public class SchoolController extends BaseController<School,Long,SchoolService>{
     }
 
     @RequestMapping(value="/save.html",method=RequestMethod.POST)
-    public String save(School school,Model model){
+    public String save(School school,Model model,HttpServletRequest request){
     	School s;
     	if (school.getId()==null||school.getId()==0) {
     		school.setCreateTime(new Date());
@@ -68,7 +71,7 @@ public class SchoolController extends BaseController<School,Long,SchoolService>{
     	school.setUpdateTime(new Date());
     	model.addAttribute("entity", s);
     	entityService.save(s);
-    	return "school/edit";
+    	return page("", "", 1, 10, model, request);
     }
     
     @RequestMapping(value="/listAll.html",method=RequestMethod.POST)

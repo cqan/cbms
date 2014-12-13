@@ -34,7 +34,7 @@ public class RoleController extends BaseController<Role, Long, RoleService> {
 	}
 
 	@RequestMapping(value = "/save.html", method = RequestMethod.POST)
-	public String save(Role role, Model model) {
+	public String save(Role role, Model model,HttpServletRequest request) {
 		if (role.getId() == null || role.getId() == 0) {
 			role.setCreateTime(new Date());
 			model.addAttribute("msg", "添加成功！");
@@ -45,7 +45,7 @@ public class RoleController extends BaseController<Role, Long, RoleService> {
 		}
 		entityService.save(role);
 		model.addAttribute("entity", role);
-		return "role/edit";
+		return page("", "", 1, 10, model, request);
 	}
 
 	@ResponseBody

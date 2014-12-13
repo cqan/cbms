@@ -43,7 +43,7 @@ public class UserController extends BaseController<User,Long,UserService>{
     }
     
     @RequestMapping(value="/save.html",method=RequestMethod.POST)
-    public String save(User user,Model model){
+    public String save(User user,Model model,HttpServletRequest request){
     	if (user.getId()==null||user.getId()==0) {
 			user.setBirthday(new Date());
 			user.setCreateTime(new Date());
@@ -61,7 +61,7 @@ public class UserController extends BaseController<User,Long,UserService>{
     	user.setUpdateTime(new Date());
     	model.addAttribute("entity", user);
     	entityService.save(user);
-    	return "user/edit";
+    	return page("", "", 1, 10, model, request);
     }
     
     
