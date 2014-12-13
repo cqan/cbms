@@ -13,7 +13,6 @@ import com.cqan.account.Account;
 import com.cqan.account.AccountTask;
 import com.cqan.service.AccountService;
 import com.cqan.service.AccountTaskService;
-import com.cqan.service.FeePolicyService;
 
 /**
  * 同步用户信息
@@ -40,8 +39,6 @@ public class AccountStatusSyncHandler implements Runnable{
 	
 	@Autowired
 	private AccountTaskService accountTaskService;
-	
-	private FeePolicyService feePolicyService;
 	
     public AccountStatusSyncHandler() {
     	if (!flag) {

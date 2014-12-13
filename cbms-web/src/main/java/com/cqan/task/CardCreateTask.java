@@ -86,6 +86,7 @@ public class CardCreateTask implements Runnable{
 			card.setPrice(cardBatch.getPrice());
 			card.setSerialNo(String.valueOf(i));
 			card.setStatus(1);
+			card.setFeePolicyId(cardBatch.getFeePolicyId());
 			card.setPwd(createPwd());
 			card.setCardNo(createCardNo(cardBatch,i));
 			logger.info("生成卡号:{}",card);
