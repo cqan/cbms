@@ -11,14 +11,14 @@
 </head>
 <body>
 <div style="margin:5px 0;"></div>  
-系统-->营业管理-->受理激活
-<div class="easyui-panel" title="变更套餐" style="width:100%">
+系统--><a href="${ctx}account/index.html">营业管理</a>-->受理激活
+<div class="easyui-panel" title="受理激活" style="width:100%">
     <div style="text-align: center;">
         <form id="inputForm" action="${ctx}account/active.html" method="post" onsubmit="return verifyForm();">
             <table cellpadding="5" align="center" style="width: 100%">
                 <tr>
                     <td style="width:47%;text-align: right;padding-right: 10px;">账号或证件编号:</td>
-                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="name" name="name"/></td>
+                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="name" name="name"/><span style="color: red;">${error}</span></td>
                 </tr>
                 <tr>
                     <td colspan="2">

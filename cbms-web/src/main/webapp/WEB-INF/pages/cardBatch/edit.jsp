@@ -34,6 +34,18 @@
 	                    </td>
 	                </tr>
 	                <tr>
+	                    <td  style="width:47%;text-align: right;padding-right: 10px;">制卡前辍:</td>
+	                    <td style="text-align: left;padding-left: 10px;">
+	                    	<input type="text" id="cardPrefix" name="cardPrefix" value="${entity.cardPrefix}"/>
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td  style="width:47%;text-align: right;padding-right: 10px;">制卡后辍:</td>
+	                    <td style="text-align: left;padding-left: 10px;">
+	                    	<input type="text" id="cardSuffix" name="cardSuffix" value="${entity.cardSuffix}"/>
+	                    </td>
+	                </tr>
+	                <tr>
 	                    <td  style="width:47%;text-align: right;padding-right: 10px;">数量:</td>
 	                    <td style="text-align: left;padding-left: 10px;">
 	                    	<input type="text" id="cardNum" name="cardNum" value="${entity.cardNum}"/>
@@ -45,6 +57,13 @@
 	                    	<input type="text" class="easyui-datetimebox" id="endTime" name="endTime" value="${entity.endTime}"/>
 	                    </td>
 	                </tr>
+	                 <tr>
+                    <td  style="width:47%;text-align: right;padding-right: 10px;">套餐:</td>
+                    <td style="text-align: left;padding-left: 10px;">        
+                        <select class="easyui-combobox" id="feePolicy" name="feePolicyId" data-options="valueField:'feePolicyId', textField:'feePolicyName',panelHeight:'auto',editable:false">
+                       </select>
+                    </td>
+                <tr>
 	                <tr>
 	                    <td  style="width:47%;text-align: right;padding-right: 10px;">描述:</td>
 	                    <td style="text-align: left;padding-left: 10px;">
@@ -54,8 +73,8 @@
 	                <tr>
 	                    <td colspan="2">
 	                      <div style="text-align:center;padding:5px">
-					            <input type="submit" class="button" value="保存">&nbsp;&nbsp;&nbsp;
-					            <input type="reset" class="button" value="取消">
+					            <input type="button" class="button" value="保存" onclick="verifyForm()">&nbsp;&nbsp;&nbsp;
+					            <a href="${ctx}card/batch/index.html" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:80px">返回</a>
 					        </div>
 	                    </td>
 	                </tr>
@@ -71,6 +90,17 @@
 		    	if(msg!=''){
 		    		show("",msg);
 		    }
+		    	var _feePolicy = $('#feePolicy').combobox({
+		             url: '${ctx}card/batch/feePolicys.html',
+		             editable: false,
+		             textField: 'feePolicyName',
+		             onLoadSuccess: function (data) {
+		            	 //设置黑认值
+		            	 $('#feePolicy').combobox('setValue','${account.schoolId}');
+		             }
+		         });
+		    	
+		    	
 		    	
 		   	$("#inputForm").validate({
 				rules: {
@@ -83,6 +113,12 @@
 					price:{
 						required:true,
 						number:true
+					},
+					cardPrefix:{
+						required:true
+					},
+					cardSuffix:{
+						required:true
 					},
 					cardNum:{
 						required:true,
@@ -100,6 +136,12 @@
 						required:"*请输入价格！",
 						number:"请正确的价格！"
 					},
+					cardPrefix:{
+						required:"*请输入前辍！"
+					},
+					cardSuffix:{
+						required:"*请输入后辍！"
+					},
 					cardNum:{
 						required:"请输入数量！",
 						digits:"请输入正确的数量！"
@@ -108,6 +150,15 @@
 			});
 		   	
 		   });
+		    
+		    function verifyForm(){
+		    	var feePolicy = $("#feePolicy").combobox('getValue'); 
+		    	if(feePolicy==''){
+		    		msgShow("提示","请选择套餐！","warning");
+		    		return false;
+		    	}
+		    	$("#inputForm").submit();
+		    }
 			
 		</script>
 </html>

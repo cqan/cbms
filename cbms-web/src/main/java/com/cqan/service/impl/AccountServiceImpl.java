@@ -42,4 +42,9 @@ public class AccountServiceImpl extends BaseServiceImpl<Account, Long, AccountRe
 		return repository.findAll(new PageRequest(0, size, new Sort(Sort.Direction.ASC,"syncTime"))).getContent();
 	}
 
+	@Override
+	public List<Account> findByExpireTime(int size) {
+		return repository.findAll(new PageRequest(0, size, new Sort(Sort.Direction.ASC,"expireTime"))).getContent();
+	}
+
 }

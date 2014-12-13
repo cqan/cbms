@@ -11,7 +11,7 @@
 </head>
 <body>
 <div style="margin:5px 0;"></div>
-系统-->营业管理-->重置密码
+系统--><a href="${ctx}account/index.html">营业管理</a>-->重置密码
 <div class="easyui-panel" title="重置密码" style="width:100%">
     <div style="text-align: center;">
         <form id="inputForm" action="${ctx}account/setpwd.html" method="post" onsubmit="return verifyForm();">

@@ -11,7 +11,7 @@
 </head>
 <body>
 <div style="margin:5px 0;"></div>  
-系统-->营业管理-->开户信息
+系统--><a href="${ctx}account/index.html">营业管理</a>-->开户信息
 <div class="easyui-panel" title="开户信息" style="width:100%">
     <div style="text-align: center;">
          <table cellpadding="5" align="center" style="width:65%">
@@ -50,9 +50,9 @@
                  <td style="text-align: left;padding-left: 10px;">
                  		<fmt:formatDate value="${entity.updateTime}" pattern="yyyy-MM-dd"/>
                  </td>
-                 <td style="width:20%;text-align: right;padding-right: 10px;">更新时间:</td>
+                 <td style="width:20%;text-align: right;padding-right: 10px;">到期时间:</td>
                  <td style="text-align: left;padding-left: 10px;">
-                 	<fmt:formatDate value="${entity.updateTime}" pattern="yyyy-MM-dd"/>
+                 	<fmt:formatDate value="${entity.expireTime}" pattern="yyyy-MM-dd"/>
                  </td>
              </tr>
              <tr>
@@ -69,11 +69,16 @@
                  	${feePolicy.name}
                  </td>
                  <td style="width:20%;text-align: right;padding-right: 10px;">上网类型:</td>
-                 <td style="text-align: left;padding-left: 10px;">${feePolicy.strategyType}</td>
+                 <td style="text-align: left;padding-left: 10px;">${feePolicy.strategyType eq 1?"包月无上限":"其它"}</td>
              </tr>
              <tr align="center">
                  <td colspan="4">
+                 <c:if test="${flag eq 1}">
                  	<a href="${ctx}account/create.html" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:80px">返回</a>
+                 </c:if>
+                 <c:if test="${!(flag eq 1)}">
+                 	<a href="${ctx}account/index.html" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:80px">返回</a>
+                 </c:if>
                  </td>
              </tr>
          </table>

@@ -35,9 +35,9 @@
             <th field="name3" width="10%">价格</th>
             <th field="name4" width="10%">数量</th>
             <th field="name5" width="10%">状态</th>
-            <th field="name6" width="15%">失效时间</th>
-            <th field="name7" width="15%">创建时间</th>
-            <th field="name8" width="15%">操作</th>
+            <th field="name6" width="10%">失效时间</th>
+            <th field="name7" width="10%">创建时间</th>
+            <th field="name8" width="10%">操作</th>
         </tr>
         </thead>
         <tbody>
@@ -50,6 +50,7 @@
                 <td>${entity.status eq 0?"未制卡":entity.status eq 1?"正在制卡":"制卡完成"}</td>
                 <td><fmt:formatDate value="${entity.endTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                 <td><fmt:formatDate value="${entity.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                <td><a href="${ctx}card/batch/download.html?id=${entity.id}">下载</a></td>
                 <td>
                     <shiro:hasPermission name="card.create.renew">
                     	<a href="#" onclick="resetCardBatch('${entity.id}')">重新生成卡</a>
@@ -83,16 +84,5 @@
   		show("",msg);
   	}
   });
-  
-  function resetCardBatch(id){
-	  jQuery.ajax({
-		  		url: "${ctx}card/batch/operate.html",
-		  		data:{id:id}, 
-		  		type:"POST",
-		  		success: function(data){
-			        alert(data);
-			        window.location.reload(true);
-			  }});
-  }
 </script>
 </html>

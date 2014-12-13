@@ -48,6 +48,19 @@ public class Card extends IdLongEntity{
 	
 	private String transferName;
 	
+	private Long feePolicyId;
+	
+
+
+	public Long getFeePolicyId() {
+		return feePolicyId;
+	}
+
+	public void setFeePolicyId(Long feePolicyId) {
+		this.feePolicyId = feePolicyId;
+	}
+
+	
 
 //	@ManyToOne
 //    @JoinColumn(name="account_group_id")

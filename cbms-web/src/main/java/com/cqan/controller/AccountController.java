@@ -2,7 +2,6 @@ package com.cqan.controller;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -24,9 +23,11 @@ import com.cqan.school.School;
 import com.cqan.service.AccountGroupService;
 import com.cqan.service.AccountService;
 import com.cqan.service.AccountTaskService;
+import com.cqan.service.CardService;
 import com.cqan.service.FeePolicyService;
 import com.cqan.service.SchoolService;
 import com.cqan.service.UserSchoolService;
+import com.cqan.system.Card;
 import com.cqan.system.UserSchool;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -54,6 +55,9 @@ public class AccountController extends BaseController<Account,Long,AccountServic
 	@Autowired
 	private AccountTaskService accountTaskService;
 	
+	@Autowired
+	private CardService cardService;
+	
     @Override
     @Autowired
     public void setEntityService(AccountService accountService) {
@@ -64,6 +68,57 @@ public class AccountController extends BaseController<Account,Long,AccountServic
     public String createAccount(Model model){
     	
     	return "account/create";
+    }
+    
+    @RequestMapping(value="/rechange.html")
+    public String rechange(String userName,String password,String cardNo,String pwd,Model model){
+    	if (StringUtils.isBlank(userName)||StringUtils.isBlank(password)||StringUtils.isBlank(cardNo)||StringUtils.isBlank(pwd)) {
+    		model.addAttribute("msg","*请求参数不能为空！");
+    		return "account/rechange";
+		}
+    	Account account = entityService.findByUserName(userName);
+    	if (account==null||!account.getPassword().equals(password)) {
+    		model.addAttribute("msg","*帐号或密码不正确！");
+    		return "account/rechange";
+		}
+    	Card card = cardService.findByCardNo(cardNo);
+    	if (card==null||!card.getPwd().equals(pwd)) {
+    		model.addAttribute("msg","*卡号或密码不正确！");
+    		return "account/rechange";
+		}
+    	if (card.getEndTime().getTime()<=System.currentTimeMillis()) {
+    		model.addAttribute("msg","*卡号已过期！");
+    		return "account/rechange";
+		}
+    	//用户套餐与卡的套餐一致
+    	if (card.getFeePolicyId()==account.getFeePolicyId()) {
+			FeePolicy fp = feePolicyService.get(card.getFeePolicyId());
+			Date expireTime = account.getExpireTime();
+			Calendar c = Calendar.getInstance();
+			//用户未过期
+			if (expireTime.getTime()>=System.currentTimeMillis()) {
+				c.setTime(expireTime);
+			}
+			c.set(Calendar.MONTH, c.get(Calendar.MONTH)+fp.getTime());
+			expireTime = c.getTime();
+			account.setStatus(0);
+			account.setExpireTime(expireTime);
+			entityService.save(account);
+		}else{
+			//用户套餐与卡的套餐不一致
+			AccountTask at = accountTaskService.findByAccountId(account.getId());
+			if (at!=null) {
+				model.addAttribute("msg","*帐户还有变更套餐未处理，现在不能变更！");
+	    		return "account/rechange";
+			}
+			saveTask(account, card.getFeePolicyId());
+		}
+    	School school = schoolService.get(account.getSchoolId());
+    	FeePolicy fp = feePolicyService.get(account.getFeePolicyId());
+    	model.addAttribute("entity", account);
+    	model.addAttribute("school",school);
+    	model.addAttribute("feePolicy",fp);
+    	return "account/accountInfo";
     }
     
     @ResponseBody
@@ -77,7 +132,6 @@ public class AccountController extends BaseController<Account,Long,AccountServic
 				School school = schoolService.get(us.getSchoolId());
 				schools.add(school);
 			}
-    		System.out.println(schools);
     		for (School school : schools) {
     			Map<String,Object> map = Maps.newHashMap();
         		map.put("schoolId", school.getId());
@@ -109,16 +163,15 @@ public class AccountController extends BaseController<Account,Long,AccountServic
 	        			data.add(map);
 	        		}
     			}
-    			List<FeePolicy> fps = feePolicyService.findBySchoolIsNull();
-        		if (fps!=null) {
-        			for (FeePolicy ag : fps) {
-            			Map<String,Object> map = Maps.newHashMap();
-            			map.put("feePolicyId", ag.getId());
-            			map.put("feePolicyName", ag.getName());
-            			data.add(map);
-            		}
-				}
-    			
+			}
+    		List<FeePolicy> fps = feePolicyService.findBySchoolIsNull();
+    		if (fps!=null) {
+    			for (FeePolicy ag : fps) {
+        			Map<String,Object> map = Maps.newHashMap();
+        			map.put("feePolicyId", ag.getId());
+        			map.put("feePolicyName", ag.getName());
+        			data.add(map);
+        		}
 			}
     	}
     	
@@ -155,10 +208,26 @@ public class AccountController extends BaseController<Account,Long,AccountServic
     	model.addAttribute("entity", a);
     	model.addAttribute("school",school);
     	Calendar c = Calendar.getInstance();
-    	c.add(Calendar.MONTH, c.get(Calendar.MONTH)+fp.getTime());
-    	model.addAttribute("endTime",c.getTime());
+    	c.set(Calendar.MONTH, c.get(Calendar.MONTH)+fp.getTime());
+    	a.setExpireTime(c.getTime());
     	model.addAttribute("feePolicy",fp);
+    	model.addAttribute("flag", "1");
     	entityService.save(a);
+    	return "account/accountInfo";
+    }
+    
+    @RequestMapping("/info.html")
+    public String accountInfo(Long id,Model model){
+    	if (id!=null&&id!=0) {
+    		Account account = entityService.get(id);
+        	if (account!=null) {
+        		School school = schoolService.get(account.getSchoolId());
+            	FeePolicy fp = feePolicyService.get(account.getFeePolicyId());
+            	model.addAttribute("feePolicy",fp);
+            	model.addAttribute("entity", account);
+            	model.addAttribute("school",school);
+			}
+		}
     	return "account/accountInfo";
     }
     
@@ -229,6 +298,10 @@ public class AccountController extends BaseController<Account,Long,AccountServic
     	if (account==null) {
     		model.addAttribute("msg", "*帐号不存在！");
     	}else{
+    		if(account.getStatus()==0&&account.getExpireTime().getTime()>System.currentTimeMillis()){
+    			model.addAttribute("error","*此帐号仍然有效，无须激活！");
+    			return "account/active";
+    		}
     		model.addAttribute("account", account);
     		FeePolicy feePolicy = feePolicyService.get(account.getFeePolicyId());
     		model.addAttribute("feePolicy", feePolicy);
@@ -284,7 +357,12 @@ public class AccountController extends BaseController<Account,Long,AccountServic
     		model.addAttribute("msg","帐号不存在！");
     		return "account/active";
 		}
-    	saveTask(account, account.getFeePolicyId());
+    	Calendar c = Calendar.getInstance();
+    	FeePolicy fp = feePolicyService.get(account.getFeePolicyId());
+    	c.set(Calendar.MONTH, c.get(Calendar.MONTH)+fp.getTime());
+    	account.setExpireTime(c.getTime());
+    	account.setStatus(0);
+    	entityService.save(account);
     	model.addAttribute("msg","激活成功！");
     	return "account/resetpwd";
     }
@@ -336,6 +414,11 @@ public class AccountController extends BaseController<Account,Long,AccountServic
     		model.addAttribute("msg", "请求参数错误！");
     		return "account/change";
     	}
+    	AccountTask accountTask = accountTaskService.findByAccountId(id);
+    	if (accountTask!=null) {
+    		model.addAttribute("msg", "*上次变更套餐尚未生效，不能再变更！");
+    		return "account/change";
+		}
     	Account a = entityService.get(id);
     	FeePolicy feePolicy = feePolicyService.get(feePolicyId);
     	if (a==null||feePolicy==null) {

@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import com.cqan.system.Card;
+import com.cqan.system.CardBatch;
 
 public interface CardRepository extends BaseRepository<Card, Long> {
 
@@ -15,5 +16,9 @@ public interface CardRepository extends BaseRepository<Card, Long> {
 	
 	@Query("from Card where card_batch_id= ?")
 	List<Card> listByCardBatchId(Long cardBatchId);
+
+	List<Card> findByCardBatch(CardBatch cb);
+
+	Card findByCardNo(String cardNo);
 
 }

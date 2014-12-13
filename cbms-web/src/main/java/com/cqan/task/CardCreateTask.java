@@ -7,6 +7,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,7 @@ public class CardCreateTask implements Runnable{
 	private static final int INITIALDELAY = 30;
 	private static final int PERIOD = 30;
 	
-	private static final int CARDLEN = 16;
+	private static final int CARDLEN = 10;
 	
 	private static boolean flag = false;
 	
@@ -103,9 +104,12 @@ public class CardCreateTask implements Runnable{
 	private String createCardNo(CardBatch cardBatch, int i) {
 		int noLen = String.valueOf(cardBatch.getCardNum()).length();
 		int cbIdLen = String.valueOf(cardBatch.getId()).length();
-		StringBuffer sb = new StringBuffer(String.valueOf(cardBatch.getId()));
+		StringBuffer sb = new StringBuffer();
+		sb.append(StringUtils.defaultString(cardBatch.getCardPrefix(), ""))
+		.append(String.valueOf(cardBatch.getId()));
 		int randStrLen = CARDLEN - noLen-cbIdLen;
-		return sb.append(RandomStringUtils.random(randStrLen, false, true)).append(fill(noLen, i)).toString();
+		return sb.append(RandomStringUtils.random(randStrLen, false, true)).append(fill(noLen, i))
+				.append(StringUtils.defaultString(cardBatch.getCardSuffix(), "")).toString();
 	}
 	
 	private String fill(int len,int i){

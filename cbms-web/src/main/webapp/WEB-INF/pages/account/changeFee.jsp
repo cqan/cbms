@@ -11,7 +11,7 @@
 </head>
 <body>
 <div style="margin:5px 0;"></div>
-系统-->营业管理-->变更套餐
+系统--><a href="${ctx}account/index.html">营业管理</a>-->变更套餐
 <div class="easyui-panel" title="变更套餐" style="width:100%">
     <div style="text-align: center;">
         <form id="inputForm" action="${ctx}account/changeFee.html" method="post" onsubmit="return verifyForm();">

@@ -4,11 +4,9 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
@@ -21,7 +19,6 @@ import org.hibernate.annotations.FetchMode;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.cqan.IdLongEntity;
-import com.cqan.school.School;
 import com.google.common.collect.Lists;
 
 /**
@@ -53,8 +50,6 @@ public class User extends IdLongEntity {
     @JSONField(name = "last_login_ip")
     private String lastLoginIp;
     
-    private School school;
-
     //1：正常，2：禁用
     private int status;
     
@@ -148,16 +143,6 @@ public class User extends IdLongEntity {
     public void setEmail(String email) {
         this.email = email;
     }
-    
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="school_id")
-	public School getSchool() {
-		return school;
-	}
-
-	public void setSchool(School school) {
-		this.school = school;
-	}
     
 
 	@Override

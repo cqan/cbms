@@ -5,4 +5,6 @@ import com.cqan.account.AccountTask;
 public interface AccountTaskRepository extends
 		BaseRepository<AccountTask, Long> {
 
+	AccountTask findByAccountId(Long accountId);
+
 }

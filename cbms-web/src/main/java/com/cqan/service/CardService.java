@@ -11,4 +11,8 @@ public interface CardService extends BaseService<Card, Long> {
 	
 	List<Card> listByCardBatchId(Long cardBatchId);
 
+	List<Card> findByCardBatch(CardBatch cb);
+
+	Card findByCardNo(String cardNo);
+
 }

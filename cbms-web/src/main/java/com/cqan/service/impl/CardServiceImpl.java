@@ -31,6 +31,16 @@ public class CardServiceImpl extends
 	public List<Card> listByCardBatchId(Long cardBatchId) {
 		return repository.listByCardBatchId(cardBatchId);
 	}
+	
+	@Override
+	public List<Card> findByCardBatch(CardBatch cb) {
+		return repository.findByCardBatch(cb);
+	}
+
+	@Override
+	public Card findByCardNo(String cardNo) {
+		return repository.findByCardNo(cardNo);
+	}
 
 	
 

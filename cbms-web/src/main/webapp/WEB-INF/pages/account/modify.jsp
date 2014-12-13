@@ -11,7 +11,7 @@
 </head>
 <body>
 <div style="margin:5px 0;"></div>
-系统-->营业管理-->客户资料变更
+系统--><a href="${ctx}account/index.html">营业管理</a>-->客户资料变更
 <div class="easyui-panel" title="客户资料变更" style="width:100%">
     <div style="text-align: center;">
         <form id="inputForm" action="${ctx}account/modify.html" method="post" onsubmit="return verifyForm();">

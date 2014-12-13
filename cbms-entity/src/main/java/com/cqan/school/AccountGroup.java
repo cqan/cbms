@@ -29,15 +29,15 @@ public class AccountGroup extends IdLongEntity {
 	//强制下线  1：强制下线；0：不强制下线
 	private int kick;
 	
-	private Integer nasId;
+	private String nasIp;
 	
-	private Integer nasPortId;
+	private String nasPortId;
 	
-	private Integer nasPort;
+	private String nasPort;
 	
-	private Integer vlanID1;
+	private String vlanID1;
 	
-	private Integer vlanID2;
+	private String vlanID2;
 	
 	private Integer vlanBindTag;
 	
@@ -102,35 +102,35 @@ public class AccountGroup extends IdLongEntity {
 		this.kick = kick;
 	}
 
-	public Integer getNasPortId() {
+	public String getNasPortId() {
 		return nasPortId;
 	}
 
-	public void setNasPortId(Integer nasPortId) {
+	public void setNasPortId(String nasPortId) {
 		this.nasPortId = nasPortId;
 	}
 
-	public Integer getNasPort() {
+	public String getNasPort() {
 		return nasPort;
 	}
 
-	public void setNasPort(Integer nasPort) {
+	public void setNasPort(String nasPort) {
 		this.nasPort = nasPort;
 	}
 
-	public Integer getVlanID1() {
+	public String getVlanID1() {
 		return vlanID1;
 	}
 
-	public void setVlanID1(Integer vlanID1) {
+	public void setVlanID1(String vlanID1) {
 		this.vlanID1 = vlanID1;
 	}
 
-	public Integer getVlanID2() {
+	public String getVlanID2() {
 		return vlanID2;
 	}
 
-	public void setVlanID2(Integer vlanID2) {
+	public void setVlanID2(String vlanID2) {
 		this.vlanID2 = vlanID2;
 	}
 
@@ -150,12 +150,12 @@ public class AccountGroup extends IdLongEntity {
 		this.ipBindTag = ipBindTag;
 	}
 
-	public Integer getNasId() {
-		return nasId;
+	public String getNasIp() {
+		return nasIp;
 	}
 
-	public void setNasId(Integer nasId) {
-		this.nasId = nasId;
+	public void setNasIp(String nasIp) {
+		this.nasIp = nasIp;
 	}
 
 	
