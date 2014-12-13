@@ -54,7 +54,7 @@ public class FeePolicyController extends BaseController<FeePolicy,Long,FeePolicy
 	}
 	
     @RequestMapping(value="/save.html",method=RequestMethod.POST)
-    public String save(FeePolicy feePolicy,Model model){
+    public String save(FeePolicy feePolicy,Model model,HttpServletRequest request){
     	FeePolicy fp;
     	School school =null;
     	if(null != feePolicy.getSchool() && null !=feePolicy.getSchool().getId()){
@@ -83,12 +83,12 @@ public class FeePolicyController extends BaseController<FeePolicy,Long,FeePolicy
 			fp.setUpControl(feePolicy.getUpControl());
 			model.addAttribute("msg","修改成功！");
 		}
-    	feePolicy.setUpdateTime(new Date());
-    	model.addAttribute("entity", feePolicy);
-		List<School> schools = schoolService.listAll();
-        model.addAttribute("schools",schools);
+//    	feePolicy.setUpdateTime(new Date());
+//    	model.addAttribute("entity", feePolicy);
+//		List<School> schools = schoolService.listAll();
+//        model.addAttribute("schools",schools);
     	entityService.save(fp);
-    	return "feePolicy/edit";
+    	return page("", "", 1, 10, model, request);
     }
     
 	@Override

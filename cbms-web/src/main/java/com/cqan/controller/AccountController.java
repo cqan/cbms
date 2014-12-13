@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -184,7 +186,7 @@ public class AccountController extends BaseController<Account,Long,AccountServic
     }
 
     @RequestMapping(value="/save.html",method=RequestMethod.POST)
-    public String save(Account account,Model model){
+    public String save(Account account,Model model,HttpServletRequest request){
     	Account a =null;
     	if (account.getId()==null||account.getId()==0) {
     		a = account;
@@ -218,7 +220,7 @@ public class AccountController extends BaseController<Account,Long,AccountServic
     	model.addAttribute("feePolicy",fp);
     	model.addAttribute("flag", "1");
     	entityService.save(a);
-    	return "account/accountInfo";
+    	return page("", "", 1, 10, model, request);
     }
     
     @RequestMapping("/info.html")
