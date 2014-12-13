@@ -29,7 +29,7 @@ public class AccountGroup extends IdLongEntity {
 	//强制下线  1：强制下线；0：不强制下线
 	private int kick;
 	
-	private Integer nasId;
+	private Integer nasIp;
 	
 	private Integer nasPortId;
 	
@@ -150,12 +150,12 @@ public class AccountGroup extends IdLongEntity {
 		this.ipBindTag = ipBindTag;
 	}
 
-	public Integer getNasId() {
-		return nasId;
+	public Integer getNasIp() {
+		return nasIp;
 	}
 
-	public void setNasId(Integer nasId) {
-		this.nasId = nasId;
+	public void setNasIp(Integer nasIp) {
+		this.nasIp = nasIp;
 	}
 
 	
