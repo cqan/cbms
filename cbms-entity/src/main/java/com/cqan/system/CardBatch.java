@@ -27,11 +27,42 @@ public class CardBatch extends IdLongEntity {
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date endTime;
 	
+	private String cardPrefix;
+	
+	private String cardSuffix;
+	
 	private String decription;
 	
 	//0:未制卡；1:正在制卡；2:制卡完成
 	private int status;
 	
+	private Long feePolicyId;
+	
+
+
+	public Long getFeePolicyId() {
+		return feePolicyId;
+	}
+
+	public void setFeePolicyId(Long feePolicyId) {
+		this.feePolicyId = feePolicyId;
+	}
+
+	public String getCardPrefix() {
+		return cardPrefix;
+	}
+
+	public void setCardPrefix(String cardPrefix) {
+		this.cardPrefix = cardPrefix;
+	}
+
+	public String getCardSuffix() {
+		return cardSuffix;
+	}
+
+	public void setCardSuffix(String cardSuffix) {
+		this.cardSuffix = cardSuffix;
+	}
 
 	public int getStatus() {
 		return status;
