@@ -77,24 +77,23 @@ public class AccountAuthServiceImpl extends
 	private String loginPolicy(Long groupId){
 		List<NetConfig> ncs = netConfigService.findByGroupId(groupId);
 		if (ncs!=null&&!ncs.isEmpty()) {
-			StringBuffer all = new StringBuffer();
+			StringBuffer sb = new StringBuffer();
 			for (int i=0;i<ncs.size();i++) {
 				NetConfig nc = ncs.get(i);
 				Integer sw = Integer.parseInt(nc.getStartWork());
 				Integer ew = Integer.parseInt(nc.getEndWork());
 				for (int j = sw; j <=ew; j++) {
-					StringBuffer sb = new StringBuffer();
 					sb.append(nc.getStartWork()).append(".begin").append(nc.getStartTime())
-					.append(".end").append(nc.getEndTime());
+					.append(".end").append(nc.getEndTime()).append(".1");
 					if (j!=ew) {
 						sb.append(";");
 					}
 				}
 				if (i!=ncs.size()-1) {
-					all.append(";");
+					sb.append(";");
 				}
 			}
-			return all.toString();
+			return sb.toString();
 		}
 		return "";
 	}
