@@ -48,7 +48,7 @@ public class AccountAuthServiceImpl extends
 		if (ag!=null) {
 			aa.setIpbindtag(ag.getIpBindTag());
 			aa.setNasIp(ag.getNasIp());
-			aa.setPcCurSession(ag.getPcMaxSession());
+			aa.setPcMaxSession(ag.getPcMaxSession());
 			aa.setMoMaxSession(ag.getMoMaxSession());
 			aa.setNasPort(ag.getNasPort());
 			aa.setNasPortId(ag.getNasPortId());

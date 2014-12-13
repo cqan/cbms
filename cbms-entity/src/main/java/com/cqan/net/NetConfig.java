@@ -3,6 +3,9 @@ package com.cqan.net;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import com.cqan.IdLongEntity;
 
 @Entity
@@ -73,6 +76,11 @@ public class NetConfig extends IdLongEntity {
 
 	public void setEndTime(String endTime) {
 		this.endTime = endTime;
+	}
+	
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this,ToStringStyle.SHORT_PREFIX_STYLE);
 	}
 	
 	

@@ -5,6 +5,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import com.cqan.IdLongEntity;
 
 @Entity
@@ -177,7 +180,10 @@ public class AccountGroup extends IdLongEntity {
 	public void setNasIp(String nasIp) {
 		this.nasIp = nasIp;
 	}
-
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this,ToStringStyle.SHORT_PREFIX_STYLE);
+	}
 	
 	
 }

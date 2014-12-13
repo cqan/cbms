@@ -9,6 +9,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
@@ -61,7 +63,10 @@ public class Role extends IdLongEntity{
 	public void setPermissions(List<Permission> permissions) {
 		this.permissions = permissions;
 	}
-	
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this,ToStringStyle.SHORT_PREFIX_STYLE);
+	}
 	
 
 }

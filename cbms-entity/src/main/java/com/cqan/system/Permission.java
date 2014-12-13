@@ -9,6 +9,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -74,6 +76,10 @@ public class Permission extends IdLongEntity{
 
 	public void setStatus(int status) {
 		this.status = status;
+	}
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this,ToStringStyle.SHORT_PREFIX_STYLE);
 	}
 
 }
