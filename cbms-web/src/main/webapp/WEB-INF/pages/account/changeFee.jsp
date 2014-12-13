@@ -11,10 +11,10 @@
 </head>
 <body>
 <div style="margin:5px 0;"></div>
-系统--><a href="${ctx}account/index.html">营业管理</a>-->变更套餐
+系统-->营业管理-->变更套餐
 <div class="easyui-panel" title="变更套餐" style="width:100%">
     <div style="text-align: center;">
-        <form id="inputForm" action="${ctx}account/changeFee.html" method="post" onsubmit="return verifyForm();">
+        <form id="inputForm" action="${ctx}account/changeFee.html" method="post">
     		<input name=id id="id" type="hidden" value="${account.id}">
             <table cellpadding="5" align="center" style="width: 100%">
                 <tr>
@@ -43,7 +43,7 @@
                 <tr>
                     <td colspan="2">
                       <div style="text-align:center;padding:5px">
-				            <input type="button" class="button" value="修改" onclick="verifyForm()">&nbsp;&nbsp;&nbsp;
+                      		<a href="#" class="easyui-linkbutton" style="margin-right: 40px;" icon="icon-ok" onclick="verifyForm()">修改</a>&nbsp;
 				            <a href="${ctx}account/change.html" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:80px">返回</a>
 				        </div>
                     </td>
@@ -117,23 +117,23 @@
 	    	
    	});
 	    
-	    function verifyForm(){
-	    	var school = $('#school').combobox('getValue'); 
-	    	var group = $('#group').combobox('getValue'); 
-	    	var fee = $('#feePolicy').combobox('getValue'); 
-	    	if(school==''){
-	    		msgShow("提示","请选择学校！","warning");
-	    		return false;
-	    	}
-	    	if(group==''){
-	    		msgShow("提示","请选择用户组！","warning");
-	    		return false;
-	    	}
-	    	if(fee==''){
-	    		fee("提示","请选择套餐！","warning");
-	    		return false;
-	    	}
-	    	return true;
-	    }
+    function verifyForm(){
+    	var school = $('#school').combobox('getValue'); 
+    	var group = $('#group').combobox('getValue'); 
+    	var fee = $('#feePolicy').combobox('getValue'); 
+    	if(school==''){
+    		msgShow("提示","请选择学校！","warning");
+    		return false;
+    	}
+    	if(group==''){
+    		msgShow("提示","请选择用户组！","warning");
+    		return false;
+    	}
+    	if(fee==''){
+    		msgShow("提示","请选择套餐！","warning");
+    		return false;
+    	}
+    	$("#inputForm").submit();
+    }
 	</script>
 </html>

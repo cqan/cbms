@@ -57,17 +57,17 @@
                 <tr>
                     <td  style="width:47%;text-align: right;padding-right: 10px;">NAS-IP-Address 绑定:</td>
                     <td style="text-align: left;padding-left: 10px;">
-                         <input type="radio" ${(empty entity || entity.ipBindTag eq 0 )?"checked='checked'":""}  name="ipBindTag"  value="0"/>
+                         <input type="radio" onclick="checkNasIP(0)" ${(empty entity || entity.ipBindTag eq 0 )?"checked='checked'":""}  name="ipBindTag"  value="0"/>
                                                                                         禁止绑定
-                         <input type="radio" ${(entity.ipBindTag eq 1 )?"checked='checked'":""}  name="ipBindTag"  value="1"/>
+                         <input type="radio"  onclick="checkNasIP(1)" ${(entity.ipBindTag eq 1 )?"checked='checked'":""}  name="ipBindTag"  value="1"/>
                                                                                          需要绑定
-                         <input type="radio" ${(entity.ipBindTag eq 3 )?"checked='checked'":""}  name="ipBindTag"  value="3"/>
+                         <input type="radio" onclick="checkNasIP(3)"  ${(entity.ipBindTag eq 3 )?"checked='checked'":""}  name="ipBindTag"  value="3"/>
                                                                                          已绑定
                     </td>
                 </tr>
                 <tr>
                     <td  style="width:47%;text-align: right;padding-right: 10px;">NAS-IP-Address BrasIP地址:</td>
-                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="nasId" name="nasId"  value="${entity.nasId}"/></td>
+                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="nasIp" name="nasIp"  disabled="${empty entity?'disabled':(entity.ipBindTag eq 3)?'':'disabled' }" value="${entity.nasIp}"/></td>
                 </tr>
                 <tr>
                     <td  style="width:47%;text-align: right;padding-right: 10px;">NAS-Port-Id:</td>
@@ -90,11 +90,19 @@
                 </tr>
                 <tr>
                     <td style="width:47%;text-align: right;padding-right: 10px;">内vlan:</td>
-                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="vlanID1" name="vlanID1" disabled=disabled  value="${entity.vlanID1}"/></td>
+                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="vlanID1" name="vlanID1"  disabled="${empty entity?'disabled':(entity.vlanBindTag eq 2)?'':'disabled' }"  value="${entity.vlanID1}"/></td>
                 </tr>
                 <tr>
                     <td style="width:47%;text-align: right;padding-right: 10px;">外vlan:</td>
-                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="vlanID2" name="vlanID2" disabled=disabled value="${entity.vlanID2}"/></td>
+                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="vlanID2" name="vlanID2"  disabled="${empty entity?'disabled':(entity.vlanBindTag eq 2)?'':'disabled' }" value="${entity.vlanID2}"/></td>
+                </tr>
+                <tr>
+                    <td style="width:47%;text-align: right;padding-right: 10px;">PC最大会话数:</td>
+                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="pcMaxSession" name="pcMaxSession"   value="${entity.pcMaxSession}"/></td>
+                </tr>
+                <tr>
+                    <td style="width:47%;text-align: right;padding-right: 10px;">手机最大会话数:</td>
+                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="moMaxSession" name="moMaxSession"  value="${entity.moMaxSession}"/></td>
                 </tr>
                 <tr>
                     <td style="width:47%;text-align: right;padding-right: 10px;">备注:</td>
@@ -148,6 +156,14 @@
 				},
 				name: {
 					required: true
+				},
+				pcMaxSession:{
+					required: true,
+					digits:true
+				},
+				moMaxSession:{
+					required: true,
+					digits:true
 				}
 			},
 			messages:{
@@ -156,6 +172,14 @@
 				},
 				name: {
 					required: "*请填写服务组名称！"
+				},
+				pcMaxSession:{
+					required:"*请输入PC最大会话数！",
+					digits:"*请输入数字！"
+				},
+				moMaxSession:{
+					required:"*请输入手机最大会话数！",
+					digits:"*请输入数字！"
 				}
 			}
 		});
@@ -163,16 +187,22 @@
     });
     
 	function checkVlan(f){
-	   var $vlanID1 = $("#vlanID1");
-	   var $vlanID2 = $("#vlanID2");
 	   if(f==2){
-	     $vlanID1.removeAttr("disabled");
-	     $vlanID2.removeAttr("disabled");
+		   $("#vlanID1").attr("disabled",false)
+		   $("#vlanID2").attr("disabled",false)
 	   }else{
 	     $vlanID1.val("");
 	     $vlanID2.val("");
-	     $vlanID1.attr("disabled","disabled");
-	     $vlanID2.attr("disabled","disabled");
+	     $("#vlanID1").attr("disabled",true)
+		 $("#vlanID2").attr("disabled",true)
+	   }
+	}
+	function checkNasIP(f){
+	   if(f==3){
+		   $("#nasIp").attr("disabled",false);
+	   }else{
+		   $("#nasIp").attr("disabled","disabled");
+		   $("#nasIp").val("");
 	   }
 	}
 	

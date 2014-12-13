@@ -11,7 +11,7 @@
 </head>
 <body>
 <div style="margin:5px 0;"></div>  
-系统--><a href="${ctx}account/index.html">营业管理</a>-->受理激活
+系统-->营业管理-->受理激活
 <div class="easyui-panel" title="受理激活" style="width:100%">
     <div style="text-align: center;">
         <form id="inputForm" action="${ctx}account/active.html" method="post" onsubmit="return verifyForm();">
@@ -24,7 +24,7 @@
                     <td colspan="2">
                       <div style="text-align:center;padding:5px">
 				            <input type="submit" class="button" value="下一步">&nbsp;&nbsp;&nbsp;
-				            <input type="reset" class="button" value="取消">
+				            <!-- <input type="reset" class="button" value="取消"> -->
 				        </div>
                     </td>
                 </tr>

@@ -14,7 +14,7 @@
 系统--><a href="${ctx}account/index.html">营业管理</a>-->充值管理
 <div class="easyui-panel" title="充值管理" style="width:100%">
     <div style="text-align: center;">
-        <form id="inputForm" action="${ctx}account/rechange.html" method="post" onsubmit="return verifyForm();">
+        <form id="inputForm" action="${ctx}account/recharge.html" method="post">
             <table cellpadding="5" align="center" style="width: 100%">
                 <tr>
                     <td style="width:47%;text-align: right;padding-right: 10px;">账号:</td>
@@ -39,8 +39,8 @@
                 <tr>
                     <td colspan="2">
                       <div style="text-align:center;padding:5px">
-				            <input type="submit" class="button" value="充值">&nbsp;&nbsp;&nbsp;
-				            <input type="reset" class="button" value="取消">
+                      		<a href="#" class="easyui-linkbutton" style="margin-right: 25px;" icon="icon-ok" onclick="verifyForm()">充值</a>
+				            <a href="${ctx}account/index.html" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:80px">返回</a>
 				        </div>
                     </td>
                 </tr>
@@ -88,5 +88,10 @@
 				}
 			});
 	    });
+	    
+    	function verifyForm(){
+    		$("#inputForm").submit();
+    	}
+
 	</script>
 </html>

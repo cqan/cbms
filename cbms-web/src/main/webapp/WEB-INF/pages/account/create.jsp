@@ -41,7 +41,7 @@
                     <td  style="width:47%;text-align: right;padding-right: 10px;">证件类型:
                     </td>
                     <td style="text-align: left;padding-left: 10px;">
-                        <select class="easyui-combobox" data-options="panelHeight:'auto'" style="width:75px;" name="licenseType">
+                        <select class="easyui-combobox" data-options="panelHeight:'auto'" style="width:75px;" name="licenseType" id="licenseType">
 		                    <option value="1" ${entity.licenseType eq 1?"selected":""}>身份证</option>
 		                    <option value="2" ${entity.licenseType eq 2?"selected":""}>学生证</option>
 		                    <option value="2" ${entity.licenseType eq 3?"selected":""}>军官证</option>
@@ -53,6 +53,10 @@
                 <tr>
                     <td  style="width:47%;text-align: right;padding-right: 10px;"></td>
                     <td style="text-align: left;padding-left: 10px;"></td>
+                </tr>
+                <tr>
+                    <td  style="width:47%;text-align: right;padding-right: 10px;">联系电话:</td>
+                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="mobile" name="mobile"  value="${entity.mobile}"/></td>
                 </tr>
                 <tr>
                     <td  style="width:47%;text-align: right;padding-right: 10px;">联系电话:</td>
@@ -88,9 +92,9 @@
                     <td colspan="2">
                       <div style="text-align:center;padding:5px">
                             <shiro:hasPermission name="business.account.add">
-				            	<input type="button" class="button" value="保存" onclick="verifyForm()">&nbsp;&nbsp;&nbsp;
+                            <a href="#" class="easyui-linkbutton" style="margin-right: 25px;" icon="icon-ok" onclick="verifyForm()">保存</a>&nbsp;&nbsp;&nbsp;
 				            </shiro:hasPermission>
-				            <a href="${ctx}account/create.html" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:80px">返回</a>
+				            <a href="${ctx}account/index.html" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:80px">返回</a>
 				        </div>
                     </td>
                 </tr>
@@ -114,14 +118,17 @@
 	    	if(msg!=''){
 	    		show("",msg);
 		    }
-		    
-			jQuery.validator.addMethod("licenseNo1", function(value, element) {
-			    if($("#licenseType").val()==1){
-			       return this.optional(element) || (/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(value));
-			    }else{
-			       return true;
+	    	
+			jQuery.validator.addMethod("licenseNo", function(value, element) {
+				var licenseType = $('#licenseType').combobox('getValue'); 
+			    if(licenseType==1){
+					var licenseNo = $('#licenseNo').val(); 
+			    	if(licenseNo.length!=15&&licenseNo.length!=18){
+					       return false;
+					 }
 			    }
-	    	 }, "*请填写正确的身份证格式！");
+			    return true;
+	    	 }, "*身份证号码长度必须是15位或18位！");
 	    	
 	    	$("#inputForm").validate({
 				rules: {
@@ -143,19 +150,8 @@
 					name:{
 						required:true
 					},
-					email:{
-						required:true,
-						email:true	
-					},
-					phoneNum:{
-						required:true
-					},
-					address:{
-						required:true
-					},address:{
-						required:true
-					},
 					licenseNo:{
+						 licenseNo:true,
 						 required:true,
 						 remote:{
 							 url:'${ctx}account/checkLicenseNo.html',
@@ -165,8 +161,6 @@
 								 licenseNo: function(){return $("#licenseNo").val()},
 								 id:$("#uid").val()}
 						 }
-					},licenseNo1:{
-					   required:true
 					}
 				},
 				messages:{
@@ -182,22 +176,10 @@
 					name:{
 						required:"*请输入姓名"
 					},
-					email:{
-						required:"*请输入email！",
-						email:"*请输入正确的email地址"
-					},
-					phoneNum:{
-						required:"*请输入联系电话"
-					},
-					address:{
-						required:"*请输入联系地址"    
-					},
+					
 					licenseNo:{
 						required:"*请输入证件号码",
-						remote:"*证件号已存在！"
-					},
-					licenseNo1:{
-					   required:"*请输入证件号码",
+						licenseNo:"*身份号必须是15位或18位！",
 						remote:"*证件号已存在！"
 					}
 				}

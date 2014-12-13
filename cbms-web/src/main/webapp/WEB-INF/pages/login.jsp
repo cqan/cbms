@@ -42,7 +42,7 @@
      </script>
   <body>
     <div style="margin:0 auto;width:900px;">
-            <div id="win" class="easyui-window" minimizable="false" closable="false" maximizable="false"  collapsible="false"  title="北京联通校园网运营管理平台" style="width:380px;height:250px;">
+            <div id="win" class="easyui-window" minimizable="false" closable="false" maximizable="false"  collapsible="false"  title="北京联通校园网运营管理平台" style="width:400px;height:280px;">
                 <form action="${ctx}login.html" method="post" style="padding:10px 20px 10px 40px;" id="loginForm" name="login_f">
                     <table width="100%">
                     <tr><td style="text-align: right; width: 25%"></td>

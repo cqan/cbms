@@ -11,7 +11,7 @@
 </head>
 <body>
 <div style="margin:5px 0;"></div>
-系统--><a href="${ctx}account/index.html">营业管理</a>-->${empty entity?"添加":"修改"}学校客户组信息
+系统-->营业管理-->${empty entity?"添加":"修改"}学校客户组信息
 <div class="easyui-panel" title="${empty entity?"添加":"修改"}学校客户组信息" style="width:100%">
     <div style="text-align: center;">
         <form id="inputForm" action="${ctx}account/modInfo.html" method="post">
@@ -44,7 +44,7 @@
                 <tr>
                     <td colspan="2">
                       <div style="text-align:center;padding:5px">
-				            <input type="button" class="button" value="修改" onclick="verifyForm()">&nbsp;&nbsp;&nbsp;
+                      <a href="#" class="easyui-linkbutton" style="margin-right: 40px;" icon="icon-ok" onclick="verifyForm()">修改</a>&nbsp;&nbsp;&nbsp;
 				            <a href="${ctx}account/modify.html" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:80px">返回</a>
 				        </div>
                     </td>

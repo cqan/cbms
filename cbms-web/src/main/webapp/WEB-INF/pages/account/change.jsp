@@ -14,7 +14,7 @@
 系统--><a href="${ctx}account/index.html">营业管理</a>-->变更套餐
 <div class="easyui-panel" title="变更套餐" style="width:100%">
     <div style="text-align: center;">
-        <form id="inputForm" action="${ctx}account/change.html" method="post" onsubmit="return verifyForm();">
+        <form id="inputForm" action="${ctx}account/change.html" method="post">
     		<input name="id" id="id" type="hidden" value="${entity.id}">
             <table cellpadding="5" align="center" style="width: 100%">
                 <tr>
@@ -24,7 +24,7 @@
                 <tr>
                     <td colspan="2">
                       <div style="text-align:center;padding:5px">
-				            <input type="submit" class="button" value="下一步">&nbsp;&nbsp;&nbsp;
+                     		<a href="#" class="easyui-linkbutton" style="margin-right: 40px;" icon="icon-ok" onclick="verifyForm()">下一步</a>&nbsp;
 				            <a href="${ctx}account/change.html" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:80px">返回</a>
 				        </div>
                     </td>
@@ -55,5 +55,9 @@
 				}
 			});
 	    });
+	    
+	    function verifyForm(){
+    		$("#inputForm").submit();
+    	}
 	</script>
 </html>

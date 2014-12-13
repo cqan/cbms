@@ -22,6 +22,8 @@
     </form>
     </div>
     <table id="tt" class="easyui-datagrid" style="width:100%;height:auto;">
+    		<a href="${ctx}account/create.html" class="easyui-linkbutton" data-options="iconCls:'icon-add'" style="width:80px;margin-bottom:5px;">开户</a>
+    		<a href="${ctx}account/recharge.html" class="easyui-linkbutton" data-options="iconCls:'icon-add'" style="width:80px;margin-bottom:5px;">充卡充值</a>
         <thead>
         <tr>
             <th field="name1" width="10%">用户姓名</th>

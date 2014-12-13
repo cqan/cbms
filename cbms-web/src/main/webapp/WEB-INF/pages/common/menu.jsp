@@ -49,8 +49,7 @@
           <div title="营业管理" iconCls="icon-folder" style="overflow:auto;padding:6px;">
             <ul class="easyui-tree navlist">
                 <shiro:hasPermission name="business.account"><li><span><a link="${ctx}account/index.html">帐户信息</a></span></li></shiro:hasPermission>
-                <shiro:hasPermission name="business.account"><li><span><a link="${ctx}account/create.html">开户受理</a></span></li></shiro:hasPermission>
-                <shiro:hasPermission name="business.active"><li><span><a link="${ctx}account/active.html">受理激活</a></span></li></shiro:hasPermission>
+                <!--<shiro:hasPermission name="business.active"><li><span><a link="${ctx}account/active.html">受理激活</a></span></li></shiro:hasPermission>-->
                 <shiro:hasPermission name="business.reset"><li><span><a link="${ctx}account/setpwd.html">重置密码</a></span></li></shiro:hasPermission>
                 <shiro:hasPermission name="business.accountchange"><li><span><a link="${ctx}account/modify.html">客户资料变更</a></span></li></shiro:hasPermission>
                 <shiro:hasPermission name="business.policychange"><li><span><a link="${ctx}account/change.html">套餐变更</a></span></li></shiro:hasPermission>

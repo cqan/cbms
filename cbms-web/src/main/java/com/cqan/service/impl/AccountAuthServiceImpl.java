@@ -42,10 +42,19 @@ public class AccountAuthServiceImpl extends
 		aa.setUserStatusTime(new Date());
 		aa.setUpdateTime(new Date());
 		aa.setUserName(account.getUserName());
+		aa.setMobile(account.getMobile());
 		aa.setLoginpolicy(loginPolicy(account.getGroup().getId()));
 		AccountGroup ag = accountGroupService.get(account.getGroup().getId());
 		if (ag!=null) {
-			aa.setIpbindtag(0);
+			aa.setIpbindtag(ag.getIpBindTag());
+			aa.setNasIp(ag.getNasIp());
+			aa.setPcCurSession(ag.getPcMaxSession());
+			aa.setMoMaxSession(ag.getMoMaxSession());
+			aa.setNasPort(ag.getNasPort());
+			aa.setNasPortId(ag.getNasPortId());
+			aa.setVlanbindtag(ag.getVlanBindTag());
+			aa.setVlanId1(ag.getVlanID1());
+			aa.setVlanId2(ag.getVlanID2());
 		}
 		FeePolicy fp = feePolicyService.get(account.getFeePolicyId());
 		if (fp!=null) {

@@ -35,7 +35,7 @@ public class AccountGroupController extends BaseController<AccountGroup,Long,Acc
     }
 
     @RequestMapping(value="/save.html",method=RequestMethod.POST)
-    public String save(AccountGroup accountGroup,Model model){
+    public String save(AccountGroup accountGroup,Model model,HttpServletRequest request){
     	AccountGroup ag;
     	System.out.println("school id:"+accountGroup.getSchool().getId());
     	School school = schoolService.get(accountGroup.getSchool().getId());
@@ -55,7 +55,7 @@ public class AccountGroupController extends BaseController<AccountGroup,Long,Acc
 			ag.setIndependentGroup(accountGroup.getIndependentGroup());
 			ag.setName(accountGroup.getName());
 			ag.setKick(accountGroup.getKick());
-			ag.setNasId(accountGroup.getNasId());
+			ag.setNasIp(accountGroup.getNasIp());
 			ag.setNasPort(accountGroup.getNasPort());
 			ag.setNasPortId(accountGroup.getNasPortId());
 			ag.setVlanBindTag(accountGroup.getVlanBindTag());
@@ -71,10 +71,8 @@ public class AccountGroupController extends BaseController<AccountGroup,Long,Acc
 		List<School> schools = schoolService.listAll();
         model.addAttribute("schools",schools);
     	entityService.save(ag);
-    	return "accountGroup/edit";
+    	return this.page("", "", 1, 10, model, request);
     }
-
-    
     
 	@Override
 	@RequestMapping("/index.html")

@@ -70,25 +70,30 @@ public class AccountController extends BaseController<Account,Long,AccountServic
     	return "account/create";
     }
     
-    @RequestMapping(value="/rechange.html")
-    public String rechange(String userName,String password,String cardNo,String pwd,Model model){
+    @RequestMapping(value="/recharge.html",method=RequestMethod.GET)
+    public String toRechange(){
+    	return "account/recharge";
+    }
+    
+    @RequestMapping(value="/recharge.html",method=RequestMethod.POST)
+    public String recharge(String userName,String password,String cardNo,String pwd,Model model){
     	if (StringUtils.isBlank(userName)||StringUtils.isBlank(password)||StringUtils.isBlank(cardNo)||StringUtils.isBlank(pwd)) {
     		model.addAttribute("msg","*请求参数不能为空！");
-    		return "account/rechange";
+    		return "account/recharge";
 		}
     	Account account = entityService.findByUserName(userName);
     	if (account==null||!account.getPassword().equals(password)) {
     		model.addAttribute("msg","*帐号或密码不正确！");
-    		return "account/rechange";
+    		return "account/recharnge";
 		}
     	Card card = cardService.findByCardNo(cardNo);
     	if (card==null||!card.getPwd().equals(pwd)) {
     		model.addAttribute("msg","*卡号或密码不正确！");
-    		return "account/rechange";
+    		return "account/recharge";
 		}
     	if (card.getEndTime().getTime()<=System.currentTimeMillis()) {
     		model.addAttribute("msg","*卡号已过期！");
-    		return "account/rechange";
+    		return "account/recharge";
 		}
     	//用户套餐与卡的套餐一致
     	if (card.getFeePolicyId()==account.getFeePolicyId()) {
@@ -109,7 +114,7 @@ public class AccountController extends BaseController<Account,Long,AccountServic
 			AccountTask at = accountTaskService.findByAccountId(account.getId());
 			if (at!=null) {
 				model.addAttribute("msg","*帐户还有变更套餐未处理，现在不能变更！");
-	    		return "account/rechange";
+	    		return "account/recharge";
 			}
 			saveTask(account, card.getFeePolicyId());
 		}
@@ -423,11 +428,13 @@ public class AccountController extends BaseController<Account,Long,AccountServic
     	FeePolicy feePolicy = feePolicyService.get(feePolicyId);
     	if (a==null||feePolicy==null) {
     		model.addAttribute("msg", "*帐号或套餐不存在！");
+    	}else if(a.getFeePolicyId().equals(feePolicyId)){
+    		model.addAttribute("msg", "*选择的套餐与现套餐一致不需要变更！");
     	}else{
     		a.setUpdateTime(new Date());
     		entityService.save(a);
     		saveTask(a, feePolicy.getId());
-    		model.addAttribute("msg","变更个人信息成功！");
+    		model.addAttribute("msg","变更套餐信息成功！");
     	}
     	return "account/change";
     }
