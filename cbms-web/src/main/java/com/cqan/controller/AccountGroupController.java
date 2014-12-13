@@ -37,7 +37,12 @@ public class AccountGroupController extends BaseController<AccountGroup,Long,Acc
     @RequestMapping(value="/save.html",method=RequestMethod.POST)
     public String save(AccountGroup accountGroup,Model model){
     	AccountGroup ag;
+    	System.out.println("school id:"+accountGroup.getSchool().getId());
     	School school = schoolService.get(accountGroup.getSchool().getId());
+    	System.out.println("independent:"+accountGroup.getIndependentGroup());
+    	System.out.println("kick:"+accountGroup.getKick());
+    	System.out.println("school:"+school);
+    	System.out.println("school name:"+school.getName());
     	if (accountGroup.getId()==null||accountGroup.getId()==0) {
     		accountGroup.setCreateTime(new Date());
     		accountGroup.setSchool(school);
@@ -49,7 +54,15 @@ public class AccountGroupController extends BaseController<AccountGroup,Long,Acc
 			ag.setDescription(accountGroup.getDescription());
 			ag.setIndependentGroup(accountGroup.getIndependentGroup());
 			ag.setName(accountGroup.getName());
-			accountGroup.setSchool(school);
+			ag.setKick(accountGroup.getKick());
+			ag.setNasId(accountGroup.getNasId());
+			ag.setNasPort(accountGroup.getNasPort());
+			ag.setNasPortId(accountGroup.getNasPortId());
+			ag.setVlanBindTag(accountGroup.getVlanBindTag());
+			ag.setVlanID1(accountGroup.getVlanID1());
+			ag.setVlanID2(accountGroup.getVlanID2());
+			ag.setIpBindTag(accountGroup.getIpBindTag());
+			ag.setSchool(school);
 			ag.setType(accountGroup.getType());
 			model.addAttribute("msg","修改成功！");
 		}
@@ -80,6 +93,5 @@ public class AccountGroupController extends BaseController<AccountGroup,Long,Acc
         model.addAttribute("schools",schools);
         return super.edit(id, model);
 	}
-    
-    
+
 }

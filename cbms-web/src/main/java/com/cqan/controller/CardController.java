@@ -1,5 +1,6 @@
 package com.cqan.controller;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,4 +40,21 @@ public class CardController extends BaseController<Card, Long, CardService> {
 			return "卡号冻结成功！";
 		}
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/resetPwd.html", method = RequestMethod.POST)
+	public String resetPwd(Long id){
+		if (id == null || id == 0) {
+			return "请求参数错误！";
+		}
+		Card card = entityService.get(id);
+		if (card == null) {
+			return "卡号不存在！";
+		}
+		String pwd  = RandomStringUtils.random(8, false, true);
+		card.setPwd(pwd);
+		entityService.save(card);
+		return "密码重置成功！";
+	}
+	
 }

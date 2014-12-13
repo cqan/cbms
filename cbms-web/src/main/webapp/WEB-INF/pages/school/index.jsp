@@ -44,7 +44,7 @@
                 可信标志：<select class="easyui-combobox" style="width: 100px;" data-options="panelHeight:'auto'" name="search_EQI_trusted">
                     <option value="">全部</option>
                     <option value="1" ${param['search_EQI_trusted'] eq 1?"selected":""}>可信</option>
-                    <option value="2" ${param['search_EQI_trusted'] eq 2?"selected":""}>不可信</option>
+                    <option value="2" ${param['search_EQI_trusted'] eq 0?"selected":""}>不可信</option>
              </select>
              </td><td align="right">
              上网方式：<select class="easyui-combobox" style="width: 100px;" data-options="panelHeight:'auto'" name="search_EQI_netType">
@@ -75,7 +75,7 @@
 	            <th field="name9" width="8%">可信标志</th>
 	            <th field="name10" width="8%">虚拟学校标志</th>
 	            <th field="name11" width="8%">激活帐号数</th>
-	            <th field="name12" width="12%">操作</th>
+	            <th field="name13" width="12%">操作</th>
 	        </tr>
 	        </thead>
 	        <tbody>
@@ -88,7 +88,7 @@
 	                <td>${entity.rate}</td>
 	                <td>${entity.city eq 2 ?"二区":entity.city eq 3 ?"三区":entity.city eq 4 ?"四区":entity.city eq 5?"五区":entity.city eq 7?"七区":entity.city eq 8?"八区":entity.city eq 9?"昌平":entity.city eq 10?"房山":entity.city eq 11?"密云":""}</td>
 	                <td>${entity.trusted eq 1?"可信":"不可信"}</td>
-	                <td>${entity.virtualFlag eq '1'?"否":"是"}</td>
+	                <td>${entity.virtualFlag eq '1'?"是":"否"}</td>
 	                <td>${entity.activeNum}</td>
 	                <td>
 	                    <shiro:hasPermission name="school.reg.modify">

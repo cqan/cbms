@@ -49,6 +49,7 @@
                 <td>
                 	<c:if test="${entity.status eq 1}"><a href="#" onclick="disable('${entity.id}')">冻结</a>&nbsp;</c:if>
                 	<c:if test="${entity.status eq 4}"><a href="#" onclick="disable('${entity.id}')">解结</a>&nbsp;</c:if>
+                	<a href="#" onclick="resetPwd('${entity.id}')">重置密码</a>
                 </td>
             </tr>
         </c:forEach>
@@ -88,6 +89,24 @@
   		  			});
   				}}));
   		
+  	}
+  	
+  	function resetPwd(id){
+  	      if( $.messager.confirm('系统提示', '确实要执行此操作吗?', function(r){
+				if (r){
+					$.ajax({
+						url:"${ctx}card/resetPwd.html",
+						data:{id:id},
+						type:'POST',
+						success:function(data){
+							alertMsg(data,'info');
+							window.location.reload(true);
+						},
+						error:function(data){
+						alertMsg(data,'error');
+						}
+				});
+			}}));
   	}
   </script>
 </html>

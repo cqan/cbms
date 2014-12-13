@@ -172,6 +172,7 @@ public class CardBatchController extends BaseController<CardBatch, Long, CardBat
 		return "cardBatch/edit1";
 	}
 	
+	
 	@ResponseBody
 	@RequestMapping(value="/operate.html",method=RequestMethod.POST)
 	public Object reset(HttpServletRequest request){

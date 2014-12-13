@@ -152,9 +152,11 @@
 					},
 					address:{
 						required:true
+					},address:{
+						required:true
 					},
 					licenseNo:{
-						required:true,
+						 required:true,
 						 remote:{
 							 url:'${ctx}account/checkLicenseNo.html',
 							 type:"post",
@@ -163,6 +165,8 @@
 								 licenseNo: function(){return $("#licenseNo").val()},
 								 id:$("#uid").val()}
 						 }
+					},licenseNo1:{
+					   required:true
 					}
 				},
 				messages:{
@@ -190,6 +194,10 @@
 					},
 					licenseNo:{
 						required:"*请输入证件号码",
+						remote:"*证件号已存在！"
+					},
+					licenseNo1:{
+					   required:"*请输入证件号码",
 						remote:"*证件号已存在！"
 					}
 				}
