@@ -48,7 +48,16 @@ public class Account extends IdLongEntity {
 	
 	private Long syncTime;
 	
+	private String mobile;
 	
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
 	public Long getSyncTime() {
 		return syncTime;
 	}

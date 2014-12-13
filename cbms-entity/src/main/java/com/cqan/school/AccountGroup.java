@@ -39,11 +39,31 @@ public class AccountGroup extends IdLongEntity {
 	
 	private String vlanID2;
 	
+	private Integer pcMaxSession;
+	
+	private Integer moMaxSession;
+	
 	private Integer vlanBindTag;
 	
 	private Integer ipBindTag;    
 	
 	
+	public Integer getPcMaxSession() {
+		return pcMaxSession;
+	}
+
+	public void setPcMaxSession(Integer pcMaxSession) {
+		this.pcMaxSession = pcMaxSession;
+	}
+
+	public Integer getMoMaxSession() {
+		return moMaxSession;
+	}
+
+	public void setMoMaxSession(Integer moMaxSession) {
+		this.moMaxSession = moMaxSession;
+	}
+
 	@ManyToOne
     @JoinColumn(name="school_id")
 	public School getSchool() {
