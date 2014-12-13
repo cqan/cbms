@@ -33,6 +33,29 @@ public class CardBatchController extends BaseController<CardBatch, Long, CardBat
 		return "cardBatch/edit";
 	}
 	
+    @RequestMapping(value="/edit1.html",method=RequestMethod.GET)
+    public String UpdateTime(Long id,Model model){
+       if (id!=null){
+           Object entity  = entityService.get(id);
+           model.addAttribute("entity",entity);
+       }
+       return "cardBatch/edit1";
+   }
+    
+	@RequestMapping(value="/save1.html",method=RequestMethod.POST)
+	public String saveUpdateTime(CardBatch cardBatch,Model model){
+		CardBatch c = cardBatch;
+		if(null != cardBatch.getId()){
+		    c = entityService.get(cardBatch.getId());
+			c.setUpdateTime(new Date());
+			c.setEndTime(cardBatch.getEndTime());
+			entityService.save(c);
+		}
+		model.addAttribute("entity",c);
+		model.addAttribute("msg","添加制卡成功！");
+		return "cardBatch/edit1";
+	}
+	
 	@ResponseBody
 	@RequestMapping(value="/operate.html",method=RequestMethod.POST)
 	public Object reset(HttpServletRequest request){

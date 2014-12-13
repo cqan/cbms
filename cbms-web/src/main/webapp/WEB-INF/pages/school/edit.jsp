@@ -72,8 +72,8 @@
                     <td  style="width:47%;text-align: right;padding-right: 10px;">虚拟学校标志:</td>
                     <td style="text-align: left;padding-left: 10px;">
                         <select class="easyui-combobox" data-options="panelHeight:'auto'" name="virtualFlag">
-                        <option value="1" ${entity.virtualFlag eq 1?"selected":""}>否</option>
-                        <option value="2"  ${entity.virtualFlag eq 2?"selected":""}>是</option>
+                        <option value="0" ${entity.virtualFlag eq 0?"selected":""}>否</option>
+                        <option value="1"  ${entity.virtualFlag eq 1?"selected":""}>是</option>
                        </select>
                     </td>
                 </tr>
@@ -146,6 +146,15 @@
     		show("",msg);
     	}
     	
+         var $trusted = $("#trusted");
+	     $trusted.click(function(){
+	         if($(this).attr("checked")=="checked"){
+	            $(this).val(1);
+	         }else{
+	            $(this).val(0);
+	         }
+	     });
+    	
     	jQuery.validator.addMethod("ip", function(value, element) {
     	    return this.optional(element) || (/^(\d+)\.(\d+)\.(\d+)\.(\d+)$/.test(value) && (RegExp.$1 < 256 && RegExp.$2 < 256 && RegExp.$3 < 256 && RegExp.$4 < 256));
     	  }, "*请填写正确的IP地址！");
@@ -161,34 +170,6 @@
 				rate:{
 					required:true,
 					digits:true
-				},
-				netLeader:{
-					required:true
-				},
-				netLeaderPhone:{
-					required:true
-				},
-				maintenance:{
-					required:true
-				},
-				customerManager:{
-					required:true
-				},
-				cmPhone:{
-					required:true
-				},
-				mPhone:{
-					required:true
-				},
-				serverIp:{
-					required:true,
-					ip:true
-				},
-				serverPort:{
-					required:true
-				},
-				addr:{
-					required:true
 				}
 			},
 			messages:{
@@ -201,34 +182,6 @@
 				rate:{
 					required:"*请填写学校分成比率！",
 					digits:"*分成比率必须是数字！"
-				},
-				netLeader:{
-					required:"*请填写网络负责人电话姓名！"
-				},
-				netLeaderPhone:{
-					required:"*请填写网络负责人电话！"
-				},
-				maintenance:{
-					required:"*请填写维护人员名称！"
-				},
-				customerManager:{
-					required:"*请填写客服经理名称！"
-				},
-				cmPhone:{
-					required:"*请填写客服经理电话！"
-				},
-				mPhone:{
-					required:"*请填写维护人员名称！"
-				},
-				serverIp:{
-					required:"*请填写服务IP！"
-				},
-				serverPort:{
-					required:"*请填写服务端口！",
-					digits:"*端口必须是数字！"
-				},
-				addr:{
-					required:"*请填写地址！"
 				}
 			}
 		});

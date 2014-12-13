@@ -20,11 +20,28 @@ public class AccountGroup extends IdLongEntity {
 	
 	private School school;//所属学校
 	
-	//独立客户组1：开启；2：关闭
+	//独立客户组1：开启；0：关闭
 	private int independentGroup;
 	
 	//描述
 	private String description;
+	
+	//强制下线  1：强制下线；0：不强制下线
+	private int kick;
+	
+	private Integer nasId;
+	
+	private Integer nasPortId;
+	
+	private Integer nasPort;
+	
+	private Integer vlanID1;
+	
+	private Integer vlanID2;
+	
+	private Integer vlanBindTag;
+	
+	private Integer ipBindTag;    
 	
 	
 	@ManyToOne
@@ -77,5 +94,70 @@ public class AccountGroup extends IdLongEntity {
 		this.description = description;
 	}
 
+	public int getKick() {
+		return kick;
+	}
+
+	public void setKick(int kick) {
+		this.kick = kick;
+	}
+
+	public Integer getNasPortId() {
+		return nasPortId;
+	}
+
+	public void setNasPortId(Integer nasPortId) {
+		this.nasPortId = nasPortId;
+	}
+
+	public Integer getNasPort() {
+		return nasPort;
+	}
+
+	public void setNasPort(Integer nasPort) {
+		this.nasPort = nasPort;
+	}
+
+	public Integer getVlanID1() {
+		return vlanID1;
+	}
+
+	public void setVlanID1(Integer vlanID1) {
+		this.vlanID1 = vlanID1;
+	}
+
+	public Integer getVlanID2() {
+		return vlanID2;
+	}
+
+	public void setVlanID2(Integer vlanID2) {
+		this.vlanID2 = vlanID2;
+	}
+
+	public Integer getVlanBindTag() {
+		return vlanBindTag;
+	}
+
+	public void setVlanBindTag(Integer vlanBindTag) {
+		this.vlanBindTag = vlanBindTag;
+	}
+
+	public Integer getIpBindTag() {
+		return ipBindTag;
+	}
+
+	public void setIpBindTag(Integer ipBindTag) {
+		this.ipBindTag = ipBindTag;
+	}
+
+	public Integer getNasId() {
+		return nasId;
+	}
+
+	public void setNasId(Integer nasId) {
+		this.nasId = nasId;
+	}
+
+	
 	
 }

@@ -1,5 +1,6 @@
 package com.cqan.school;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -23,10 +24,10 @@ public class School extends IdLongEntity {
 	//上网方式(虚拟ADSL ,PPPOE.)
 	private int netType;
 	
-	//1:可信；2:不可信
+	//1:可信；0:不可信
 	private  int trusted;
 	
-	//学校虚拟标识   1：否 2：是
+	//学校虚拟标识   1：否 0：是
 	private String virtualFlag;
 	
 	private int activeNum;
@@ -62,7 +63,7 @@ public class School extends IdLongEntity {
 	private String addr;
 	
 	private String description;
-
+	
 	public String getName() {
 		return name;
 	}
@@ -246,11 +247,5 @@ public class School extends IdLongEntity {
 			return false;
 		}
 	}
-	
-	
-	
-	
-	
-	
 	
 }

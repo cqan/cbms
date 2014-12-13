@@ -48,7 +48,53 @@
                 </tr>
                 <tr>
                     <td  style="width:47%;text-align: right;padding-right: 10px;">独立客户组:</td>
-                    <td style="text-align: left;padding-left: 10px;"><input type="checkbox" id="independentGroup"  name="independentGroup"  ${entity.independentGroup eq 1?"checked":""} value="${entity.independentGroup eq null?2:entity.independentGroup}" /></td>
+                    <td style="text-align: left;padding-left: 10px;"><input type="checkbox" id="independentGroup"  name="independentGroup"  ${entity.independentGroup eq 1?"checked":""} value="${entity.independentGroup eq null?0:entity.independentGroup}" /></td>
+                </tr>
+               <tr>
+                    <td  style="width:47%;text-align: right;padding-right: 10px;">强制下线:</td>
+                    <td style="text-align: left;padding-left: 10px;"><input type="checkbox" id="kick"  name="kick"  ${entity.kick eq 1?"checked":""} value="${entity.kick eq null?0:entity.kick}" /></td>
+                </tr>
+                <tr>
+                    <td  style="width:47%;text-align: right;padding-right: 10px;">NAS-IP-Address 绑定:</td>
+                    <td style="text-align: left;padding-left: 10px;">
+                         <input type="radio" ${(empty entity || entity.ipBindTag eq 0 )?"checked='checked'":""}  name="ipBindTag"  value="0"/>
+                                                                                        禁止绑定
+                         <input type="radio" ${(entity.ipBindTag eq 1 )?"checked='checked'":""}  name="ipBindTag"  value="1"/>
+                                                                                         需要绑定
+                         <input type="radio" ${(entity.ipBindTag eq 3 )?"checked='checked'":""}  name="ipBindTag"  value="3"/>
+                                                                                         已绑定
+                    </td>
+                </tr>
+                <tr>
+                    <td  style="width:47%;text-align: right;padding-right: 10px;">NAS-IP-Address BrasIP地址:</td>
+                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="nasId" name="nasId"  value="${entity.nasId}"/></td>
+                </tr>
+                <tr>
+                    <td  style="width:47%;text-align: right;padding-right: 10px;">NAS-Port-Id:</td>
+                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="nasPortId" name="nasPortId"  value="${entity.nasPortId}"/></td>
+                </tr>
+                <tr>
+                    <td  style="width:47%;text-align: right;padding-right: 10px;">NAS-Port:</td>
+                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="nasPort" name="nasPort"  value="${entity.nasPort}"/></td>
+                </tr>
+                <tr>
+                    <td  style="width:47%;text-align: right;padding-right: 10px;">vlan绑定:</td>
+                    <td style="text-align: left;padding-left: 10px;">
+                         <input type="radio" onclick="checkVlan(0);"  ${(empty entity || entity.vlanBindTag eq 0 )?"checked='checked'":""}  name="vlanBindTag"  value="0"/>
+                                                                                       禁止绑定
+                         <input type="radio" onclick="checkVlan(1);"  ${(entity.vlanBindTag eq 1 )?"checked='checked'":""}  name="vlanBindTag"  value="1"/>
+                                                                                       需要绑定
+                         <input type="radio" onclick="checkVlan(2);"  ${(entity.vlanBindTag eq 2 )?"checked='checked'":""}  name="vlanBindTag"  value="2"/>
+                                                                                       已绑定
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:47%;text-align: right;padding-right: 10px;">内vlan:</td>
+                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="vlanID1" name="vlanID1" disabled=disabled  value="${entity.vlanID1}"/></td>
+                </tr>
+                <tr>
+                    <td style="width:47%;text-align: right;padding-right: 10px;">外vlan:</td>
+                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="vlanID2" name="vlanID2" disabled=disabled value="${entity.vlanID2}"/></td>
                 </tr>
                 <tr>
                     <td style="width:47%;text-align: right;padding-right: 10px;">备注:</td>
@@ -76,7 +122,25 @@
     	if(msg!=''){
     		show("",msg);
 	    }
-    	
+	    
+	     var $independentGroup = $("#independentGroup");
+	     $independentGroup.click(function(){
+	         if($(this).attr("checked")=="checked"){
+	            $(this).val(1);
+	         }else{
+	            $(this).val(0);
+	         }
+	     });
+	     
+	     var $kick = $("#kick");
+	     $kick.click(function(){
+	         if($(this).attr("checked")=="checked"){
+	            $(this).val(1);
+	         }else{
+	            $(this).val(0);
+	         }
+	     });
+ 
     	$("#inputForm").validate({
 			rules: {
 				groupCode: {
@@ -97,6 +161,20 @@
 		});
     	
     });
+    
+	function checkVlan(f){
+	   var $vlanID1 = $("#vlanID1");
+	   var $vlanID2 = $("#vlanID2");
+	   if(f==2){
+	     $vlanID1.removeAttr("disabled");
+	     $vlanID2.removeAttr("disabled");
+	   }else{
+	     $vlanID1.val("");
+	     $vlanID2.val("");
+	     $vlanID1.attr("disabled","disabled");
+	     $vlanID2.attr("disabled","disabled");
+	   }
+	}
 	
 </script>
 </html>

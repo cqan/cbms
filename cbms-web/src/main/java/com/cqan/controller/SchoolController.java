@@ -1,17 +1,24 @@
 package com.cqan.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
+import com.alibaba.fastjson.JSON;
 import com.cqan.school.School;
 import com.cqan.service.SchoolService;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Created by Administrator on 2014/10/19.
@@ -70,4 +77,29 @@ public class SchoolController extends BaseController<School,Long,SchoolService>{
     	model.addAttribute("entity",schools);
     	return null;
     }
+    
+    @RequestMapping(value="/listById.html",method=RequestMethod.GET)
+    public String findById(long id ,Model model){
+    	List<School> schools = entityService.listAll();
+    	model.addAttribute("entity",schools);
+    	return null;
+    }
+    
+    @ResponseBody
+    @RequestMapping(value="/select.html")
+    public String select(String areaId){
+    	List<Map<String,Object>> data = Lists.newArrayList();
+        List<School> schools = new ArrayList<School>();
+	    schools = entityService.listByAreaId(areaId);
+		System.out.println(schools);
+		System.out.println(schools.size());
+		for (School school : schools) {
+			Map<String,Object> map = Maps.newHashMap();
+    		map.put("schoolId", school.getId());
+    		map.put("schoolName", school.getName());
+    		data.add(map);
+		}
+    	return JSON.toJSONString(data);
+    }
+
 }

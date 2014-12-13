@@ -1,5 +1,7 @@
 package com.cqan.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,24 @@ public class SchoolServiceImpl extends BaseServiceImpl<School, Long, SchoolRepos
 	public void setEntityRepository(SchoolRepository repository) {
 		this.repository = repository;
 	}
+
+	@Override
+	public void delete(Long id) {
+		super.delete(id);
+	}
+
+	@Override
+	public List<School> listById(long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<School> listByAreaId(String id) {
+		return repository.listSchoolByAreaId(id);
+	}
+	
+	
 
 
 }

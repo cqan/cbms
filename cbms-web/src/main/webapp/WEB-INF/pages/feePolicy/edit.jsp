@@ -58,35 +58,31 @@
                     <td style="text-align: left;padding-left: 10px;">
                       <select class="easyui-combobox" data-options="panelHeight:'auto'" name="downControl">
                             <option value=""  ${entity.downControl eq null?"selected":""}>无限制</option>
-		                    <option value="512" ${entity.downControl eq 1?"selected":""}>512K</option>
 		                    <option value="1" ${entity.downControl eq 2?"selected":""}>1M</option>
 		                    <option value="2" ${entity.downControl eq 3?"selected":""}>2M</option>
-		                    <option value="3" ${entity.downControl eq 4?"selected":""}>3M</option>
-		                    <option value="4" ${entity.downControl eq 5?"selected":""}>4M</option>
-		                    <option value="8" ${entity.downControl eq 6?"selected":""}>8M</option>
-		                    <option value="10" ${entity.downControl eq 7?"selected":""}>10M</option>
-		                    <option value="12" ${entity.downControl eq 8?"selected":""}>12M</option>
-		                    <option value="20" ${entity.downControl eq 9?"selected":""}>20M</option>
+		                    <option value="4" ${entity.downControl eq 4?"selected":""}>4M</option>
+		                    <option value="8" ${entity.downControl eq 8?"selected":""}>8M</option>
+		                    <option value="10" ${entity.downControl eq 10?"selected":""}>10M</option>
+		                    <option value="20" ${entity.downControl eq 20?"selected":""}>20M</option>
+		                    <option value="30" ${entity.downControl eq 30?"selected":""}>30M</option>
+		                    <option value="50" ${entity.downControl eq 50?"selected":""}>50M</option>
+		                    <option value="100" ${entity.downControl eq 100?"selected":""}>100M</option>
                        </select>
                     </td>
                 </tr>
                 <tr>
                     <td style="width:47%;text-align: right;padding-right: 10px;">适用地区:</td>
                     <td style="text-align: left;padding-left: 10px;">
-                        <select class="easyui-combobox" data-options="panelHeight:'auto'" name="area">
-                        <option value="1" ${entity.area eq 1?"selected":""}>北京1</option>
-                        <option value="2"  ${entity.area eq 2?"selected":""}>北京2</option>
+                        <select class="easyui-combobox"  data-options="valueField:'areaId',
+                            textField:'areaName',panelHeight:'auto',editable:false,data:[{'areaId':2,'areaName':'二区'},{'areaId':3,'areaName':'三区'},
+                            {'areaId':4,'areaName':'四区'},{'areaId':5,'areaName':'五区'},{'areaId':7,'areaName':'七区'},{'areaId':8,'areaName':'八区'},{'areaId':9,'areaName':'昌平'},{'areaId':10,'areaName':'房山'},{'areaId':11,'areaName':'密云'}]" name="area" id="area">
                        </select>
                     </td>
                 </tr>
                 <tr>
                     <td style="width:47%;text-align: right;padding-right: 10px;">适用学校:</td>
                     <td style="text-align: left;padding-left: 10px;">
-                        <select class="easyui-combobox" data-options="panelHeight:'auto'" name="school.id">
-		                    <option value="" ${entity.school.id eq null?"selected":""}>全部</option>
-		                    <c:forEach items="${schools}" var="school">
-		                        <option value="${school.id}" ${entity.school.id eq school.id?"selected":""}>${school.name}</option>
-		                    </c:forEach>
+                        <select class="easyui-combobox"  id="school" name="school.id" data-options="valueField:'schoolId', textField:'schoolName',panelHeight:'auto',editable:false"> </select>
                        </select>
                     </td>
                 </tr>
@@ -138,6 +134,30 @@
 </body>
 <script lang="text/javascript">   
     $(function(){
+    
+     var area_id = $('#area').combobox('getValue'); 
+     $('#area').combobox({
+             editable: false,
+             onLoadSuccess: function (data) {
+	             $('#area').combobox('setValue','${entity.area}');
+	    	 },
+             onSelect: function (record) {
+           	 _school = $('#school').combobox({
+		             url: '${ctx}school/select.html?areaId='+record.areaId,
+		             editable: false,
+		             valueField: 'schoolId',
+		             textField: 'schoolName'
+		       }).combobox('clear');
+             }
+	   });
+	    
+       var _school = $('#school').combobox({
+             url: '${ctx}school/select.html?areaId='+area_id,
+             editable: false,
+             valueField: 'schoolId',
+             textField: 'schoolName'
+       });
+         
     	var msg = "${msg}";
 	   	$("#inputForm").validate({
 			rules: {
@@ -174,8 +194,11 @@
     	if(msg!=''){
     		show("",msg);
 	    }
-    	
+	    
     });
+    
+    
+    
 	
 </script>
 </html>

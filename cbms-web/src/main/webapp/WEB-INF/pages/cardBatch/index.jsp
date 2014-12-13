@@ -53,6 +53,7 @@
                 <td>
                     <shiro:hasPermission name="card.create.renew">
                     	<a href="#" onclick="resetCardBatch('${entity.id}')">重新生成卡</a>
+                    	<a href="${ctx}card/batch/edit1.html?id=${entity.id}">修改</a>&nbsp;
                     </shiro:hasPermission>
                 </td>
             </tr>

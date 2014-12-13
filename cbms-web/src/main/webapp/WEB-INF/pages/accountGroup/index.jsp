@@ -22,6 +22,7 @@
              </td>
             <td align="right">
       		  客户组编号：<input name="search_LIKES_groupCode" style="width: 90px;" class="easyui-textbox" value="${param['search_LIKES_groupCode']}">
+      		  <input name="search_EQI_del" type="hidden" value="false">
       		</td>
              <td align="right">      
 	         	 客户组类型：
@@ -57,11 +58,12 @@
             <th field="name2" width="15%">客户组名称</th>
             <th field="name3" width="15%">客户组类型</th>
             <th field="name4" width="15%">学校</th>
+            <th field="name6" width="8%">允许强制下线</th>
             <!--
-            <th field="name5" width="15%">自动绑定</th>
+            <th field="name6" width="15%">自动绑定</th>
             -->
-            <th field="name6" width="15%">备注</th>
-            <th field="name7" width="10%">操作</th>
+            <th field="name7" width="15%">备注</th>
+            <th field="name8" width="10%">操作</th>
         </tr>
         </thead>
         <tbody>
@@ -71,13 +73,14 @@
                 <td>${entity.name}</td>
                 <td>${entity.type eq 1?"学生":(entity.type eq 2?"家属区":(entity.type eq 3?"办公区":"其它"))}</td>
                 <td>${entity.school.name}</td>
-                <!--
-                <td></td>
-                -->
+                <td>${entity.kick eq 0?"否":"是"}</td>
                 <td>${entity.description}</td>
                 <td>
                     <shiro:hasPermission name="school.accountGroup.modify">
                     	<a href="${ctx}accountGroup/edit.html?id=${entity.id}">修改</a>&nbsp;
+                    </shiro:hasPermission>
+                    <shiro:hasPermission name="school.accountGroup.del">
+                    	<a href="${ctx}accountGroup/del.html?id=${entity.id}">禁用</a>&nbsp;
                     </shiro:hasPermission>
                 </td>
             </tr>
