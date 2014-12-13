@@ -39,34 +39,32 @@
                 <tr>
                     <td style="width:47%;text-align: right;padding-right: 10px;">上行带宽控制:</td>
                     <td style="text-align: left;padding-left: 10px;">
-                       <select class="easyui-combobox" data-options="panelHeight:'auto'" name="upControl">
-                            <option value="" ${entity.upControl eq null?"selected":""}>无限制</option>
-		                    <option value="512" ${entity.upControl eq 512?"selected":""}>512K</option>
-		                    <option value="1" ${entity.upControl eq 1?"selected":""}>1M</option>
-		                    <option value="2" ${entity.upControl eq 2?"selected":""}>2M</option>
-		                    <option value="3" ${entity.upControl eq 3?"selected":""}>3M</option>
-		                    <option value="4" ${entity.upControl eq 4?"selected":""}>4M</option>
-		                    <option value="8" ${entity.upControl eq 8?"selected":""}>8M</option>
-		                    <option value="10" ${entity.upControl eq 10?"selected":""}>10M</option>
-		                    <option value="12" ${entity.upControl eq 12?"selected":""}>12M</option>
-		                    <option value="20" ${entity.upControl eq 20?"selected":""}>20M</option>
+                       <select class="easyui-combobox" data-options="valueField:'upControl',
+                            textField:'upControlName',panelHeight:'auto',editable:false,data:[{'upControl':1,'upControlName':'1M'},
+                      		{'upControl':2,'upControlName':'2M'},
+                      		{'upControl':4,'upControlName':'4M'},
+                      		{'upControl':8,'upControlName':'8M'},
+                      		{'upControl':10,'upControlName':'10M'},
+                      		{'upControl':20,'upControlName':'20M'},
+                      		{'upControl':30,'upControlName':'30M'},
+                      		{'upControl':50,'upControlName':'50M'},
+                      		{'upControl':100,'upControlName':'100M'}]" name="upControl" id="upControl">
                        </select>
                     </td>
                 </tr>
                 <tr>
                     <td style="width:47%;text-align: right;padding-right: 10px;">下行带宽控制:</td>
                     <td style="text-align: left;padding-left: 10px;">
-                      <select class="easyui-combobox" data-options="panelHeight:'auto'" name="downControl">
-                            <option value=""  ${entity.downControl eq null?"selected":""}>无限制</option>
-		                    <option value="1" ${entity.downControl eq 2?"selected":""}>1M</option>
-		                    <option value="2" ${entity.downControl eq 3?"selected":""}>2M</option>
-		                    <option value="4" ${entity.downControl eq 4?"selected":""}>4M</option>
-		                    <option value="8" ${entity.downControl eq 8?"selected":""}>8M</option>
-		                    <option value="10" ${entity.downControl eq 10?"selected":""}>10M</option>
-		                    <option value="20" ${entity.downControl eq 20?"selected":""}>20M</option>
-		                    <option value="30" ${entity.downControl eq 30?"selected":""}>30M</option>
-		                    <option value="50" ${entity.downControl eq 50?"selected":""}>50M</option>
-		                    <option value="100" ${entity.downControl eq 100?"selected":""}>100M</option>
+                      <select class="easyui-combobox" data-options="valueField:'downControl',
+                            textField:'downControlName',panelHeight:'auto',editable:false,data:[{'downControl':1,'downControlName':'1M'},
+                      		{'downControl':2,'downControlName':'2M'},
+                      		{'downControl':4,'downControlName':'4M'},
+                      		{'downControl':8,'downControlName':'8M'},
+                      		{'downControl':10,'downControlName':'10M'},
+                      		{'downControl':20,'downControlName':'20M'},
+                      		{'downControl':30,'downControlName':'30M'},
+                      		{'downControl':50,'downControlName':'50M'},
+                      		{'downControl':100,'downControlName':'100M'}]" name="downControl" id="downControl">
                        </select>
                     </td>
                 </tr>
@@ -83,7 +81,6 @@
                     <td style="width:47%;text-align: right;padding-right: 10px;">适用学校:</td>
                     <td style="text-align: left;padding-left: 10px;">
                         <select class="easyui-combobox"  id="school" name="school.id" data-options="valueField:'schoolId', textField:'schoolName',panelHeight:'auto',editable:false"> </select>
-                       </select>
                     </td>
                 </tr>
                 <tr>
@@ -121,7 +118,7 @@
                 <tr>
                     <td colspan="2">
                       <div style="text-align:center;padding:5px">
-				            <input type="submit" class="button" value="保存">&nbsp;&nbsp;&nbsp;
+				            <a href="#" class="easyui-linkbutton" style="margin-right: 20px;width: 80px" icon="icon-ok" onclick="verifyForm()">保存</a>&nbsp;&nbsp;&nbsp;
 				            <a href="${ctx}feePolicy/index.html" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:80px">返回</a>
 				       </div>
                     </td>
@@ -139,7 +136,11 @@
      $('#area').combobox({
              editable: false,
              onLoadSuccess: function (data) {
-	             $('#area').combobox('setValue','${entity.area}');
+            	 for(var i=0;i<data.length;i++){
+            		if(data[i].areaId=='${entity.area}'){
+            			$('#area').combobox('setValue',data[i].areaName);
+            		}
+            	 }
 	    	 },
              onSelect: function (record) {
            	 _school = $('#school').combobox({
@@ -158,47 +159,71 @@
              textField: 'schoolName'
        });
          
-    	var msg = "${msg}";
 	   	$("#inputForm").validate({
 			rules: {
 				price: {
 					required: true,
 					number:true,
-					min:0
+					min:0,
+					max:65535
 				},
 				name: {
 					required: true
 				},
 				time:{
 					required: true,
-					digits:true
+					digits:true,
+					min:0,
+					max:99
 				}
 			},
 			messages:{
 				price: {
 					required:"*请输入价格！",
 					number:"*价钱只能是数字！",
-					min:"价钱必须大于0"
+					min:"*价钱必须大于0",
+					max:"价钱最大不能超过65535"
 				},
 				name: {
 					required:"*请输入名称！"
 				},
 				time:{
 					required:"*请填写时间！",
-					digits:"*时间只能是正整数！"
+					digits:"*时间只能是正整数！",
+					min:"*时间必须大于0",
+					max:"*时间不能大于99"
 				}
 			}
 		});
     	
-    	
+	   	var msg = "${msg}";
     	if(msg!=''){
     		show("",msg);
 	    }
-	    
     });
     
-    
-    
-	
+    function verifyForm(){
+    	var upControl = $("#upControl").combobox('getValue'); 
+    	if(upControl==''){
+    		msgShow("提示","请选择上行带宽！","warning");
+    		return false;
+    	}
+    	var downControl = $("#downControl").combobox('getValue'); 
+    	if(downControl==''){
+    		msgShow("提示","请选择下行带宽！","warning");
+    		return false;
+    	}
+    	var area = $('#area').combobox('getValue'); 
+    	if(area==''){
+    		msgShow("提示","请选择地区！","warning");
+    		return false;
+    	}
+    	var school = $('#school').combobox('getValue'); 
+    	if(school==''){
+    		msgShow("提示","请选择学校！","warning");
+    		return false;
+    	}
+    	$("#inputForm").submit();
+    }
 </script>
 </html>

@@ -27,8 +27,8 @@
                 <tr>
                     <td colspan="2">
                       <div style="text-align:center;padding:5px">
-				            <input type="submit" class="button" value="保存">
-				            <a href="${ctx}user/index.html" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:80px">返回</a>
+				            <a href="#" class="easyui-linkbutton" style="margin-right: 20px;width: 80px" icon="icon-ok" onclick="verifyForm()">保存</a>&nbsp;&nbsp;&nbsp;
+				             <a href="${ctx}user/index.html" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:80px">返回</a>
 				        </div>
                     </td>
                 </tr>
@@ -71,7 +71,10 @@
 			}
 		}
 	});
-	
 });
+	
+	 function verifyForm(){
+	    	$("#inputForm").submit();
+	    }
 </script>
 </html>

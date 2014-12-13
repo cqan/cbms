@@ -163,21 +163,12 @@ public class CardBatchController extends BaseController<CardBatch, Long, CardBat
 	@RequestMapping(value="/save1.html",method=RequestMethod.POST)
 	public String saveUpdateTime(CardBatch cardBatch,Model model,HttpServletRequest request){
 		CardBatch c = cardBatch;
-		System.out.println("cardBatch id"+cardBatch.getId());
 		if(null != cardBatch.getId()){
 		    c = entityService.get(cardBatch.getId());
 			c.setUpdateTime(new Date());
 			c.setEndTime(cardBatch.getEndTime());
-			System.out.println("end Time:"+cardBatch.getEndTime());
-			System.out.println("c:"+c);
 			entityService.save(c);
-			List<Card> cs  = cardService.listByCardBatchId(cardBatch.getId());
-			for (int i = 0; i < cs.size(); i++) {
-				Card cd = cs.get(i);
-				cd.setEndTime(cardBatch.getEndTime());
-				cd.setUpdateTime(new Date());
-				cardService.save(cd);
-			}
+			cardService.updateEndTime(cardBatch.getId(),cardBatch.getEndTime());
 		}
 		System.out.println(c.getEndTime());
 		model.addAttribute("entity",c);

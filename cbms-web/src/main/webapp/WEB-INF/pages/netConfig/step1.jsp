@@ -32,7 +32,7 @@
                 <tr>
                     <td colspan="2">
                       <div style="text-align:center;padding:5px">
-				            <input type="submit" class="button" value="下一步">&nbsp;&nbsp;&nbsp;
+                             <a href="#" class="easyui-linkbutton" style="margin-right: 20px;width: 80px" icon="icon-ok" onclick="verifyForm()">下一步</a>&nbsp;
 				        </div>
                     </td>
                 </tr>
@@ -64,6 +64,20 @@
 	             textField: 'groupName'
 	         });
     });
+    
+    function verifyForm(){
+    	var school = $('#school').combobox('getValue'); 
+    	var group = $('#group').combobox('getValue'); 
+    	if(school==''){
+    		msgShow("提示","请选择学校！","warning");
+    		return false;
+    	}
+    	if(group==''){
+    		msgShow("提示","请选择用户组！","warning");
+    		return false;
+    	}
+    	$("#inputForm").submit();
+    }
 	
 </script>
 </html>

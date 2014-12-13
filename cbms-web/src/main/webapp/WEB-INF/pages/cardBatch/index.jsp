@@ -50,13 +50,7 @@
                 <td>${entity.status eq 0?"未制卡":entity.status eq 1?"正在制卡":"制卡完成"}</td>
                 <td><fmt:formatDate value="${entity.endTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                 <td><fmt:formatDate value="${entity.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                <td><a href="${ctx}card/batch/download.html?id=${entity.id}">下载</a></td>
-                <td>
-                    <shiro:hasPermission name="card.create.renew">
-                    	<a href="#" onclick="resetCardBatch('${entity.id}')">重新生成卡</a>
-                    	<a href="${ctx}card/batch/edit1.html?id=${entity.id}">修改</a>&nbsp;
-                    </shiro:hasPermission>
-                </td>
+                <td><a href="${ctx}card/batch/edit1.html?id=${entity.id}">修改</a>&nbsp;<a href="${ctx}card/batch/download.html?id=${entity.id}">下载</a></td>
             </tr>
         </c:forEach>
         </tbody>

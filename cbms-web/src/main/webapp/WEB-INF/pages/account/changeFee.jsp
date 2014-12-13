@@ -43,7 +43,7 @@
                 <tr>
                     <td colspan="2">
                       <div style="text-align:center;padding:5px">
-                      		<a href="#" class="easyui-linkbutton" style="margin-right: 40px;" icon="icon-ok" onclick="verifyForm()">修改</a>&nbsp;
+                      		<a href="#" class="easyui-linkbutton" style="margin-right: 20px;width: 80px" icon="icon-ok" onclick="verifyForm()">修改</a>&nbsp;
 				            <a href="${ctx}account/change.html" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:80px">返回</a>
 				        </div>
                     </td>

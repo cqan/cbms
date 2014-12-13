@@ -14,7 +14,7 @@
 系统-->营业管理-->受理激活
 <div class="easyui-panel" title="受理激活" style="width:100%">
     <div style="text-align: center;">
-        <form id="inputForm" action="${ctx}account/active.html" method="post" onsubmit="return verifyForm();">
+        <form id="inputForm" action="${ctx}account/active.html" method="post">
             <table cellpadding="5" align="center" style="width: 100%">
                 <tr>
                     <td style="width:47%;text-align: right;padding-right: 10px;">账号或证件编号:</td>
@@ -23,14 +23,13 @@
                 <tr>
                     <td colspan="2">
                       <div style="text-align:center;padding:5px">
-				            <input type="submit" class="button" value="下一步">&nbsp;&nbsp;&nbsp;
+				            <a href="#" class="easyui-linkbutton" style="margin-right: 20px;width: 80px" icon="icon-ok" onclick="verifyForm()">下一步</a>&nbsp;
 				            <!-- <input type="reset" class="button" value="取消"> -->
 				        </div>
                     </td>
                 </tr>
             </table>
         </form>
-        
     </div>
 </div>
 </body>
@@ -54,5 +53,9 @@
 				}
 			});
 	    });
+	    
+	    function verifyForm(){
+    		$("#inputForm").submit();
+    	}
 	</script>
 </html>

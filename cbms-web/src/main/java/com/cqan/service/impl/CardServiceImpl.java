@@ -1,5 +1,6 @@
 package com.cqan.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,12 @@ public class CardServiceImpl extends
 	@Override
 	public Card findByCardNo(String cardNo) {
 		return repository.findByCardNo(cardNo);
+	}
+
+	@Override
+	@Transactional
+	public void updateEndTime(Long id, Date endTime) {
+		repository.updateEndTime(endTime,id);
 	}
 
 	

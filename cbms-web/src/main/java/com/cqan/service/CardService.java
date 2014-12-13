@@ -1,5 +1,6 @@
 package com.cqan.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.cqan.system.Card;
@@ -14,5 +15,7 @@ public interface CardService extends BaseService<Card, Long> {
 	List<Card> findByCardBatch(CardBatch cb);
 
 	Card findByCardNo(String cardNo);
+
+	void updateEndTime(Long id, Date endTime);
 
 }

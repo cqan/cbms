@@ -65,6 +65,7 @@ public class FeePolicyController extends BaseController<FeePolicy,Long,FeePolicy
     	if (feePolicy.getId()==null||feePolicy.getId()==0) {
     		feePolicy.setCreateTime(new Date());
     		feePolicy.setSchool(school);
+    		model.addAttribute("msg","添加成功！");
     		fp = feePolicy;
 		}else{
 			fp = entityService.get(feePolicy.getId());

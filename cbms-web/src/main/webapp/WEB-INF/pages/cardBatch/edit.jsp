@@ -73,7 +73,7 @@
 	                <tr>
 	                    <td colspan="2">
 	                      <div style="text-align:center;padding:5px">
-					            <input type="button" class="button" value="保存" onclick="verifyForm()">&nbsp;&nbsp;&nbsp;
+					            <a href="#" class="easyui-linkbutton" style="margin-right: 20px;width: 80px" icon="icon-ok" onclick="verifyForm()">保存</a>&nbsp;
 					            <a href="${ctx}card/batch/index.html" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:80px">返回</a>
 					        </div>
 	                    </td>

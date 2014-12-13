@@ -85,7 +85,7 @@
                        </select>                                                                              
                     </td>
                     <td style="text-align: center;padding-left: 10px;">
-                                                                                                      时间段：<input type="text" id="startTime" onblur="checkTime();">----<input type="text" id="endTime" onblur="checkTime();"><input id="addConfig" type="button" class="button" value="增加">
+                           时间段：<input type="text" id="startTime" onblur="checkTime();">----<input type="text" id="endTime" onblur="checkTime();"><input id="addConfig" type="button" class="button" value="增加">
                     </td>
                 </tr>
                 <tr style="height:40px;">
@@ -95,7 +95,7 @@
                 </tr>
             </table>
             <div style="text-align:center;padding:5px">
-				  <input type="submit" class="button" value="保存">&nbsp;&nbsp;&nbsp;
+            <a href="#" class="easyui-linkbutton" style="margin-right: 20px;width: 80px" icon="icon-ok" onclick="verifyForm()">保存</a>&nbsp;
 	              <a href="${ctx}netConfig/step1.html" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:80px">返回</a>
 			</div>
         </form>
@@ -104,44 +104,48 @@
 </body>
 <script lang="text/javascript">   
     $(function(){
-             
-             $("#startTime").blur(function(){
-                if($(this)){
-                }
-             });
-	         $addConfig = $("#addConfig").click(function(){
-	            if(!checkWeek() || !checkTime()){
-	              return null;
-	            }
-	            var $startWeek = $("#startWeek");
-	            var $endWeek = $("#endWeek");
-	            var soption = $startWeek.find("option:selected");
-	            var eoption = $endWeek.find("option:selected");  
-	            var stext = soption.text();
-	            var sval = soption.val();
-	            var etext = eoption.text();
-	            var eval = eoption.val();
-	            
-	            var text = "";
-	            if(sval>eval){
-	              $("#error").html("* 日期段起始错误.");
-	              return null;
-	            }else if(sval==eval){
-	               text=stext;
-	            }else{
-	                text=stext+"&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;&nbsp;"+etext;
-	            }
-	            var st = $("#startTime").val();
-	            var et = $("#endTime").val();
-	            var $before = $(this).parent().parent("tr");
-	            var index = $("#addConfigTable").find("tr[class='a']").size();
-	            index = index + 1;
-	       	    $("#startTime").val("");
-	       	    $("#endTime").val("");
-	       	    var temp = "<tr class=\"a\"><td style=\"text-align: center;padding-right: 10px;\">"+index+"</td><td style=\"text-align: center;padding-left: 10px;\">"+text+"<input name=\"startWork\" type=\"hidden\" value=\""+sval+"\"><input name=\"endWork\" type=\"hidden\" value=\""+eval+"\"><input name=\"startTime\" type=\"hidden\" value=\""+st+"\"><input name=\"endTime\" type=\"hidden\" value=\""+et+"\"></td><td style=\"text-align: center;padding-left: 10px;\"><span styel=\"width:40px;text-align: center;padding-left: 10px;\">"+st+"----"+et+"</span><a style=\"padding-left: 50px;padding-right: 10px;\" href=\"#\" onclick=\"del(this);\">删除</a></td></td></tr>";
-	            var $temp = $(temp);
-	            $before.before($temp);
-	         });
+    	
+    	var msg = "${msg}";
+    	if(msg!=''){
+    		show("",msg);
+	    }
+           $("#startTime").blur(function(){
+              if($(this)){
+              }
+           });
+        $addConfig = $("#addConfig").click(function(){
+           if(!checkWeek() || !checkTime()){
+             return null;
+           }
+           var $startWeek = $("#startWeek");
+           var $endWeek = $("#endWeek");
+           var soption = $startWeek.find("option:selected");
+           var eoption = $endWeek.find("option:selected");  
+           var stext = soption.text();
+           var sval = soption.val();
+           var etext = eoption.text();
+           var eval = eoption.val();
+           
+           var text = "";
+           if(sval>eval){
+             $("#error").html("* 日期段起始错误.");
+             return null;
+           }else if(sval==eval){
+              text=stext;
+           }else{
+               text=stext+"&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;&nbsp;"+etext;
+           }
+           var st = $("#startTime").val();
+           var et = $("#endTime").val();
+           var $before = $(this).parent().parent("tr");
+           var index = $("#addConfigTable").find("tr[class='a']").size();
+           index = index + 1;
+      	    $("#startTime").val("");
+      	    $("#endTime").val("");
+      	    var temp = "<tr class=\"a\"><td style=\"text-align: center;padding-right: 10px;\">"+index+"</td><td style=\"text-align: center;padding-left: 10px;\">"+text+"<input name=\"startWork\" type=\"hidden\" value=\""+sval+"\"><input name=\"endWork\" type=\"hidden\" value=\""+eval+"\"><input name=\"startTime\" type=\"hidden\" value=\""+st+"\"><input name=\"endTime\" type=\"hidden\" value=\""+et+"\"></td><td style=\"text-align: center;padding-left: 10px;\"><span styel=\"width:40px;text-align: center;padding-left: 10px;\">"+st+"----"+et+"</span><a style=\"padding-left: 50px;padding-right: 10px;\" href=\"#\" onclick=\"del(this);\">删除</a></td></td></tr>";
+           var $temp = $(temp);
+           $before.before($temp);
+        });
     });
     
     function del(myself){
@@ -199,6 +203,9 @@
     function vl(){
        return false;
     }
-       
+    
+    function verifyForm(){
+    	$("#inputForm").submit();
+    }
 </script>
 </html>

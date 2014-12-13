@@ -92,7 +92,7 @@
                     <td colspan="2">
                       <div style="text-align:center;padding:5px">
                             <shiro:hasPermission name="business.account.add">
-                            <a href="#" class="easyui-linkbutton" style="margin-right: 25px;" icon="icon-ok" onclick="verifyForm()">保存</a>&nbsp;&nbsp;&nbsp;
+                            	<a href="#" class="easyui-linkbutton" style="margin-right: 20px;width: 80px" icon="icon-ok" onclick="verifyForm()">保存</a>&nbsp;&nbsp;&nbsp;
 				            </shiro:hasPermission>
 				            <a href="${ctx}account/index.html" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:80px">返回</a>
 				        </div>

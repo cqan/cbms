@@ -11,7 +11,8 @@
 	<meta http-equiv="description" content="This is my page">
   </head>
   	<body>
-    <div>
+    <div style="margin:5px 0;"></div>  
+    系统--><a href="${ctx}card/batch/index.html">制卡管理</a>-->变更套餐
     <form id="inputForm" action="${ctx}card/index.html" method="post">
         <input type="hidden" name="page" id="page" value="${param['page']}">
         <input type="hidden" name="pageSize" id="pageSize" value="${param['pageSize']}">
@@ -32,10 +33,11 @@
         <tr>
             <th field="name2" width="15%">卡号名</th>
             <th field="name3" width="10%">密码</th>
-            <th field="name4" width="15%">制卡批次</th>
-            <th field="name5" width="15%">创建时间</th>
-            <th field="name6" width="10%">状态</th>
-            <th field="name7" width="20%">操作</th>
+            <th field="name4" width="10%">制卡批次</th>
+            <th field="name5" width="20%">创建时间</th>
+            <th field="name6" width="20%">创建时间</th>
+            <th field="name7" width="10%">状态</th>
+            <th field="name8" width="15%">操作</th>
         </tr>
         </thead>
         <tbody>
@@ -45,6 +47,7 @@
                 <td>${entity.pwd}</td>
                 <td>${entity.cardBatch.name}</td>
                 <td><fmt:formatDate value="${entity.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                <td><fmt:formatDate value="${entity.endTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                 <td>${entity.status eq 1?"未使用":entity.status eq 2?"已使用":entity.status eq 3?"过期":"冻结"}</td>
                 <td>
                 	<c:if test="${entity.status eq 1}"><a href="#" onclick="disable('${entity.id}')">冻结</a>&nbsp;</c:if>

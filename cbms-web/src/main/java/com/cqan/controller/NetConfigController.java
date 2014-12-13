@@ -48,7 +48,6 @@ public class NetConfigController extends BaseController<NetConfig,Long,NetConfig
     	AccountGroup ag  = accountGroupService.get(groupId);
     	List<NetConfig> netConfigs = new ArrayList<NetConfig>();
     	netConfigs = entityService.findByGroupId(groupId);
-    	model.addAttribute("msg","修改成功！");
     	model.addAttribute("ag", ag);
     	model.addAttribute("groupId", groupId);
     	model.addAttribute("netConfigs", netConfigs);
@@ -81,6 +80,7 @@ public class NetConfigController extends BaseController<NetConfig,Long,NetConfig
     	AccountGroup ag  = accountGroupService.get(groupId);
     	model.addAttribute("netConfigs", netConfigs);
     	model.addAttribute("ag", ag);
+    	model.addAttribute("msg","*操作成功！");
     	return "netConfig/edit";
     }
 

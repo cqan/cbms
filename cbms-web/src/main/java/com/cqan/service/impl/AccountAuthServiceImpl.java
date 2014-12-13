@@ -65,14 +65,7 @@ public class AccountAuthServiceImpl extends
 	}
 	
 	private long getBit(Integer kg){
-		long c = kg;
-		if (c==512) {
-			c=c*1024;
-		}else{
-			c=c*1024*1024;
-		}
-		return c;
-		
+		return kg*1024*1024;
 	}
 
 	@Override

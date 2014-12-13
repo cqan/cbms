@@ -2,6 +2,7 @@ package com.cqan.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,6 +14,9 @@ import com.cqan.school.AccountGroup;
 import com.cqan.school.School;
 import com.cqan.service.AccountGroupService;
 import com.cqan.service.SchoolService;
+import com.cqan.service.UserSchoolService;
+import com.cqan.system.UserSchool;
+import com.google.common.collect.Sets;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,6 +31,9 @@ public class AccountGroupController extends BaseController<AccountGroup,Long,Acc
 
 	@Autowired
 	private SchoolService schoolService;
+	
+	@Autowired
+	private UserSchoolService userSchoolService;
 	
     @Override
     @Autowired
@@ -68,8 +75,6 @@ public class AccountGroupController extends BaseController<AccountGroup,Long,Acc
 		}
     	accountGroup.setUpdateTime(new Date());
     	model.addAttribute("entity", ag);
-		List<School> schools = schoolService.listAll();
-        model.addAttribute("schools",schools);
     	entityService.save(ag);
     	return this.page("", "", 1, 10, model, request);
     }
@@ -79,7 +84,14 @@ public class AccountGroupController extends BaseController<AccountGroup,Long,Acc
 	 public String page(@RequestParam(value = "sortType", defaultValue = "auto") String sortType,String sortField,
              @RequestParam(value = "page", defaultValue = "1") int pageNumber,@RequestParam
              (value = "pageSize", defaultValue = PAGESIZE) int pageSize, Model model,HttpServletRequest request) {
-		List<School> schools = schoolService.listAll();
+		Set<School> schools = Sets.newHashSet();
+		List<UserSchool> userSchools = userSchoolService.findByUserId(getCurrentUser().getId());
+		if (userSchools!=null) {
+			for (UserSchool us : userSchools) {
+				School school = schoolService.get(us.getSchoolId());
+				schools.add(school);
+			}
+		}
         model.addAttribute("schools",schools);
 		return super.page(sortType, sortField, pageNumber, pageSize, model, request);
 	}
@@ -87,7 +99,14 @@ public class AccountGroupController extends BaseController<AccountGroup,Long,Acc
 	@Override
 	@RequestMapping("/edit.html")
 	public String edit(Long id, Model model) {
-		List<School> schools = schoolService.listAll();
+		Set<School> schools = Sets.newHashSet();
+		List<UserSchool> userSchools = userSchoolService.findByUserId(getCurrentUser().getId());
+		if (userSchools!=null) {
+			for (UserSchool us : userSchools) {
+				School school = schoolService.get(us.getSchoolId());
+				schools.add(school);
+			}
+		}
         model.addAttribute("schools",schools);
         return super.edit(id, model);
 	}
