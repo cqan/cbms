@@ -1,5 +1,7 @@
 package com.cqan.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +25,16 @@ public class CardServiceImpl extends
 	@Transactional
 	public void deleteByCardBatch(CardBatch cb) {
 		repository.deleteByCardBatch(cb.getId());
+	}
+
+	@Override
+	public List<Card> findByCardBatch(CardBatch cb) {
+		return repository.findByCardBatch(cb);
+	}
+
+	@Override
+	public Card findByCardNo(String cardNo) {
+		return repository.findByCardNo(cardNo);
 	}
 
 	

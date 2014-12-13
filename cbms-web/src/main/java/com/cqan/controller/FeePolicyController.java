@@ -2,6 +2,7 @@ package com.cqan.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,6 +17,9 @@ import com.cqan.account.FeePolicy;
 import com.cqan.school.School;
 import com.cqan.service.FeePolicyService;
 import com.cqan.service.SchoolService;
+import com.cqan.service.UserSchoolService;
+import com.cqan.system.UserSchool;
+import com.google.common.collect.Sets;
 
 
 @Controller
@@ -24,6 +28,9 @@ public class FeePolicyController extends BaseController<FeePolicy,Long,FeePolicy
 
 	@Autowired
 	private SchoolService schoolService;
+	
+	@Autowired
+	private UserSchoolService userSchoolService;
 	
 	@Override
 	@Autowired
@@ -36,7 +43,12 @@ public class FeePolicyController extends BaseController<FeePolicy,Long,FeePolicy
 	 public String page(@RequestParam(value = "sortType", defaultValue = "auto") String sortType,String sortField,
              @RequestParam(value = "page", defaultValue = "1") int pageNumber,@RequestParam
              (value = "pageSize", defaultValue = PAGESIZE) int pageSize, Model model,HttpServletRequest request) {
-		List<School> schools = schoolService.listAll();
+		Set<School> schools = Sets.newHashSet();
+		List<UserSchool> userSchools = userSchoolService.findByUserId(getCurrentUser().getId());
+		for (UserSchool us : userSchools) {
+			School school = schoolService.get(us.getSchoolId());
+			schools.add(school);
+		}
         model.addAttribute("schools",schools);
 		return super.page(sortType, sortField, pageNumber, pageSize, model, request);
 	}

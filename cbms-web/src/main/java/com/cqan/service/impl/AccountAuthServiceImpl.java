@@ -11,7 +11,9 @@ import com.cqan.account.AccountAuth;
 import com.cqan.account.FeePolicy;
 import com.cqan.net.NetConfig;
 import com.cqan.repository.AccountAuthRepository;
+import com.cqan.school.AccountGroup;
 import com.cqan.service.AccountAuthService;
+import com.cqan.service.AccountGroupService;
 import com.cqan.service.FeePolicyService;
 import com.cqan.service.NetConfigService;
 
@@ -25,18 +27,26 @@ public class AccountAuthServiceImpl extends
 	@Autowired
 	private FeePolicyService feePolicyService;
 	
+	@Autowired
+	private AccountGroupService accountGroupService;
+	
 	@Override
 	public void updateAccount(Account account) {
 		AccountAuth aa = repository.findByUserName(account.getUserName());
 		if (aa==null) {
 			aa = new AccountAuth();
-			aa.setUserStatus(account.getStatus());
 			aa.setCreateTime(new Date());
 		}
+		aa.setUserStatus(account.getStatus());
 		aa.setPassword(account.getPassword());
 		aa.setUserStatusTime(new Date());
 		aa.setUpdateTime(new Date());
+		aa.setUserName(account.getUserName());
 		aa.setLoginpolicy(loginPolicy(account.getGroup().getId()));
+		AccountGroup ag = accountGroupService.get(account.getGroup().getId());
+		if (ag!=null) {
+			aa.setIpbindtag(0);
+		}
 		FeePolicy fp = feePolicyService.get(account.getFeePolicyId());
 		if (fp!=null) {
 			aa.setInputkg(getBit(fp.getDownControl()));

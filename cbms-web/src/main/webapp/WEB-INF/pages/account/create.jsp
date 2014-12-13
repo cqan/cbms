@@ -11,7 +11,7 @@
 </head>
 <body>
 <div style="margin:5px 0;"></div>
-系统-->营业管理-->开户受理<div class="easyui-panel" title="${empty entity?"添加":"修改"}学校客户组信息" style="width:100%">
+系统--><a href="${ctx}account/index.html">营业管理</a>-->开户受理<div class="easyui-panel" title="${empty entity?"添加":"修改"}学校客户组信息" style="width:100%">
     <div style="text-align: center;">
         <form id="inputForm" action="${ctx}account/save.html" method="post">
     		<input name="id" id="id" type="hidden" value="${entity.id}">
@@ -114,6 +114,14 @@
 	    	if(msg!=''){
 	    		show("",msg);
 		    }
+		    
+			jQuery.validator.addMethod("licenseNo1", function(value, element) {
+			    if($("#licenseType").val()==1){
+			       return this.optional(element) || (/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(value));
+			    }else{
+			       return true;
+			    }
+	    	 }, "*请填写正确的身份证格式！");
 	    	
 	    	$("#inputForm").validate({
 				rules: {

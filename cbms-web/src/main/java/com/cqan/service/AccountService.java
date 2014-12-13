@@ -13,5 +13,7 @@ public interface AccountService  extends BaseService<Account, Long>{
 	Account findByLicenseNoOrUserName(String name);
 
 	List<Account> findBySyncTime(int size);
+
+	List<Account> findByExpireTime(int syncSize);
 	
 }

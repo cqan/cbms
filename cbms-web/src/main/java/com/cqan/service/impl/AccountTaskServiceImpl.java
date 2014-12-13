@@ -16,4 +16,9 @@ public class AccountTaskServiceImpl extends BaseServiceImpl<AccountTask, Long, A
 		this.repository = repository;
 	}
 
+	@Override
+	public AccountTask findByAccountId(Long accountId) {
+		return repository.findByAccountId(accountId);
+	}
+
 }
