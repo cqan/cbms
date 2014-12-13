@@ -14,6 +14,7 @@
 	<div class="easyui-panel" title="添加制卡" style="width:100%">
 	    <div style="text-align: center;">
 	        <form id="inputForm" action="${ctx}card/batch/save1.html" method="POST">
+	            <input name="id" id="id" type="hidden" value="${entity.id}">
 	            <table cellpadding="5" align="center" style="width: 100%">
 	                <tr>
 	                    <td style="width:47%;text-align: right;padding-right: 10px;">名称:</td>
