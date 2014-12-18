@@ -16,11 +16,11 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.cqan.service.UserRealmService;
 import com.cqan.system.Permission;
 import com.cqan.system.Role;
 import com.cqan.system.User;
 import com.google.common.collect.Sets;
-import com.cqan.service.UserService;
 
 
 /**
@@ -31,14 +31,14 @@ import com.cqan.service.UserService;
 public class ShiroRealm extends AuthorizingRealm {
 
 	@Autowired
-    private UserService userService;
+    private UserRealmService userRealmService;
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         String username = (String)principals.getPrimaryPrincipal();
 
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-        User user = userService.findByUserName(username);
+        User user = userRealmService.findByUserName(username);
         if (user!=null) {
         	Set<String> roles = Sets.newHashSet();
         	Set<String> permissions = Sets.newHashSet();
@@ -65,7 +65,7 @@ public class ShiroRealm extends AuthorizingRealm {
 
         String username = (String)token.getPrincipal();
 
-        User user = userService.findByUserName(username);
+        User user = userRealmService.findByUserName(username);
 
         if(user == null) {
             throw new UnknownAccountException();//没找到帐号
