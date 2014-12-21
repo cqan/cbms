@@ -38,7 +38,7 @@
                     <td colspan="2">
                       <div style="text-align:center;padding:5px">
                       		<a href="#" class="easyui-linkbutton" style="margin-right: 20px;width: 80px" icon="icon-ok" onclick="verifyForm()">重置</a>&nbsp;&nbsp;&nbsp;
-				            <a href="${ctx}account/modpwd.html" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:80px">返回</a>
+				            <a href="${ctx}account/setpwd.html" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:80px">返回</a>
 				        </div>
                     </td>
                 </tr>

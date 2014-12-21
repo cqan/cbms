@@ -81,7 +81,7 @@
                 <tr>
                     <td style="width:47%;text-align: right;padding-right: 10px;">适用学校:</td>
                     <td style="text-align: left;padding-left: 10px;">
-                        <select class="easyui-combobox"  id="school" name="school.id" data-options="valueField:'schoolId', textField:'schoolName',panelHeight:'auto',editable:false"> </select>
+                        <select class="easyui-combobox"  id="school" name="school.id" data-options="valueField:'schoolId', textField:'schoolName',panelHeight:'auto',editable:false"></select>
                     </td>
                 </tr>
                 <tr>

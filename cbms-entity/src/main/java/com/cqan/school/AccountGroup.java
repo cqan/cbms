@@ -32,6 +32,12 @@ public class AccountGroup extends IdLongEntity {
 	//强制下线  1：强制下线；0：不强制下线
 	private int kick;
 	
+	//pin码启用  1：启用pin码；0：不启用pin码
+	private int passAddedPin;
+	
+	//带宽分享  1：分享；0：不分享
+	private int sharedBandRate;
+	
 	private String nasIp;
 	
 	private String nasPortId;
@@ -180,6 +186,23 @@ public class AccountGroup extends IdLongEntity {
 	public void setNasIp(String nasIp) {
 		this.nasIp = nasIp;
 	}
+	
+	public int getPassAddedPin() {
+		return passAddedPin;
+	}
+
+	public void setPassAddedPin(int passAddedPin) {
+		this.passAddedPin = passAddedPin;
+	}
+
+	public int getSharedBandRate() {
+		return sharedBandRate;
+	}
+
+	public void setSharedBandRate(int sharedBandRate) {
+		this.sharedBandRate = sharedBandRate;
+	}
+
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this,ToStringStyle.SHORT_PREFIX_STYLE);

@@ -69,6 +69,10 @@ public class AccountGroupController extends BaseController<AccountGroup,Long,Acc
 			ag.setVlanID1(accountGroup.getVlanID1());
 			ag.setVlanID2(accountGroup.getVlanID2());
 			ag.setIpBindTag(accountGroup.getIpBindTag());
+			ag.setSharedBandRate(accountGroup.getSharedBandRate());
+			ag.setPassAddedPin(accountGroup.getPassAddedPin());
+			ag.setPcMaxSession(accountGroup.getPcMaxSession());
+			ag.setMoMaxSession(accountGroup.getMoMaxSession());
 			ag.setSchool(school);
 			ag.setType(accountGroup.getType());
 			model.addAttribute("msg","修改成功！");

@@ -55,6 +55,14 @@
                     <td  style="width:47%;text-align: right;padding-right: 10px;">强制下线:</td>
                     <td style="text-align: left;padding-left: 10px;"><input type="checkbox" id="kick"  name="kick"  ${entity.kick eq 1?"checked":""} value="${entity.kick eq null?0:entity.kick}" /></td>
                 </tr>
+               <tr>
+                    <td  style="width:47%;text-align: right;padding-right: 10px;">启用pin码:</td>
+                    <td style="text-align: left;padding-left: 10px;"><input type="checkbox" id="passAddedPin"  name="passAddedPin"  ${entity.passAddedPin eq 1?"checked":""} value="${entity.passAddedPin eq null?0:entity.passAddedPin}" /></td>
+                </tr>
+               <tr>
+                    <td  style="width:47%;text-align: right;padding-right: 10px;">宽带分享:</td>
+                    <td style="text-align: left;padding-left: 10px;"><input type="checkbox" id="sharedBandRate"  name="sharedBandRate"  ${entity.sharedBandRate eq 1?"checked":""} value="${entity.sharedBandRate eq null?0:entity.sharedBandRate}" /></td>
+                </tr>
                 <tr>
                     <td  style="width:47%;text-align: right;padding-right: 10px;">NAS-IP-Address 绑定:</td>
                     <td style="text-align: left;padding-left: 10px;">
@@ -95,7 +103,7 @@
                 </tr>
                 <tr>
                     <td style="width:47%;text-align: right;padding-right: 10px;">外vlan:</td>
-                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="vlanID2" name="vlanID2"  disabled="${empty entity?'disabled=disabled':(entity.vlanBindTag eq 2)?'':'disabled=disabled' } value="${entity.vlanID2}"/></td>
+                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="vlanID2" name="vlanID2"  ${empty entity?'disabled=disabled':(entity.vlanBindTag eq 2)?'':'disabled=disabled' } value="${entity.vlanID2}"/></td>
                 </tr>
                 <tr>
                     <td style="width:47%;text-align: right;padding-right: 10px;">PC最大会话数:</td>
@@ -149,6 +157,25 @@
 	            $(this).val(0);
 	         }
 	     });
+	     
+	     var $passAddedPin = $("#passAddedPin");
+	     $passAddedPin.click(function(){
+	         if($(this).attr("checked")=="checked"){
+	            $(this).val(1);
+	         }else{
+	            $(this).val(0);
+	         }
+	     });
+	     
+	     var $sharedBandRate = $("#sharedBandRate");
+	     $sharedBandRate.click(function(){
+	         if($(this).attr("checked")=="checked"){
+	            $(this).val(1);
+	         }else{
+	            $(this).val(0);
+	         }
+	     });
+	     
  
     	$("#inputForm").validate({
 			rules: {
