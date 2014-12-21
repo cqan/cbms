@@ -71,6 +71,20 @@ public class AccountController extends BaseController<Account,Long,AccountServic
     	
     	return "account/create";
     }
+    @RequestMapping(value="/queryChange.html")
+    public String queryChange(Long id,Model model){
+    	Account account = entityService.get(id);
+    	if (account!=null){
+    		AccountTask at = accountTaskService.findByAccountId(id);
+    		if (at!=null) {
+    			model.addAttribute("account", account);
+    			model.addAttribute("at", at);
+    			FeePolicy fp = feePolicyService.get(at.getFeePolicyId());
+    			model.addAttribute("fp", fp);
+    		}
+    	}
+    	return "account/queryChange";
+    }
     
     @RequestMapping(value="/recharge.html",method=RequestMethod.GET)
     public String toRechange(){

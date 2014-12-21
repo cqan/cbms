@@ -5,6 +5,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -50,6 +52,7 @@ public class AccountAuth extends IdLongEntity {
 	
 	private Integer pcMaxSession;
 	
+	 @Temporal(TemporalType.TIMESTAMP)
 	private Date timeStamp;
 	
 	private String userName;

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
 <html>
 <head>
     <%@include file="/WEB-INF/pages/common/taglib.jsp"%>
@@ -67,7 +68,7 @@
                 </tr>
                 <tr>
                     <td  style="width:47%;text-align: right;padding-right: 10px;">NAS-IP-Address BrasIP地址:</td>
-                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="nasIp" name="nasIp"  disabled="${empty entity?'disabled':(entity.ipBindTag eq 3)?'':'disabled' }" value="${entity.nasIp}"/></td>
+                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="nasIp" name="nasIp"  ${empty entity?'disabled=disabled':(entity.ipBindTag eq 3)?'':'disabled=disabled'} value="${entity.nasIp}"/></td>
                 </tr>
                 <tr>
                     <td  style="width:47%;text-align: right;padding-right: 10px;">NAS-Port-Id:</td>
@@ -90,11 +91,11 @@
                 </tr>
                 <tr>
                     <td style="width:47%;text-align: right;padding-right: 10px;">内vlan:</td>
-                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="vlanID1" name="vlanID1"  disabled="${empty entity?'disabled':(entity.vlanBindTag eq 2)?'':'disabled' }"  value="${entity.vlanID1}"/></td>
+                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="vlanID1" name="vlanID1"  ${empty entity?'disabled=disabled':(entity.vlanBindTag eq 2)?'':'disabled=disabled' }  value="${entity.vlanID1}"/></td>
                 </tr>
                 <tr>
                     <td style="width:47%;text-align: right;padding-right: 10px;">外vlan:</td>
-                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="vlanID2" name="vlanID2"  disabled="${empty entity?'disabled':(entity.vlanBindTag eq 2)?'':'disabled' }" value="${entity.vlanID2}"/></td>
+                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="vlanID2" name="vlanID2"  disabled="${empty entity?'disabled=disabled':(entity.vlanBindTag eq 2)?'':'disabled=disabled' } value="${entity.vlanID2}"/></td>
                 </tr>
                 <tr>
                     <td style="width:47%;text-align: right;padding-right: 10px;">PC最大会话数:</td>

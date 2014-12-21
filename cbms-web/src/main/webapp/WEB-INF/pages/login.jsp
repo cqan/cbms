@@ -1,6 +1,4 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -43,8 +41,8 @@
   <body>
     <div style="margin:0 auto;width:900px;">
             <div id="win" class="easyui-window" minimizable="false" closable="false" maximizable="false"  collapsible="false"  title="北京联通校园网运营管理平台" style="width:400px;height:280px;">
-                <form action="${ctx}login.html" method="post" style="padding:10px 20px 10px 40px;" id="loginForm" name="login_f">
-                    <table width="100%">
+                <form action="${ctx}login.html" method="post" style="padding:10px 20px 10px 10px;" id="loginForm" name="login_f">
+                    <table width="350px;">
                     <tr><td style="text-align: right; width: 25%"></td>
                     	<td style="color: red;"><c:if test="${empty error}"><div style="margin:10px 0;"></div></c:if>
                     	<c:if test="${!empty error}">${error}</c:if></td>

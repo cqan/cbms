@@ -46,6 +46,7 @@
                 <td>${entity.status eq 0?"正常":"停机"}</td>
                 <td>
                 	<a href="${ctx}account/info.html?id=${entity.id}">详情</a>&nbsp;
+                	<a href="${ctx}account/queryChange.html?id=${entity.id}">查询变更</a>&nbsp;
                 </td>
             </tr>
         </c:forEach>

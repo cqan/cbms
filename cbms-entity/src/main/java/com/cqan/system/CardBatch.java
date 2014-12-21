@@ -1,9 +1,12 @@
 package com.cqan.system;
 
+
 import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -104,6 +107,7 @@ public class CardBatch extends IdLongEntity {
 		this.cardNum = cardNum;
 	}
 
+	@Temporal(TemporalType.TIMESTAMP)
 	public Date getEndTime() {
 		return endTime;
 	}

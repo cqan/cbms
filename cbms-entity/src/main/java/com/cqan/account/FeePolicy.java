@@ -1,12 +1,15 @@
 package com.cqan.account;
 
 
+
 import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -42,9 +45,11 @@ public class FeePolicy extends IdLongEntity {
 	private String area;
 	
 	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date startTime;
 	
 	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date endTime;
 	//学生是否可见 1：是；2：否
 	private Integer stuVisible;

@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -44,6 +46,7 @@ public class Account extends IdLongEntity {
 	
 	private String creater;
 	
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date expireTime;
 	
 	private Long syncTime;

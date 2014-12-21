@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
 <head>
     <%@include file="/WEB-INF/pages/common/taglib.jsp"%>
@@ -19,12 +20,6 @@
 	                    <td style="width:47%;text-align: right;padding-right: 10px;">名称:</td>
 	                    <td style="text-align: left;padding-left: 10px;">
 	                    	<input type="text" id="name"  name="name" value="${entity.name}" />
-	                    </td>
-	                </tr>
-	                <tr>
-	                    <td  style="width:47%;text-align: right;padding-right: 10px;">区域:</td>
-	                    <td style="text-align: left;padding-left: 10px;">
-	                    	<input type="text" name="area"  value="${entity.area}"/>
 	                    </td>
 	                </tr>
 	                <tr>
@@ -107,9 +102,6 @@
 					name: {
 						required: true
 					},
-					area: {
-						required: true
-					},
 					price:{
 						required:true,
 						number:true
@@ -128,9 +120,6 @@
 				messages:{
 					name: {
 						required:"*请输入名称！"
-					},
-					area: {
-						required:"*请输入区域！"
 					},
 					price:{
 						required:"*请输入价格！",

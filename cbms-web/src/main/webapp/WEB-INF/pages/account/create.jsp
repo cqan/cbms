@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
 <html>
 <head>
     <%@include file="/WEB-INF/pages/common/taglib.jsp"%>
@@ -55,7 +56,7 @@
                     <td style="text-align: left;padding-left: 10px;"></td>
                 </tr>
                 <tr>
-                    <td  style="width:47%;text-align: right;padding-right: 10px;">联系电话:</td>
+                    <td  style="width:47%;text-align: right;padding-right: 10px;">绑定手机:</td>
                     <td style="text-align: left;padding-left: 10px;"><input type="text" id="mobile" name="mobile"  value="${entity.mobile}"/></td>
                 </tr>
                 <tr>

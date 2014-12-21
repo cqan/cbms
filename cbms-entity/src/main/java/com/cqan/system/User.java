@@ -9,6 +9,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -57,7 +59,7 @@ public class User extends IdLongEntity {
 	
 	// 多对多定义
 	@ManyToMany
-	@JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "role_id") })
+	@JoinTable(name = "tbl_user_role", joinColumns = { @JoinColumn(name = "userid") }, inverseJoinColumns = { @JoinColumn(name = "roleid") })
 	// Fecth策略定义
 	@Fetch(FetchMode.SUBSELECT)
 	// 集合按id排序
@@ -96,6 +98,7 @@ public class User extends IdLongEntity {
         this.avatar = avatar;
     }
 
+    @Temporal(TemporalType.TIMESTAMP)
     public Date getBirthday() {
         return birthday;
     }

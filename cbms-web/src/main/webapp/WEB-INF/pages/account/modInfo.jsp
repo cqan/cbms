@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
 <html>
 <head>
     <%@include file="/WEB-INF/pages/common/taglib.jsp"%>
@@ -112,7 +113,7 @@
    	});
 	    
 		    function verifyForm(){
-		    	$.messager.confirm('系统提示', '确认要重置密码吗?', function(r){
+		    	$.messager.confirm('系统提示', '确认要修改此帐号资料吗?', function(r){
 		            if (r){
 		                $("#inputForm").submit();
 		            }

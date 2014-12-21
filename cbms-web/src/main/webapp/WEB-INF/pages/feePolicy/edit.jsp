@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
 <html>
 <head>
     <%@include file="/WEB-INF/pages/common/taglib.jsp"%>
@@ -40,15 +41,15 @@
                     <td style="width:47%;text-align: right;padding-right: 10px;">上行带宽控制:</td>
                     <td style="text-align: left;padding-left: 10px;">
                        <select class="easyui-combobox" data-options="valueField:'upControl',
-                            textField:'upControlName',panelHeight:'auto',editable:false,data:[{'upControl':1,'upControlName':'1M'},
-                      		{'upControl':2,'upControlName':'2M'},
-                      		{'upControl':4,'upControlName':'4M'},
-                      		{'upControl':8,'upControlName':'8M'},
-                      		{'upControl':10,'upControlName':'10M'},
-                      		{'upControl':20,'upControlName':'20M'},
-                      		{'upControl':30,'upControlName':'30M'},
-                      		{'upControl':50,'upControlName':'50M'},
-                      		{'upControl':100,'upControlName':'100M'}]" name="upControl" id="upControl">
+                            textField:'upControlName',panelHeight:'auto',editable:false,data:[{'upControl':1,'upControlName':'1M',selected:${entity.upControl eq 1}},
+                      		{'upControl':2,'upControlName':'2M',selected:${entity.upControl eq 2}},
+                      		{'upControl':4,'upControlName':'4M',selected:${entity.upControl eq 4}},
+                      		{'upControl':8,'upControlName':'8M',selected:${entity.upControl eq 8}},
+                      		{'upControl':10,'upControlName':'10M',selected:${entity.upControl eq 10}},
+                      		{'upControl':20,'upControlName':'20M',selected:${entity.upControl eq 20}},
+                      		{'upControl':30,'upControlName':'30M',selected:${entity.upControl eq 30}},
+                      		{'upControl':50,'upControlName':'50M',selected:${entity.upControl eq 50}},
+                      		{'upControl':100,'upControlName':'100M',selected:${entity.upControl eq 100}}]" name="upControl" id="upControl">
                        </select>
                     </td>
                 </tr>
@@ -56,15 +57,15 @@
                     <td style="width:47%;text-align: right;padding-right: 10px;">下行带宽控制:</td>
                     <td style="text-align: left;padding-left: 10px;">
                       <select class="easyui-combobox" data-options="valueField:'downControl',
-                            textField:'downControlName',panelHeight:'auto',editable:false,data:[{'downControl':1,'downControlName':'1M'},
-                      		{'downControl':2,'downControlName':'2M'},
-                      		{'downControl':4,'downControlName':'4M'},
-                      		{'downControl':8,'downControlName':'8M'},
-                      		{'downControl':10,'downControlName':'10M'},
-                      		{'downControl':20,'downControlName':'20M'},
-                      		{'downControl':30,'downControlName':'30M'},
-                      		{'downControl':50,'downControlName':'50M'},
-                      		{'downControl':100,'downControlName':'100M'}]" name="downControl" id="downControl">
+                            textField:'downControlName',panelHeight:'auto',editable:false,data:[{'downControl':1,'downControlName':'1M',selected:${entity.downControl eq 1}},
+                      		{'downControl':2,'downControlName':'2M',selected:${entity.downControl eq 2}},
+                      		{'downControl':4,'downControlName':'4M',selected:${entity.downControl eq 4}},
+                      		{'downControl':8,'downControlName':'8M',selected:${entity.downControl eq 8}},
+                      		{'downControl':10,'downControlName':'10M',selected:${entity.downControl eq 10}},
+                      		{'downControl':20,'downControlName':'20M',selected:${entity.downControl eq 20}},
+                      		{'downControl':30,'downControlName':'30M',selected:${entity.downControl eq 30}},
+                      		{'downControl':50,'downControlName':'50M',selected:${entity.downControl eq 50}},
+                      		{'downControl':100,'downControlName':'100M',selected:${entity.downControl eq 100}}]" name="downControl" id="downControl">
                        </select>
                     </td>
                 </tr>
@@ -143,11 +144,11 @@
             	 }
 	    	 },
              onSelect: function (record) {
-           	 _school = $('#school').combobox({
-		             url: '${ctx}school/select.html?areaId='+record.areaId,
-		             editable: false,
-		             valueField: 'schoolId',
-		             textField: 'schoolName'
+           	 	_school = $('#school').combobox({
+	            url: '${ctx}school/select.html?areaId='+record.areaId,
+	            editable: false,
+	            valueField: 'schoolId',
+	            textField: 'schoolName'
 		       }).combobox('clear');
              }
 	   });

@@ -49,7 +49,7 @@ public class Role extends IdLongEntity{
 
 	// 多对多定义
 	@ManyToMany
-	@JoinTable(name = "role_permission", joinColumns = { @JoinColumn(name = "role_id") }, inverseJoinColumns = { @JoinColumn(name = "permission_id") })
+	@JoinTable(name = "tbl_role_permission", joinColumns = { @JoinColumn(name = "roleid") }, inverseJoinColumns = { @JoinColumn(name = "permissionid") })
 	// Fecth策略定义
 	@Fetch(FetchMode.SUBSELECT)
 	// 集合按id排序
