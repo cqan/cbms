@@ -28,7 +28,7 @@ public class AccountStatusSyncHandler implements Runnable{
 	
 	private static final int INITIALDELAY = 30;
 	
-	private static final int PERIOD = 30;
+	private static final int PERIOD = 60;
 	
 	private static final int SYNC_SIZE = 100;	
 	

@@ -102,7 +102,7 @@
 						required:"*请输入联系电话"
 					},
 					address:{
-						required:"*请输入联系地址"    
+						required:"*请输入联系地址"
 					},
 					licenseNo:{
 						required:"*请输入证件号码",

@@ -1,5 +1,6 @@
 package com.cqan.school;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -19,30 +20,30 @@ public class AccountGroup extends IdLongEntity {
 	private String name;
 	
 	//1：学生；2：家属区；3：办公区；4：其它
-	private int type;
+	private Integer type;
 	
 	private School school;//所属学校
 	
 	//独立客户组1：开启；0：关闭
-	private int independentGroup;
+	private Integer independentGroup =0;
 	
 	//描述
 	private String description;
 	
 	//强制下线  1：强制下线；0：不强制下线
-	private int kick;
+	private Integer kick;
 	
 	//pin码启用  1：启用pin码；0：不启用pin码
-	private int passAddedPin;
+	private Integer passAddedPin =0;
 	
 	//带宽分享  1：分享；0：不分享
-	private int sharedBandRate;
+	private Integer sharedBandRate =0;
 	
 	private String nasIp;
 	
 	private String nasPortId;
 	
-	private String nasPort;
+	private Integer nasPort;
 	
 	private String vlanID1;
 	
@@ -58,6 +59,9 @@ public class AccountGroup extends IdLongEntity {
 	
 	
 	public Integer getPcMaxSession() {
+		if (pcMaxSession==null) {
+			return 0;
+		}
 		return pcMaxSession;
 	}
 
@@ -66,6 +70,9 @@ public class AccountGroup extends IdLongEntity {
 	}
 
 	public Integer getMoMaxSession() {
+		if (moMaxSession==null) {
+			return 0;
+		}
 		return moMaxSession;
 	}
 
@@ -99,19 +106,19 @@ public class AccountGroup extends IdLongEntity {
 		this.name = name;
 	}
 
-	public int getType() {
+	public Integer getType() {
 		return type;
 	}
 
-	public void setType(int type) {
+	public void setType(Integer type) {
 		this.type = type;
 	}
 
-	public int getIndependentGroup() {
+	public Integer getIndependentGroup() {
 		return independentGroup;
 	}
 
-	public void setIndependentGroup(int independentGroup) {
+	public void setIndependentGroup(Integer independentGroup) {
 		this.independentGroup = independentGroup;
 	}
 
@@ -123,11 +130,11 @@ public class AccountGroup extends IdLongEntity {
 		this.description = description;
 	}
 
-	public int getKick() {
+	public Integer getKick() {
 		return kick;
 	}
 
-	public void setKick(int kick) {
+	public void setKick(Integer kick) {
 		this.kick = kick;
 	}
 
@@ -139,11 +146,14 @@ public class AccountGroup extends IdLongEntity {
 		this.nasPortId = nasPortId;
 	}
 
-	public String getNasPort() {
+	public Integer getNasPort() {
+		if (nasPort==null) {
+			return 0;
+		}
 		return nasPort;
 	}
 
-	public void setNasPort(String nasPort) {
+	public void setNasPort(Integer nasPort) {
 		this.nasPort = nasPort;
 	}
 
@@ -187,19 +197,21 @@ public class AccountGroup extends IdLongEntity {
 		this.nasIp = nasIp;
 	}
 	
-	public int getPassAddedPin() {
+	@Column(name="ISPASSADDEDPIN")
+	public Integer getPassAddedPin() {
 		return passAddedPin;
 	}
 
-	public void setPassAddedPin(int passAddedPin) {
+	public void setPassAddedPin(Integer passAddedPin) {
 		this.passAddedPin = passAddedPin;
 	}
 
-	public int getSharedBandRate() {
+	@Column(name="SHAREDBANDRATE")
+	public Integer getSharedBandRate() {
 		return sharedBandRate;
 	}
 
-	public void setSharedBandRate(int sharedBandRate) {
+	public void setSharedBandRate(Integer sharedBandRate) {
 		this.sharedBandRate = sharedBandRate;
 	}
 

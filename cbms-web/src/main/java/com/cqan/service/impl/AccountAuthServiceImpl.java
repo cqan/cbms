@@ -52,6 +52,8 @@ public class AccountAuthServiceImpl extends
 			aa.setMoMaxSession(ag.getMoMaxSession());
 			aa.setNasPort(ag.getNasPort());
 			aa.setNasPortId(ag.getNasPortId());
+			aa.setPassAddedPin(ag.getPassAddedPin());
+			aa.setSharedBandRate(ag.getSharedBandRate());
 			aa.setVlanbindtag(ag.getVlanBindTag());
 			aa.setVlanId1(ag.getVlanID1());
 			aa.setVlanId2(ag.getVlanID2());

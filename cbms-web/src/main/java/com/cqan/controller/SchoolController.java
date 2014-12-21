@@ -93,11 +93,13 @@ public class SchoolController extends BaseController<School,Long,SchoolService>{
     public String select(String areaId){
     	List<Map<String,Object>> data = Lists.newArrayList();
         List<School> schools = new ArrayList<School>();
+        Map<String,Object> map = Maps.newHashMap();
+		map.put("schoolId", "");
+		map.put("schoolName","全部");
+		data.add(map);
 	    schools = entityService.listByAreaId(areaId);
-		System.out.println(schools);
-		System.out.println(schools.size());
 		for (School school : schools) {
-			Map<String,Object> map = Maps.newHashMap();
+			map = Maps.newHashMap();
     		map.put("schoolId", school.getId());
     		map.put("schoolName", school.getName());
     		data.add(map);

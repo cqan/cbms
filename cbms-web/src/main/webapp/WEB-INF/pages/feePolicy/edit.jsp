@@ -73,8 +73,17 @@
                     <td style="width:47%;text-align: right;padding-right: 10px;">适用地区:</td>
                     <td style="text-align: left;padding-left: 10px;">
                         <select class="easyui-combobox"  data-options="valueField:'areaId',
-                            textField:'areaName',panelHeight:'auto',editable:false,data:[{'areaId':2,'areaName':'二区'},{'areaId':3,'areaName':'三区'},
-                            {'areaId':4,'areaName':'四区'},{'areaId':5,'areaName':'五区'},{'areaId':7,'areaName':'七区'},{'areaId':8,'areaName':'八区'},{'areaId':9,'areaName':'昌平'},{'areaId':10,'areaName':'房山'},{'areaId':11,'areaName':'密云'}]" name="area" id="area">
+                            textField:'areaName',panelHeight:'auto',editable:false,
+                            data:[{'areaId':2,'areaName':'二区',selected:${entity.area eq '二区'}},
+                            {'areaId':3,'areaName':'三区',selected:${entity.area eq '三区'}},
+                            {'areaId':4,'areaName':'四区',selected:${entity.area eq '四区'}},
+                            {'areaId':5,'areaName':'五区',selected:${entity.area eq '五区'}},
+                            {'areaId':7,'areaName':'七区',selected:${entity.area eq '七区'}},
+                            {'areaId':8,'areaName':'八区',selected:${entity.area eq '八区'}},
+                            {'areaId':9,'areaName':'昌平',selected:${entity.area eq '昌平'}},
+                            {'areaId':10,'areaName':'房山',selected:${entity.area eq '房山'}},
+                            {'areaId':11,'areaName':'密云',selected:${entity.area eq '密云'}}
+                            ]" name="area" id="area">
                        </select>
                     </td>
                 </tr>
@@ -140,6 +149,20 @@
             	 for(var i=0;i<data.length;i++){
             		if(data[i].areaId=='${entity.area}'){
             			$('#area').combobox('setValue',data[i].areaName);
+            			var u = "${ctx}school/select.html?areaId="+data[i].areaId;
+            			_school = $('#school').combobox({
+            	            url: u,
+            	            editable: false,
+            	            valueField: 'schoolId',
+            	            textField: 'schoolName',
+            	            onLoadSuccess:function(data){
+            	            	 for(var i=0;i<data.length;i++){
+	            	            	if (data[i].schoolId='${entity.school.id}') {
+	            	            		$('#school').combobox('setValue',data[i].schoolName);
+									}
+            	            	 }
+            	            }
+            		       }).combobox('clear');
             		}
             	 }
 	    	 },
@@ -217,11 +240,6 @@
     	var area = $('#area').combobox('getValue'); 
     	if(area==''){
     		msgShow("提示","请选择地区！","warning");
-    		return false;
-    	}
-    	var school = $('#school').combobox('getValue'); 
-    	if(school==''){
-    		msgShow("提示","请选择学校！","warning");
     		return false;
     	}
     	$("#inputForm").submit();

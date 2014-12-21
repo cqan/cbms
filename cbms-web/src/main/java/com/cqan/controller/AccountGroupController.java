@@ -44,12 +44,7 @@ public class AccountGroupController extends BaseController<AccountGroup,Long,Acc
     @RequestMapping(value="/save.html",method=RequestMethod.POST)
     public String save(AccountGroup accountGroup,Model model,HttpServletRequest request){
     	AccountGroup ag;
-    	System.out.println("school id:"+accountGroup.getSchool().getId());
     	School school = schoolService.get(accountGroup.getSchool().getId());
-    	System.out.println("independent:"+accountGroup.getIndependentGroup());
-    	System.out.println("kick:"+accountGroup.getKick());
-    	System.out.println("school:"+school);
-    	System.out.println("school name:"+school.getName());
     	if (accountGroup.getId()==null||accountGroup.getId()==0) {
     		accountGroup.setCreateTime(new Date());
     		accountGroup.setSchool(school);

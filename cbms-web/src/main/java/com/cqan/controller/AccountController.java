@@ -111,6 +111,18 @@ public class AccountController extends BaseController<Account,Long,AccountServic
     		model.addAttribute("msg","*卡号已过期！");
     		return "account/recharge";
 		}
+    	if (card.getStatus()==2) {
+    		model.addAttribute("msg","*卡号已被使用过了！");
+    		return "account/recharge";
+    	}
+    	if (card.getStatus()==3) {
+    		model.addAttribute("msg","*卡号已过期了！");
+    		return "account/recharge";
+    	}
+    	if (card.getStatus()==4) {
+    		model.addAttribute("msg","*卡号已被冻结了！");
+    		return "account/recharge";
+    	}
     	//用户套餐与卡的套餐一致
     	if (card.getFeePolicyId()==account.getFeePolicyId()) {
 			FeePolicy fp = feePolicyService.get(card.getFeePolicyId());
@@ -139,6 +151,8 @@ public class AccountController extends BaseController<Account,Long,AccountServic
     	model.addAttribute("entity", account);
     	model.addAttribute("school",school);
     	model.addAttribute("feePolicy",fp);
+    	card.setStatus(2);
+    	cardService.save(card);
     	return "account/accountInfo";
     }
     

@@ -37,7 +37,7 @@ public class CardCreateTask implements Runnable{
 	private static ScheduledExecutorService scheduled = Executors.newScheduledThreadPool(1);
 	
 	private static final int INITIALDELAY = 30;
-	private static final int PERIOD = 30;
+	private static final int PERIOD = 60;
 	
 	private static final int CARDLEN = 10;
 	
