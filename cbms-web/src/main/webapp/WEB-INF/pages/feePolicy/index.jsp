@@ -55,14 +55,16 @@
             <th field="name3" width="6%">适用学校</th>
             <th field="name4" width="8%">计费政策类型</th>
             <th field="name5" width="6%">费率（元）</th>
-            <th field="name6" width="8%">周期（分钟/天/月）</th>
-            <th field="name7" width="8%">上限类型（N：无S：时间 L：流量）</th>
-            <th field="name8" width="6%">超限费率</th>
-            <th field="name9" width="6%">上限数值</th>
-            <th field="name10" width="6%">客户组类型</th>
+            
+            
+            
+            
             <th field="name11" width="6%">创建人</th>
             <th field="name12" width="8%">学生是否可见（Y：是 N：否）</th>
-            <th field="name13" width="8%">启动标志（Y：是  N：否）</th>
+           
+           
+            
+            
             <th field="name14" width="10%">套餐解释</th>
             <th field="name15" width="4%">操作</th>
         </tr>
@@ -71,18 +73,19 @@
         <c:forEach items="${page.content}" var="entity">
             <tr>
                 <td>${entity.name}</td>
-                <td>${entity.area}</td>
+                <td>${entity.area eq 2?'二区':entity.area eq 3?'三区':entity.area eq 4?'四区':entity.area eq 5?'五区':entity.area eq 7?'七区':entity.area eq 8?'八区':entity.area eq 9?'昌平':entity.area eq 10?'房山':entity.area eq 11?'密云':''}</td>
                 <td>${entity.school.id eq null?"全部学校":entity.school.name}</td>
-                <td>${entity.strategyType}</td>
+                <td>${entity.strategyType eq 1?'包月无上限':''}</td>
                 <td>${entity.price}</td>
-                <td>${entity.time}</td>
-                <td>${entity.time}</td>
-                <td>${entity.time}</td>
-                <td>${entity.time}</td>
-                <td>${entity.time}</td>
+
+
+
                 <td>${entity.creator}</td>
                 <td>${entity.stuVisible eq ""?"全部":(entity.stuVisible eq 1?"是":"否")}</td>
-                <td>${entity.time}</td>
+
+
+
+
                 <td>${entity.description}</td>
                 <td>
                    <shiro:hasPermission name="fee.policy.modify">
