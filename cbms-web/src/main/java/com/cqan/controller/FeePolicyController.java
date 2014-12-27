@@ -82,7 +82,10 @@ public class FeePolicyController extends BaseController<FeePolicy,Long,FeePolicy
     	}
     	feePolicy.setCreator(getCurrentUserName());
     	feePolicy.setCreatorId(getCurrentUser().getId());
-    	feePolicy.setArea(request.getParameter("area"));
+    	String area = request.getParameter("area");
+    	if (StringUtils.isNotBlank(area)) {
+    		feePolicy.setArea(area);
+		}
     	System.out.println(request.getParameter("area"));
     	feePolicy.setDescription(request.getParameter("description"));
     	String dc = request.getParameter("downControl");

@@ -124,6 +124,17 @@
 			    }
 			    return true;
 	    	 }, "*身份证号码长度必须是15位或18位！");
+			
+			
+			jQuery.validator.addMethod("mobile", function(value, element) {
+				var mobile = $('#mobile').val(); 
+				//132、130、131、156、155、185、186，176
+				var reg = /^((130|132|131|156|155|185|186|176[0-9])+\d{8})$/;
+		    	if(!reg.test(mobile)){
+				       return false;
+				 }
+			    return true;
+	    	 }, "*请输入正确的手机号！");
 	    	
 	    	$("#inputForm").validate({
 				rules: {
@@ -144,6 +155,18 @@
 					},
 					name:{
 						required:true
+					},
+					mobile:{
+						required:true,
+						mobile:true,
+						remote:{
+							 url:'${ctx}account/checkMobile.html',
+							 type:"post",
+							 dataType:"json", 
+							 data: {                    
+								 mobile: function(){return $("#mobile").val()},
+								 id:$("#uid").val()}
+						 }
 					},
 					licenseNo:{
 						 licenseNo:true,
@@ -171,7 +194,10 @@
 					name:{
 						required:"*请输入姓名"
 					},
-					
+					mobile:{
+						required:"*请输入手机号！",
+						remote:"*此手机号已存在！"
+					},
 					licenseNo:{
 						required:"*请输入证件号码",
 						licenseNo:"*身份号必须是15位或18位！",

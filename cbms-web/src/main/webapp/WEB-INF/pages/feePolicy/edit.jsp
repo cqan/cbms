@@ -77,15 +77,17 @@
                     <td style="text-align: left;padding-left: 10px;">
                         <select class="easyui-combobox"  data-options="valueField:'areaId',
                             textField:'areaName',panelHeight:'auto',editable:false,
-                            data:[{'areaId':2,'areaName':'二区',selected:${entity.area eq '二区'}},
-                            {'areaId':3,'areaName':'三区',selected:${entity.area eq '三区'}},
-                            {'areaId':4,'areaName':'四区',selected:${entity.area eq '四区'}},
-                            {'areaId':5,'areaName':'五区',selected:${entity.area eq '五区'}},
-                            {'areaId':7,'areaName':'七区',selected:${entity.area eq '七区'}},
-                            {'areaId':8,'areaName':'八区',selected:${entity.area eq '八区'}},
-                            {'areaId':9,'areaName':'昌平',selected:${entity.area eq '昌平'}},
-                            {'areaId':10,'areaName':'房山',selected:${entity.area eq '房山'}},
-                            {'areaId':11,'areaName':'密云',selected:${entity.area eq '密云'}}
+                            data:[
+                            {'areaId':0,'areaName':'全部',selected:${empty entity.area}},
+                            {'areaId':2,'areaName':'二区',selected:${entity.area eq 2}},
+                            {'areaId':3,'areaName':'三区',selected:${entity.area eq 3}},
+                            {'areaId':4,'areaName':'四区',selected:${entity.area eq 4}},
+                            {'areaId':5,'areaName':'五区',selected:${entity.area eq 5}},
+                            {'areaId':7,'areaName':'七区',selected:${entity.area eq 7}},
+                            {'areaId':8,'areaName':'八区',selected:${entity.area eq 8}},
+                            {'areaId':9,'areaName':'昌平',selected:${entity.area eq 9}},
+                            {'areaId':10,'areaName':'房山',selected:${entity.area eq 10}},
+                            {'areaId':11,'areaName':'密云',selected:${entity.area eq 11}}
                             ]" id="area" name="area">
                        </select>
                     </td>

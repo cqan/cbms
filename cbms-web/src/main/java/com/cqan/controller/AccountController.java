@@ -27,6 +27,7 @@ import com.cqan.service.AccountService;
 import com.cqan.service.AccountTaskService;
 import com.cqan.service.CardService;
 import com.cqan.service.FeePolicyService;
+import com.cqan.service.RechargeHistoryService;
 import com.cqan.service.SchoolService;
 import com.cqan.service.UserSchoolService;
 import com.cqan.system.Card;
@@ -56,6 +57,11 @@ public class AccountController extends BaseController<Account,Long,AccountServic
 	
 	@Autowired
 	private AccountTaskService accountTaskService;
+	
+	@Autowired
+	private RechargeHistoryService  rechargeHistoryService;
+	
+
 	
 	@Autowired
 	private CardService cardService;
@@ -125,17 +131,18 @@ public class AccountController extends BaseController<Account,Long,AccountServic
     	}
     	//用户套餐与卡的套餐一致
     	if (card.getFeePolicyId()==account.getFeePolicyId()) {
-			//FeePolicy fp = feePolicyService.get(card.getFeePolicyId());
+			FeePolicy fp = feePolicyService.get(card.getFeePolicyId());
 			Date expireTime = account.getExpireTime();
 			Calendar c = Calendar.getInstance();
 			//用户未过期
 			if (expireTime.getTime()>=System.currentTimeMillis()) {
 				c.setTime(expireTime);
 			}
-			//c.set(Calendar.MONTH, c.get(Calendar.MONTH)+fp.getTime());
+			c.set(Calendar.MONTH, c.get(Calendar.MONTH)+fp.getTime());
 			expireTime = c.getTime();
 			account.setStatus(0);
 			account.setExpireTime(expireTime);
+			rechargeHistoryService.saveHistory(userName, fp.getId(),cardNo, "充值卡号："+cardNo, 1, 2);
 			entityService.save(account);
 		}else{
 			//用户套餐与卡的套餐不一致
@@ -144,6 +151,7 @@ public class AccountController extends BaseController<Account,Long,AccountServic
 				model.addAttribute("msg","*帐户还有变更套餐未处理，现在不能变更！");
 	    		return "account/recharge";
 			}
+			rechargeHistoryService.saveHistory(userName,card.getFeePolicyId(),cardNo, "充值卡号："+cardNo, 1, 2);
 			saveTask(account, card.getFeePolicyId());
 		}
     	School school = schoolService.get(account.getSchoolId());
@@ -257,8 +265,10 @@ public class AccountController extends BaseController<Account,Long,AccountServic
     		Account account = entityService.get(id);
         	if (account!=null) {
         		School school = schoolService.get(account.getSchoolId());
-            	FeePolicy fp = feePolicyService.get(account.getFeePolicyId());
-            	model.addAttribute("feePolicy",fp);
+        		if (account.getFeePolicyId()!=null) {
+        			FeePolicy fp = feePolicyService.get(account.getFeePolicyId());
+        			model.addAttribute("feePolicy",fp);
+				}
             	model.addAttribute("entity", account);
             	model.addAttribute("school",school);
 			}
@@ -283,6 +293,25 @@ public class AccountController extends BaseController<Account,Long,AccountServic
 		}else if(account==null){
 			return "true";
 		}
+    	return "false";
+    }
+    
+    
+    @ResponseBody
+    @RequestMapping("/checkMobile.html")
+    public String checkMobile(String mobile,Long id){
+    	if (StringUtils.isBlank(mobile)) {
+    		return "true";
+    	}
+    	//修改
+    	Account account = entityService.findByMobile(mobile);
+    	if (id!=null&&id!=0) {
+    		if (account==null||account.getId()==id) {
+    			return "true";
+    		}
+    	}else if(account==null){
+    		return "true";
+    	}
     	return "false";
     }
     

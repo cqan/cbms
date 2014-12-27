@@ -42,13 +42,14 @@ public class InfoCode implements Serializable {
     /****系统级错误结束****/
 
     /****参数错误开始****/
-    public static final InfoCode USERNAME_PASSWORD_IS_NULL = new InfoCode(40000, "用户名或密码为空");
+    public static final InfoCode USERNAME_IS_NULL = new InfoCode(40000, "用户名为空");
+    public static final InfoCode NOTFOUND_USER = new InfoCode(40001, "用户不存在");
+    public static final InfoCode STREAMNUMBER_IS_NULL = new InfoCode(40002, "流水号不能为空");
+    public static final InfoCode FEEPOLICY_IS_NULL = new InfoCode(40003, "套餐编号不能为空");
+    public static final InfoCode FEEPOLICY_IS_ERROR = new InfoCode(40004, "套餐不存在");
+    public static final InfoCode FEEPOLICY_NOT_MATCH = new InfoCode(40005, "套餐不与用户匹配");
+    public static final InfoCode RECHAREGE_LIMIT = new InfoCode(40006, "本月充值超过2次，请下月再充值！");
 
-    public static final InfoCode INVALID_USERNAME_PASSWORD = new InfoCode(40001, "用户名或密码不正确");
-
-    public static final InfoCode NOTFOUND_USER = new InfoCode(40002, "用户不存在");
-
-    public static final InfoCode DISABLE_USER = new InfoCode(40003, "此用户被禁用");
     /****参数错误结束****/
 
     /****业务错误开始****/

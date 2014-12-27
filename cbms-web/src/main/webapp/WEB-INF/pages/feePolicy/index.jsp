@@ -43,6 +43,7 @@
                  <option value="1">是</option>
                  <option value="2">否</option>
           </select>
+          <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="submitForm()" style="width:80px">Search</a>
     </form>
     <table id="tt" class="easyui-datagrid" style="width:100%;height:auto;">
         <shiro:hasPermission name="fee.policy.add">
@@ -50,30 +51,24 @@
         </shiro:hasPermission>
         <thead>
         <tr>
-            <th field="name1" width="6%">计费策略名</th>
-            <th field="name2" width="6%">地区</th>
-            <th field="name3" width="6%">适用学校</th>
-            <th field="name4" width="8%">计费政策类型</th>
-            <th field="name5" width="6%">费率（元）</th>
-            
-            
-            
-            
-            <th field="name11" width="6%">创建人</th>
-            <th field="name12" width="8%">学生是否可见（Y：是 N：否）</th>
-           
-           
-            
-            
-            <th field="name14" width="10%">套餐解释</th>
-            <th field="name15" width="4%">操作</th>
+            <th field="name1" width="10%">编号</th>
+            <th field="name2" width="10%">计费策略名</th>
+            <th field="name3" width="10%">地区</th>
+            <th field="name4" width="10%">适用学校</th>
+            <th field="name5" width="10%">计费政策类型</th>
+            <th field="name6" width="10%">费率（元）</th>
+            <th field="name7" width="10%">创建人</th>
+            <th field="name8" width="10%">学生是否可见（Y：是 N：否）</th>
+            <th field="name9" width="10%">套餐解释</th>
+            <th field="name10" width="10%">操作</th>
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${page.content}" var="entity">
             <tr>
+                <td>${entity.id}</td>
                 <td>${entity.name}</td>
-                <td>${entity.area eq 2?'二区':entity.area eq 3?'三区':entity.area eq 4?'四区':entity.area eq 5?'五区':entity.area eq 7?'七区':entity.area eq 8?'八区':entity.area eq 9?'昌平':entity.area eq 10?'房山':entity.area eq 11?'密云':''}</td>
+                <td>${empty entity.area?"全部":entity.area eq 2?'二区':entity.area eq 3?'三区':entity.area eq 4?'四区':entity.area eq 5?'五区':entity.area eq 7?'七区':entity.area eq 8?'八区':entity.area eq 9?'昌平':entity.area eq 10?'房山':entity.area eq 11?'密云':''}</td>
                 <td>${entity.school.id eq null?"全部学校":entity.school.name}</td>
                 <td>${entity.strategyType eq 1?'包月无上限':''}</td>
                 <td>${entity.price}</td>

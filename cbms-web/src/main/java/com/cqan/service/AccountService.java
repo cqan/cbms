@@ -7,6 +7,8 @@ import com.cqan.account.Account;
 public interface AccountService  extends BaseService<Account, Long>{
 
 	Account findByUserName(String userName);
+	
+	Account findByMobile(String mobile);
 
 	Account findByLicenseNo(String licenseNo);
 

@@ -117,6 +117,7 @@
                 /logout.html = logout
                 /authenticated.html = authc
                 /authcode.html=anon
+                /api/**=anon
                 /** = user
             </value>
         </property>

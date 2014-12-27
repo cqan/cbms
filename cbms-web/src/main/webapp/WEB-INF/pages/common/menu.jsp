@@ -49,6 +49,7 @@
           <div title="营业管理" iconCls="icon-folder" style="overflow:auto;padding:6px;">
             <ul class="easyui-tree navlist">
                 <shiro:hasPermission name="business.account"><li><span><a link="${ctx}account/index.html?sid=<%=session.getId()%>">帐户信息</a></span></li></shiro:hasPermission>
+                <shiro:hasPermission name="business.account.rechargeHistory"><li><span><a link="${ctx}rechargeHistory/index.html?sid=<%=session.getId()%>">充值历史查询</a></span></li></shiro:hasPermission>
                 <!--<shiro:hasPermission name="business.active"><li><span><a link="${ctx}account/active.html">受理激活</a></span></li></shiro:hasPermission>-->
                 <shiro:hasPermission name="business.reset"><li><span><a link="${ctx}account/setpwd.html?sid=<%=session.getId()%>">重置密码</a></span></li></shiro:hasPermission>
                 <shiro:hasPermission name="business.accountchange"><li><span><a link="${ctx}account/modify.html?sid=<%=session.getId()%>">客户资料变更</a></span></li></shiro:hasPermission>

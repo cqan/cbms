@@ -13,5 +13,7 @@ public interface AccountRepository extends BaseRepository<Account, Long>{
 	@Query("from Account where userName=?1 or licenseNo=?1")
 	Account findByUserNameOrLicenseNo(String name);
 
+	Account findByMobile(String mobile);
+
 
 }

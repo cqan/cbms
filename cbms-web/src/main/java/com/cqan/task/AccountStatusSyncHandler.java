@@ -1,5 +1,7 @@
 package com.cqan.task;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -11,8 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.cqan.account.Account;
 import com.cqan.account.AccountTask;
+import com.cqan.account.FeePolicy;
+import com.cqan.account.RechargeHistory;
 import com.cqan.service.AccountService;
 import com.cqan.service.AccountTaskService;
+import com.cqan.service.FeePolicyService;
+import com.cqan.service.RechargeHistoryService;
 
 /**
  * 同步用户信息
@@ -32,6 +38,9 @@ public class AccountStatusSyncHandler implements Runnable{
 	
 	private static final int SYNC_SIZE = 100;	
 	
+	//短信充值延长15分钟
+	private static final int DELAY = 15;
+	
 	private static boolean flag = false;
 	
 	@Autowired
@@ -39,6 +48,14 @@ public class AccountStatusSyncHandler implements Runnable{
 	
 	@Autowired
 	private AccountTaskService accountTaskService;
+	
+	@Autowired
+	private FeePolicyService feePolicyService;
+	
+	
+	
+	@Autowired
+	private RechargeHistoryService rechargeHistoryService;
 	
     public AccountStatusSyncHandler() {
     	if (!flag) {
@@ -68,12 +85,34 @@ public class AccountStatusSyncHandler implements Runnable{
 					account.setStatus(1);
 				}
 				AccountTask at = accountTaskService.findByAccountId(account.getId());
+				Calendar c = Calendar.getInstance();
 				if (at!=null) {
 					account.setFeePolicyId(at.getId());
+					FeePolicy fp = feePolicyService.get(at.getFeePolicyId());
+					c.set(Calendar.MONTH, c.get(Calendar.MONTH)+fp.getTime());
+					account.setExpireTime(c.getTime());
 					accountTaskService.delete(at.getId());
+					accountService.save(account);
 				}
-				accountService.save(account);
 				logger.info("更新帐户信息:{}",account);
+				//处理短信充值
+				c = Calendar.getInstance();
+				c.set(Calendar.MINUTE, c.get(Calendar.MINUTE)+DELAY);
+				List<RechargeHistory> lists = rechargeHistoryService.findUnRechargeHistory(account.getUserName(),c.getTime());
+				if (lists!=null) {
+					for (RechargeHistory rh : lists) {
+						if (rh.getFeePolicyId()==account.getFeePolicyId()) {
+							FeePolicy fp = feePolicyService.get(at.getFeePolicyId());
+							c.set(Calendar.MONTH, c.get(Calendar.MONTH)+fp.getTime());
+							account.setExpireTime(c.getTime());
+							rh.setStatus(2);
+							rh.setUpdateTime(new Date());
+							rechargeHistoryService.save(rh);
+							accountService.save(account);
+							logger.info("同步短信充值信息：{}",rh);
+						}
+					}
+				}
 			}
 		}
 	}

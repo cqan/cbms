@@ -47,4 +47,10 @@ public class AccountServiceImpl extends BaseServiceImpl<Account, Long, AccountRe
 		return repository.findAll(new PageRequest(0, size, new Sort(Sort.Direction.ASC,"expireTime"))).getContent();
 	}
 
+	@Override
+	public Account findByMobile(String mobile) {
+		
+		return repository.findByMobile(mobile);
+	}
+
 }

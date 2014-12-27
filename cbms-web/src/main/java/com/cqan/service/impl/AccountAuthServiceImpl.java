@@ -59,12 +59,14 @@ public class AccountAuthServiceImpl extends
 			aa.setVlanId1(ag.getVlanID1());
 			aa.setVlanId2(ag.getVlanID2());
 		}
-		FeePolicy fp = feePolicyService.get(account.getFeePolicyId());
-		if (fp!=null) {
-			aa.setInputkg(getBit(fp.getDownControl()));
-			aa.setOutputkg(getBit(fp.getUpControl()));
+		if (account.getFeePolicyId()!=null) {
+			FeePolicy fp = feePolicyService.get(account.getFeePolicyId());
+			if (fp!=null) {
+				aa.setInputkg(getBit(fp.getDownControl()));
+				aa.setOutputkg(getBit(fp.getUpControl()));
+			}
+			repository.save(aa);
 		}
-		repository.save(aa);
 	}
 	
 	private long getBit(Integer kg){

@@ -7,8 +7,10 @@ import java.util.Map;
 
 
 
+
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -97,13 +99,24 @@ public class SchoolController extends BaseController<School,Long,SchoolService>{
 		map.put("schoolId", "");
 		map.put("schoolName","全部");
 		data.add(map);
-	    schools = entityService.listByAreaId(areaId);
-		for (School school : schools) {
-			map = Maps.newHashMap();
-    		map.put("schoolId", school.getId());
-    		map.put("schoolName", school.getName());
-    		data.add(map);
+		if (StringUtils.isBlank(areaId)||"0".equals(areaId)) {
+			 schools = entityService.listAll();
+				for (School school : schools) {
+					map = Maps.newHashMap();
+		    		map.put("schoolId", school.getId());
+		    		map.put("schoolName", school.getName());
+		    		data.add(map);
+				}
+		}else{
+			 schools = entityService.listByAreaId(areaId);
+				for (School school : schools) {
+					map = Maps.newHashMap();
+		    		map.put("schoolId", school.getId());
+		    		map.put("schoolName", school.getName());
+		    		data.add(map);
+				}
 		}
+	   
     	return JSON.toJSONString(data);
     }
 
