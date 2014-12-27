@@ -68,7 +68,7 @@ private static final int SYNC_SIZE = 100;
 				accountAuthService.updateAccount(account);
 				account.setSyncTime(System.currentTimeMillis());
 				accountService.save(account);
-				logger.info("更新帐户信息:{}",account);
+				logger.info("同步套餐信息:{}",account);
 			}
 		}
 	}
