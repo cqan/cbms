@@ -86,7 +86,6 @@
                     <td style="text-align: left;padding-left: 10px;">
                         <select class="easyui-combobox"  data-options="valueField:'areaId',
                             textField:'areaName',panelHeight:'auto',editable:false,
-<<<<<<< HEAD
                             data:[{'areaId':'','areaName':'全部',selected:${entity.area eq ''}},
                             {'areaId':2,'areaName':'二区',selected:${entity.area eq '2'}},
                             {'areaId':3,'areaName':'三区',selected:${entity.area eq '3'}},
@@ -98,18 +97,6 @@
                             {'areaId':10,'areaName':'房山',selected:${entity.area eq '10'}},
                             {'areaId':11,'areaName':'密云',selected:${entity.area eq '11'}}
                             ]" name="area" id="area">
-=======
-                            data:[{'areaId':2,'areaName':'二区',selected:${entity.area eq '二区'}},
-                            {'areaId':3,'areaName':'三区',selected:${entity.area eq '三区'}},
-                            {'areaId':4,'areaName':'四区',selected:${entity.area eq '四区'}},
-                            {'areaId':5,'areaName':'五区',selected:${entity.area eq '五区'}},
-                            {'areaId':7,'areaName':'七区',selected:${entity.area eq '七区'}},
-                            {'areaId':8,'areaName':'八区',selected:${entity.area eq '八区'}},
-                            {'areaId':9,'areaName':'昌平',selected:${entity.area eq '昌平'}},
-                            {'areaId':10,'areaName':'房山',selected:${entity.area eq '房山'}},
-                            {'areaId':11,'areaName':'密云',selected:${entity.area eq '密云'}}
-                            ]" id="area" name="area">
->>>>>>> 082e203064212133bfc354bc5aaadb92b8428011
                        </select>
                     </td>
                 </tr>
@@ -206,7 +193,7 @@
 		       }).combobox('clear');
              }
 	   });
-<<<<<<< HEAD
+	   
        var _school = $('#school').combobox({
              url: '${ctx}school/select.html?areaId='+area_id,
              editable: false,
@@ -217,8 +204,6 @@
                  //$('#school').combobox('setValue',$("#schoolId").val());
             //}
        });
-=======
->>>>>>> 082e203064212133bfc354bc5aaadb92b8428011
          
 	   	$("#inputForm").validate({
 			rules: {
