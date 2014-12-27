@@ -100,7 +100,7 @@ public class AccountController extends BaseController<Account,Long,AccountServic
     	Account account = entityService.findByUserName(userName);
     	if (account==null||!account.getPassword().equals(password)) {
     		model.addAttribute("msg","*帐号或密码不正确！");
-    		return "account/recharnge";
+    		return "account/recharge";
 		}
     	Card card = cardService.findByCardNo(cardNo);
     	if (card==null||!card.getPwd().equals(pwd)) {
@@ -237,15 +237,15 @@ public class AccountController extends BaseController<Account,Long,AccountServic
     	a.setUpdateTime(new Date());
     	a.setStatus(0);
     	School school = schoolService.get(account.getSchoolId());
-    	FeePolicy fp = feePolicyService.get(account.getFeePolicyId());
+    	//FeePolicy fp = feePolicyService.get(account.getFeePolicyId());
     	a.setCreater(getCurrentUserName());
     	account.setUpdateTime(new Date());
     	model.addAttribute("entity", a);
     	model.addAttribute("school",school);
     	Calendar c = Calendar.getInstance();
-    	c.set(Calendar.MONTH, c.get(Calendar.MONTH)+fp.getTime());
+    	//c.set(Calendar.MONTH, c.get(Calendar.MONTH)+fp.getTime());
     	a.setExpireTime(c.getTime());
-    	model.addAttribute("feePolicy",fp);
+    	//model.addAttribute("feePolicy",fp);
     	model.addAttribute("flag", "1");
     	entityService.save(a);
     	return page("", "", 1, 10, model, request);

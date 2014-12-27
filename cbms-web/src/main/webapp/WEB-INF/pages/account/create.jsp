@@ -84,12 +84,6 @@
                     </td>
                 </tr>
                 <tr>
-                    <td  style="width:47%;text-align: right;padding-right: 10px;">套餐:</td>
-                    <td style="text-align: left;padding-left: 10px;">
-                        <select class="easyui-combobox" id="feePolicy" name="feePolicyId" data-options="valueField:'feePolicyId', textField:'feePolicyName',panelHeight:'auto',editable:false">
-                       </select>
-                    </td>
-                <tr>
                     <td colspan="2">
                       <div style="text-align:center;padding:5px">
                             <shiro:hasPermission name="business.account.add">
@@ -199,12 +193,6 @@
 	                     valueField: 'groupId',
 	                     textField: 'groupName'
 	                 }).combobox('clear');
-	           	  _feePolicy.combobox({
-	                     disabled: false,
-	                     url: '${ctx}account/select.html?name=feePolicy&schoolId=' + record.schoolId,
-	                     valueField: 'feePolicyId',
-	                     textField: 'feePolicyName'
-	                 }).combobox('clear');
 	             }
 	         });
 	         var _group = $('#group').combobox({
@@ -212,28 +200,18 @@
 	             valueField: 'groupId',
 	             textField: 'groupName'
 	         });
-	         var _feePolicy = $('#feePolicy').combobox({
-	             disabled: true,
-	             valueField: 'feePolicyId',
-	             textField: 'feePolicyName'
-	         });
 	    	
 	    });
 	    
 	    function verifyForm(){
 	    	var school = $('#school').combobox('getValue'); 
 	    	var group = $('#group').combobox('getValue'); 
-	    	var feePolicy = $('#feePolicy').combobox('getValue'); 
 	    	if(school==''){
 	    		msgShow("提示","请选择学校！","warning");
 	    		return false;
 	    	}
 	    	if(group==''){
 	    		msgShow("提示","请选择用户组！","warning");
-	    		return false;
-	    	}
-	    	if(feePolicy==''){
-	    		msgShow("提示","请选择套餐！","warning");
 	    		return false;
 	    	}
 	    	$("#inputForm").submit();
