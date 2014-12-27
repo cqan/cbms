@@ -52,7 +52,7 @@
                 <!--<shiro:hasPermission name="business.active"><li><span><a link="${ctx}account/active.html">受理激活</a></span></li></shiro:hasPermission>-->
                 <shiro:hasPermission name="business.reset"><li><span><a link="${ctx}account/setpwd.html?sid=<%=session.getId()%>">重置密码</a></span></li></shiro:hasPermission>
                 <shiro:hasPermission name="business.accountchange"><li><span><a link="${ctx}account/modify.html?sid=<%=session.getId()%>">客户资料变更</a></span></li></shiro:hasPermission>
-                <shiro:hasPermission name="business.policychange"><li><span><a link="${ctx}account/change.html?sid=<%=session.getId()%>">套餐变更</a></span></li></shiro:hasPermission>
+                <!--<shiro:hasPermission name="business.policychange"><li><span><a link="${ctx}account/change.html?sid=<%=session.getId()%>">套餐变更</a></span></li></shiro:hasPermission>-->
             </ul>
         </div>
     </shiro:hasPermission>

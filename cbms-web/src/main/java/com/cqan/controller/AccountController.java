@@ -125,14 +125,14 @@ public class AccountController extends BaseController<Account,Long,AccountServic
     	}
     	//用户套餐与卡的套餐一致
     	if (card.getFeePolicyId()==account.getFeePolicyId()) {
-			FeePolicy fp = feePolicyService.get(card.getFeePolicyId());
+			//FeePolicy fp = feePolicyService.get(card.getFeePolicyId());
 			Date expireTime = account.getExpireTime();
 			Calendar c = Calendar.getInstance();
 			//用户未过期
 			if (expireTime.getTime()>=System.currentTimeMillis()) {
 				c.setTime(expireTime);
 			}
-			c.set(Calendar.MONTH, c.get(Calendar.MONTH)+fp.getTime());
+			//c.set(Calendar.MONTH, c.get(Calendar.MONTH)+fp.getTime());
 			expireTime = c.getTime();
 			account.setStatus(0);
 			account.setExpireTime(expireTime);
