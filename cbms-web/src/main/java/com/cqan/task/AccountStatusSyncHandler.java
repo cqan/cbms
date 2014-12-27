@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.cqan.account.Account;
 import com.cqan.account.AccountTask;
@@ -26,6 +27,7 @@ import com.cqan.service.RechargeHistoryService;
  * @author wuhui
  *
  */
+@Component
 public class AccountStatusSyncHandler implements Runnable{
 
 
@@ -98,13 +100,14 @@ public class AccountStatusSyncHandler implements Runnable{
 				logger.info("更新帐户信息:{}",account);
 				//处理短信充值
 				c = Calendar.getInstance();
-				c.set(Calendar.MINUTE, c.get(Calendar.MINUTE)+DELAY);
+				c.set(Calendar.MINUTE, c.get(Calendar.MINUTE)-DELAY);
+				System.out.println(c.getTime());
 				if (account!=null&&StringUtils.isNotBlank(account.getMobile())) {
 					List<RechargeHistory> lists = rechargeHistoryService.findUnRechargeHistory(account.getMobile(),c.getTime());
 					if (lists!=null) {
 						for (RechargeHistory rh : lists) {
-							if (rh.getFeePolicyId()==account.getFeePolicyId()) {
-								FeePolicy fp = feePolicyService.get(at.getFeePolicyId());
+							if (account.getFeePolicyId()==null||rh.getFeePolicyId()==account.getFeePolicyId()) {
+								FeePolicy fp = feePolicyService.get(rh.getFeePolicyId());
 								c.set(Calendar.MONTH, c.get(Calendar.MONTH)+fp.getTime());
 								account.setExpireTime(c.getTime());
 								rh.setStatus(2);

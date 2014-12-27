@@ -11,7 +11,7 @@ public interface RechargeHistoryRepository extends
 		BaseRepository<RechargeHistory, Long> {
 
 
-	@Query("from RechargeHistory where status=1 and rechargeType=2 and userName=?1 and createTime>=?2")
+	@Query("from RechargeHistory where status=1 and rechargeType=2 and userName=?1 and createTime<=?2")
 	public List<RechargeHistory> findRecharegeHistory(String userName,Date rechargeTime);
 
 	@Query("from RechargeHistory where status=1 and rechargeType=2 and userName=?1 and streamNumber=?2")
