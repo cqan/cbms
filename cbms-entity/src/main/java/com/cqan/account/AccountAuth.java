@@ -78,6 +78,8 @@ public class AccountAuth extends IdLongEntity {
 
 	// 带宽分享 1：分享；0：不分享
 	private Integer sharedBandRate =0;
+	
+	private String schoolcode;
 
 	/**
 	 * 绑定标志：0-禁止绑定，1-需要绑定，2-已绑定vlan，用于绑定vlan。
@@ -89,6 +91,20 @@ public class AccountAuth extends IdLongEntity {
 		return vlanbindtag;
 	}
 	
+	
+	@Column(name = "schoolcode")
+	public String getSchoolcode() {
+		return schoolcode;
+	}
+
+
+
+	public void setSchoolcode(String schoolcode) {
+		this.schoolcode = schoolcode;
+	}
+
+
+
 	@Column(name="isPassAddedPin")
 	public Integer getPassAddedPin() {
 		return passAddedPin;

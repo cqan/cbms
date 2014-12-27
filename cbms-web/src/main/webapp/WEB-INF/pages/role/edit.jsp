@@ -12,7 +12,7 @@
 <body>
 <div style="margin:5px 0;"></div>
 系统管理--><a href="${ctx}role/index.html">角色管理</a>-->${empty entity?"添加":"修改"}角色信息
-<div class="easyui-panel" title="${empty entity?"添加":"修改"}用户信息" style="width:100%">
+<div class="easyui-panel" title="${empty entity?"添加":"修改"}角色信息" style="width:100%">
     <div style="text-align: center;">
         <form id="inputForm" action="${ctx}role/save.html" method="post">
         <input id="rid" name="id" type="hidden" value="${entity.id}">

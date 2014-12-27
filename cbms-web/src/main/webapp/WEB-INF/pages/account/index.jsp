@@ -27,12 +27,14 @@
         <thead>
         <tr>
             <th field="name1" width="10%">用户姓名</th>
-            <th field="name2" width="15%">帐号</th>
-            <th field="name3" width="15%">证件号</th>
-            <th field="name4" width="15%">创建时间</th>
-            <th field="name5" width="15%">到期时间</th>
-            <th field="name6" width="10%">状态</th>
-            <th field="name7" width="20%">操作</th>
+            <th field="name2" width="10%">帐号</th>
+            <th field="name3" width="10%">绑定手机</th>
+            <th field="name4" width="10%">密码</th>
+            <th field="name5" width="15%">证件号</th>
+            <th field="name6" width="10%">创建时间</th>
+            <th field="name7" width="10%">到期时间</th>
+            <th field="name8" width="10%">状态</th>
+            <th field="name9" width="15%">操作</th>
         </tr>
         </thead>
         <tbody>
@@ -40,6 +42,8 @@
             <tr>
                 <td>${entity.name}</td>
                 <td>${entity.userName}</td>
+                <td>${entity.mobile}</td>
+                <td>${entity.password}</td>
                 <td>${entity.licenseNo}</td>
                 <td><fmt:formatDate value="${entity.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                 <td><fmt:formatDate value="${entity.expireTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>

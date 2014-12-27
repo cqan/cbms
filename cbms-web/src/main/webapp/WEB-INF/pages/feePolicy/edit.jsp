@@ -13,7 +13,7 @@
 <body>
 <div style="margin:5px 0;"></div>
 计费管理--><a href="${ctx}feePolicy/index.html">计费套餐策略</a>-->${empty entity?"添加":"修改"}计费套餐策略信息
-<div class="easyui-panel" title="${empty entity?"添加":"修改"}学校客户组信息" style="width:100%">
+<div class="easyui-panel" title="${empty entity?"添加":"修改"}计费套餐策略信息" style="width:100%">
     <div style="text-align: center;">
         <form id="inputForm" action="${ctx}feePolicy/save.html" method="post">
     		<input name="id" id="id" type="hidden" value="${entity.id}">
@@ -21,7 +21,9 @@
             <table cellpadding="5" align="center" style="width: 100%">
                 <tr>
                     <td  style="width:47%;text-align: right;padding-right: 10px;">计费策略名:</td>
-                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="name" name="name"  value="${entity.name}"/></td>
+                    <td style="text-align: left;padding-left: 10px;">
+                    	<input type="text" id="name" name="name"  value="${entity.name}"/>
+                    </td>
                 </tr>
                 <tr>
                     <td style="width:47%;text-align: right;padding-right: 10px;"></td>
@@ -66,7 +68,8 @@
                     <td style="width:47%;text-align: right;padding-right: 10px;">下行带宽控制:</td>
                     <td style="text-align: left;padding-left: 10px;">
                       <select class="easyui-combobox" data-options="valueField:'downControl',
-                            textField:'downControlName',panelHeight:'auto',editable:false,data:[{'downControl':1,'downControlName':'1M',selected:${entity.downControl eq 1}},
+                            textField:'downControlName',panelHeight:'auto',editable:false,data:[
+                            {'downControl':1,'downControlName':'1M',selected:${entity.downControl eq 1}},
                       		{'downControl':2,'downControlName':'2M',selected:${entity.downControl eq 2}},
                       		{'downControl':4,'downControlName':'4M',selected:${entity.downControl eq 4}},
                       		{'downControl':8,'downControlName':'8M',selected:${entity.downControl eq 8}},
@@ -83,6 +86,7 @@
                     <td style="text-align: left;padding-left: 10px;">
                         <select class="easyui-combobox"  data-options="valueField:'areaId',
                             textField:'areaName',panelHeight:'auto',editable:false,
+<<<<<<< HEAD
                             data:[{'areaId':'','areaName':'全部',selected:${entity.area eq ''}},
                             {'areaId':2,'areaName':'二区',selected:${entity.area eq '2'}},
                             {'areaId':3,'areaName':'三区',selected:${entity.area eq '3'}},
@@ -94,19 +98,31 @@
                             {'areaId':10,'areaName':'房山',selected:${entity.area eq '10'}},
                             {'areaId':11,'areaName':'密云',selected:${entity.area eq '11'}}
                             ]" name="area" id="area">
+=======
+                            data:[{'areaId':2,'areaName':'二区',selected:${entity.area eq '二区'}},
+                            {'areaId':3,'areaName':'三区',selected:${entity.area eq '三区'}},
+                            {'areaId':4,'areaName':'四区',selected:${entity.area eq '四区'}},
+                            {'areaId':5,'areaName':'五区',selected:${entity.area eq '五区'}},
+                            {'areaId':7,'areaName':'七区',selected:${entity.area eq '七区'}},
+                            {'areaId':8,'areaName':'八区',selected:${entity.area eq '八区'}},
+                            {'areaId':9,'areaName':'昌平',selected:${entity.area eq '昌平'}},
+                            {'areaId':10,'areaName':'房山',selected:${entity.area eq '房山'}},
+                            {'areaId':11,'areaName':'密云',selected:${entity.area eq '密云'}}
+                            ]" id="area" name="area">
+>>>>>>> 082e203064212133bfc354bc5aaadb92b8428011
                        </select>
                     </td>
                 </tr>
                 <tr>
                     <td style="width:47%;text-align: right;padding-right: 10px;">适用学校:</td>
                     <td style="text-align: left;padding-left: 10px;">
-                        <select class="easyui-combobox"  id="school" name="school.id" data-options="valueField:'schoolId', textField:'schoolName',panelHeight:'auto',editable:false"></select>
+                        <select class="easyui-combobox"  id="school" name="schoolId" data-options="valueField:'schoolId', textField:'schoolName',panelHeight:'auto',editable:false"></select>
                     </td>
                 </tr>
                 <tr>
                      <td style="width:47%;text-align: right;padding-right: 10px;">开始日期：</td>
 	                 <td style="text-align: left;padding-left: 10px;">
-	                     <input name="startTime" class="easyui-datetimebox" value="${entity.startTime}" style="width:100px;">
+	                     <input name="startTime" class="Wdate" type="text" onClick="WdatePicker()" value="<fmt:formatDate value="${entity.startTime}" pattern="yyyy-MM-dd"/>" style="width:100px;">
 	                 </td>
                 </tr>
                 <tr>
@@ -114,7 +130,7 @@
                      	 结束日期：
                      </td>
 	                 <td style="text-align: left;padding-left: 10px;">
-	                    <input name="endTime" class="easyui-datetimebox" value="${entity.endTime}" style="width:100px;">
+	                    <input name="endTime" class="Wdate" type="text" onClick="WdatePicker()" value="<fmt:formatDate value="${entity.endTime}" pattern="yyyy-MM-dd"/>" style="width:100px;">
 	                 </td>
                 </tr>
                 <tr>
@@ -157,23 +173,28 @@
              editable: false,
              onLoadSuccess: function (data) {
             	 for(var i=0;i<data.length;i++){
-            		if(data[i].areaId=='${entity.area}'){
-            			$('#area').combobox('setValue',data[i].areaName);
-            			var u = "${ctx}school/select.html?areaId="+data[i].areaId;
-            			_school = $('#school').combobox({
-            	            url: u,
-            	            editable: false,
-            	            valueField: 'schoolId',
-            	            textField: 'schoolName',
-            	            onLoadSuccess:function(data){
-            	            	 for(var i=0;i<data.length;i++){
-	            	            	if (data[i].schoolId='${entity.school.id}') {
-	            	            		$('#school').combobox('setValue',data[i].schoolName);
-									}
-            	            	 }
-            	            }
-            		       }).combobox('clear');
-            		}
+            		 for (var item in data[i]) {
+  	                    if (data[i][item] == '${entity.area}') {
+  	                        $(this).combobox("select", data[i][item]);
+	              			var u = "${ctx}school/select.html?areaId="+data[i][item];
+	              			_school = $('#school').combobox({
+	              	            url: u,
+	              	            editable: false,
+	              	            valueField: 'schoolId',
+	              	            textField: 'schoolName',
+	              	            onLoadSuccess:function(){
+	              	            	var data = $(this).combobox("getData");
+	              	            	 for(var i=0;i<data.length;i++){
+	              	            		 for (var item in data[i]) {
+	                   	                    if (data[i][item] == '${entity.school.id}') {
+	                   	                        $(this).combobox("select", data[i][item]);
+	                   	                    }
+	                   	                }
+	              	            	 }
+	              	            }
+	              		       }).combobox('clear');
+	  	                 }
+  	                }
             	 }
 	    	 },
              onSelect: function (record) {
@@ -185,6 +206,7 @@
 		       }).combobox('clear');
              }
 	   });
+<<<<<<< HEAD
        var _school = $('#school').combobox({
              url: '${ctx}school/select.html?areaId='+area_id,
              editable: false,
@@ -195,6 +217,8 @@
                  //$('#school').combobox('setValue',$("#schoolId").val());
             //}
        });
+=======
+>>>>>>> 082e203064212133bfc354bc5aaadb92b8428011
          
 	   	$("#inputForm").validate({
 			rules: {

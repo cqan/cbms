@@ -39,6 +39,7 @@ public class AccountAuthServiceImpl extends
 		}
 		aa.setUserStatus(account.getStatus());
 		aa.setPassword(account.getPassword());
+		aa.setSchoolcode(String.valueOf(account.getSchoolId()));
 		aa.setUserStatusTime(new Date());
 		aa.setUpdateTime(new Date());
 		aa.setUserName(account.getUserName());
@@ -82,15 +83,8 @@ public class AccountAuthServiceImpl extends
 			StringBuffer sb = new StringBuffer();
 			for (int i=0;i<ncs.size();i++) {
 				NetConfig nc = ncs.get(i);
-				Integer sw = Integer.parseInt(nc.getStartWork());
-				Integer ew = Integer.parseInt(nc.getEndWork());
-				for (int j = sw; j <=ew; j++) {
-					sb.append(nc.getStartWork()).append(".begin").append(nc.getStartTime())
-					.append(".end").append(nc.getEndTime()).append(".1");
-					if (j!=ew) {
-						sb.append(";");
-					}
-				}
+				sb.append(nc.getStartWork()).append(".").append(nc.getEndWork()).append(".").append(nc.getStartTime())
+				.append(".").append(nc.getEndTime()).append(".0");
 				if (i!=ncs.size()-1) {
 					sb.append(";");
 				}

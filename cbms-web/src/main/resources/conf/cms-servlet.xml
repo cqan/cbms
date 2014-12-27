@@ -20,6 +20,13 @@
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Service" />
 	</context:component-scan>
+	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<bean id="requestHandlerInterceptor" class="com.cqan.interceptor.RequestHandlerInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
 
 	<mvc:annotation-driven>
 		<mvc:message-converters register-defaults="true">

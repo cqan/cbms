@@ -120,4 +120,12 @@
 					displayMsg: '显示{from} - {to} 条数据，共{total}条'"></div>
     </div>
   </body>
+  <script type="text/javascript">   
+	    $(function(){
+	    	var msg = "${msg}";
+	    	if(msg!=''){
+	    		show("",msg);
+		    }
+	    });
+	</script>
 </html>

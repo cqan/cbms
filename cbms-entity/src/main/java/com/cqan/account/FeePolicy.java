@@ -30,13 +30,13 @@ public class FeePolicy extends IdLongEntity {
 	private String name;
 	
 	//计费政策类型
-	private short strategyType;
+	private Integer strategyType;
 
 	private School school;
 	
-	private float price;
+	private Float price;
 	
-	private int time;
+	private Integer time;
 	
 	private Integer downControl;
 	
@@ -45,18 +45,16 @@ public class FeePolicy extends IdLongEntity {
 	private String area;
 	
 	@DateTimeFormat(pattern="yyyy-MM-dd")
-	@Temporal(TemporalType.TIMESTAMP)
 	private Date startTime;
 	
 	@DateTimeFormat(pattern="yyyy-MM-dd")
-	@Temporal(TemporalType.TIMESTAMP)
 	private Date endTime;
 	//学生是否可见 1：是；2：否
 	private Integer stuVisible;
 	
 	private String description;
 	
-	private int creatorId;
+	private Long creatorId;
 	
 	private String creator;
 	
@@ -70,11 +68,11 @@ public class FeePolicy extends IdLongEntity {
 		this.name = name;
 	}
 
-	public short getStrategyType() {
+	public Integer getStrategyType() {
 		return strategyType;
 	}
 
-	public void setStrategyType(short strategyType) {
+	public void setStrategyType(Integer strategyType) {
 		this.strategyType = strategyType;
 	}
 
@@ -82,15 +80,15 @@ public class FeePolicy extends IdLongEntity {
 		return price;
 	}
 
-	public void setPrice(float price) {
+	public void setPrice(Float price) {
 		this.price = price;
 	}
 
-	public int getTime() {
+	public Integer getTime() {
 		return time;
 	}
 
-	public void setTime(int time) {
+	public void setTime(Integer time) {
 		this.time = time;
 	}
 
@@ -151,11 +149,11 @@ public class FeePolicy extends IdLongEntity {
 		this.stuVisible = stuVisible;
 	}
 	
-	public int getCreatorId() {
+	public Long getCreatorId() {
 		return creatorId;
 	}
 
-	public void setCreatorId(int creatorId) {
+	public void setCreatorId(Long creatorId) {
 		this.creatorId = creatorId;
 	}
 

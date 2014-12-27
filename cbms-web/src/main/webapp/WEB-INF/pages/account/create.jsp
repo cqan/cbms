@@ -12,7 +12,7 @@
 </head>
 <body>
 <div style="margin:5px 0;"></div>
-系统--><a href="${ctx}account/index.html">营业管理</a>-->开户受理<div class="easyui-panel" title="${empty entity?"添加":"修改"}学校客户组信息" style="width:100%">
+系统--><a href="${ctx}account/index.html">营业管理</a>-->开户受理<div class="easyui-panel" title="开户受理" style="width:100%">
     <div style="text-align: center;">
         <form id="inputForm" action="${ctx}account/save.html" method="post">
     		<input name="id" id="id" type="hidden" value="${entity.id}">
@@ -83,12 +83,6 @@
                         <select class="easyui-combobox" data-options="valueField:'groupId', textField:'groupName',panelHeight:'auto',editable:false" id="group" name="group.id"> </select>
                     </td>
                 </tr>
-                <tr>
-                    <td  style="width:47%;text-align: right;padding-right: 10px;">套餐:</td>
-                    <td style="text-align: left;padding-left: 10px;">
-                        <select class="easyui-combobox" id="feePolicy" name="feePolicyId" data-options="valueField:'feePolicyId', textField:'feePolicyName',panelHeight:'auto',editable:false">
-                       </select>
-                    </td>
                 <tr>
                     <td colspan="2">
                       <div style="text-align:center;padding:5px">
@@ -199,12 +193,6 @@
 	                     valueField: 'groupId',
 	                     textField: 'groupName'
 	                 }).combobox('clear');
-	           	  _feePolicy.combobox({
-	                     disabled: false,
-	                     url: '${ctx}account/select.html?name=feePolicy&schoolId=' + record.schoolId,
-	                     valueField: 'feePolicyId',
-	                     textField: 'feePolicyName'
-	                 }).combobox('clear');
 	             }
 	         });
 	         var _group = $('#group').combobox({
@@ -212,28 +200,18 @@
 	             valueField: 'groupId',
 	             textField: 'groupName'
 	         });
-	         var _feePolicy = $('#feePolicy').combobox({
-	             disabled: true,
-	             valueField: 'feePolicyId',
-	             textField: 'feePolicyName'
-	         });
 	    	
 	    });
 	    
 	    function verifyForm(){
 	    	var school = $('#school').combobox('getValue'); 
 	    	var group = $('#group').combobox('getValue'); 
-	    	var feePolicy = $('#feePolicy').combobox('getValue'); 
 	    	if(school==''){
 	    		msgShow("提示","请选择学校！","warning");
 	    		return false;
 	    	}
 	    	if(group==''){
 	    		msgShow("提示","请选择用户组！","warning");
-	    		return false;
-	    	}
-	    	if(feePolicy==''){
-	    		msgShow("提示","请选择套餐！","warning");
 	    		return false;
 	    	}
 	    	$("#inputForm").submit();

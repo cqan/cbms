@@ -12,7 +12,7 @@
 <body>
 <div style="margin:5px 0;"></div>
 系统管理--><a href="${ctx}role/index.html">角色管理</a>-->给角色[${entity.name}]授权
-<div class="easyui-panel" title="用户授权" style="width:100%">
+<div class="easyui-panel" title="给角色[${entity.name}]授权" style="width:100%">
     <div style="text-align: center;">
         <form id="inputForm" action="${ctx}role/auth.html" method="post">
         <input name="id" type="hidden" value="${entity.id}">

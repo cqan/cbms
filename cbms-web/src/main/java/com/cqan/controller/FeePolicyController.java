@@ -1,11 +1,13 @@
 package com.cqan.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +28,8 @@ import com.google.common.collect.Sets;
 @RequestMapping("/feePolicy")
 public class FeePolicyController extends BaseController<FeePolicy,Long,FeePolicyService>{
 
+	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	
 	@Autowired
 	private SchoolService schoolService;
 	
@@ -54,40 +58,67 @@ public class FeePolicyController extends BaseController<FeePolicy,Long,FeePolicy
 	}
 	
     @RequestMapping(value="/save.html",method=RequestMethod.POST)
-    public String save(FeePolicy feePolicy,Model model,HttpServletRequest request){
-    	FeePolicy fp;
+    public String save(Model model,HttpServletRequest request) throws Exception{
+    	FeePolicy feePolicy = null;
     	School school =null;
-    	if(null != feePolicy.getSchool() && null !=feePolicy.getSchool().getId()){
-    		school = schoolService.get(feePolicy.getSchool().getId());
+    	String strId = request.getParameter("id");
+    	if (StringUtils.isNotBlank(strId)) {
+			Long id = Long.parseLong(strId);
+			feePolicy = entityService.get(id);
+		}
+    	if (feePolicy==null) {
+    		feePolicy = new FeePolicy();
+    		feePolicy.setCreateTime(new Date());
+    		request.setAttribute("msg","添加成功！");
+    	}else{
+    		request.setAttribute("msg","修改成功！");
+    	}
+    	String sid = request.getParameter("schoolId");
+    	if(StringUtils.isNotBlank(sid)&&!sid.equals("全部")){
+    		school = schoolService.get(Long.parseLong(sid));
+    		feePolicy.setSchool(school);
+    	}else{
+    		feePolicy.setSchool(null);
     	}
     	feePolicy.setCreator(getCurrentUserName());
-    	feePolicy.setCreatorId(1);
-    	if (feePolicy.getId()==null||feePolicy.getId()==0) {
-    		feePolicy.setCreateTime(new Date());
-    		feePolicy.setSchool(school);
-    		model.addAttribute("msg","添加成功！");
-    		fp = feePolicy;
-		}else{
-			fp = entityService.get(feePolicy.getId());
-			fp.setArea(feePolicy.getArea());
-			fp.setDescription(feePolicy.getDescription());
-			fp.setDownControl(feePolicy.getDownControl());
-			fp.setEndTime(feePolicy.getEndTime());
-			fp.setName(feePolicy.getName());
-			fp.setPrice(feePolicy.getPrice());
-			fp.setSchool(school);
-			fp.setStartTime(feePolicy.getStartTime());
-			fp.setStrategyType(feePolicy.getStrategyType());
-			fp.setStuVisible(feePolicy.getStuVisible());
-			fp.setTime(feePolicy.getTime());
-			fp.setUpControl(feePolicy.getUpControl());
-			model.addAttribute("msg","修改成功！");
+    	feePolicy.setCreatorId(getCurrentUser().getId());
+    	feePolicy.setArea(request.getParameter("area"));
+    	System.out.println(request.getParameter("area"));
+    	feePolicy.setDescription(request.getParameter("description"));
+    	String dc = request.getParameter("downControl");
+    	if (StringUtils.isNotBlank(dc)) {
+    		feePolicy.setDownControl(Integer.parseInt(dc));
+    	}
+    	String uc = request.getParameter("upControl");
+    	if (StringUtils.isNotBlank(uc)) {
+    		feePolicy.setUpControl(Integer.parseInt(uc));
+    	}
+    	String at = request.getParameter("startTime");
+    	if (StringUtils.isNotBlank(at)) {
+    		feePolicy.setStartTime(sdf.parse(at));
 		}
-//    	feePolicy.setUpdateTime(new Date());
-//    	model.addAttribute("entity", feePolicy);
-//		List<School> schools = schoolService.listAll();
-//        model.addAttribute("schools",schools);
-    	entityService.save(fp);
+    	String et = request.getParameter("endTime");
+    	if (StringUtils.isNotBlank(et)) {
+    		feePolicy.setEndTime(sdf.parse(et));
+    	}
+    	feePolicy.setName(request.getParameter("name"));
+    	String p = request.getParameter("price");
+    	if (StringUtils.isNotBlank(p)) {
+    		feePolicy.setPrice(Float.parseFloat(p));
+		}
+    	String s = request.getParameter("strategyType");
+    	if (StringUtils.isNotBlank(s)) {
+    		feePolicy.setStrategyType(Integer.parseInt(s));
+    	}
+    	String sv = request.getParameter("stuVisible");
+    	if (StringUtils.isNotBlank(sv)) {
+    		feePolicy.setStuVisible(Integer.parseInt(sv));
+    	}
+    	String time = request.getParameter("time");
+    	if (StringUtils.isNotBlank(time)) {
+    		feePolicy.setTime(Integer.parseInt(time));
+    	}
+    	entityService.save(feePolicy);
     	return page("", "", 1, 10, model, request);
     }
     
