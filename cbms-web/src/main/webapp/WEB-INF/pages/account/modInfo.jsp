@@ -16,7 +16,7 @@
 <div class="easyui-panel" title="${empty entity?"添加":"修改"}帐户信息" style="width:100%">
     <div style="text-align: center;">
         <form id="inputForm" action="${ctx}account/modInfo.html" method="post">
-    		<input name=id id="id" type="hidden" value="${account.id}">
+    		<input name=id id="uid" type="hidden" value="${account.id}">
             <table cellpadding="5" align="center" style="width: 100%">
                 <tr>
                     <td style="width:47%;text-align: right;padding-right: 10px;">账号:</td>
@@ -36,7 +36,7 @@
                 </tr>
                 <tr>
                     <td style="width:47%;text-align: right;padding-right: 10px;">绑定手机:</td>
-                    <td style="text-align: left;padding-left: 10px;"><input name="mobile" value="${account.mobile}"></td>
+                    <td style="text-align: left;padding-left: 10px;"><input name="mobile" id="mobile" value="${account.mobile}"></td>
                 </tr>
                 <tr>
                     <td style="width:47%;text-align: right;padding-right: 10px;">联系电话:</td>
@@ -67,6 +67,15 @@
 	    		show("",msg);
 		    }
 	    	
+	    	jQuery.validator.addMethod("mobile", function(value, element) {
+				var mobile = $('#mobile').val(); 
+				//132、130、131、156、155、185、186，176
+				var reg = /^((130|132|131|156|155|185|186|176[0-9])+\d{8})$/;
+		    	if(!reg.test(mobile)){
+				       return false;
+				 }
+			    return true;
+	    	 }, "*请输入正确的手机号！");
 	    	$("#inputForm").validate({
 				rules: {
 					name:{
@@ -78,6 +87,18 @@
 					},
 					phoneNum:{
 						required:true
+					},
+					mobile:{
+						required:true,
+						mobile:true,
+						remote:{
+							 url:'${ctx}account/checkMobile.html',
+							 type:"post",
+							 dataType:"json", 
+							 data: {                    
+								 mobile: function(){return $("#mobile").val()},
+								 id:$("#uid").val()}
+						 }
 					},
 					address:{
 						required:true
@@ -107,6 +128,9 @@
 					},
 					address:{
 						required:"*请输入联系地址"
+					},mobile:{
+						required:"*请输入手机号！",
+						remote:"*此手机号已存在！"
 					},
 					licenseNo:{
 						required:"*请输入证件号码",

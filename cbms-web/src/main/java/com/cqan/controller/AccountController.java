@@ -449,12 +449,13 @@ public class AccountController extends BaseController<Account,Long,AccountServic
     		a.setEmail(account.getEmail());
     		a.setName(account.getName());
     		a.setPhoneNum(account.getPhoneNum());
+    		a.setMobile(account.getMobile());
     		a.setLicenseNo(account.getLicenseNo());
     		a.setUpdateTime(new Date());
     		entityService.save(a);
     		model.addAttribute("msg","变更个人信息成功！");
     	}
-    	return "account/resetpwd";
+    	return "account/modify";
     }
     
     @RequestMapping("/change.html")

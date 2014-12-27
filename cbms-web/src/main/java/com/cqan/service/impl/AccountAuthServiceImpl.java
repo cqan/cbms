@@ -44,7 +44,9 @@ public class AccountAuthServiceImpl extends
 		aa.setUpdateTime(new Date());
 		aa.setUserName(account.getUserName());
 		aa.setMobile(account.getMobile());
-		aa.setLoginpolicy(loginPolicy(account.getGroup().getId()));
+		if (account.getGroup().getId()!=null) {
+			aa.setLoginpolicy(loginPolicy(account.getGroup().getId()));
+		}
 		AccountGroup ag = accountGroupService.get(account.getGroup().getId());
 		if (ag!=null) {
 			aa.setIpbindtag(ag.getIpBindTag());
