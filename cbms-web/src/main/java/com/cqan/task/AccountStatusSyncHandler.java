@@ -7,6 +7,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,18 +99,20 @@ public class AccountStatusSyncHandler implements Runnable{
 				//处理短信充值
 				c = Calendar.getInstance();
 				c.set(Calendar.MINUTE, c.get(Calendar.MINUTE)+DELAY);
-				List<RechargeHistory> lists = rechargeHistoryService.findUnRechargeHistory(account.getUserName(),c.getTime());
-				if (lists!=null) {
-					for (RechargeHistory rh : lists) {
-						if (rh.getFeePolicyId()==account.getFeePolicyId()) {
-							FeePolicy fp = feePolicyService.get(at.getFeePolicyId());
-							c.set(Calendar.MONTH, c.get(Calendar.MONTH)+fp.getTime());
-							account.setExpireTime(c.getTime());
-							rh.setStatus(2);
-							rh.setUpdateTime(new Date());
-							rechargeHistoryService.save(rh);
-							accountService.save(account);
-							logger.info("同步短信充值信息：{}",rh);
+				if (account!=null&&StringUtils.isNotBlank(account.getMobile())) {
+					List<RechargeHistory> lists = rechargeHistoryService.findUnRechargeHistory(account.getMobile(),c.getTime());
+					if (lists!=null) {
+						for (RechargeHistory rh : lists) {
+							if (rh.getFeePolicyId()==account.getFeePolicyId()) {
+								FeePolicy fp = feePolicyService.get(at.getFeePolicyId());
+								c.set(Calendar.MONTH, c.get(Calendar.MONTH)+fp.getTime());
+								account.setExpireTime(c.getTime());
+								rh.setStatus(2);
+								rh.setUpdateTime(new Date());
+								rechargeHistoryService.save(rh);
+								accountService.save(account);
+								logger.info("同步短信充值信息：{}",rh);
+							}
 						}
 					}
 				}
