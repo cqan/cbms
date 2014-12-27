@@ -12,8 +12,8 @@
 </head>
 <body>
 <div style="margin:5px 0;"></div>
-系统-->营业管理-->${empty entity?"添加":"修改"}学校客户组信息
-<div class="easyui-panel" title="${empty entity?"添加":"修改"}学校客户组信息" style="width:100%">
+系统-->营业管理-->${empty entity?"添加":"修改"}帐户信息
+<div class="easyui-panel" title="${empty entity?"添加":"修改"}帐户信息" style="width:100%">
     <div style="text-align: center;">
         <form id="inputForm" action="${ctx}account/modInfo.html" method="post">
     		<input name=id id="id" type="hidden" value="${account.id}">
@@ -35,12 +35,16 @@
                     <td style="text-align: left;padding-left: 10px;"><input name="address" value="${account.address}"></td>
                 </tr>
                 <tr>
-                    <td style="width:47%;text-align: right;padding-right: 10px;">email:</td>
-                    <td style="text-align: left;padding-left: 10px;"><input name="email" value="${account.email}"></td>
+                    <td style="width:47%;text-align: right;padding-right: 10px;">绑定手机:</td>
+                    <td style="text-align: left;padding-left: 10px;"><input name="mobile" value="${account.mobile}"></td>
                 </tr>
                 <tr>
                     <td style="width:47%;text-align: right;padding-right: 10px;">联系电话:</td>
                     <td style="text-align: left;padding-left: 10px;"><input name="phoneNum" value="${account.phoneNum}"></td>
+                </tr>
+                <tr>
+                    <td style="width:47%;text-align: right;padding-right: 10px;">email:</td>
+                    <td style="text-align: left;padding-left: 10px;"><input name="email" value="${account.email}"></td>
                 </tr>
                 <tr>
                     <td colspan="2">

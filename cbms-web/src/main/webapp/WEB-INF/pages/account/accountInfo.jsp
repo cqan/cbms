@@ -39,9 +39,9 @@
                  <td style="text-align: left;padding-left: 10px;">${entity.group.name}</td>
              </tr>
              <tr>
-                 <td style="width:20%;text-align: right;padding-right: 10px;">电子邮箱:</td>
+                 <td style="width:20%;text-align: right;padding-right: 10px;">绑定手机:</td>
                  <td style="text-align: left;padding-left: 10px;">
-                 	${entity.email}
+                 	${entity.mobile}
                  </td>
                  <td style="width:20%;text-align: right;padding-right: 10px;">联系电话:</td>
                  <td style="text-align: left;padding-left: 10px;">${entity.phoneNum}</td>

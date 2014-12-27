@@ -13,7 +13,7 @@
 <body>
 <div style="margin:5px 0;"></div>  
 系统--><a href="${ctx}account/index.html">营业管理</a>-->变更查询
-<div class="easyui-panel" title="开户信息" style="width:100%">
+<div class="easyui-panel" title="套餐变更查询" style="width:100%">
     <div style="text-align: center;">
          <table cellpadding="5" align="center" style="width:65%">
              <c:if test="${empty account}">

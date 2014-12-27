@@ -73,7 +73,7 @@ public class RoleController extends BaseController<Role, Long, RoleService> {
 		model.addAttribute("entity", role);
 		model.addAttribute("auths", auths);
 		if (StringUtils.isNoneBlank(msg)) {
-    		model.addAttribute("msg",msg);
+    		model.addAttribute("msg","修改角色权限成功！");
 		}
 		return "role/auth";
 	}

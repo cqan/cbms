@@ -12,7 +12,7 @@
 </head>
 <body>
 <div style="margin:5px 0;"></div>
-系统--><a href="${ctx}account/index.html">营业管理</a>-->开户受理<div class="easyui-panel" title="${empty entity?"添加":"修改"}学校客户组信息" style="width:100%">
+系统--><a href="${ctx}account/index.html">营业管理</a>-->开户受理<div class="easyui-panel" title="开户受理" style="width:100%">
     <div style="text-align: center;">
         <form id="inputForm" action="${ctx}account/save.html" method="post">
     		<input name="id" id="id" type="hidden" value="${entity.id}">
@@ -65,7 +65,7 @@
                 </tr>
                 <tr>
                     <td  style="width:47%;text-align: right;padding-right: 10px;">Email:</td>
-                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="email" name="email"  value="${entity.email}"/>*相关资料或验证信息会发送到此邮箱，请正确填写</td>
+                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="email" name="email"  value="${entity.email}"/></td>
                 </tr>
                 <tr>
                     <td  style="width:47%;text-align: right;padding-right: 10px;">地址:</td>
