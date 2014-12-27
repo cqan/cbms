@@ -29,8 +29,16 @@
                  <option value="9" ${param['search_EQI_strategyType'] eq 9?"selected":""}>计流量</option>
           </select>
       	 适用地区：<select class="easyui-combobox" style="width: 100px;" data-options="panelHeight:'auto'" name="search_EQS_area">
-                 <option value="">全省</option>
-                 <option value="1" ${param['search_EQS_area'] eq 1?"selected":""}>北京</option>
+      	         <option value="" ${param['search_EQS_area'] eq  ''?"selected":""}>全部</option>
+                 <option value="2" ${param['search_EQS_area'] eq  2?"selected":""}>二区</option>
+                 <option value="3" ${param['search_EQS_area'] eq  3?"selected":""}>三区</option>
+                 <option value="4" ${param['search_EQS_area'] eq  4?"selected":""}>四区</option>
+                 <option value="5" ${param['search_EQS_area'] eq  5?"selected":""}>五区</option>
+                 <option value="7" ${param['search_EQS_area'] eq  7?"selected":""}>七区</option>
+                 <option value="8" ${param['search_EQS_area'] eq  8?"selected":""}>八区</option>
+                 <option value="9" ${param['search_EQS_area'] eq  9?"selected":""}>昌平</option>
+                 <option value="10" ${param['search_EQS_area'] eq  10?"selected":""}>房山</option>
+                 <option value="11" ${param['search_EQS_area'] eq  11?"selected":""}>密云</option>
           </select>
         	 学校：<select class="easyui-combobox" style="width: 100px;" data-options="panelHeight:'auto'" name="search_EQI_school.id">
                  <option value="">全部</option>
@@ -39,10 +47,11 @@
                  </c:forEach>
           </select>
         	 学生是否可见：<select class="easyui-combobox" style="width: 100px;" data-options="panelHeight:'auto'" name="search_EQI_stuVisible">
-                 <option value="">全部</option>
-                 <option value="1">是</option>
-                 <option value="2">否</option>
+                 <option value=""  ${param['search_EQI_stuVisible'] eq ''?"selected":""}>全部</option>
+                 <option value="1" ${param['search_EQI_stuVisible'] eq  1?"selected":""}>是</option>
+                 <option value="2" ${param['search_EQI_stuVisible'] eq  2?"selected":""}>否</option>
           </select>
+          <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="submitForm()" style="width:80px">Search</a>
     </form>
     <table id="tt" class="easyui-datagrid" style="width:100%;height:auto;">
         <shiro:hasPermission name="fee.policy.add">
@@ -73,7 +82,7 @@
         <c:forEach items="${page.content}" var="entity">
             <tr>
                 <td>${entity.name}</td>
-                <td>${entity.area eq 2?'二区':entity.area eq 3?'三区':entity.area eq 4?'四区':entity.area eq 5?'五区':entity.area eq 7?'七区':entity.area eq 8?'八区':entity.area eq 9?'昌平':entity.area eq 10?'房山':entity.area eq 11?'密云':''}</td>
+                <td>${entity.area eq 2?'二区':entity.area eq 3?'三区':entity.area eq 4?'四区':entity.area eq 5?'五区':entity.area eq 7?'七区':entity.area eq 8?'八区':entity.area eq 9?'昌平':entity.area eq 10?'房山':entity.area eq 11?'密云':entity.area eq ''?'全部':''}</td>
                 <td>${entity.school.id eq null?"全部学校":entity.school.name}</td>
                 <td>${entity.strategyType eq 1?'包月无上限':''}</td>
                 <td>${entity.price}</td>

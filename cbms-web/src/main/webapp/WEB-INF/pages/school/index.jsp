@@ -40,13 +40,14 @@
                     <option value="2" ${param['search_EQI_rateType'] eq 2?"selected":""}>包月</option>
              </select>
              </td>
-                <td align="right">
+             <td align="right">
                 可信标志：<select class="easyui-combobox" style="width: 100px;" data-options="panelHeight:'auto'" name="search_EQI_trusted">
                     <option value="">全部</option>
                     <option value="1" ${param['search_EQI_trusted'] eq 1?"selected":""}>可信</option>
-                    <option value="2" ${param['search_EQI_trusted'] eq 0?"selected":""}>不可信</option>
+                    <option value="2" ${param['search_EQI_trusted'] eq 2?"selected":""}>不可信</option>
              </select>
-             </td><td align="right">
+             </td>
+             <td align="right">
              上网方式：<select class="easyui-combobox" style="width: 100px;" data-options="panelHeight:'auto'" name="search_EQI_netType">
 	                    <option value="">全部</option>
 	                    <option value="1" ${param['search_EQI_netType'] eq 1?"selected":""}>虚拟ADSL</option>

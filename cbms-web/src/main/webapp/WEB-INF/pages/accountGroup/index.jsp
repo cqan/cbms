@@ -22,7 +22,6 @@
              </td>
             <td align="right">
       		  客户组编号：<input name="search_LIKES_groupCode" style="width: 90px;" class="easyui-textbox" value="${param['search_LIKES_groupCode']}">
-      		  <input name="search_EQI_del" type="hidden" value="false">
       		</td>
              <td align="right">      
 	         	 客户组类型：

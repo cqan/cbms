@@ -65,7 +65,7 @@
                 </tr>
                 <tr>
                     <td  style="width:47%;text-align: right;padding-right: 10px;">Email:</td>
-                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="email" name="email"  value="${entity.email}"/>*相关资料或验证信息会发送到此邮箱，请正确填写</td>
+                    <td style="text-align: left;padding-left: 10px;"><input type="text" id="email" name="email"  value="${entity.email}"/></td>
                 </tr>
                 <tr>
                     <td  style="width:47%;text-align: right;padding-right: 10px;">地址:</td>

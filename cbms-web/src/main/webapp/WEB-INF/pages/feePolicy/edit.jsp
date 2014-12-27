@@ -17,6 +17,7 @@
     <div style="text-align: center;">
         <form id="inputForm" action="${ctx}feePolicy/save.html" method="post">
     		<input name="id" id="id" type="hidden" value="${entity.id}">
+    		<input id="schoolId" type="hidden" value="${entity.school.id}">
             <table cellpadding="5" align="center" style="width: 100%">
                 <tr>
                     <td  style="width:47%;text-align: right;padding-right: 10px;">计费策略名:</td>
@@ -33,7 +34,15 @@
                     <td style="width:47%;text-align: right;padding-right: 10px;">计费政策类型:</td>
                     <td style="text-align: left;padding-left: 10px;">
 	                    <select class="easyui-combobox" data-options="panelHeight:'auto'" name="strategyType">
-	                          <option value="1" ${entity.strategyType eq 1?"selected":""}>包月无上限</option>
+	                             <option value="1" ${entity.strategyType eq 1?"selected":""}>包月无上限</option>
+				                 <option value="2" ${entity.strategyType eq 2?"selected":""}>包时长</option>
+				                 <option value="3" ${entity.strategyType eq 3?"selected":""}>包天无上限</option>
+				                 <option value="4" ${entity.strategyType eq 4?"selected":""}>包天有时长上限</option>
+				                 <option value="5" ${entity.strategyType eq 5?"selected":""}>包天有流量上限</option>
+				                 <option value="6" ${entity.strategyType eq 6?"selected":""}>计时</option>
+				                 <option value="7" ${entity.strategyType eq 7?"selected":""}>包月有时长上限</option>
+				                 <option value="8" ${entity.strategyType eq 8?"selected":""}>包月有流量上限</option>
+				                 <option value="9" ${entity.strategyType eq 9?"selected":""}>计流量</option>
 	                     </select>
                     </td>
                 </tr>
@@ -74,15 +83,16 @@
                     <td style="text-align: left;padding-left: 10px;">
                         <select class="easyui-combobox"  data-options="valueField:'areaId',
                             textField:'areaName',panelHeight:'auto',editable:false,
-                            data:[{'areaId':2,'areaName':'二区',selected:${entity.area eq '二区'}},
-                            {'areaId':3,'areaName':'三区',selected:${entity.area eq '三区'}},
-                            {'areaId':4,'areaName':'四区',selected:${entity.area eq '四区'}},
-                            {'areaId':5,'areaName':'五区',selected:${entity.area eq '五区'}},
-                            {'areaId':7,'areaName':'七区',selected:${entity.area eq '七区'}},
-                            {'areaId':8,'areaName':'八区',selected:${entity.area eq '八区'}},
-                            {'areaId':9,'areaName':'昌平',selected:${entity.area eq '昌平'}},
-                            {'areaId':10,'areaName':'房山',selected:${entity.area eq '房山'}},
-                            {'areaId':11,'areaName':'密云',selected:${entity.area eq '密云'}}
+                            data:[{'areaId':'','areaName':'全部',selected:${entity.area eq ''}},
+                            {'areaId':2,'areaName':'二区',selected:${entity.area eq '2'}},
+                            {'areaId':3,'areaName':'三区',selected:${entity.area eq '3'}},
+                            {'areaId':4,'areaName':'四区',selected:${entity.area eq '4'}},
+                            {'areaId':5,'areaName':'五区',selected:${entity.area eq '5'}},
+                            {'areaId':7,'areaName':'七区',selected:${entity.area eq '7'}},
+                            {'areaId':8,'areaName':'八区',selected:${entity.area eq '8'}},
+                            {'areaId':9,'areaName':'昌平',selected:${entity.area eq '9'}},
+                            {'areaId':10,'areaName':'房山',selected:${entity.area eq '10'}},
+                            {'areaId':11,'areaName':'密云',selected:${entity.area eq '11'}}
                             ]" name="area" id="area">
                        </select>
                     </td>
@@ -175,12 +185,15 @@
 		       }).combobox('clear');
              }
 	   });
-	    
        var _school = $('#school').combobox({
              url: '${ctx}school/select.html?areaId='+area_id,
              editable: false,
              valueField: 'schoolId',
              textField: 'schoolName'
+             //,
+            //onLoadSuccess:function(data){
+                 //$('#school').combobox('setValue',$("#schoolId").val());
+            //}
        });
          
 	   	$("#inputForm").validate({
@@ -237,11 +250,11 @@
     		msgShow("提示","请选择下行带宽！","warning");
     		return false;
     	}
-    	var area = $('#area').combobox('getValue'); 
-    	if(area==''){
-    		msgShow("提示","请选择地区！","warning");
-    		return false;
-    	}
+    	//var area = $('#area').combobox('getValue'); 
+    	//if(area==''){
+    	//	msgShow("提示","请选择地区！","warning");
+    	//	return false;
+    	//}
     	$("#inputForm").submit();
     }
 </script>
