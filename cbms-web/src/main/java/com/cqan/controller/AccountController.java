@@ -503,7 +503,7 @@ public class AccountController extends BaseController<Account,Long,AccountServic
     	AccountTask at = new AccountTask();
     	at.setAccountId(account.getId());
     	at.setCreateTime(new Date());
-    	at.setFeePolicyId(account.getFeePolicyId());
+    	at.setFeePolicyId(feePolicyId);
     	accountTaskService.save(at);
     }
     
