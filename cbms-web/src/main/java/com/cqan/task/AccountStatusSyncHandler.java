@@ -91,11 +91,15 @@ public class AccountStatusSyncHandler implements Runnable{
 				Calendar c = Calendar.getInstance();
 				if (at!=null) {
 					account.setFeePolicyId(at.getId());
-					FeePolicy fp = feePolicyService.get(at.getFeePolicyId());
-					c.set(Calendar.MONTH, c.get(Calendar.MONTH)+fp.getTime());
-					account.setExpireTime(c.getTime());
-					accountTaskService.delete(at.getId());
-					accountService.save(account);
+					if (at.getFeePolicyId()!=null) {
+						FeePolicy fp = feePolicyService.get(at.getFeePolicyId());
+						if (fp!=null) {
+							c.set(Calendar.MONTH, c.get(Calendar.MONTH)+fp.getTime());
+							account.setExpireTime(c.getTime());
+							accountTaskService.delete(at.getId());
+							accountService.save(account);
+						}
+					}
 				}
 				logger.info("更新帐户信息:{}",account);
 				//处理短信充值
