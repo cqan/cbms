@@ -35,7 +35,7 @@
             <th field="name3" width="10%">密码</th>
             <th field="name4" width="10%">制卡批次</th>
             <th field="name5" width="20%">创建时间</th>
-            <th field="name6" width="20%">创建时间</th>
+            <th field="name6" width="20%">失效时间</th>
             <th field="name7" width="10%">状态</th>
             <th field="name8" width="15%">操作</th>
         </tr>
@@ -52,7 +52,7 @@
                 <td>
                 	<c:if test="${entity.status eq 1}"><a href="#" onclick="disable('${entity.id}')">冻结</a>&nbsp;</c:if>
                 	<c:if test="${entity.status eq 4}"><a href="#" onclick="disable('${entity.id}')">解结</a>&nbsp;</c:if>
-                	<a href="#" onclick="resetPwd('${entity.id}')">重置密码</a>
+                	<c:if test="${entity.status eq 1}"><a href="#" onclick="resetPwd('${entity.id}')">重置密码</a></c:if>
                 </td>
             </tr>
         </c:forEach>
