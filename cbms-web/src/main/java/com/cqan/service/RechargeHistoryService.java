@@ -12,7 +12,7 @@ public interface RechargeHistoryService extends
 
 	public List<RechargeHistory> findUnRechargeHistory(String userName,Date rechargeTime);
 
-	public Long countCurrMonthRechargeHistory();
+	public Long countCurrMonthRechargeHistory(String username);
 
 	public List<RechargeHistory> findByStreamNumber(String userName,String streamNumber);
 }

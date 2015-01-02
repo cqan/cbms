@@ -33,10 +33,10 @@
         <tr>
             <th field="name2" width="15%">卡号名</th>
             <th field="name3" width="10%">密码</th>
-            <th field="name4" width="10%">制卡批次</th>
-            <th field="name5" width="20%">创建时间</th>
-            <th field="name6" width="20%">失效时间</th>
-            <th field="name7" width="10%">状态</th>
+            <th field="name4" width="20%">制卡批次</th>
+            <th field="name5" width="15%">创建时间</th>
+            <th field="name6" width="15%">失效时间</th>
+            <th field="name7" width="5%">状态</th>
             <th field="name8" width="15%">操作</th>
         </tr>
         </thead>

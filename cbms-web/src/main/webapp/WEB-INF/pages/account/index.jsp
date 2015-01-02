@@ -34,10 +34,10 @@
             <th field="name3" width="10%">绑定手机</th>
             <th field="name4" width="10%">密码</th>
             <th field="name5" width="15%">证件号</th>
-            <th field="name6" width="10%">创建时间</th>
-            <th field="name7" width="10%">到期时间</th>
-            <th field="name8" width="10%">状态</th>
-            <th field="name9" width="15%">操作</th>
+            <th field="name6" width="15%">创建时间</th>
+            <th field="name7" width="15%">到期时间</th>
+            <th field="name8" width="5%">状态</th>
+            <th field="name9" width="10%">操作</th>
         </tr>
         </thead>
         <tbody>

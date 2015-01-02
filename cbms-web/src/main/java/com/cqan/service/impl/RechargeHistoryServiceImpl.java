@@ -60,7 +60,7 @@ public class RechargeHistoryServiceImpl extends
 	}
 
 	@Override
-	public Long countCurrMonthRechargeHistory() {
+	public Long countCurrMonthRechargeHistory(String username) {
 		Map<String,Object> searchParams = Maps.newHashMap();
 		Calendar c = Calendar.getInstance();
 		c.set(Calendar.DATE, 0);
@@ -69,6 +69,7 @@ public class RechargeHistoryServiceImpl extends
 		c.set(Calendar.SECOND, 0);
 		c.set(Calendar.MILLISECOND, 0);
 		searchParams.put("GTED_createTime",sdf.format(c.getTime()));
+		searchParams.put("EQS_userName",username);
 		return repository.count(buildSpecification(searchParams));
 	}
 

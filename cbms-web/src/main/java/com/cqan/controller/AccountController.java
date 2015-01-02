@@ -20,6 +20,8 @@ import com.alibaba.fastjson.JSON;
 import com.cqan.account.Account;
 import com.cqan.account.AccountTask;
 import com.cqan.account.FeePolicy;
+import com.cqan.http.AppResp;
+import com.cqan.http.InfoCode;
 import com.cqan.school.AccountGroup;
 import com.cqan.school.School;
 import com.cqan.service.AccountGroupService;
@@ -31,6 +33,7 @@ import com.cqan.service.RechargeHistoryService;
 import com.cqan.service.SchoolService;
 import com.cqan.service.UserSchoolService;
 import com.cqan.system.Card;
+import com.cqan.system.CardBatch;
 import com.cqan.system.UserSchool;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -129,6 +132,23 @@ public class AccountController extends BaseController<Account,Long,AccountServic
     		model.addAttribute("msg","*卡号已被冻结了！");
     		return "account/recharge";
     	}
+    	CardBatch cb = card.getCardBatch();
+		if (cb!=null&&cb.getSchools()!=null) {
+			boolean flag = false;
+			List<School> schools = cb.getSchools();
+			if (schools!=null) {
+				for (School s : schools) {
+					if (account.getSchoolId()!=null&&account.getSchoolId().equals(s.getId())) {
+						flag = true;
+						break;
+					}
+				}
+				if (!flag) {
+					model.addAttribute("msg","*用户不能使用此卡号！");
+		    		return "account/recharge";
+				}
+			}
+		}
     	//用户套餐与卡的套餐一致
     	if (card.getFeePolicyId()==account.getFeePolicyId()) {
 			FeePolicy fp = feePolicyService.get(card.getFeePolicyId());

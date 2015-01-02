@@ -53,12 +53,12 @@
 	                    </td>
 	                </tr>
 	                 <tr>
-                    <td  style="width:47%;text-align: right;padding-right: 10px;">套餐:</td>
-                    <td style="text-align: left;padding-left: 10px;">        
-                        <select class="easyui-combobox" id="feePolicy" name="feePolicyId" data-options="valueField:'feePolicyId', textField:'feePolicyName',panelHeight:'auto',editable:false">
-                       </select>
-                    </td>
-                <tr>
+	                    <td  style="width:47%;text-align: right;padding-right: 10px;">套餐:</td>
+	                    <td style="text-align: left;padding-left: 10px;">        
+	                        <select class="easyui-combobox" id="feePolicy" name="feePolicyId" data-options="valueField:'feePolicyId', textField:'feePolicyName',panelHeight:'auto',editable:false">
+	                       </select>
+	                    </td>
+                	<tr>
 	                <tr>
 	                    <td  style="width:47%;text-align: right;padding-right: 10px;">描述:</td>
 	                    <td style="text-align: left;padding-left: 10px;">

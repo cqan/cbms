@@ -46,9 +46,18 @@ public class InfoCode implements Serializable {
     public static final InfoCode NOTFOUND_USER = new InfoCode(40001, "用户不存在");
     public static final InfoCode STREAMNUMBER_IS_NULL = new InfoCode(40002, "流水号不能为空");
     public static final InfoCode FEEPOLICY_IS_NULL = new InfoCode(40003, "套餐编号不能为空");
-    public static final InfoCode FEEPOLICY_IS_ERROR = new InfoCode(40004, "套餐不存在");
-    public static final InfoCode FEEPOLICY_NOT_MATCH = new InfoCode(40005, "套餐不与用户匹配");
-    public static final InfoCode RECHAREGE_LIMIT = new InfoCode(40006, "本月充值超过2次，请下月再充值！");
+    public static final InfoCode LICENSENO_IS_NULL = new InfoCode(40004, "请输入开户时的证件号");
+    public static final InfoCode FEEPOLICY_IS_ERROR = new InfoCode(40005, "套餐不存在");
+    public static final InfoCode FEEPOLICY_NOT_MATCH = new InfoCode(40006, "套餐不与用户匹配");
+    public static final InfoCode RECHAREGE_LIMIT = new InfoCode(40007, "本月充值超过2次，请下月再充值！");
+    public static final InfoCode PASSWORD_IS_NULL = new InfoCode(40008, "无效的密码");
+    public static final InfoCode TOKEN_IS_NULL = new InfoCode(40009, "请输入授权码");
+    public static final InfoCode USER_LOGOUT = new InfoCode(40010, "用户没有登录或登录已过期");
+    public static final InfoCode USERNAME_OR_PASSWROD_IS_ERROR = new InfoCode(40011, "用户或密码不正确！");
+    public static final InfoCode INVALID_CARD = new InfoCode(40012, "卡号不存在或卡号已过期！");
+    public static final InfoCode CARD_ERROR = new InfoCode(40012, "卡号或密码不正确！");
+    
+    public static final InfoCode NOT_USERABLED_CARD = new InfoCode(40013, "用户不能使用此卡！");
 
     /****参数错误结束****/
 

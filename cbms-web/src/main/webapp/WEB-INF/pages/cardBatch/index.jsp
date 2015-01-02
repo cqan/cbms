@@ -32,7 +32,7 @@
             <th field="name1" width="15%">名称</th>
             <th field="name3" width="5%">价格</th>
             <th field="name4" width="5%">数量</th>
-            <th field="name5" width="5%">状态</th>
+            <th field="name5" width="10%">状态</th>
             <th field="name7" width="15%">创建时间</th>
             <th field="name6" width="15%">失效时间</th>
             <th field="name8" width="15%">描述</th>
