@@ -287,13 +287,13 @@ public class AccountRestController {
 			}
 			AuthToken at = authTokenService.findByUserName(username);
 			if (at==null) {
-				return new AppResp(InfoCode.USER_LOGOUT).toString();
+				return new AppResp(InfoCode.UNAUTHORIZED).toString();
 			}
 			if (!token.equals(at.getAuthToken())) {
-				return new AppResp(InfoCode.USER_LOGOUT).toString();
+				return new AppResp(InfoCode.UNAUTHORIZED).toString();
 			}
 			if (at.getExpireTime().getTime()<=System.currentTimeMillis()) {
-				return new AppResp(InfoCode.USER_LOGOUT).toString();
+				return new AppResp(InfoCode.UNAUTHORIZED).toString();
 			}
 			Account account = accountService.findByUserName(username);
 			if (account==null) {
@@ -360,13 +360,13 @@ public class AccountRestController {
 			}
 			AuthToken at = authTokenService.findByUserName(username);
 			if (at==null) {
-				return new AppResp(InfoCode.USER_LOGOUT).toString();
+				return new AppResp(InfoCode.UNAUTHORIZED).toString();
 			}
 			if (!token.equals(at.getAuthToken())) {
-				return new AppResp(InfoCode.USER_LOGOUT).toString();
+				return new AppResp(InfoCode.UNAUTHORIZED).toString();
 			}
 			if (at.getExpireTime().getTime()<=System.currentTimeMillis()) {
-				return new AppResp(InfoCode.USER_LOGOUT).toString();
+				return new AppResp(InfoCode.UNAUTHORIZED).toString();
 			}
 			Account account = accountService.findByUserName(username);
 			if (account==null) {
@@ -413,27 +413,27 @@ public class AccountRestController {
 			}
 			AuthToken at = authTokenService.findByUserName(username);
 			if (at==null) {
-				return new AppResp(InfoCode.USER_LOGOUT).toString();
+				return new AppResp(InfoCode.UNAUTHORIZED).toString();
 			}
 			if (!token.equals(at.getAuthToken())) {
-				return new AppResp(InfoCode.USER_LOGOUT).toString();
+				return new AppResp(InfoCode.UNAUTHORIZED).toString();
 			}
 			if (at.getExpireTime().getTime()<=System.currentTimeMillis()) {
-				return new AppResp(InfoCode.USER_LOGOUT).toString();
+				return new AppResp(InfoCode.UNAUTHORIZED).toString();
 			}
 			Account account = accountService.findByUserName(username);
 			if (account==null) {
 				return new AppResp(InfoCode.NOTFOUND_USER).toString();
 			}
 			Card card = cardService.findByCardNo(cardNo);
-			if (card==null||card.getEndTime().getTime()<=System.currentTimeMillis()) {
+			if (card==null||card.getStatus()!=1||card.getEndTime().getTime()<=System.currentTimeMillis()) {
 				return new AppResp(InfoCode.INVALID_CARD).toString();
 			}
 			if (!card.getPwd().equals(password)) {
 				return new AppResp(InfoCode.CARD_ERROR).toString();
 			}
 			CardBatch cb = card.getCardBatch();
-			if (cb!=null&&cb.getSchools()!=null) {
+			if (cb!=null&&cb.getSchools()!=null&&!cb.getSchools().isEmpty()) {
 				boolean flag = false;
 				List<School> schools = cb.getSchools();
 				if (schools!=null) {
@@ -470,15 +470,24 @@ public class AccountRestController {
 						c.set(Calendar.MONTH, c.get(Calendar.MONTH)+fp.getTime());
 						account.setExpireTime(c.getTime());
 						accountService.save(account);
+						card.setStatus(2);
+						cardService.save(card);
 						saveHistroy(account, card, fp);
 						return new AppResp(InfoCode.SUCCESS).toString();
 					}else{
-						AccountTask accountTask = new AccountTask();
+						
+						AccountTask accountTask = accountTaskService.findByAccountId(account.getId());
+						if (accountTask!=null) {
+							return new AppResp(InfoCode.USER_HAS_CHANGE).toString();
+						}
+						accountTask = new AccountTask();
 						accountTask.setAccountId(account.getId());
 						accountTask.setCreateTime(new Date());
 						accountTask.setFeePolicyId(card.getFeePolicyId());
 						accountTask.setUpdateTime(new Date());
 						saveHistroy(account, card, fp);
+						card.setStatus(2);
+						cardService.save(card);
 						accountTaskService.save(accountTask);
 						return new AppResp(InfoCode.SUCCESS).toString();
 					}
@@ -506,25 +515,25 @@ public class AccountRestController {
 			if (StringUtils.isBlank(token)) {
 				return new AppResp(InfoCode.TOKEN_IS_NULL).toString();
 			}
-			AuthToken at = authTokenService.findByUserName(username);
-			if (at==null) {
-				return new AppResp(InfoCode.USER_LOGOUT).toString();
-			}
-			if (!token.equals(at.getAuthToken())) {
-				return new AppResp(InfoCode.USER_LOGOUT).toString();
-			}
-			if (at.getExpireTime().getTime()<=System.currentTimeMillis()) {
-				return new AppResp(InfoCode.USER_LOGOUT).toString();
-			}
-			Account account = accountService.findByUserName(username);
-			if (account==null) {
-				return new AppResp(InfoCode.NOTFOUND_USER).toString();
-			}
-			if (StringUtils.isNotBlank(newpassword)) {
+			if (StringUtils.isBlank(newpassword)) {
 				return new AppResp(InfoCode.PASSWORD_IS_NULL).toString();
 			}
 			if (newpassword.length()<6) {
 				return new AppResp(InfoCode.PASSWORD_IS_NULL).toString();
+			}
+			AuthToken at = authTokenService.findByUserName(username);
+			if (at==null) {
+				return new AppResp(InfoCode.UNAUTHORIZED).toString();
+			}
+			if (!token.equals(at.getAuthToken())) {
+				return new AppResp(InfoCode.UNAUTHORIZED).toString();
+			}
+			if (at.getExpireTime().getTime()<=System.currentTimeMillis()) {
+				return new AppResp(InfoCode.UNAUTHORIZED).toString();
+			}
+			Account account = accountService.findByUserName(username);
+			if (account==null) {
+				return new AppResp(InfoCode.NOTFOUND_USER).toString();
 			}
 			account.setPassword(newpassword);
 			accountService.save(account);

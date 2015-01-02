@@ -133,7 +133,7 @@ public class AccountController extends BaseController<Account,Long,AccountServic
     		return "account/recharge";
     	}
     	CardBatch cb = card.getCardBatch();
-		if (cb!=null&&cb.getSchools()!=null) {
+		if (cb!=null&&cb.getSchools()!=null&&!cb.getSchools().isEmpty()) {
 			boolean flag = false;
 			List<School> schools = cb.getSchools();
 			if (schools!=null) {

@@ -52,7 +52,7 @@ public class InfoCode implements Serializable {
     public static final InfoCode RECHAREGE_LIMIT = new InfoCode(40007, "本月充值超过2次，请下月再充值！");
     public static final InfoCode PASSWORD_IS_NULL = new InfoCode(40008, "无效的密码");
     public static final InfoCode TOKEN_IS_NULL = new InfoCode(40009, "请输入授权码");
-    public static final InfoCode USER_LOGOUT = new InfoCode(40010, "用户没有登录或登录已过期");
+    public static final InfoCode USER_HAS_CHANGE = new InfoCode(40010, "用户有变更记录暂不能充值");
     public static final InfoCode USERNAME_OR_PASSWROD_IS_ERROR = new InfoCode(40011, "用户或密码不正确！");
     public static final InfoCode INVALID_CARD = new InfoCode(40012, "卡号不存在或卡号已过期！");
     public static final InfoCode CARD_ERROR = new InfoCode(40012, "卡号或密码不正确！");
