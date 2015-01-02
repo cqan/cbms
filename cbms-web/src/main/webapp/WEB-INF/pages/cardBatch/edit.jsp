@@ -62,7 +62,7 @@
 	                <tr>
 	                    <td  style="width:47%;text-align: right;padding-right: 10px;">描述:</td>
 	                    <td style="text-align: left;padding-left: 10px;">
-	                    	<textarea rows="decription" cols="20"></textarea>
+	                    	<textarea rows="6" cols="20" name="decription"></textarea>
 	                    </td>
 	                </tr>
 	                <tr>
