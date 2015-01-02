@@ -52,7 +52,7 @@
                 <td>
                 	<c:if test="${entity.status eq 1}"><a href="#" onclick="disable('${entity.id}')">冻结</a>&nbsp;</c:if>
                 	<c:if test="${entity.status eq 4}"><a href="#" onclick="disable('${entity.id}')">解结</a>&nbsp;</c:if>
-                	<a href="#" onclick="resetPwd('${entity.id}')">重置密码</a>
+                	<c:if test="${entity.status eq 1}"><a href="#" onclick="resetPwd('${entity.id}')">重置密码</a></c:if>
                 </td>
             </tr>
         </c:forEach>

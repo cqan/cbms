@@ -157,7 +157,6 @@
 						required:true
 					},
 					mobile:{
-						required:true,
 						mobile:true,
 						remote:{
 							 url:'${ctx}account/checkMobile.html',
@@ -195,7 +194,6 @@
 						required:"*请输入姓名"
 					},
 					mobile:{
-						required:"*请输入手机号！",
 						remote:"*此手机号已存在！"
 					},
 					licenseNo:{

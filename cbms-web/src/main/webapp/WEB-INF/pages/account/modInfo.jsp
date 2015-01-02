@@ -12,8 +12,8 @@
 </head>
 <body>
 <div style="margin:5px 0;"></div>
-系统-->营业管理-->${empty entity?"添加":"修改"}帐户信息
-<div class="easyui-panel" title="${empty entity?"添加":"修改"}帐户信息" style="width:100%">
+系统-->营业管理-->变更帐户信息
+<div class="easyui-panel" title="变更帐户信息" style="width:100%">
     <div style="text-align: center;">
         <form id="inputForm" action="${ctx}account/modInfo.html" method="post">
     		<input name=id id="uid" type="hidden" value="${account.id}">
@@ -89,7 +89,6 @@
 						required:true
 					},
 					mobile:{
-						required:true,
 						mobile:true,
 						remote:{
 							 url:'${ctx}account/checkMobile.html',
@@ -129,7 +128,6 @@
 					address:{
 						required:"*请输入联系地址"
 					},mobile:{
-						required:"*请输入手机号！",
 						remote:"*此手机号已存在！"
 					},
 					licenseNo:{
