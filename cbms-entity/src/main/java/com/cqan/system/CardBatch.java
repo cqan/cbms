@@ -2,17 +2,27 @@ package com.cqan.system;
 
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.cqan.IdLongEntity;
+import com.cqan.school.School;
 
 @Entity
 @Table(name="card_strategy")
@@ -41,7 +51,26 @@ public class CardBatch extends IdLongEntity {
 	
 	private Long feePolicyId;
 	
+	
+	private List<School> schools;
+	
 
+	// 多对多定义
+	@ManyToMany
+	@JoinTable(name = "tbl_card_batch_school", joinColumns = { @JoinColumn(name = "card_batch_id") }, inverseJoinColumns = { @JoinColumn(name = "school_id") })
+	// Fecth策略定义
+	@Fetch(FetchMode.SUBSELECT)
+	// 集合按id排序
+	@OrderBy("id ASC")
+	// 缓存策略
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+	public List<School> getSchools() {
+		return schools;
+	}
+
+	public void setSchools(List<School> schools) {
+		this.schools = schools;
+	}
 
 	public Long getFeePolicyId() {
 		return feePolicyId;

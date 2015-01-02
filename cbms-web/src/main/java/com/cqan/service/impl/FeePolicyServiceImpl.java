@@ -29,4 +29,10 @@ public class FeePolicyServiceImpl extends BaseServiceImpl<FeePolicy, Long, FeePo
 		return repository.findBySchoolIsNull();
 	}
 
+	@Override
+	public FeePolicy findBySerialNo(String serialNo) {
+		
+		return repository.findBySerialNo(serialNo);
+	}
+
 }

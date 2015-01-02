@@ -14,7 +14,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cqan.account.Account;
 import com.cqan.account.FeePolicy;
 import com.cqan.school.School;
 import com.cqan.service.FeePolicyService;
@@ -131,5 +133,24 @@ public class FeePolicyController extends BaseController<FeePolicy,Long,FeePolicy
         model.addAttribute("schools",schools);
         return super.edit(id, model);
 	}
+	
+	
+	@ResponseBody
+    @RequestMapping("/checkSerialNo.html")
+    public String checkMobile(String serialNo,Long id){
+    	if (StringUtils.isBlank(serialNo)) {
+    		return "true";
+    	}
+    	//修改
+    	FeePolicy fp = entityService.findBySerialNo(serialNo);
+    	if (id!=null&&id!=0) {
+    		if (fp==null||fp.getId()==id) {
+    			return "true";
+    		}
+    	}else if(fp==null){
+    		return "true";
+    	}
+    	return "false";
+    }
 
 }

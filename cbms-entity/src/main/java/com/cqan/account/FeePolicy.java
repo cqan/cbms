@@ -27,6 +27,9 @@ public class FeePolicy extends IdLongEntity {
 
 	private String name;
 	
+	//编号
+	private String serialNo;
+	
 	//计费政策类型
 	private Integer strategyType;
 
@@ -57,6 +60,13 @@ public class FeePolicy extends IdLongEntity {
 	private String creator;
 	
 
+	public String getSerialNo() {
+		return serialNo;
+	}
+
+	public void setSerialNo(String serialNo) {
+		this.serialNo = serialNo;
+	}
 
 	public String getName() {
 		return name;

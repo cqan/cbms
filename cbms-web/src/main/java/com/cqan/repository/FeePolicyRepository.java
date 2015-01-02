@@ -11,4 +11,6 @@ public interface FeePolicyRepository extends BaseRepository<FeePolicy, Long> {
 	
 	List<FeePolicy> findBySchoolIsNull();
 
+	FeePolicy findBySerialNo(String serialNo);
+
 }

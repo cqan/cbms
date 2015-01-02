@@ -10,4 +10,6 @@ public interface FeePolicyService extends BaseService<FeePolicy, Long>{
 	List<FeePolicy> findBySchool(School school);
 
 	List<FeePolicy> findBySchoolIsNull();
+
+	FeePolicy findBySerialNo(String serialNo);
 }
