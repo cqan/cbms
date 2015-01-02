@@ -128,11 +128,13 @@
 			
 			jQuery.validator.addMethod("mobile", function(value, element) {
 				var mobile = $('#mobile').val(); 
-				//132、130、131、156、155、185、186，176
-				var reg = /^((130|132|131|156|155|185|186|176[0-9])+\d{8})$/;
-		    	if(!reg.test(mobile)){
-				       return false;
-				 }
+				if(mobile!=''){
+					//132、130、131、156、155、185、186，176
+					var reg = /^((130|132|131|156|155|185|186|176[0-9])+\d{8})$/;
+			    	if(!reg.test(mobile)){
+					       return false;
+					 }
+				}
 			    return true;
 	    	 }, "*请输入正确的手机号！");
 	    	
@@ -157,7 +159,6 @@
 						required:true
 					},
 					mobile:{
-						required:true,
 						mobile:true,
 						remote:{
 							 url:'${ctx}account/checkMobile.html',
@@ -195,7 +196,6 @@
 						required:"*请输入姓名"
 					},
 					mobile:{
-						required:"*请输入手机号！",
 						remote:"*此手机号已存在！"
 					},
 					licenseNo:{
