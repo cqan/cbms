@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.cqan.account.FeePolicy;
+import com.cqan.school.School;
 import com.cqan.service.CardBatchService;
 import com.cqan.service.CardService;
 import com.cqan.service.FeePolicyService;
@@ -50,7 +51,13 @@ public class CardBatchController extends BaseController<CardBatch, Long, CardBat
 	@Autowired
 	private UserSchoolService userSchoolService;
 	
-	
+	@Override
+	@RequestMapping("/edit.html")
+    public String edit(Long id,Model model){
+		List<School> allSchools = schoolService.listAll();
+		model.addAttribute("allSchools",allSchools);
+       return "cardBatch/edit";
+   }
 	
 	@Override
 	@Autowired
@@ -144,30 +151,62 @@ public class CardBatchController extends BaseController<CardBatch, Long, CardBat
 
 	@RequestMapping(value="/save.html",method=RequestMethod.POST)
 	public String save(CardBatch cardBatch,Model model,HttpServletRequest request){
+		String[] sids = request.getParameterValues("cardSchools");
+		List<School> schools = Lists.newArrayList();
+		if (sids!=null&&sids.length>0) {
+			for (String sid : sids) {
+				if (StringUtils.isNotBlank(sid)) {
+					School s = schoolService.get(Long.parseLong(sid));
+					if (s!=null) {
+						schools.add(s);
+					}
+				}
+			}
+		}
+		cardBatch.setSchools(schools);
 		cardBatch.setCreateTime(new Date());
+		cardBatch.setSchools(schools);
 		entityService.save(cardBatch);
 		model.addAttribute("msg","添加制卡成功！");
 		return page("", "", 1, 10, model, request);
 	}
 	
     @RequestMapping(value="/edit1.html",method=RequestMethod.GET)
-    public String UpdateTime(Long id,Model model){
-        System.out.println(id);
+    public String update(Long id,Model model){
+    	List<School> allSchools = schoolService.listAll();
        if (id!=null){
-           Object entity  = entityService.get(id);
+           CardBatch entity  = entityService.get(id);
            model.addAttribute("entity",entity);
+           if (entity.getSchools()!=null) {
+        	   model.addAttribute("cardSchools",entity.getSchools());
+        	   allSchools.removeAll(entity.getSchools());
+		}
        }
+		model.addAttribute("allSchools",allSchools);
        return "cardBatch/edit1";
    }
     
 	@RequestMapping(value="/save1.html",method=RequestMethod.POST)
 	public String saveUpdateTime(CardBatch cardBatch,Model model,HttpServletRequest request){
+		String[] sids = request.getParameterValues("cardSchools");
+		List<School> schools = Lists.newArrayList();
+		if (sids!=null&&sids.length>0) {
+			for (String sid : sids) {
+				if (StringUtils.isNotBlank(sid)) {
+					School s = schoolService.get(Long.parseLong(sid));
+					if (s!=null) {
+						schools.add(s);
+					}
+				}
+			}
+		}
 		CardBatch c = cardBatch;
 		if(null != cardBatch.getId()){
 		    c = entityService.get(cardBatch.getId());
 			c.setUpdateTime(new Date());
 			c.setEndTime(cardBatch.getEndTime());
 			c.setDecription(cardBatch.getDecription());
+			c.setSchools(schools);
 			entityService.save(c);
 			cardService.updateEndTime(cardBatch.getId(),cardBatch.getEndTime());
 		}

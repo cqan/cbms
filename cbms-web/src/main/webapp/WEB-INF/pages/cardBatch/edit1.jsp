@@ -42,6 +42,41 @@
 	                    </td>
 	                </tr>
 	                <tr>
+	                    <td align="center" colspan="2">
+	                    	<div>
+		                    	<table>
+		                    		<tr>
+		                    			<td>所有学校:</td>
+		                    			<td></td>
+		                    			<td>选择学校：</td>
+		                    		</tr>
+		                    		<tr>
+		                    			<td>
+		                    				<select id="allSchools" multiple="multiple" size="6">
+		                    					<c:forEach var="school" items="${allSchools}">
+		                    						<option value="${school.id}" ondblclick="selectOne()">${school.name}</option>
+		                    					</c:forEach>
+		                    				</select>
+		                    			</td>
+		                    			<td>
+			                    			<div><input value=">" type="button" onclick="selectOne()"></div>
+			                    			<div><input value=">>" type="button" onclick="selectAll()"></div>
+			                    			<div><input type="button" onclick="removeOne()" value="<"></div>
+			                    			<div><input type="button" onclick="removeAll()" value="<<"/></div>
+			                    		</td>
+		                    			<td>
+		                    				<select id="cardSchools" name="cardSchools" multiple="multiple" size="6">
+		                    					<c:forEach var="school" items="${cardSchools}">
+		                    						<option value="${school.id}"  ondblclick="removeOne()">${school.name}</option>
+		                    					</c:forEach>
+		                    				</select>
+		                    			</td>
+		                    		</tr>
+		                    	</table>
+	                    	</div>
+	                    </td>
+                	<tr>
+	                <tr>
 	                    <td  style="width:47%;text-align: right;padding-right: 10px;">描述:</td>
 	                    <td style="text-align: left;padding-left: 10px;">
 	                    	<textarea rows="2" cols="20" name="decription">${entity.decription}</textarea>
@@ -61,7 +96,32 @@
 	</div>
 	</body>
 	
-	<script lang="text/javascript">   
+	<script lang="text/javascript">  
+	
+			function selectOne(){
+				$("#allSchools option:selected").each(function(){
+					 $("#cardSchools").append("<option  ondblclick='removeOne()' value='"+$(this).val()+"'>"+$(this).text()+"</option");  
+					$(this).remove();
+				});
+			}
+			function selectAll(){
+				$("#allSchools option").each(function(){
+					 $("#cardSchools").append("<option  ondblclick='removeOne()' value='"+$(this).val()+"'>"+$(this).text()+"</option");  
+					$(this).remove();
+				});
+			}
+			function removeOne(){
+				$("#cardSchools option:selected").each(function(){
+					 $("#allSchools").append("<option  ondblclick='selectOne()' value='"+$(this).val()+"'>"+$(this).text()+"</option");  
+		$(this).remove();
+				});
+			}
+			function removeAll(){
+				$("#cardSchools option").each(function(){
+					 $("#allSchools").append("<option  ondblclick='selectOne()' value='"+$(this).val()+"'>"+$(this).text()+"</option");  
+					$(this).remove();
+				});
+			}
 		    $(function(){
 		    	var msg = "${msg}";
 		    	if(msg!=''){
@@ -105,6 +165,9 @@
 		   	
 		   });
 		    function verifyForm(){
+		    	$("#cardSchools option").each(function(){
+		    		$(this).attr("selected",true);
+				});
 		    	$("#inputForm").submit();
 		    }
 		</script>
