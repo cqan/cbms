@@ -84,29 +84,33 @@ public class AccountStatusSyncHandler implements Runnable{
 		List<Account> accounts = accountService.findByExpireTime(SYNC_SIZE);
 		if (accounts!=null&&!accounts.isEmpty()) {
 			for (Account account : accounts) {
+				//处理帐号过期的情况
 				if (account.getExpireTime().getTime()<=System.currentTimeMillis()) {
 					account.setStatus(1);
 				}
-				AccountTask at = accountTaskService.findByAccountId(account.getId());
-				Calendar c = Calendar.getInstance();
-				if (at!=null) {
-					account.setFeePolicyId(at.getId());
-					if (at.getFeePolicyId()!=null) {
-						FeePolicy fp = feePolicyService.get(at.getFeePolicyId());
-						if (fp!=null) {
-							c.set(Calendar.MONTH, c.get(Calendar.MONTH)+fp.getTime());
-							account.setExpireTime(c.getTime());
-							accountTaskService.delete(at.getId());
-							accountService.save(account);
+				//处理变更请求
+				if (account.getExpireTime().getTime()<=System.currentTimeMillis()) {
+					Calendar c = Calendar.getInstance();
+					AccountTask at = accountTaskService.findByAccountId(account.getId());
+					if (at!=null) {
+						account.setFeePolicyId(at.getId());
+						if (at.getFeePolicyId()!=null) {
+							FeePolicy fp = feePolicyService.get(at.getFeePolicyId());
+							if (fp!=null) {
+								c.set(Calendar.MONTH, c.get(Calendar.MONTH)+fp.getTime());
+								account.setExpireTime(c.getTime());
+								accountTaskService.delete(at.getId());
+								account.setStatus(0);
+								accountService.save(account);
+							}
 						}
 					}
 				}
 				logger.info("更新帐户信息:{}",account);
 				//处理短信充值
-				c = Calendar.getInstance();
-				c.set(Calendar.MINUTE, c.get(Calendar.MINUTE)-DELAY);
-				System.out.println(c.getTime());
 				if (account!=null&&StringUtils.isNotBlank(account.getMobile())) {
+					Calendar c = Calendar.getInstance();
+					c.set(Calendar.MINUTE, c.get(Calendar.MINUTE)-DELAY);
 					List<RechargeHistory> lists = rechargeHistoryService.findUnRechargeHistory(account.getMobile(),c.getTime());
 					if (lists!=null) {
 						for (RechargeHistory rh : lists) {
@@ -117,6 +121,7 @@ public class AccountStatusSyncHandler implements Runnable{
 								rh.setStatus(2);
 								rh.setUpdateTime(new Date());
 								rechargeHistoryService.save(rh);
+								account.setStatus(0);
 								accountService.save(account);
 								logger.info("同步短信充值信息：{}",rh);
 							}

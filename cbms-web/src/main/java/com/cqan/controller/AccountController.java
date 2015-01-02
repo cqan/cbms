@@ -155,12 +155,13 @@ public class AccountController extends BaseController<Account,Long,AccountServic
 			saveTask(account, card.getFeePolicyId());
 		}
     	School school = schoolService.get(account.getSchoolId());
-    	FeePolicy fp = feePolicyService.get(account.getFeePolicyId());
+    	FeePolicy fp = feePolicyService.get(card.getFeePolicyId());
     	model.addAttribute("entity", account);
     	model.addAttribute("school",school);
     	model.addAttribute("feePolicy",fp);
     	card.setStatus(2);
     	cardService.save(card);
+    	model.addAttribute("msg","充值成功！");
     	return "account/accountInfo";
     }
     
@@ -243,16 +244,16 @@ public class AccountController extends BaseController<Account,Long,AccountServic
 			a = entityService.get(account.getId());
 		}
     	a.setUpdateTime(new Date());
-    	a.setStatus(0);
+    	//a.setStatus(0);
     	School school = schoolService.get(account.getSchoolId());
     	//FeePolicy fp = feePolicyService.get(account.getFeePolicyId());
     	a.setCreater(getCurrentUserName());
     	account.setUpdateTime(new Date());
     	model.addAttribute("entity", a);
     	model.addAttribute("school",school);
-    	Calendar c = Calendar.getInstance();
+    	//Calendar c = Calendar.getInstance();
     	//c.set(Calendar.MONTH, c.get(Calendar.MONTH)+fp.getTime());
-    	a.setExpireTime(c.getTime());
+    	a.setExpireTime(new Date());
     	//model.addAttribute("feePolicy",fp);
     	model.addAttribute("flag", "1");
     	entityService.save(a);
@@ -265,8 +266,10 @@ public class AccountController extends BaseController<Account,Long,AccountServic
     		Account account = entityService.get(id);
         	if (account!=null) {
         		School school = schoolService.get(account.getSchoolId());
+        		System.out.println("================"+account);
         		if (account.getFeePolicyId()!=null) {
         			FeePolicy fp = feePolicyService.get(account.getFeePolicyId());
+        			System.out.println("================"+fp);
         			model.addAttribute("feePolicy",fp);
 				}
             	model.addAttribute("entity", account);

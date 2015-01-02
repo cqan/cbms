@@ -17,13 +17,16 @@
         <input type="hidden" name="pageSize" id="pageSize" value="${param['pageSize']}">
         用户姓名:<input name="search_LIKES_name" style="width: 100px;" class="easyui-textbox" value="${param['search_LIKES_name']}">
         帐号:<input name="search_LIKES_userName" style="width: 100px;" class="easyui-textbox" value="${param['search_LIKES_userName']}">
+        绑定手机:<input name="search_LIKES_mobile" style="width: 100px;" class="easyui-textbox" value="${param['search_LIKES_mobile']}">
         证件号:<input name="search_LIKES_licenseNo" style="width: 100px;" class="easyui-textbox" value="${param['search_LIKES_licenseNo']}">
         <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="submitForm()" style="width:80px">Search</a>
     </form>
     </div>
+    <div>
+    	<a href="${ctx}account/create.html" class="easyui-linkbutton" data-options="iconCls:'icon-add'" style="width:80px;margin-bottom:5px;">开户</a>
+    	<a href="${ctx}account/recharge.html" class="easyui-linkbutton" data-options="iconCls:'icon-add'" style="width:80px;margin-bottom:5px;">充卡充值</a>
+    </div>
     <table id="tt" class="easyui-datagrid" style="width:100%;height:auto;">
-    		<a href="${ctx}account/create.html" class="easyui-linkbutton" data-options="iconCls:'icon-add'" style="width:80px;margin-bottom:5px;">开户</a>
-    		<a href="${ctx}account/recharge.html" class="easyui-linkbutton" data-options="iconCls:'icon-add'" style="width:80px;margin-bottom:5px;">充卡充值</a>
         <thead>
         <tr>
             <th field="name1" width="10%">用户姓名</th>

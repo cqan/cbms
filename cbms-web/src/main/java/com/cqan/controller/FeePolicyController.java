@@ -86,7 +86,6 @@ public class FeePolicyController extends BaseController<FeePolicy,Long,FeePolicy
     	if (StringUtils.isNotBlank(area)) {
     		feePolicy.setArea(area);
 		}
-    	System.out.println(request.getParameter("area"));
     	feePolicy.setDescription(request.getParameter("description"));
     	String dc = request.getParameter("downControl");
     	if (StringUtils.isNotBlank(dc)) {

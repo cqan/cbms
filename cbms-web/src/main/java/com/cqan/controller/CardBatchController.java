@@ -167,12 +167,12 @@ public class CardBatchController extends BaseController<CardBatch, Long, CardBat
 		    c = entityService.get(cardBatch.getId());
 			c.setUpdateTime(new Date());
 			c.setEndTime(cardBatch.getEndTime());
+			c.setDecription(cardBatch.getDecription());
 			entityService.save(c);
 			cardService.updateEndTime(cardBatch.getId(),cardBatch.getEndTime());
 		}
-		System.out.println(c.getEndTime());
 		model.addAttribute("entity",c);
-		model.addAttribute("msg","添加制卡成功！");
+		model.addAttribute("msg","修改制卡成功！");
 		return page("", "", 1, 10, model, request);
 	}
 	
