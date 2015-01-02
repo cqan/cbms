@@ -24,12 +24,6 @@
 	                    </td>
 	                </tr>
 	                <tr>
-	                    <td  style="width:47%;text-align: right;padding-right: 10px;">区域:</td>
-	                    <td style="text-align: left;padding-left: 10px;">
-	                    	<input type="text" name="area" readonly="readonly" value="${entity.area}"/>
-	                    </td>
-	                </tr>
-	                <tr>
 	                    <td  style="width:47%;text-align: right;padding-right: 10px;">价格:</td>
 	                    <td style="text-align: left;padding-left: 10px;">
 	                    	<input type="text" id="price" readonly="readonly" name="price" value="${entity.price}"/>
@@ -50,7 +44,7 @@
 	                <tr>
 	                    <td  style="width:47%;text-align: right;padding-right: 10px;">描述:</td>
 	                    <td style="text-align: left;padding-left: 10px;">
-	                    	<textarea rows="decription" cols="20" readonly="readonly"></textarea>
+	                    	<textarea rows="6" cols="20" name="decription">${entity.decription}</textarea>
 	                    </td>
 	                </tr>
 	                <tr>
