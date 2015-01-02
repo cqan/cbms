@@ -105,7 +105,7 @@ public class AccountAuth extends IdLongEntity {
 
 
 
-	@Column(name="isPassAddedPin")
+	@Column(name="ispassaddedpin")
 	public Integer getPassAddedPin() {
 		return passAddedPin;
 	}

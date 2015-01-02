@@ -33,8 +33,8 @@
             <th field="name3" width="5%">价格</th>
             <th field="name4" width="5%">数量</th>
             <th field="name5" width="5%">状态</th>
-            <th field="name6" width="15%">失效时间</th>
             <th field="name7" width="15%">创建时间</th>
+            <th field="name6" width="15%">失效时间</th>
             <th field="name8" width="15%">描述</th>
             <th field="name9" width="10%">操作</th>
         </tr>
@@ -46,8 +46,8 @@
                 <td>${entity.price}</td>
                 <td>${entity.cardNum}</td>
                 <td>${entity.status eq 0?"未制卡":entity.status eq 1?"正在制卡":"制卡完成"}</td>
-                <td><fmt:formatDate value="${entity.endTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                 <td><fmt:formatDate value="${entity.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                <td><fmt:formatDate value="${entity.endTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                 <td>${entity.decription}</td>
                 <td><a href="${ctx}card/batch/edit1.html?id=${entity.id}">修改</a>&nbsp;<a href="${ctx}card/batch/download.html?id=${entity.id}">下载</a></td>
             </tr>
