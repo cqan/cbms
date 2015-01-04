@@ -503,7 +503,7 @@ public class AccountRestController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value="/card/modpwd.html",method=RequestMethod.POST)
+	@RequestMapping(value="/account/modpwd.html",method=RequestMethod.POST)
 	public String modpwd(HttpServletRequest request){
 		String username = request.getParameter("username");
 		String token = request.getParameter("token");

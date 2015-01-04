@@ -122,6 +122,10 @@ public class FeePolicyController extends BaseController<FeePolicy,Long,FeePolicy
     	if (StringUtils.isNotBlank(time)) {
     		feePolicy.setTime(Integer.parseInt(time));
     	}
+    	String serialNo = request.getParameter("serialNo");
+    	if (StringUtils.isNotBlank(serialNo)) {
+    		feePolicy.setSerialNo(serialNo);
+    	}
     	entityService.save(feePolicy);
     	return page("", "", 1, 10, model, request);
     }
