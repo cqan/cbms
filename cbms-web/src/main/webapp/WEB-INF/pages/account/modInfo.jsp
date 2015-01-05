@@ -69,6 +69,9 @@
 	    	
 	    	jQuery.validator.addMethod("mobile", function(value, element) {
 				var mobile = $('#mobile').val(); 
+				if (mobile==null) {
+					return true;
+				}
 				//132、130、131、156、155、185、186，176
 				var reg = /^((130|132|131|156|155|185|186|176[0-9])+\d{8})$/;
 		    	if(!reg.test(mobile)){

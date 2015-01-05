@@ -101,6 +101,7 @@ public class AccountStatusSyncHandler implements Runnable{
 								account.setExpireTime(c.getTime());
 								accountTaskService.delete(at.getId());
 								account.setStatus(0);
+								account.setStatusSyncTime(System.currentTimeMillis());
 								accountService.save(account);
 							}
 						}
@@ -122,6 +123,7 @@ public class AccountStatusSyncHandler implements Runnable{
 								rh.setUpdateTime(new Date());
 								rechargeHistoryService.save(rh);
 								account.setStatus(0);
+								account.setStatusSyncTime(System.currentTimeMillis());
 								accountService.save(account);
 								logger.info("同步短信充值信息：{}",rh);
 							}

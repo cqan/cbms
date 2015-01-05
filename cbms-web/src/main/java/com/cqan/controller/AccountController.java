@@ -248,6 +248,7 @@ public class AccountController extends BaseController<Account,Long,AccountServic
     	if (account.getId()==null||account.getId()==0) {
     		a = account;
     		a.setSyncTime(System.currentTimeMillis());
+    		a.setStatusSyncTime(System.currentTimeMillis());
     		a.setCreateTime(new Date());
     		a.setUserName(account.getUserName());
 			a.setAddress(account.getAddress());
