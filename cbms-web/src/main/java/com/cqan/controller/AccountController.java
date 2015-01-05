@@ -288,10 +288,8 @@ public class AccountController extends BaseController<Account,Long,AccountServic
     		Account account = entityService.get(id);
         	if (account!=null) {
         		School school = schoolService.get(account.getSchoolId());
-        		System.out.println("================"+account);
         		if (account.getFeePolicyId()!=null) {
         			FeePolicy fp = feePolicyService.get(account.getFeePolicyId());
-        			System.out.println("================"+fp);
         			model.addAttribute("feePolicy",fp);
 				}
             	model.addAttribute("entity", account);
