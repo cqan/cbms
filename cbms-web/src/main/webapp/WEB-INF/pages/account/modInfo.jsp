@@ -85,11 +85,7 @@
 						required:true
 					},
 					email:{
-						required:true,
 						email:true	
-					},
-					phoneNum:{
-						required:true
 					},
 					mobile:{
 						mobile:true,
@@ -122,11 +118,7 @@
 						required:"*请输入姓名"
 					},
 					email:{
-						required:"*请输入email！",
 						email:"*请输入正确的email地址"
-					},
-					phoneNum:{
-						required:"*请输入联系电话"
 					},
 					address:{
 						required:"*请输入联系地址"
