@@ -115,7 +115,7 @@ public class AccountStatusSyncHandler implements Runnable{
 					Calendar c = Calendar.getInstance();
 					c.set(Calendar.MINUTE, c.get(Calendar.MINUTE)-DELAY);
 					List<RechargeHistory> lists = rechargeHistoryService.findUnRechargeHistory(account.getMobile(),c.getTime());
-					if (lists!=null) {
+					if (lists!=null&&!lists.isEmpty()) {
 						flag = false;
 						for (RechargeHistory rh : lists) {
 							if (account.getFeePolicyId()==null||rh.getFeePolicyId()==account.getFeePolicyId()) {
