@@ -18,3 +18,5 @@ cbms-web/.project
 cbms-web/.settings/
 cbms-web/logs/
 cbms-web/target/
+.settings/*
+cbms-web/.mymetadata
