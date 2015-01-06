@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cqan.account.Account;
 import com.cqan.account.FeePolicy;
 import com.cqan.school.School;
 import com.cqan.service.FeePolicyService;

@@ -53,6 +53,8 @@
                 <td>${entity.status eq 0?"正常":"停机"}</td>
                 <td>
                 	<a href="${ctx}account/info.html?id=${entity.id}">详情</a>&nbsp;
+                	<c:if test="${(entity.status eq 0)&&(entity.freeze eq 1)}"><a href="#" onclick="freeze('freeze','${entity.id}')">冻结</a>&nbsp;</c:if>
+                	<c:if test="${(entity.status eq 1)&&(entity.freeze eq 2)}"><a href="#" onclick="freeze('unfreeze','${entity.id}')">解冻</a>&nbsp;</c:if>
                 	<a href="${ctx}account/queryChange.html?id=${entity.id}">查询变更</a>&nbsp;
                 </td>
             </tr>
@@ -92,6 +94,25 @@
   		  			}
   		  			});
   				}}));
+  		
+  	}
+  	function freeze(op,id){
+  			if( $.messager.confirm('系统提示', '确实要执行此操作吗?', function(r){
+  	  			if (r){
+  	  				$.ajax({
+  	  		  			url:"${ctx}account/freeze.html",
+  	  		  			data:{op:op,id:id},
+  	  		  			type:'POST',
+  	  		  			success:function(data){
+  	  		  				alert(data);
+  	  		  				window.location.reload(true);
+  	  		  			},
+  	  		  			error:function(data){
+  	  		  				alert(data);
+  	  		  			}
+  	  		  			});
+  	  				}}));
+  		
   		
   	}
   </script>

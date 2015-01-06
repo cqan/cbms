@@ -69,7 +69,7 @@
 	    	
 	    	jQuery.validator.addMethod("mobile", function(value, element) {
 				var mobile = $('#mobile').val(); 
-				if (mobile==null) {
+				if (mobile=="") {
 					return true;
 				}
 				//132、130、131、156、155、185、186，176

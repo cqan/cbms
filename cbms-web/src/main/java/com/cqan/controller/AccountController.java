@@ -20,8 +20,6 @@ import com.alibaba.fastjson.JSON;
 import com.cqan.account.Account;
 import com.cqan.account.AccountTask;
 import com.cqan.account.FeePolicy;
-import com.cqan.http.AppResp;
-import com.cqan.http.InfoCode;
 import com.cqan.school.AccountGroup;
 import com.cqan.school.School;
 import com.cqan.service.AccountGroupService;
@@ -259,6 +257,7 @@ public class AccountController extends BaseController<Account,Long,AccountServic
 			a.setLicenseNo(account.getLicenseNo());
 			a.setLicenseType(account.getLicenseType());
 			a.setName(account.getName());
+			a.setFreeze(1);
 			a.setPassword(account.getPassword());
 			a.setPhoneNum(account.getPhoneNum());
 			a.setSchoolId(account.getSchoolId());
@@ -317,6 +316,38 @@ public class AccountController extends BaseController<Account,Long,AccountServic
 			return "true";
 		}
     	return "false";
+    }
+    @ResponseBody
+    @RequestMapping("/freeze.html")
+    public String freeze(String op,Long id){
+    	if (id==null||id==0) {
+			return "请求参数错误！";
+		}
+    	//修改
+    	Account account = entityService.get(id);
+    	if (account==null) {
+    		return "此帐号不存在！";
+    	}
+    	if ("freeze".equals(op)) {
+    		if (account.getStatus()==1) {
+    			return "此帐号已停机需要冻结！";
+    		}
+        	account.setStatus(1);
+        	account.setFreeze(2);
+        	account.setFreezeTime(new Date());
+		}else{
+			account.setStatus(0);
+        	account.setFreeze(1);
+        	Long time = System.currentTimeMillis()-account.getFreezeTime().getTime();
+        	if (account.getExpireTime().getTime()<=System.currentTimeMillis()) {
+        		account.setExpireTime(new Date(System.currentTimeMillis()+time));
+			}else{
+				account.setExpireTime(new Date(account.getExpireTime().getTime()+time));
+			}
+		}
+    	entityService.save(account);
+    	
+    	return "操作成功！";
     }
     
     

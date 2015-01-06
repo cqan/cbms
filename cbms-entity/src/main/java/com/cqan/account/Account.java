@@ -55,7 +55,28 @@ public class Account extends IdLongEntity {
 	
 	private String mobile;
 	
+	//1:正常；2:冻结
+	private Integer freeze;
 	
+	private Date freezeTime;
+	
+	
+	public Integer getFreeze() {
+		return freeze;
+	}
+
+	public void setFreeze(Integer freeze) {
+		this.freeze = freeze;
+	}
+
+	public Date getFreezeTime() {
+		return freezeTime;
+	}
+
+	public void setFreezeTime(Date freezeTime) {
+		this.freezeTime = freezeTime;
+	}
+
 	public Long getStatusSyncTime() {
 		return statusSyncTime;
 	}
