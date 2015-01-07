@@ -77,11 +77,11 @@
 
 	<error-page>
 		<exception-type>com.cqan.exception.AppException</exception-type>
-		<location>/500.html</location>
+		<location>/exception.html</location>
 	</error-page>
 	<error-page>
 		<error-code>500</error-code>
-		<location>/500.html</location>
+		<location>/exception.html</location>
 	</error-page>
 	
     <welcome-file-list>

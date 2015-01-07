@@ -131,6 +131,9 @@ public class AccountGroup extends IdLongEntity {
 	}
 
 	public Integer getKick() {
+		if (kick==null) {
+			return 0;
+		}
 		return kick;
 	}
 

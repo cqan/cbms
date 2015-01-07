@@ -217,10 +217,10 @@
 	function checkVlan(f){
 	   if(f==2){
 		   $("#vlanID1").attr("disabled",false)
-		   $("#vlanID2").attr("disabled",false)
+		   $("#vlanID1").attr("disabled",false)
 	   }else{
-	     $vlanID1.val("");
-	     $vlanID2.val("");
+	     $("#vlanID1").val("");
+	     $("#vlanID2").val("");
 	     $("#vlanID1").attr("disabled",true)
 		 $("#vlanID2").attr("disabled",true)
 	   }

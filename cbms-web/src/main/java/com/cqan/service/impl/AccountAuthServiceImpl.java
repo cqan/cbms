@@ -55,6 +55,7 @@ public class AccountAuthServiceImpl extends
 			aa.setMoMaxSession(ag.getMoMaxSession());
 			aa.setNasPort(ag.getNasPort());
 			aa.setNasPortId(ag.getNasPortId());
+			aa.setKickofftag(ag.getKick());
 			aa.setPassAddedPin(ag.getPassAddedPin());
 			aa.setSharedBandRate(ag.getSharedBandRate());
 			aa.setVlanbindtag(ag.getVlanBindTag());
@@ -64,8 +65,8 @@ public class AccountAuthServiceImpl extends
 		if (account.getFeePolicyId()!=null) {
 			FeePolicy fp = feePolicyService.get(account.getFeePolicyId());
 			if (fp!=null) {
-				aa.setInputkg(getBit(fp.getDownControl()));
-				aa.setOutputkg(getBit(fp.getUpControl()));
+				aa.setInputkg(getBit(fp.getUpControl()));
+				aa.setOutputkg(getBit(fp.getDownControl()));
 			}
 			repository.save(aa);
 		}

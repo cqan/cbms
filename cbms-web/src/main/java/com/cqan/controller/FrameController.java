@@ -101,4 +101,10 @@ public class FrameController {
         }
         return null;
     }
+    
+    @RequestMapping("/exception.html")
+    public String exception(){
+    	
+    	return "common/exception";
+    }
 }
