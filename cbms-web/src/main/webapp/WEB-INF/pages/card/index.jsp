@@ -12,7 +12,7 @@
   </head>
   	<body>
     <div style="margin:5px 0;"></div>  
-    系统--><a href="${ctx}card/batch/index.html">制卡管理</a>-->变更套餐
+    系统--><a href="${ctx}card/batch/index.html">制卡管理</a>-->充值卡管理
     <form id="inputForm" action="${ctx}card/index.html" method="post">
         <input type="hidden" name="page" id="page" value="${param['page']}">
         <input type="hidden" name="pageSize" id="pageSize" value="${param['pageSize']}">
