@@ -59,7 +59,7 @@
              <tr>
                  <td style="width:20%;text-align: right;padding-right: 10px;">地址:</td>
                  <td style="text-align: left;padding-left: 10px;">
-                 	${school.name}
+                 	${entity.address}
                  </td>
                  <td style="width:20%;text-align: right;padding-right: 10px;">受理人:</td>
                  <td style="text-align: left;padding-left: 10px;">${entity.creater}</td>
